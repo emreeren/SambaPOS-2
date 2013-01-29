@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using Samba.Localization.Properties;
+
+namespace Samba.Localization
+{
+    [AttributeUsage(AttributeTargets.Property)]
+    public class LocalizedDisplayNameAttribute : DisplayNameAttribute
+    {
+        private readonly string _resourceName;
+        public LocalizedDisplayNameAttribute(string resourceName)
+        {
+            _resourceName = resourceName;
+        }
+
+        public LocalizedDisplayNameAttribute()
+        {
+            var type = GetType();
+            _resourceName = type.Name;
+        }
+
+        public override string DisplayName
+        {
+            get
+            {
+                return Resources.ResourceManager.GetString(_resourceName);
+            }
+        }
+    }
+
+    public class LocalizedDescriptionAttribute : DescriptionAttribute
+    {
+        private readonly string _resourceName;
+        public LocalizedDescriptionAttribute(string resourceName)
+        {
+            _resourceName = resourceName;
+        }
+
+        public LocalizedDescriptionAttribute()
+        {
+            var type = GetType();
+            _resourceName = type.Name;
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return Resources.ResourceManager.GetString(_resourceName);
+            }
+        }
+
+    }
+}

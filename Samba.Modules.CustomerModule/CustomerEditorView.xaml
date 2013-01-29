@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Samba.Modules.CustomerModule.CustomerEditorView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Common="clr-namespace:Samba.Presentation.Common;assembly=Samba.Presentation.Common"
+     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+            <Label>
+                <LocText ResourceIdentifierKey="CustomerName" Suffix=":"/>
+            </Label>
+            <TextBox HorizontalAlignment="Left" MinWidth="200" Text="{Binding Name}" />
+            <Label>
+                <LocText ResourceIdentifierKey="GroupCode" Suffix=":"/>
+            </Label>
+            <ComboBox HorizontalAlignment="Left" MinWidth="150" Text="{Binding GroupCode,Mode=TwoWay}"
+                      ItemsSource="{Binding GroupCodes}" IsEditable="True"/>
+            <Label>
+                <LocText ResourceIdentifierKey="PhoneNumber" Suffix=":"/>
+            </Label>
+            <Common:MaskedTextBox HorizontalAlignment="Left" MinWidth="100" InputMask="{Binding PhoneNumberInputMask}"
+                 PromptChar=" " UnmaskedText="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+            <Label>
+                <LocText ResourceIdentifierKey="Address" Suffix=":"/>
+            </Label>
+            <TextBox HorizontalAlignment="Left" MinWidth="200" MinHeight="55" Text="{Binding Address}"
+                 AcceptsReturn="True" />
+            <Label>
+                <LocText ResourceIdentifierKey="Note" Suffix=":"/>
+            </Label>
+            <TextBox HorizontalAlignment="Left" MinWidth="200" MinHeight="55" Text="{Binding Note}"
+                 AcceptsReturn="True" />
+            <CheckBox Margin="0,5,0,0" IsChecked="{Binding InternalAccount}">
+                <LocText ResourceIdentifierKey="InternalAccount"/>
+            </CheckBox>
+            <Button HorizontalAlignment="Left" Margin="0,10" MinWidth="70" Content="{Binding SaveCommand.Caption}"
+                 Command="{Binding SaveCommand}" />
+            <Label Content="{Binding Error}" Foreground="Red" />
+        </StackPanel>
+    </Grid>
+</UserControl>

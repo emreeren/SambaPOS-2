@@ -1,0 +1,43 @@
+﻿<Window x:Class="Samba.Modules.CreditCardModule.ExternalProcessor.ExternalProcessorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:VirtualKeyboard="clr-namespace:Samba.Presentation.Common.VirtualKeyboard;assembly=Samba.Presentation.Common" mc:Ignorable="d" FontSize="20"
+             Height="495" Width="700" WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        Name="ExternalProcessorWindow" Loaded="ExternalProcessorWindow_Loaded" 
+        Title="External Credit Card Processor">
+    <Border BorderThickness="5" BorderBrush="CornflowerBlue">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label HorizontalContentAlignment="Center">Tendered Amount</Label>
+                <Border BorderThickness="2" BorderBrush="Red" HorizontalAlignment="Center">
+                    <TextBlock FontWeight="Bold" FontSize="25" TextAlignment="Center" HorizontalAlignment="Center" MinWidth="250" Text="{Binding TenderedAmount,StringFormat='#,#0.00'}"/>
+                </Border>
+                <StackPanel Visibility="{Binding CanPreAuth,Converter={StaticResource VisibilityConverter}}">
+                    <Label HorizontalContentAlignment="Center">Gratuity</Label>
+                    <TextBlock FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" MinWidth="250" Text="{Binding Gratuity,StringFormat='#,#0.00'}"/>
+                    <Label HorizontalContentAlignment="Center">Swipe Data</Label>
+                    <PasswordBox Name="SwipeDataBox" HorizontalAlignment="Center" MinWidth="250"/>
+                </StackPanel>
+            </StackPanel>
+            <UniformGrid Grid.Column="1" Columns="1">
+                <Button Margin="4" Width="100" Command="{Binding PreAuthCommand}">PreAuth</Button>
+                <Button Margin="4" Width="100" Command="{Binding ForceCommand}">Force</Button>
+                <Button Margin="4" Width="100" Command="{Binding CancelCommand}">Cancel</Button>
+            </UniformGrid>
+            <Viewbox Grid.Row="1" Grid.ColumnSpan="2">
+                <VirtualKeyboard:KeyboardView/>
+            </Viewbox>
+
+        </Grid>
+    </Border>
+</Window>

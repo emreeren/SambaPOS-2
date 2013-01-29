@@ -1,0 +1,2915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Clear" xml:space="preserve">
+		<value>Wis</value>
+	</data>
+	<data name="EnterPin" xml:space="preserve">
+		<value>VOER PIN IN</value>
+	</data>
+	<data name="Exit" xml:space="preserve">
+		<value>Afsluiten</value>
+	</data>
+	<data name="Login" xml:space="preserve">
+		<value>Inloggen</value>
+	</data>
+	<data name="CheckDBVersion" xml:space="preserve">
+		<value>Controleer Database Versie</value>
+	</data>
+	<data name="SqlHint" xml:space="preserve">
+		<value>Klik hier voor informatie over het werken met SQL-databases</value>
+	</data>
+	<data name="AdminPasswordHint" xml:space="preserve">
+		<value>Admin PIN: 1234
+Veranderen van PIN zal deze hint verbergen</value>
+	</data>
+	<data name="AccountName" xml:space="preserve">
+		<value>Rekening naam</value>
+	</data>
+	<data name="Address" xml:space="preserve">
+		<value>Adres</value>
+	</data>
+	<data name="Amount" xml:space="preserve">
+		<value>Bedrag</value>
+	</data>
+	<data name="Cash" xml:space="preserve">
+		<value>Contant</value>
+	</data>
+	<data name="CreditCard" xml:space="preserve">
+		<value>Credit Card</value>
+	</data>
+	<data name="Description" xml:space="preserve">
+		<value>Beschrijving</value>
+	</data>
+	<data name="ExpenseTransactions" xml:space="preserve">
+		<value>Uitgaven Transacties</value>
+	</data>
+	<data name="GrandTotal" xml:space="preserve">
+		<value>Algemeen totaal</value>
+	</data>
+	<data name="Income" xml:space="preserve">
+		<value>Inkomsten</value>
+	</data>
+	<data name="IncomeTransactions" xml:space="preserve">
+		<value>Inkomsten Transacties</value>
+	</data>
+	<data name="Note" xml:space="preserve">
+		<value>Notitie</value>
+	</data>
+	<data name="PhoneNumber" xml:space="preserve">
+		<value>Telefoon</value>
+	</data>
+	<data name="Total" xml:space="preserve">
+		<value>Totaal</value>
+	</data>
+	<data name="Voucher" xml:space="preserve">
+		<value>Bon</value>
+	</data>
+	<data name="CreditCard_ab" xml:space="preserve">
+		<value>C.Card</value>
+	</data>
+	<data name="Voucher_ab" xml:space="preserve">
+		<value>Bon</value>
+	</data>
+	<data name="OperationIncome" xml:space="preserve">
+		<value>Operatie Inkomen</value>
+	</data>
+	<data name="StartOfDay" xml:space="preserve">
+		<value>Begin van werkperiode</value>
+	</data>
+	<data name="NewIncomeTransaction" xml:space="preserve">
+		<value>Nieuwe inkomsten Transactie</value>
+	</data>
+	<data name="NewExpenseTransaction" xml:space="preserve">
+		<value>Nieuwe uitgaven Transactie</value>
+	</data>
+	<data name="IncomeTransaction_r" xml:space="preserve">
+		<value>Inkomen
+Transactie</value>
+	</data>
+	<data name="ExpenseTransaction_r" xml:space="preserve">
+		<value>Uitgave
+Transactie</value>
+	</data>
+	<data name="Cancel" xml:space="preserve">
+		<value>Annuleren</value>
+	</data>
+	<data name="CustomerAccounts" xml:space="preserve">
+		<value>Klant
+Rekeningen</value>
+	</data>
+	<data name="CustomerName" xml:space="preserve">
+		<value>Naam van de klant</value>
+	</data>
+	<data name="InternalAccount" xml:space="preserve">
+		<value>Interne rekening</value>
+	</data>
+	<data name="Ticket" xml:space="preserve">
+		<value>Bon</value>
+	</data>
+	<data name="TotalSales" xml:space="preserve">
+		<value>Totale omzet</value>
+	</data>
+	<data name="LastOrderDate" xml:space="preserve">
+		<value>Laatste Bestelling Datum</value>
+	</data>
+	<data name="LastOrderStatus" xml:space="preserve">
+		<value>Laatste Bestelling Status</value>
+	</data>
+	<data name="LastOrder" xml:space="preserve">
+		<value>Laatste Bestelling</value>
+	</data>
+	<data name="Close" xml:space="preserve">
+		<value>Sluiten</value>
+	</data>
+	<data name="Date" xml:space="preserve">
+		<value>Datum</value>
+	</data>
+	<data name="Liability" xml:space="preserve">
+		<value>Aansprakelijkheid</value>
+	</data>
+	<data name="Receiveable" xml:space="preserve">
+		<value>Te Ontvangen</value>
+	</data>
+	<data name="Customer" xml:space="preserve">
+		<value>Klant</value>
+	</data>
+	<data name="CustomerList" xml:space="preserve">
+		<value>Klantenlijst</value>
+	</data>
+	<data name="Customers" xml:space="preserve">
+		<value>Klanten</value>
+	</data>
+	<data name="SelectCustomer_r" xml:space="preserve">
+		<value>Kies
+Klant</value>
+	</data>
+	<data name="NewCustomer_r" xml:space="preserve">
+		<value>Nieuwe
+Klant</value>
+	</data>
+	<data name="FindTicket_r" xml:space="preserve">
+		<value>Bon
+Zoeken</value>
+	</data>
+	<data name="ResetCustomer_r" xml:space="preserve">
+		<value>Reset
+Klant</value>
+	</data>
+	<data name="GetPayment_r" xml:space="preserve">
+		<value>Ontvang
+Betaling</value>
+	</data>
+	<data name="CustomerAccount_r" xml:space="preserve">
+		<value>Klant
+Rekening</value>
+	</data>
+	<data name="MakePayment_r" xml:space="preserve">
+		<value>Doe
+Betaling</value>
+	</data>
+	<data name="TicketNumber_f" xml:space="preserve">
+		<value>Bon Nummer: {0}</value>
+	</data>
+	<data name="Information" xml:space="preserve">
+		<value>Informatie</value>
+	</data>
+	<data name="CallerIdDriverError" xml:space="preserve">
+		<value>Om de Caller-ID te kunnen weergeven moet je de hardware-drivers installeren</value>
+	</data>
+	<data name="Calling" xml:space="preserve">
+		<value>Bellen</value>
+	</data>
+	<data name="Management" xml:space="preserve">
+		<value>Beheren</value>
+	</data>
+	<data name="Common" xml:space="preserve">
+		<value>Gedeeld</value>
+	</data>
+	<data name="CanOpenDashboard" xml:space="preserve">
+		<value>Mag dashboard openen</value>
+	</data>
+	<data name="Keyboard" xml:space="preserve">
+		<value>Toetsenbord</value>
+	</data>
+	<data name="Add_f" xml:space="preserve">
+		<value>Voeg {0} toe</value>
+	</data>
+	<data name="Edit_f" xml:space="preserve">
+		<value>Bewerk {0}</value>
+	</data>
+	<data name="Delete_f" xml:space="preserve">
+		<value>Verwijder {0}</value>
+	</data>
+	<data name="Clone_f" xml:space="preserve">
+		<value>Kloon {0}</value>
+	</data>
+	<data name="List_f" xml:space="preserve">
+		<value>{0} Lijst</value>
+	</data>
+	<data name="Confirmation" xml:space="preserve">
+		<value>Bevestiging</value>
+	</data>
+	<data name="DeleteItemConfirmation_f" xml:space="preserve">
+		<value>Verwijder {0} [{1}]?</value>
+	</data>
+	<data name="Warning" xml:space="preserve">
+		<value>Waarschuwing</value>
+	</data>
+	<data name="Save" xml:space="preserve">
+		<value>Opslaan</value>
+	</data>
+	<data name="EditModel_f" xml:space="preserve">
+		<value>Bezig met bewerken van {0} ({1})</value>
+	</data>
+	<data name="AddModel_f" xml:space="preserve">
+		<value>Toevoegen Nieuwe {0}</value>
+	</data>
+	<data name="EmptyNameError" xml:space="preserve">
+		<value>Laat {0} naam niet leeg.</value>
+	</data>
+	<data name="CantSave" xml:space="preserve">
+		<value>Kan niet opslaan</value>
+	</data>
+	<data name="GroupCode" xml:space="preserve">
+		<value>Groep Code</value>
+	</data>
+	<data name="BaseUnit" xml:space="preserve">
+		<value>Basiseenheid</value>
+	</data>
+	<data name="TransactionUnit" xml:space="preserve">
+		<value>Handelingeenheid</value>
+	</data>
+	<data name="TransacitonUnitMultiplier" xml:space="preserve">
+		<value>Transactie vermenigvuldigingsfactor</value>
+	</data>
+	<data name="InventoryItems" xml:space="preserve">
+		<value>Voorraadartikelen</value>
+	</data>
+	<data name="Recipes" xml:space="preserve">
+		<value>Recepten</value>
+	</data>
+	<data name="Transactions" xml:space="preserve">
+		<value>Transactie</value>
+	</data>
+	<data name="EndOfDayRecords" xml:space="preserve">
+		<value>Einde van de dag gegevens</value>
+	</data>
+	<data name="Select" xml:space="preserve">
+		<value>Selecteer</value>
+	</data>
+	<data name="CantDeletePastEndOfDayRecords" xml:space="preserve">
+		<value>Kan geen gegevens na einde-dag verwijderen</value>
+	</data>
+	<data name="EndOfDayRecord" xml:space="preserve">
+		<value>Einde van de dag gegevens</value>
+	</data>
+	<data name="CalculateCost" xml:space="preserve">
+		<value>Bereken Kosten</value>
+	</data>
+	<data name="Products" xml:space="preserve">
+		<value>Producten</value>
+	</data>
+	<data name="Cost" xml:space="preserve">
+		<value>Kosten</value>
+	</data>
+	<data name="CostPrediction" xml:space="preserve">
+		<value>Kosten Voorspelling</value>
+	</data>
+	<data name="Costs" xml:space="preserve">
+		<value>Kosten</value>
+	</data>
+	<data name="CurrentCost" xml:space="preserve">
+		<value>Huidige kosten</value>
+	</data>
+	<data name="CurrentInventory" xml:space="preserve">
+		<value>Huidige voorraad</value>
+	</data>
+	<data name="InStock" xml:space="preserve">
+		<value>Op voorraad</value>
+	</data>
+	<data name="InventoryConsumption" xml:space="preserve">
+		<value>Voorraad verbruik</value>
+	</data>
+	<data name="InventoryItemName" xml:space="preserve">
+		<value>Voorraadartikel naam</value>
+	</data>
+	<data name="Portion" xml:space="preserve">
+		<value>Deel</value>
+	</data>
+	<data name="PredictedInventory" xml:space="preserve">
+		<value>Inventaris voorspelling</value>
+	</data>
+	<data name="ProductName" xml:space="preserve">
+		<value>Naam van het product</value>
+	</data>
+	<data name="Purchase" xml:space="preserve">
+		<value>Kopen</value>
+	</data>
+	<data name="SellAmount" xml:space="preserve">
+		<value>Verkocht aantal</value>
+	</data>
+	<data name="Unit" xml:space="preserve">
+		<value>Eenheid</value>
+	</data>
+	<data name="RecipeName" xml:space="preserve">
+		<value>Recept Naam</value>
+	</data>
+	<data name="Product" xml:space="preserve">
+		<value>Product</value>
+	</data>
+	<data name="FixedCost" xml:space="preserve">
+		<value>Vaste kosten</value>
+	</data>
+	<data name="Quantity" xml:space="preserve">
+		<value>Hoeveelheid</value>
+	</data>
+	<data name="Recipe" xml:space="preserve">
+		<value>Recept</value>
+	</data>
+	<data name="Inventory" xml:space="preserve">
+		<value>Inventaris</value>
+	</data>
+	<data name="DocumentNo" xml:space="preserve">
+		<value>Document nr.</value>
+	</data>
+	<data name="UnitPrice" xml:space="preserve">
+		<value>Eenheidsprijs</value>
+	</data>
+	<data name="TransactionDocument" xml:space="preserve">
+		<value>Transactie Document</value>
+	</data>
+	<data name="Line" xml:space="preserve">
+		<value>Regel</value>
+	</data>
+	<data name="InventoryItem" xml:space="preserve">
+		<value>Voorraadartikel</value>
+	</data>
+	<data name="DeleteErrorDepartmentUsedInRole" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze afdeling toegewezen is aan een gebruikersrol.</value>
+	</data>
+	<data name="DepartmentName" xml:space="preserve">
+		<value>Afdelingsnaam</value>
+	</data>
+	<data name="POSMenu" xml:space="preserve">
+		<value>Kassa Menu</value>
+	</data>
+	<data name="TerminalMenu" xml:space="preserve">
+		<value>Terminal Menu</value>
+	</data>
+	<data name="POSTableView" xml:space="preserve">
+		<value>Kassa Tafelweergave</value>
+	</data>
+	<data name="TerminalTableView" xml:space="preserve">
+		<value>Terminal Tafelweergave</value>
+	</data>
+	<data name="OpenTicketView" xml:space="preserve">
+		<value>Open Bonnen Weergave</value>
+	</data>
+	<data name="ColumnCount" xml:space="preserve">
+		<value>Aantal kolommen</value>
+	</data>
+	<data name="POSDefaultTicketTag" xml:space="preserve">
+		<value>POS Standaard Bon Tag</value>
+	</data>
+	<data name="TerminalDefaultTicketTag" xml:space="preserve">
+		<value>Terminal Standaard Bon Tag</value>
+	</data>
+	<data name="DepartmentType" xml:space="preserve">
+		<value>Afdeling Type</value>
+	</data>
+	<data name="FastFood" xml:space="preserve">
+		<value>Fast-Food</value>
+	</data>
+	<data name="ALaCarte" xml:space="preserve">
+		<value>A-la Carte</value>
+	</data>
+	<data name="Delivery" xml:space="preserve">
+		<value>Levering</value>
+	</data>
+	<data name="Numerators" xml:space="preserve">
+		<value>Tellers</value>
+	</data>
+	<data name="TicketNumerator" xml:space="preserve">
+		<value>Bon Teller</value>
+	</data>
+	<data name="OrderNumerator" xml:space="preserve">
+		<value>Bestel Teller</value>
+	</data>
+	<data name="TicketTags" xml:space="preserve">
+		<value>Bon Labels</value>
+	</data>
+	<data name="TagGroups" xml:space="preserve">
+		<value>Tag groepen</value>
+	</data>
+	<data name="TagGroup" xml:space="preserve">
+		<value>Tag groep</value>
+	</data>
+	<data name="ChooseTagsForDepartmentHint" xml:space="preserve">
+		<value>Selecteer tags voor het gebruik op afdeling {0}.</value>
+	</data>
+	<data name="Department" xml:space="preserve">
+		<value>Afdeling</value>
+	</data>
+	<data name="BatchCreteProducts" xml:space="preserve">
+		<value>Batch producten aanmaken</value>
+	</data>
+	<data name="BatchCreateProductsDialogHint" xml:space="preserve">
+		<value>Maak een regel voor elk product met [Product naam] [prijs] formaat. Begin Categorienamen met # karakter.</value>
+	</data>
+	<data name="DeleteErrorProductUsedInMenu" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit product toegewezen is aan een menu</value>
+	</data>
+	<data name="DeleteErrorProductUsedInReceipt" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit product toegewezen is aan een ontvangstbewijs.</value>
+	</data>
+	<data name="DeleteErrorProductPropertyUsedInProduct" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit product eigendom toegewezen aan een product</value>
+	</data>
+	<data name="PropertyGroupName" xml:space="preserve">
+		<value>Eigenschappengroep naam</value>
+	</data>
+	<data name="SingleSelection" xml:space="preserve">
+		<value>Enkele selectie</value>
+	</data>
+	<data name="MultipleSelection" xml:space="preserve">
+		<value>Meervoudige Selectie</value>
+	</data>
+	<data name="AddPropertyPriceToProductPrice" xml:space="preserve">
+		<value>Eigenschap toevoegen Prijs tot Product Prijs</value>
+	</data>
+	<data name="POSView" xml:space="preserve">
+		<value>Kassa Weergave</value>
+	</data>
+	<data name="ButtonHeight" xml:space="preserve">
+		<value>Hoogte knop</value>
+	</data>
+	<data name="TerminalView" xml:space="preserve">
+		<value>Terminal Weergave</value>
+	</data>
+	<data name="Properties" xml:space="preserve">
+		<value>Eigenschappen</value>
+	</data>
+	<data name="Property" xml:space="preserve">
+		<value>Eigenschap</value>
+	</data>
+	<data name="Price" xml:space="preserve">
+		<value>Prijs</value>
+	</data>
+	<data name="PB" xml:space="preserve">
+		<value>C</value>
+	</data>
+	<data name="PropertyGroup" xml:space="preserve">
+		<value>Eigenschapgroep</value>
+	</data>
+	<data name="Barcode" xml:space="preserve">
+		<value>Streepjescode</value>
+	</data>
+	<data name="PortionPrices" xml:space="preserve">
+		<value>Portie Prijzen</value>
+	</data>
+	<data name="Multiplier" xml:space="preserve">
+		<value>Factor</value>
+	</data>
+	<data name="PropertyGroups" xml:space="preserve">
+		<value>Eigenschapgroepen</value>
+	</data>
+	<data name="SelectPropertyGroupsHint_f" xml:space="preserve">
+		<value>Selecteer Eigenschapgroepen voor Product {0}.</value>
+	</data>
+	<data name="Departments" xml:space="preserve">
+		<value>Afdelingen</value>
+	</data>
+	<data name="Settings" xml:space="preserve">
+		<value>Instellingen</value>
+	</data>
+	<data name="ProductList" xml:space="preserve">
+		<value>Product Lijst</value>
+	</data>
+	<data name="MenuList" xml:space="preserve">
+		<value>Menulijst</value>
+	</data>
+	<data name="BatchPriceList" xml:space="preserve">
+		<value>Prijslijst Bewerken</value>
+	</data>
+	<data name="CanChangeDepartment" xml:space="preserve">
+		<value>Kan afdeling wijzigen</value>
+	</data>
+	<data name="AlphanumericButtonValues" xml:space="preserve">
+		<value>Alfanumerieke knopwaarden</value>
+	</data>
+	<data name="AutoSelect" xml:space="preserve">
+		<value>Automatisch selecteren</value>
+	</data>
+	<data name="ButtonColor" xml:space="preserve">
+		<value>Kleur van de knoppen</value>
+	</data>
+	<data name="CategoryName" xml:space="preserve">
+		<value>Categorie naam</value>
+	</data>
+	<data name="CategoryProperties" xml:space="preserve">
+		<value>Categorie-eigenschappen</value>
+	</data>
+	<data name="Color" xml:space="preserve">
+		<value>Kleur</value>
+	</data>
+	<data name="DefaultProperties" xml:space="preserve">
+		<value>Standaard eigenschappen</value>
+	</data>
+	<data name="FastMenu" xml:space="preserve">
+		<value>Snelmenu</value>
+	</data>
+	<data name="Gift" xml:space="preserve">
+		<value>Gift</value>
+	</data>
+	<data name="Header" xml:space="preserve">
+		<value>Kop</value>
+	</data>
+	<data name="ImagePath" xml:space="preserve">
+		<value>Afbeeldingspad</value>
+	</data>
+	<data name="MenuProperties" xml:space="preserve">
+		<value>Menu Eigenschappen</value>
+	</data>
+	<data name="NumeratorProperties" xml:space="preserve">
+		<value>Teller Eigenschappen</value>
+	</data>
+	<data name="NumeratorType" xml:space="preserve">
+		<value>Teller Type</value>
+	</data>
+	<data name="NumeratorValue" xml:space="preserve">
+		<value>Teller Waarde</value>
+	</data>
+	<data name="SortOrder" xml:space="preserve">
+		<value>Sorteervolgorde</value>
+	</data>
+	<data name="PageCount" xml:space="preserve">
+		<value>Aantal pagina's</value>
+	</data>
+	<data name="WrapText" xml:space="preserve">
+		<value>Tekstterugloop</value>
+	</data>
+	<data name="DeleteErrorMenuViewUsedInDepartment" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit menu toegewezen is aan een afdeling</value>
+	</data>
+	<data name="MenuName" xml:space="preserve">
+		<value>Menu Naam</value>
+	</data>
+	<data name="MenuCategories" xml:space="preserve">
+		<value>Menucategorieën</value>
+	</data>
+	<data name="Menu" xml:space="preserve">
+		<value>Menu</value>
+	</data>
+	<data name="Categories" xml:space="preserve">
+		<value>Categorieën</value>
+	</data>
+	<data name="Category" xml:space="preserve">
+		<value>Categorie</value>
+	</data>
+	<data name="CategoryProducts" xml:space="preserve">
+		<value>Categorie producten</value>
+	</data>
+	<data name="Sort_f" xml:space="preserve">
+		<value>Sorteer {0}</value>
+	</data>
+	<data name="ProductProperties" xml:space="preserve">
+		<value>Product Eigenschappen</value>
+	</data>
+	<data name="AllCategories" xml:space="preserve">
+		<value>Alle categorieën</value>
+	</data>
+	<data name="AddCategoryHint" xml:space="preserve">
+		<value>Voer Categorieën in die u wilt toevoegen</value>
+	</data>
+	<data name="AutoSelectProductsQuestion" xml:space="preserve">
+		<value>Selecteer producten automatisch voor nieuwe categorieen?</value>
+	</data>
+	<data name="AddProductsToCategoryHint_f" xml:space="preserve">
+		<value>Selecteer Producten voor categorie {0}</value>
+	</data>
+	<data name="DeleteSelectedCategoryQuestion" xml:space="preserve">
+		<value>Geselecteerde categorie?</value>
+	</data>
+	<data name="SortCategoryProducts" xml:space="preserve">
+		<value>Sorteer Categorie Producten</value>
+	</data>
+	<data name="SortCategories" xml:space="preserve">
+		<value>Sorteer Categorieën</value>
+	</data>
+	<data name="SortCategoryProductsDialogHint_f" xml:space="preserve">
+		<value>Sleep categorie {0} producten om volgorde te wijzigen.</value>
+	</data>
+	<data name="SortCategoriesDialogHint_f" xml:space="preserve">
+		<value>Sleep {0} menu categorieën om volgorde te wijzigen.</value>
+	</data>
+	<data name="DeleteErrorTagUsedInDepartment" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze tag toegewezen is aan een afdeling</value>
+	</data>
+	<data name="TicketTagName" xml:space="preserve">
+		<value>Bon Tag Naam</value>
+	</data>
+	<data name="Numerator" xml:space="preserve">
+		<value>Teller</value>
+	</data>
+	<data name="DoAfterTicketSelected" xml:space="preserve">
+		<value>Doe het nadat de bon is geselecteerd</value>
+	</data>
+	<data name="CanUseOnPOS" xml:space="preserve">
+		<value>Gebruik op Kassa</value>
+	</data>
+	<data name="CanUseOnTerminal" xml:space="preserve">
+		<value>Gebruik op terminal</value>
+	</data>
+	<data name="SelectionRequired" xml:space="preserve">
+		<value>Selectie Verplicht</value>
+	</data>
+	<data name="NumericTags" xml:space="preserve">
+		<value>Numerieke Labels</value>
+	</data>
+	<data name="FreeTagging" xml:space="preserve">
+		<value>Gratis Tagging</value>
+	</data>
+	<data name="ButtonColors" xml:space="preserve">
+		<value>Knop Kleuren</value>
+	</data>
+	<data name="WhenTagSelected" xml:space="preserve">
+		<value>Wanneer getagd</value>
+	</data>
+	<data name="WhenTagNotSelected" xml:space="preserve">
+		<value>Wanneer untagged</value>
+	</data>
+	<data name="SubTags" xml:space="preserve">
+		<value>Sub Tags</value>
+	</data>
+	<data name="TagName" xml:space="preserve">
+		<value>Tag Naam</value>
+	</data>
+	<data name="Account" xml:space="preserve">
+		<value>Rekening</value>
+	</data>
+	<data name="NumericTagsShouldBeNumbersErrorMessage" xml:space="preserve">
+		<value>Als "Numeriek Tagging" geselecteerd is moeten alle tags numerieke waarden bevatten.</value>
+	</data>
+	<data name="NewTag" xml:space="preserve">
+		<value>Nieuwe tag</value>
+	</data>
+	<data name="TicketTag" xml:space="preserve">
+		<value>Bon Tag</value>
+	</data>
+	<data name="Refresh" xml:space="preserve">
+		<value>Verversen</value>
+	</data>
+	<data name="CloseTicket" xml:space="preserve">
+		<value>Sluiten bon</value>
+	</data>
+	<data name="GetPayment" xml:space="preserve">
+		<value>Afrekenen</value>
+	</data>
+	<data name="Tag" xml:space="preserve">
+		<value>Tag</value>
+	</data>
+	<data name="CanNavigateCash" xml:space="preserve">
+		<value>Kan Cash scherm in</value>
+	</data>
+	<data name="CanOpenNavigation" xml:space="preserve">
+		<value>Kan Navigatie scherm in</value>
+	</data>
+	<data name="InternetBrowser" xml:space="preserve">
+		<value>Internet Browser</value>
+	</data>
+	<data name="BatchCreateGiftReasons" xml:space="preserve">
+		<value>Batch aanmaken kado-redenen</value>
+	</data>
+	<data name="BatchCreateReasonsHint" xml:space="preserve">
+		<value>Voer een regel in voor elke reden die u wilt toevoegen</value>
+	</data>
+	<data name="DeleteErrorGiftReasonInUse" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit Gift Reden wordt gebruikt in een ticket</value>
+	</data>
+	<data name="GiftReasonName" xml:space="preserve">
+		<value>Gift Reden Naam</value>
+	</data>
+	<data name="GiftReason" xml:space="preserve">
+		<value>Gift Reden</value>
+	</data>
+	<data name="DeleteErrorNumeratorIsOrderNumerator" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze Teller wordt gebruikt als Bestel Teller</value>
+	</data>
+	<data name="DeleteErrorNumeratorIsTicketNumerator" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze Teller wordt gebruikt als Bon Teller</value>
+	</data>
+	<data name="DeleteErrorNumeratorUsedInTicket" xml:space="preserve">
+		<value>Kan niet verwijderen omdate deze Teller toegewezen is aan een Bon Tag</value>
+	</data>
+	<data name="NumeratorName" xml:space="preserve">
+		<value>Teller Naam</value>
+	</data>
+	<data name="NumeratorFormat" xml:space="preserve">
+		<value>Getalnotatie</value>
+	</data>
+	<data name="DeleteErrorTemplateUsedInPrintJob" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit Printsjabloon toegewezen is aan een afdruktaak</value>
+	</data>
+	<data name="TemplateName" xml:space="preserve">
+		<value>Sjabloonnaam</value>
+	</data>
+	<data name="HeaderTemplate" xml:space="preserve">
+		<value>Kopsjabloon</value>
+	</data>
+	<data name="LineTemplate" xml:space="preserve">
+		<value>Regelsjabloon</value>
+	</data>
+	<data name="GiftLineTemplate" xml:space="preserve">
+		<value>Giftregelsjabloon</value>
+	</data>
+	<data name="VoidLineTemplate" xml:space="preserve">
+		<value>Retourregelsjabloon</value>
+	</data>
+	<data name="SubLineTemplate" xml:space="preserve">
+		<value>Regeleigenschappen sjabloon</value>
+	</data>
+	<data name="MergeLines" xml:space="preserve">
+		<value>Regels samenvoegen</value>
+	</data>
+	<data name="TicketDate" xml:space="preserve">
+		<value>Bon Datum</value>
+	</data>
+	<data name="TicketTime" xml:space="preserve">
+		<value>Bon tijd</value>
+	</data>
+	<data name="DayDate" xml:space="preserve">
+		<value>Datum van de Dag</value>
+	</data>
+	<data name="DayTime" xml:space="preserve">
+		<value>Tijd van de dag</value>
+	</data>
+	<data name="UniqueTicketId" xml:space="preserve">
+		<value>Unieke Bon ID</value>
+	</data>
+	<data name="TicketNumber" xml:space="preserve">
+		<value>Bonnummer</value>
+	</data>
+	<data name="OptionalTicketTag" xml:space="preserve">
+		<value>Optioneel Bon Tag</value>
+	</data>
+	<data name="TableOrUserName" xml:space="preserve">
+		<value>Tafelnaam, Indien leeg Gebruikersnaam</value>
+	</data>
+	<data name="UserName" xml:space="preserve">
+		<value>Gebruikersnaam</value>
+	</data>
+	<data name="TableName" xml:space="preserve">
+		<value>Tafelnaam</value>
+	</data>
+	<data name="TicketNote" xml:space="preserve">
+		<value>Bon Opmerking</value>
+	</data>
+	<data name="AccountAddress" xml:space="preserve">
+		<value>Rekening Adres</value>
+	</data>
+	<data name="AccountPhone" xml:space="preserve">
+		<value>Rekening Telefoonnummer</value>
+	</data>
+	<data name="LineItemQuantity" xml:space="preserve">
+		<value># Regel: Artikel Hoeveelheid</value>
+	</data>
+	<data name="LineItemName" xml:space="preserve">
+		<value># Regel: Artikelnaam</value>
+	</data>
+	<data name="LineItemPrice" xml:space="preserve">
+		<value># Regel: Artikel Prijs</value>
+	</data>
+	<data name="LineItemPriceCents" xml:space="preserve">
+		<value># Regel: Artikel Prijs op Centen</value>
+	</data>
+	<data name="LineItemTotal" xml:space="preserve">
+		<value># Regel: Artikel totaal</value>
+	</data>
+	<data name="LineItemTotalAndQuantity" xml:space="preserve">
+		<value># Regel: Artikel totaal x aantal</value>
+	</data>
+	<data name="LineItemTotalWithoutGifts" xml:space="preserve">
+		<value># Regel: Artikel totaal (Gift niet inbegrepen)</value>
+	</data>
+	<data name="LineItemDetails" xml:space="preserve">
+		<value># Regel: Artikel eigenschappen</value>
+	</data>
+	<data name="LineItemDetailPrice" xml:space="preserve">
+		<value># Regel: Artikel eigenschap prijs</value>
+	</data>
+	<data name="LineItemDetailQuantity" xml:space="preserve">
+		<value># Regel: Artikel eigenschap aantal</value>
+	</data>
+	<data name="LineOrderNumber" xml:space="preserve">
+		<value># Regel: Bestelnummer</value>
+	</data>
+	<data name="LineGiftOrVoidReason" xml:space="preserve">
+		<value># Regel: Gift of retour reden</value>
+	</data>
+	<data name="TicketTotal" xml:space="preserve">
+		<value>Bon totaal</value>
+	</data>
+	<data name="TicketPaidTotal" xml:space="preserve">
+		<value>Betaald bon bedrag</value>
+	</data>
+	<data name="TicketRemainingAmount" xml:space="preserve">
+		<value>Resterend bon bedrag</value>
+	</data>
+	<data name="RemainingAmountIfPaid" xml:space="preserve">
+		<value>Resterend bedrag als betaald</value>
+	</data>
+	<data name="DiscountTotalAndTicketTotal" xml:space="preserve">
+		<value>Kortingregels indien bestaand</value>
+	</data>
+	<data name="PrinterTemplate" xml:space="preserve">
+		<value>Printer Sjabloon</value>
+	</data>
+	<data name="PrinterName" xml:space="preserve">
+		<value>Printer Naam</value>
+	</data>
+	<data name="ShareNameAndPortName" xml:space="preserve">
+		<value>Printer Share-naam / Poort Naam</value>
+	</data>
+	<data name="PrinterType" xml:space="preserve">
+		<value>Printer Type</value>
+	</data>
+	<data name="CharacterSet" xml:space="preserve">
+		<value>Tekenset</value>
+	</data>
+	<data name="LineCharacterCount" xml:space="preserve">
+		<value>Aantal karakters per regel</value>
+	</data>
+	<data name="TicketPrinter" xml:space="preserve">
+		<value>Bonprinter</value>
+	</data>
+	<data name="Text" xml:space="preserve">
+		<value>Tekst</value>
+	</data>
+	<data name="Html" xml:space="preserve">
+		<value>HTML</value>
+	</data>
+	<data name="PortPrinter" xml:space="preserve">
+		<value>Poort Printer</value>
+	</data>
+	<data name="DemoPrinter" xml:space="preserve">
+		<value>Demo Printer (kladblok)</value>
+	</data>
+	<data name="Printer" xml:space="preserve">
+		<value>Printer</value>
+	</data>
+	<data name="PrintJobName" xml:space="preserve">
+		<value>Printopdracht Naam</value>
+	</data>
+	<data name="ButtonHeader" xml:space="preserve">
+		<value>Knopnaam</value>
+	</data>
+	<data name="LockTicket" xml:space="preserve">
+		<value>Ticket blokkeren</value>
+	</data>
+	<data name="UseAtPosScreen" xml:space="preserve">
+		<value>Weergave bij Kassascherm</value>
+	</data>
+	<data name="UseAtPaymentScreen" xml:space="preserve">
+		<value>Weergave bij betaalscherm</value>
+	</data>
+	<data name="UseAtTerminal" xml:space="preserve">
+		<value>Weergave Op Terminal</value>
+	</data>
+	<data name="UseAtOldTickets" xml:space="preserve">
+		<value>Alleen voor oude tickets</value>
+	</data>
+	<data name="PrintMapping" xml:space="preserve">
+		<value>Print Mapping</value>
+	</data>
+	<data name="PrintContent" xml:space="preserve">
+		<value>Afdrukken Inhoud</value>
+	</data>
+	<data name="AutoPrintWhen" xml:space="preserve">
+		<value>Auto Printen Na</value>
+	</data>
+	<data name="AutoPrintPaymentType" xml:space="preserve">
+		<value>Auto Printen voor Betalingswijzen</value>
+	</data>
+	<data name="MenuItemGroup" xml:space="preserve">
+		<value>Productgroep</value>
+	</data>
+	<data name="MenuItem" xml:space="preserve">
+		<value>Product</value>
+	</data>
+	<data name="Template" xml:space="preserve">
+		<value>Sjabloon</value>
+	</data>
+	<data name="Add" xml:space="preserve">
+		<value>Toevoegen</value>
+	</data>
+	<data name="Delete" xml:space="preserve">
+		<value>Verwijderen</value>
+	</data>
+	<data name="Manual" xml:space="preserve">
+		<value>Handmatig</value>
+	</data>
+	<data name="WhenNewLinesAddedToTicket" xml:space="preserve">
+		<value>Nieuwe regels toegevoegd aan ticket</value>
+	</data>
+	<data name="WhenTicketPaid" xml:space="preserve">
+		<value>Ticket betaald</value>
+	</data>
+	<data name="AllLines" xml:space="preserve">
+		<value>Alle regels</value>
+	</data>
+	<data name="OnlyNewLines" xml:space="preserve">
+		<value>Alleen nieuwe regels</value>
+	</data>
+	<data name="LinesGroupedByBarcode" xml:space="preserve">
+		<value>Gegroepeerd per Barcode</value>
+	</data>
+	<data name="LinesGroupedByGroupCode" xml:space="preserve">
+		<value>Gegroepeerd per groep Code</value>
+	</data>
+	<data name="PrintJob" xml:space="preserve">
+		<value>Printopdracht</value>
+	</data>
+	<data name="DeleteSelectedMappingQuestion" xml:space="preserve">
+		<value>Geselecteerde mapping verwijderen?</value>
+	</data>
+	<data name="TicketOptions" xml:space="preserve">
+		<value>Bon-instellingen</value>
+	</data>
+	<data name="AutoRounding" xml:space="preserve">
+		<value>Auto afronden</value>
+	</data>
+	<data name="WeightBarcodes" xml:space="preserve">
+		<value>Dikte Barcodes</value>
+	</data>
+	<data name="WeightBarcodePefix" xml:space="preserve">
+		<value>Dikte Barcode Prefix</value>
+	</data>
+	<data name="WeightBarcodeItemIdLength" xml:space="preserve">
+		<value>Dikte Barcode Item ID Lengte</value>
+	</data>
+	<data name="WeightBarcodeQuantityLength" xml:space="preserve">
+		<value>Dikte Barcode Aantal Lengte</value>
+	</data>
+	<data name="ProgramSettings" xml:space="preserve">
+		<value>Programma-instellingen</value>
+	</data>
+	<data name="DayOperations" xml:space="preserve">
+		<value>Werkperiodes</value>
+	</data>
+	<data name="LocalSettings" xml:space="preserve">
+		<value>Lokale Instellingen</value>
+	</data>
+	<data name="Terminals" xml:space="preserve">
+		<value>Terminals</value>
+	</data>
+	<data name="Printers" xml:space="preserve">
+		<value>Printers</value>
+	</data>
+	<data name="PrintJobs" xml:space="preserve">
+		<value>Afdruktaken</value>
+	</data>
+	<data name="PrinterTemplates" xml:space="preserve">
+		<value>Printer Sjablonen</value>
+	</data>
+	<data name="VoidReasons" xml:space="preserve">
+		<value>Retour Redenen</value>
+	</data>
+	<data name="GiftReasons" xml:space="preserve">
+		<value>Gift Redenen</value>
+	</data>
+	<data name="SambaPosWebsite" xml:space="preserve">
+		<value>SambaPOS Website</value>
+	</data>
+	<data name="SambaNetwork" xml:space="preserve">
+		<value>Samba Netwerk</value>
+	</data>
+	<data name="CanStartEndOfDay" xml:space="preserve">
+		<value>Mag einde dag opstarten</value>
+	</data>
+	<data name="TerminalName" xml:space="preserve">
+		<value>Terminal Naam</value>
+	</data>
+	<data name="ProgramLanguage" xml:space="preserve">
+		<value>Programma Taal</value>
+	</data>
+	<data name="DataConnection" xml:space="preserve">
+		<value>Data Connection String</value>
+	</data>
+	<data name="MessageServerName" xml:space="preserve">
+		<value>Message Server Naam</value>
+	</data>
+	<data name="MessageServerPort" xml:space="preserve">
+		<value>Message Server Poort</value>
+	</data>
+	<data name="AutoStartMessageClient" xml:space="preserve">
+		<value>Start message client automatisch</value>
+	</data>
+	<data name="StartClientNow" xml:space="preserve">
+		<value>Start client nu</value>
+	</data>
+	<data name="DeleteErrorShouldHaveAtLeastOneTerminal" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat er ten minste een terminal dient te zijn.</value>
+	</data>
+	<data name="DefaultTerminal" xml:space="preserve">
+		<value>Standaard Terminal</value>
+	</data>
+	<data name="AutoLogout" xml:space="preserve">
+		<value>Automatisch afmelden</value>
+	</data>
+	<data name="PrinterOptions" xml:space="preserve">
+		<value>Printerinstellingen</value>
+	</data>
+	<data name="SlipReportPrinter" xml:space="preserve">
+		<value>Slip rapport Printer</value>
+	</data>
+	<data name="ReportPrinter" xml:space="preserve">
+		<value>Rapport Printer</value>
+	</data>
+	<data name="SelectPrintJob" xml:space="preserve">
+		<value>Selecteer Printopdracht</value>
+	</data>
+	<data name="Terminal" xml:space="preserve">
+		<value>Terminal</value>
+	</data>
+	<data name="PrintJobList" xml:space="preserve">
+		<value>Print Opdrachten Lijst</value>
+	</data>
+	<data name="SelectPrintJobsForTerminalHint_f" xml:space="preserve">
+		<value>Selecteer afdruktaken die u wilt toevoegen aan terminal {0}</value>
+	</data>
+	<data name="BatchAddVoidReasons" xml:space="preserve">
+		<value>Voeg meerdere retour redenen in</value>
+	</data>
+	<data name="BatchAddVoidReasonsDialogHint" xml:space="preserve">
+		<value>Voer een regel in voor elke reden die u wilt toevoegen</value>
+	</data>
+	<data name="DeleteErrorVoidReasonUsed" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze reden gebruikt wordt in een ticket</value>
+	</data>
+	<data name="VoidReasonName" xml:space="preserve">
+		<value>Retour Reden Naam</value>
+	</data>
+	<data name="VoidReason" xml:space="preserve">
+		<value>Retour Reden</value>
+	</data>
+	<data name="CashContent" xml:space="preserve">
+		<value>Kontante inhoud</value>
+	</data>
+	<data name="WorkPeriodStartDate_f" xml:space="preserve">
+		<value>Datum van Werk Periode: {0}</value>
+	</data>
+	<data name="WorkPeriodStartTime" xml:space="preserve">
+		<value>Tijd van Werk Periode: {0}</value>
+	</data>
+	<data name="TotalWorkTimeDays_f" xml:space="preserve">
+		<value>Totale werktijd:
+{0:0} dagen {1:0} uur {2:0} minuten</value>
+	</data>
+	<data name="TotalWorkTimeHours_f" xml:space="preserve">
+		<value>Totale werktijd: {0:0} uur {1:0} minuten</value>
+	</data>
+	<data name="TotalWorkTimeMinutes_f" xml:space="preserve">
+		<value>Totale werktijd: {0:0} minuten</value>
+	</data>
+	<data name="StartWorkPeriodToEnablePos" xml:space="preserve">
+		<value>Start werkperiode om kassa aan te zetten</value>
+	</data>
+	<data name="StartWorkPeriod" xml:space="preserve">
+		<value>Start werkperiode</value>
+	</data>
+	<data name="EndWorkPeriod" xml:space="preserve">
+		<value>Einde werkperiode</value>
+	</data>
+	<data name="StartingWorkPeriodCompleted" xml:space="preserve">
+		<value>Werkperiode gestart.</value>
+	</data>
+	<data name="ThereAreOpenTicketsWarning_f" xml:space="preserve">
+		<value>Er zijn {0} open bonnen.
+Kan de werkperiode niet beeindigen zolang er nog bonnen open staan</value>
+	</data>
+	<data name="Table" xml:space="preserve">
+		<value>Tafel</value>
+	</data>
+	<data name="SaveErrorDuplicateTableName" xml:space="preserve">
+		<value>Er is al een tafel met die naam.</value>
+	</data>
+	<data name="AddMultipleTables" xml:space="preserve">
+		<value>Voeg meerdere tafels in</value>
+	</data>
+	<data name="AddMultipleTableHint" xml:space="preserve">
+		<value>Voeg een regel voor elk Tafelnaam. Begin Categorieën met # karakter.</value>
+	</data>
+	<data name="DeleteErrorTicketAssignedToTable" xml:space="preserve">
+		<value>Kan niet verwijderen omdat er een bon toegewezen is aan die tafel</value>
+	</data>
+	<data name="DeleteErrorTableUsedInTableView" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze tafel toegewezen is aan een Tafel Weergave</value>
+	</data>
+	<data name="TableViews" xml:space="preserve">
+		<value>Tafel Weergave</value>
+	</data>
+	<data name="Tables" xml:space="preserve">
+		<value>Tafels</value>
+	</data>
+	<data name="CanOpenTableList" xml:space="preserve">
+		<value>Mag tafellijst zien</value>
+	</data>
+	<data name="CanChangeTable" xml:space="preserve">
+		<value>Kan de tafel van een bon wijzigen</value>
+	</data>
+	<data name="DeleteErrorTableViewUsedInDepartment" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze tabelweergave is toegewezen aan een afdeling</value>
+	</data>
+	<data name="TableViewName" xml:space="preserve">
+		<value>Weergave Naam</value>
+	</data>
+	<data name="TableViewMode" xml:space="preserve">
+		<value>Weergavemodus</value>
+	</data>
+	<data name="BackgroundColor" xml:space="preserve">
+		<value>Achtergrondkleur</value>
+	</data>
+	<data name="BackgroundImage" xml:space="preserve">
+		<value>Achtergrondafbeelding</value>
+	</data>
+	<data name="EmptyTableColor" xml:space="preserve">
+		<value>Lege Tafel Kleur</value>
+	</data>
+	<data name="UnavailableTableColor" xml:space="preserve">
+		<value>Bezette tafel kleur</value>
+	</data>
+	<data name="LockedTableColor" xml:space="preserve">
+		<value>Geblokkeerde tafel kleur</value>
+	</data>
+	<data name="NumeratorHeight" xml:space="preserve">
+		<value>Teller Hoogte</value>
+	</data>
+	<data name="AlphanumericButtons" xml:space="preserve">
+		<value>Alfanumerieke toetsen</value>
+	</data>
+	<data name="Automatic" xml:space="preserve">
+		<value>Automatisch</value>
+	</data>
+	<data name="Custom" xml:space="preserve">
+		<value>Handmatig</value>
+	</data>
+	<data name="Hidden" xml:space="preserve">
+		<value>Verborgen</value>
+	</data>
+	<data name="SelectTable" xml:space="preserve">
+		<value>Selecteer Tafel</value>
+	</data>
+	<data name="TableList" xml:space="preserve">
+		<value>Tafel Lijst</value>
+	</data>
+	<data name="SelectTableDialogHint_f" xml:space="preserve">
+		<value>Selecteer de tafels die u wilt toevoegen aan {0} weergave</value>
+	</data>
+	<data name="TableView" xml:space="preserve">
+		<value>Tafel weergave</value>
+	</data>
+	<data name="EditMode" xml:space="preserve">
+		<value>Ontwerpmodus</value>
+	</data>
+	<data name="NextPage" xml:space="preserve">
+		<value>Volgende pagina</value>
+	</data>
+	<data name="PreviousPage" xml:space="preserve">
+		<value>Vorige Pagina</value>
+	</data>
+	<data name="TablesMerged_f" xml:space="preserve">
+		<value>{0} bon
+samengevoegd met {1} tafel.</value>
+	</data>
+	<data name="TicketMergedToTable_f" xml:space="preserve">
+		<value>Bon samengevoegd met {0} tafel.</value>
+	</data>
+	<data name="TicketMovedToTable_f" xml:space="preserve">
+		<value>{0} bon
+verplaatst naar {1} tafel.</value>
+	</data>
+	<data name="SelectTableThatYouWantToMoveTicket_f" xml:space="preserve">
+		<value>Selecteer nieuwe tafel voor {0} bon.</value>
+	</data>
+	<data name="SelectTableForTicket" xml:space="preserve">
+		<value>Selecteer tafel voor bon.</value>
+	</data>
+	<data name="SelectTableForOperation" xml:space="preserve">
+		<value>Selecteer de tafel waaraan u orders toe wilt voegen.</value>
+	</data>
+	<data name="FindProduct" xml:space="preserve">
+		<value>Zoek Product</value>
+	</data>
+	<data name="FindTicket" xml:space="preserve">
+		<value>Zoek Bon</value>
+	</data>
+	<data name="FindTable" xml:space="preserve">
+		<value>Zoek Tafel</value>
+	</data>
+	<data name="DiscountTotal" xml:space="preserve">
+		<value>Korting Totaal</value>
+	</data>
+	<data name="PaymentTotal" xml:space="preserve">
+		<value>Betaling Totaal</value>
+	</data>
+	<data name="Balance" xml:space="preserve">
+		<value>Saldo</value>
+	</data>
+	<data name="ChargedAmount" xml:space="preserve">
+		<value>Belast</value>
+	</data>
+	<data name="Portions" xml:space="preserve">
+		<value>Delen</value>
+	</data>
+	<data name="ExtraModifiers" xml:space="preserve">
+		<value>Extra Opties</value>
+	</data>
+	<data name="Update" xml:space="preserve">
+		<value>Bijwerken</value>
+	</data>
+	<data name="AddAndSave" xml:space="preserve">
+		<value>Toevoegen en opslaan</value>
+	</data>
+	<data name="Number" xml:space="preserve">
+		<value>Aantal</value>
+	</data>
+	<data name="OpenClose_ab" xml:space="preserve">
+		<value>Op-Sl</value>
+	</data>
+	<data name="TicketOpeningTime" xml:space="preserve">
+		<value>Bon Opening</value>
+	</data>
+	<data name="LastOrderTime" xml:space="preserve">
+		<value>Laatste bestelling</value>
+	</data>
+	<data name="LastPaymentTime" xml:space="preserve">
+		<value>Laatste betaling</value>
+	</data>
+	<data name="Print" xml:space="preserve">
+		<value>Afdrukken</value>
+	</data>
+	<data name="CloseTicket_r" xml:space="preserve">
+		<value>Sluiten
+Bon</value>
+	</data>
+	<data name="CashPayment_r" xml:space="preserve">
+		<value>Contante
+Betaling</value>
+	</data>
+	<data name="CreditCard_r" xml:space="preserve">
+		<value>Betaal
+Kaart</value>
+	</data>
+	<data name="SelectCustomer" xml:space="preserve">
+		<value>Selecteer Klant</value>
+	</data>
+	<data name="AllTickets_r" xml:space="preserve">
+		<value>Alle
+Bonnen</value>
+	</data>
+	<data name="Void" xml:space="preserve">
+		<value>Retour</value>
+	</data>
+	<data name="Divide" xml:space="preserve">
+		<value>Verdelen</value>
+	</data>
+	<data name="ExtraModifier" xml:space="preserve">
+		<value>Extra Opties</value>
+	</data>
+	<data name="ReleaseLock" xml:space="preserve">
+		<value>Blokkering verwijderen</value>
+	</data>
+	<data name="ChangePrice" xml:space="preserve">
+		<value>Wijzig Prijs</value>
+	</data>
+	<data name="ForChangingPriceTypeAPrice" xml:space="preserve">
+		<value>Voor het wijzigen van prijs eerst typt u een prijs van teller</value>
+	</data>
+	<data name="NewTicket" xml:space="preserve">
+		<value>Nieuwe bon</value>
+	</data>
+	<data name="ChangeTable_r" xml:space="preserve">
+		<value>Verander
+Tafel</value>
+	</data>
+	<data name="SelectTable_r" xml:space="preserve">
+		<value>Kies
+Tafel</value>
+	</data>
+	<data name="CustomerInfo_r" xml:space="preserve">
+		<value>Klant
+Info</value>
+	</data>
+	<data name="ChangeAmount_f" xml:space="preserve">
+		<value>Wisselgeld: {0}</value>
+	</data>
+	<data name="AccountBalance_r" xml:space="preserve">
+		<value>Rekening
+Saldo</value>
+	</data>
+	<data name="All" xml:space="preserve">
+		<value>Alle</value>
+	</data>
+	<data name="Round" xml:space="preserve">
+		<value>Afronden</value>
+	</data>
+	<data name="Flat" xml:space="preserve">
+		<value>Auto Afronden</value>
+	</data>
+	<data name="DiscountPercentSign" xml:space="preserve">
+		<value>Korting%</value>
+	</data>
+	<data name="CanReleaseTicketLock" xml:space="preserve">
+		<value>Mag Bon blokkering opheffen</value>
+	</data>
+	<data name="CanRemoveTicketTag" xml:space="preserve">
+		<value>Mag Bon Tag opheffen</value>
+	</data>
+	<data name="CanGiftItems" xml:space="preserve">
+		<value>Kan artikelen kado geven</value>
+	</data>
+	<data name="CanVoidItems" xml:space="preserve">
+		<value>Kan artikelen retour nemen</value>
+	</data>
+	<data name="CanMoveTicketLines" xml:space="preserve">
+		<value>Kan artikelen verplaatsen</value>
+	</data>
+	<data name="CanMergeTickets" xml:space="preserve">
+		<value>Kan bonnen samenvoegen</value>
+	</data>
+	<data name="CanDisplayOldTickets" xml:space="preserve">
+		<value>Kan oude bonnen weergeven</value>
+	</data>
+	<data name="CanMoveUnlockedTicketLines" xml:space="preserve">
+		<value>Kan bonregels verplaatsen</value>
+	</data>
+	<data name="CanUpdateExtraModifiers" xml:space="preserve">
+		<value>Kan extra opties bijwerken</value>
+	</data>
+	<data name="CanGetPayment" xml:space="preserve">
+		<value>Kan betaling ontvangen</value>
+	</data>
+	<data name="CanGetFastPayment" xml:space="preserve">
+		<value>Kan snelle betaling ontvangen</value>
+	</data>
+	<data name="CanMakeDiscount" xml:space="preserve">
+		<value>Mag korting geven</value>
+	</data>
+	<data name="CanRoundTicketTotal" xml:space="preserve">
+		<value>Kan bontotaal afronden</value>
+	</data>
+	<data name="CanFlattenTicketTotal" xml:space="preserve">
+		<value>Kan bontotaal automatisch afronden</value>
+	</data>
+	<data name="OnlyOpenTickets" xml:space="preserve">
+		<value>Mag alleen open bonnen zien</value>
+	</data>
+	<data name="AllTickets" xml:space="preserve">
+		<value>Alle bonnen</value>
+	</data>
+	<data name="Total_f" xml:space="preserve">
+		<value>Totaal: {0}</value>
+	</data>
+	<data name="User" xml:space="preserve">
+		<value>Gebruiker</value>
+	</data>
+	<data name="MainMenu" xml:space="preserve">
+		<value>Hoofdmenu</value>
+	</data>
+	<data name="Yes" xml:space="preserve">
+		<value>Ja</value>
+	</data>
+	<data name="No" xml:space="preserve">
+		<value>Geen</value>
+	</data>
+	<data name="DeleteErrorAdminUser" xml:space="preserve">
+		<value>Kan admingebruiker niet verwijderen</value>
+	</data>
+	<data name="DeleteErrorLastUser" xml:space="preserve">
+		<value>Kan het laatste gebruikersaccount niet verwijderen</value>
+	</data>
+	<data name="DeleteErrorUserDidTicketOperation" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze gebruiker bonnen heeft gemaakt.</value>
+	</data>
+	<data name="UserRoleList" xml:space="preserve">
+		<value>Rol Lijst</value>
+	</data>
+	<data name="Users" xml:space="preserve">
+		<value>Gebruikers</value>
+	</data>
+	<data name="UserList" xml:space="preserve">
+		<value>Gebruikerslijst</value>
+	</data>
+	<data name="DeleteErrorThisRoleUsedInAUserAccount" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze rol toegewezen is aan een gebruikersaccount</value>
+	</data>
+	<data name="UserRoleName" xml:space="preserve">
+		<value>Rol Naam</value>
+	</data>
+	<data name="Permissions" xml:space="preserve">
+		<value>Machtigingen</value>
+	</data>
+	<data name="Admin" xml:space="preserve">
+		<value>Admin</value>
+	</data>
+	<data name="UserRole" xml:space="preserve">
+		<value>Gebruikersrol</value>
+	</data>
+	<data name="PinCode" xml:space="preserve">
+		<value>Pin Code</value>
+	</data>
+	<data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
+		<value>Deze pincode wordt al gebruikt door een ander gebruikersaccount.</value>
+	</data>
+	<data name="OK" xml:space="preserve">
+		<value>OK</value>
+	</data>
+	<data name="PropertyEditor" xml:space="preserve">
+		<value>Eigenschappen bewerken</value>
+	</data>
+	<data name="Details" xml:space="preserve">
+		<value>Details</value>
+	</data>
+	<data name="List" xml:space="preserve">
+		<value>Lijst</value>
+	</data>
+	<data name="DisplayAllValues" xml:space="preserve">
+		<value>Toon Alle waarden</value>
+	</data>
+	<data name="Selected" xml:space="preserve">
+		<value>Gekozen</value>
+	</data>
+	<data name="Selected_f" xml:space="preserve">
+		<value>Geselecteerde {0}</value>
+	</data>
+	<data name="WorkPeriodEndsMessage" xml:space="preserve">
+		<value>Werkperiode eindigt.
+Bezoek sectie Rapporten en maak werkperiode Rapporten</value>
+	</data>
+	<data name="DontForgetEndingWorkPeriod" xml:space="preserve">
+		<value>VERGEET NIET WERKPERIODE TE BEEINDIGEN!</value>
+	</data>
+	<data name="Paid" xml:space="preserve">
+		<value>Betaald</value>
+	</data>
+	<data name="Open" xml:space="preserve">
+		<value>Open</value>
+	</data>
+	<data name="AutoFlatten_ab" xml:space="preserve">
+		<value>Auto afronden</value>
+	</data>
+	<data name="Rounding" xml:space="preserve">
+		<value>Afronden</value>
+	</data>
+	<data name="Flattening" xml:space="preserve">
+		<value>Afronden</value>
+	</data>
+	<data name="AccountBalance" xml:space="preserve">
+		<value>Rekeningsaldo</value>
+	</data>
+	<data name="UndefinedPaymentType" xml:space="preserve">
+		<value>Ongedefinieerd type betaling</value>
+	</data>
+	<data name="Angle" xml:space="preserve">
+		<value>Hoek</value>
+	</data>
+	<data name="CornerRadius" xml:space="preserve">
+		<value>Hoek in een straal van</value>
+	</data>
+	<data name="Height" xml:space="preserve">
+		<value>Hoogte</value>
+	</data>
+	<data name="Width" xml:space="preserve">
+		<value>Breedte</value>
+	</data>
+	<data name="Gift_ab" xml:space="preserve">
+		<value>[Gift]</value>
+	</data>
+	<data name="Void_ab" xml:space="preserve">
+		<value>[Retour]</value>
+	</data>
+	<data name="OrderNumber_f" xml:space="preserve">
+		<value>Ord.Nr: {0:0} - {1}</value>
+	</data>
+	<data name="NewOrder" xml:space="preserve">
+		<value>Nieuwe Order</value>
+	</data>
+	<data name="Back" xml:space="preserve">
+		<value>Terug</value>
+	</data>
+	<data name="Empty" xml:space="preserve">
+		<value>Leeg</value>
+	</data>
+	<data name="TicketTimeDisplay_f" xml:space="preserve">
+		<value>{0} ({1} min.)</value>
+	</data>
+	<data name="Table_f" xml:space="preserve">
+		<value>Tafel: {0}</value>
+	</data>
+	<data name="Account_f" xml:space="preserve">
+		<value>Rekening: {0}</value>
+	</data>
+	<data name="TicketNumberAndTable_f" xml:space="preserve">
+		<value># {0} Tafel: {1}</value>
+	</data>
+	<data name="TicketNumberAndAccount_f" xml:space="preserve">
+		<value># {0} Tafel: {1}</value>
+	</data>
+	<data name="AccountNameAndTableName_f" xml:space="preserve">
+		<value># {0} Rekening: {1}
+Tafel: {2}</value>
+	</data>
+	<data name="CantCompleteOperationWhenThereIsZeroPricedProduct" xml:space="preserve">
+		<value>Kan deze bewerking niet voltooien, terwijl nul geprijsde orders bestaan.</value>
+	</data>
+	<data name="TagCantBeEmpty_f" xml:space="preserve">
+		<value>Kan {0} niet leeg laten</value>
+	</data>
+	<data name="Reports" xml:space="preserve">
+		<value>Rapporten</value>
+	</data>
+	<data name="CanDisplayReports" xml:space="preserve">
+		<value>Mag rapporten bekijken</value>
+	</data>
+	<data name="CanChangeReportFilter" xml:space="preserve">
+		<value>Kan datumfilter van rapporten wijzigen</value>
+	</data>
+	<data name="Today" xml:space="preserve">
+		<value>Vandaag</value>
+	</data>
+	<data name="Yesterday" xml:space="preserve">
+		<value>Gisteren</value>
+	</data>
+	<data name="PastMonth" xml:space="preserve">
+		<value>Afgelopen maand</value>
+	</data>
+	<data name="ThisMonth" xml:space="preserve">
+		<value>Deze maand</value>
+	</data>
+	<data name="ThisWeek" xml:space="preserve">
+		<value>Deze week</value>
+	</data>
+	<data name="PastWeek" xml:space="preserve">
+		<value>Afgelopen week</value>
+	</data>
+	<data name="UndefinedWithBrackets" xml:space="preserve">
+		<value>[Ongedefinieerd]</value>
+	</data>
+	<data name="TicketWithBrackets" xml:space="preserve">
+		<value>[Bon]</value>
+	</data>
+	<data name="As_f" xml:space="preserve">
+		<value>Met ingang van {0}</value>
+	</data>
+	<data name="Accounts" xml:space="preserve">
+		<value>Rekeningen</value>
+	</data>
+	<data name="NoTransactionsFoundFor_f" xml:space="preserve">
+		<value>Geen transacties voor {0}</value>
+	</data>
+	<data name="InternalAccounts" xml:space="preserve">
+		<value>Interne boekhouding</value>
+	</data>
+	<data name="AccountsLiability" xml:space="preserve">
+		<value>Aansprakelijkheden</value>
+	</data>
+	<data name="AccountsReceivable" xml:space="preserve">
+		<value>Debiteuren</value>
+	</data>
+	<data name="CashReport" xml:space="preserve">
+		<value>Cash transacties</value>
+	</data>
+	<data name="DateRangeIsNotActiveWorkPeriod" xml:space="preserve">
+		<value>Datum bereik is niet in actieve werkperiode</value>
+	</data>
+	<data name="ReportDoesNotContainsCashState" xml:space="preserve">
+		<value>Rapport bevat geen Start Bedragen</value>
+	</data>
+	<data name="Expenses" xml:space="preserve">
+		<value>Kosten</value>
+	</data>
+	<data name="CashTransactions" xml:space="preserve">
+		<value>Cash Transacties</value>
+	</data>
+	<data name="Totals" xml:space="preserve">
+		<value>Totalen</value>
+	</data>
+	<data name="TotalExpense" xml:space="preserve">
+		<value>Totale Kosten</value>
+	</data>
+	<data name="Incomes" xml:space="preserve">
+		<value>Ontvangsten</value>
+	</data>
+	<data name="StartAmount" xml:space="preserve">
+		<value>Start Bedragen</value>
+	</data>
+	<data name="SalesIncome" xml:space="preserve">
+		<value>Verkoop Inkomen</value>
+	</data>
+	<data name="TotalIncome" xml:space="preserve">
+		<value>Totaal Inkomen</value>
+	</data>
+	<data name="CashStatus" xml:space="preserve">
+		<value>Kontant geld status</value>
+	</data>
+	<data name="Drawer" xml:space="preserve">
+		<value>Kassalade</value>
+	</data>
+	<data name="WorkPeriodReport" xml:space="preserve">
+		<value>Werkperiode Rapport</value>
+	</data>
+	<data name="Sales" xml:space="preserve">
+		<value>Verkoop</value>
+	</data>
+	<data name="GeneralInformation" xml:space="preserve">
+		<value>Algemene informatie</value>
+	</data>
+	<data name="ItemProperties" xml:space="preserve">
+		<value>Extra Artikel Eigenschappen</value>
+	</data>
+	<data name="VoidsTotal" xml:space="preserve">
+		<value>Retour totaal</value>
+	</data>
+	<data name="DiscountsTotal" xml:space="preserve">
+		<value>Kortingen Totaal</value>
+	</data>
+	<data name="GiftsTotal" xml:space="preserve">
+		<value>Gift Totaal</value>
+	</data>
+	<data name="TicketCount" xml:space="preserve">
+		<value>Aantal bonnen</value>
+	</data>
+	<data name="SalesDivTicket" xml:space="preserve">
+		<value>Verkoop Totaal / Bonnen</value>
+	</data>
+	<data name="Incomes_f" xml:space="preserve">
+		<value>{0} Inkomen</value>
+	</data>
+	<data name="TotalAmount_f" xml:space="preserve">
+		<value>{0} Totaal bedrag:</value>
+	</data>
+	<data name="TicketTotal_f" xml:space="preserve">
+		<value>Totaal {0}:</value>
+	</data>
+	<data name="TotalAmountDivTag_f" xml:space="preserve">
+		<value>Totaal bedrag / {0}:</value>
+	</data>
+	<data name="UserSales" xml:space="preserve">
+		<value>Gebruiker verkoop</value>
+	</data>
+	<data name="ItemSales" xml:space="preserve">
+		<value>Artikel verkoop</value>
+	</data>
+	<data name="CostReport" xml:space="preserve">
+		<value>Kosten Rapport</value>
+	</data>
+	<data name="InventoryReport" xml:space="preserve">
+		<value>Voorraad rapport</value>
+	</data>
+	<data name="CsvBuilder" xml:space="preserve">
+		<value>CSV Builder</value>
+	</data>
+	<data name="AverageCost" xml:space="preserve">
+		<value>Gemiddelde kosten</value>
+	</data>
+	<data name="ThereAreNoCostTransactionsInThisPeriod" xml:space="preserve">
+		<value>Er zijn geen kosten transacties in deze werkperiode.</value>
+	</data>
+	<data name="InventoryPurchaseReport" xml:space="preserve">
+		<value>Voorraad inkoop rapport</value>
+	</data>
+	<data name="InventoryGroup" xml:space="preserve">
+		<value>Voorraadgroep</value>
+	</data>
+	<data name="AveragePrice_ab" xml:space="preserve">
+		<value>Gem.Prijs.</value>
+	</data>
+	<data name="ItemSalesReport" xml:space="preserve">
+		<value>Artikel verkoop rapport</value>
+	</data>
+	<data name="SalesByItemGroup" xml:space="preserve">
+		<value>Omzet per artikelgroep</value>
+	</data>
+	<data name="QuantitiesByItemGroup" xml:space="preserve">
+		<value>Hoeveelheden per artikelgroep</value>
+	</data>
+	<data name="Voids" xml:space="preserve">
+		<value>Retouren</value>
+	</data>
+	<data name="Gifts" xml:space="preserve">
+		<value>Giften</value>
+	</data>
+	<data name="Discounts" xml:space="preserve">
+		<value>Kortingen</value>
+	</data>
+	<data name="Tickets" xml:space="preserve">
+		<value>Bonnen</value>
+	</data>
+	<data name="ByPersonnel_f" xml:space="preserve">
+		<value>{0} door gebruiker</value>
+	</data>
+	<data name="NoPurchaseTransactionInCurrentDateRange" xml:space="preserve">
+		<value>Er zijn geen inkooptransacties in datumbereik.</value>
+	</data>
+	<data name="TicketTemplate" xml:space="preserve">
+		<value>Bon Sjabloon</value>
+	</data>
+	<data name="KitchenOrderTemplate" xml:space="preserve">
+		<value>Keuken Bestellingen Sjabloon</value>
+	</data>
+	<data name="InvoicePrinterTemplate" xml:space="preserve">
+		<value>Factuur Sjabloon</value>
+	</data>
+	<data name="TicketTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt;BON
+&lt;L00&gt;Datum: {TICKET DATE}
+&lt;L00&gt;Tijd: {TIME}
+&lt;L00&gt;Tafel nr.: {TABLE}
+&lt;L00&gt;Bon nr: {TICKET NO}
+&lt;F&gt;-</value>
+	</data>
+	<data name="TicketTemplateFooterValue" xml:space="preserve">
+		<value>&lt;F&gt;=
+&lt;EB&gt;
+&lt;J10&gt;{IF DISCOUNT}
+&lt;J10&gt;[Totaal Gift: | {GIFT TOTAL}]
+&lt;J10&gt;Totaal: | {TICKET TOTAL}
+{IF PAID}
+&lt;DB&gt;
+&lt;F&gt;=
+&lt;C10&gt;D A N K   U   W E L</value>
+	</data>
+	<data name="KitchenTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt;{TABLE USER}
+&lt;F&gt;-
+&lt;L00&gt;Datum: {TICKET DATE}
+&lt;L00&gt;Tijd: {TIME}
+&lt;L00&gt;Tabel nr.: {TABLE}
+&lt;L00&gt;Ticket No: {TICKET NO}
+&lt;F&gt; -</value>
+	</data>
+	<data name="KitchenTemplateVoidedLineTemplateValue" xml:space="preserve">
+		<value>&lt;L00&gt; ** RETOUR ** {QUANTITY} {NAME}
+        * {PROPERTIES}</value>
+	</data>
+	<data name="InvoiceTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt;FACTUUR
+&lt;L00&gt;Datum: {TICKET DATE}
+&lt;L00&gt;Tijd: {TIME}
+&lt;L00&gt;Tafel nr.: {TABLE}
+&lt;L00&gt;Bon Nr: {TICKET NO}
+&lt;F&gt;-</value>
+	</data>
+	<data name="KitchenPrinter" xml:space="preserve">
+		<value>Keuken Printer</value>
+	</data>
+	<data name="InvoicePrinter" xml:space="preserve">
+		<value>Factuur Printer</value>
+	</data>
+	<data name="Server" xml:space="preserve">
+		<value>Server</value>
+	</data>
+	<data name="PrintBill" xml:space="preserve">
+		<value>Print Rekening</value>
+	</data>
+	<data name="PrintOrdersToKitchenPrinter" xml:space="preserve">
+		<value>Print Bestellingen naar Keukenprinter</value>
+	</data>
+	<data name="AllTables" xml:space="preserve">
+		<value>Alle tafels</value>
+	</data>
+	<data name="Search" xml:space="preserve">
+		<value>Zoeken</value>
+	</data>
+	<data name="OpenTicketButtonDuration" xml:space="preserve">
+		<value>{0} min</value>
+	</data>
+	<data name="CIDSettings" xml:space="preserve">
+		<value>CID-instellingen</value>
+	</data>
+	<data name="Voucher_r" xml:space="preserve">
+		<value>Voucher</value>
+	</data>
+	<data name="TicketTemplateGiftedLineTemplateValue" xml:space="preserve">
+		<value>&lt;L00&gt; {QUANTITY} {NAME} | GIFT</value>
+	</data>
+	<data name="NavigationPermissions" xml:space="preserve">
+		<value>Navigatie Machtigingen</value>
+	</data>
+	<data name="DepartmentPermissions" xml:space="preserve">
+		<value>Afdeling Machtigingen</value>
+	</data>
+	<data name="TicketPermissions" xml:space="preserve">
+		<value>Bon Machtigingen</value>
+	</data>
+	<data name="SettlePermissions" xml:space="preserve">
+		<value>Betaling Machtigingen</value>
+	</data>
+	<data name="ReportPermissions" xml:space="preserve">
+		<value>Rapportage Machtigingen</value>
+	</data>
+	<data name="NoTicketsFoundForTag" xml:space="preserve">
+		<value>Geen bonnnen gevonden gelabeld met {0} tag.</value>
+	</data>
+	<data name="RemainingAmountIfPaidValue_f" xml:space="preserve">
+		<value>Betaald: | {0}
+&lt;J&gt;TOTAAL: | {1}</value>
+	</data>
+	<data name="DiscountTotalAndTicketTotalValue_f" xml:space="preserve">
+		<value>Bon TOTAAL: | {0}
+&lt;J&gt;Korting: | {1}</value>
+	</data>
+	<data name="Restaurant" xml:space="preserve">
+		<value>Restaurant</value>
+	</data>
+	<data name="IfNegativeDiscountValue_f" xml:space="preserve">
+		<value>&lt;J&gt;Afronding: | {0}</value>
+	</data>
+	<data name="ExportSalesData" xml:space="preserve">
+		<value>Exporteer verkoopgegevens</value>
+	</data>
+	<data name="ClickLinksToExportData" xml:space="preserve">
+		<value>Selecteer datumbereik, vernieuw rapport en klik op gerelateerde link om gegevens te exporteren.</value>
+	</data>
+	<data name="FooterTemplate" xml:space="preserve">
+		<value>Voettekstsjabloon</value>
+	</data>
+	<data name="UiLanguage" xml:space="preserve">
+		<value>Interface taal</value>
+	</data>
+	<data name="OverrideWindowsRegionalSettings" xml:space="preserve">
+		<value>Override Windows Landinstellingen</value>
+	</data>
+	<data name="RuleAction" xml:space="preserve">
+		<value>Actie</value>
+	</data>
+	<data name="RuleActions" xml:space="preserve">
+		<value>Acties</value>
+	</data>
+	<data name="NoAction" xml:space="preserve">
+		<value>Geen actie</value>
+	</data>
+	<data name="ShowMessage" xml:space="preserve">
+		<value>Toon bericht</value>
+	</data>
+	<data name="ActionName" xml:space="preserve">
+		<value>Actie Naam</value>
+	</data>
+	<data name="ActionType" xml:space="preserve">
+		<value>Actie Type</value>
+	</data>
+	<data name="ActionParameter" xml:space="preserve">
+		<value>Actie Parameter</value>
+	</data>
+	<data name="Parameters" xml:space="preserve">
+		<value>Parameters</value>
+	</data>
+	<data name="Message" xml:space="preserve">
+		<value>Bericht</value>
+	</data>
+	<data name="Rule" xml:space="preserve">
+		<value>Regel</value>
+	</data>
+	<data name="RuleName" xml:space="preserve">
+		<value>Regel Naam</value>
+	</data>
+	<data name="EventName" xml:space="preserve">
+		<value>Event Naam</value>
+	</data>
+	<data name="Actions" xml:space="preserve">
+		<value>Acties</value>
+	</data>
+	<data name="NewProperty" xml:space="preserve">
+		<value>Nieuwe eigenschap</value>
+	</data>
+	<data name="Move" xml:space="preserve">
+		<value>Verplaatsen</value>
+	</data>
+	<data name="MoveTicketLine" xml:space="preserve">
+		<value>Verplaatsen</value>
+	</data>
+	<data name="Title" xml:space="preserve">
+		<value>Titel</value>
+	</data>
+	<data name="DisplayPopup" xml:space="preserve">
+		<value>Popup weergeven</value>
+	</data>
+	<data name="DeleteErrorInventoryItemUsedInEndOfDayRecord" xml:space="preserve">
+		<value>Kan niet verwijderen omdat er een einde van de dag Kosten document dit voorraadartikel bevat</value>
+	</data>
+	<data name="Rules" xml:space="preserve">
+		<value>Regels</value>
+	</data>
+	<data name="Action" xml:space="preserve">
+		<value>Actie</value>
+	</data>
+	<data name="ActionList" xml:space="preserve">
+		<value>Actielijst</value>
+	</data>
+	<data name="SelectActions" xml:space="preserve">
+		<value>Selecteer Acties</value>
+	</data>
+	<data name="TagValue" xml:space="preserve">
+		<value>Tag Waarde</value>
+	</data>
+	<data name="CustomerNote" xml:space="preserve">
+		<value>Klant Opmerking</value>
+	</data>
+	<data name="GiftTotal" xml:space="preserve">
+		<value>Gift Totaal</value>
+	</data>
+	<data name="UserLogin" xml:space="preserve">
+		<value>Gebruiker aanmelden</value>
+	</data>
+	<data name="UserLogout" xml:space="preserve">
+		<value>Gebruiker Afmelden</value>
+	</data>
+	<data name="TicketCreated" xml:space="preserve">
+		<value>Bon Gemaakt op</value>
+	</data>
+	<data name="TicketTagSelected" xml:space="preserve">
+		<value>Bon Tag Geselecteerd</value>
+	</data>
+	<data name="CustomerSelectedForTicket" xml:space="preserve">
+		<value>Klant Geselecteerd voor bon</value>
+	</data>
+	<data name="TicketTotalChanged" xml:space="preserve">
+		<value>Gewijzigd Bon Totaal</value>
+	</data>
+	<data name="WorkPeriodStarted" xml:space="preserve">
+		<value>Werkperiode gestart</value>
+	</data>
+	<data name="WorkPeriodEnded" xml:space="preserve">
+		<value>Werkperiode beeindigd</value>
+	</data>
+	<data name="ExecuteActionsIf" xml:space="preserve">
+		<value>Voorwaarden</value>
+	</data>
+	<data name="ReportName" xml:space="preserve">
+		<value>Rapportnaam</value>
+	</data>
+	<data name="FileName" xml:space="preserve">
+		<value>Bestandsnaam</value>
+	</data>
+	<data name="DiscountPercentage" xml:space="preserve">
+		<value>Kortingspercentage</value>
+	</data>
+	<data name="TriggerName" xml:space="preserve">
+		<value>Trigger Naam</value>
+	</data>
+	<data name="Expression" xml:space="preserve">
+		<value>Expressie</value>
+	</data>
+	<data name="ExpressionBuilder" xml:space="preserve">
+		<value>Opbouwfunctie voor expressies</value>
+	</data>
+	<data name="CommonSettings" xml:space="preserve">
+		<value>Algemene instellingen</value>
+	</data>
+	<data name="Minute" xml:space="preserve">
+		<value>Minuut</value>
+	</data>
+	<data name="Hour" xml:space="preserve">
+		<value>Uur</value>
+	</data>
+	<data name="Day" xml:space="preserve">
+		<value>Dag</value>
+	</data>
+	<data name="Month" xml:space="preserve">
+		<value>Maand</value>
+	</data>
+	<data name="Weekday" xml:space="preserve">
+		<value>Weekdag</value>
+	</data>
+	<data name="EveryMinute" xml:space="preserve">
+		<value>Elke minuut</value>
+	</data>
+	<data name="Every5Minutes" xml:space="preserve">
+		<value>Elke 5 minuten</value>
+	</data>
+	<data name="TwiceAnHour" xml:space="preserve">
+		<value>Twee keer per uur</value>
+	</data>
+	<data name="OnceAnHour" xml:space="preserve">
+		<value>Een keer per uur</value>
+	</data>
+	<data name="TwiceADay" xml:space="preserve">
+		<value>Twee keer per dag</value>
+	</data>
+	<data name="OnceADay" xml:space="preserve">
+		<value>Keer per dag</value>
+	</data>
+	<data name="OnceAWeek" xml:space="preserve">
+		<value>Eenmaal per week</value>
+	</data>
+	<data name="FirstAndFifteenth" xml:space="preserve">
+		<value>1e en 15e</value>
+	</data>
+	<data name="OnceAMonth" xml:space="preserve">
+		<value>Een keer per maand</value>
+	</data>
+	<data name="OnceAYear" xml:space="preserve">
+		<value>Eenmaal per jaar</value>
+	</data>
+	<data name="EveryOtherMinute" xml:space="preserve">
+		<value>Om de minuut</value>
+	</data>
+	<data name="Every10Minutes" xml:space="preserve">
+		<value>Elke 10 minuten</value>
+	</data>
+	<data name="Every15Minutes" xml:space="preserve">
+		<value>Elke 15 minuten</value>
+	</data>
+	<data name="Every30Minutes" xml:space="preserve">
+		<value>Elke 30 minuten</value>
+	</data>
+	<data name="TopOfTheHour" xml:space="preserve">
+		<value>Op het hele uur</value>
+	</data>
+	<data name="QuarterPast" xml:space="preserve">
+		<value>Kwart over</value>
+	</data>
+	<data name="HalfPast" xml:space="preserve">
+		<value>Half</value>
+	</data>
+	<data name="QuarterTil" xml:space="preserve">
+		<value>Kwart voor</value>
+	</data>
+	<data name="EveryHour" xml:space="preserve">
+		<value>Elk uur</value>
+	</data>
+	<data name="EveryOtherHour" xml:space="preserve">
+		<value>Om het uur</value>
+	</data>
+	<data name="Every3Hours" xml:space="preserve">
+		<value>Om de 3 uur</value>
+	</data>
+	<data name="Every4Hours" xml:space="preserve">
+		<value>Om de 4 uur</value>
+	</data>
+	<data name="Every6Hours" xml:space="preserve">
+		<value>Elke 6 uur</value>
+	</data>
+	<data name="Every12Hours" xml:space="preserve">
+		<value>Om de 12 uur</value>
+	</data>
+	<data name="TwelveAmMidnight" xml:space="preserve">
+		<value>Middernacht</value>
+	</data>
+	<data name="Noon" xml:space="preserve">
+		<value>middag</value>
+	</data>
+	<data name="PM" xml:space="preserve">
+		<value>'s middags</value>
+	</data>
+	<data name="AM" xml:space="preserve">
+		<value>'s ochtends</value>
+	</data>
+	<data name="EveryDay" xml:space="preserve">
+		<value>Elke dag</value>
+	</data>
+	<data name="EveryOtherDay" xml:space="preserve">
+		<value>Om de andere dag</value>
+	</data>
+	<data name="EveryMonth" xml:space="preserve">
+		<value>Elke maand</value>
+	</data>
+	<data name="EveryOtherMonth" xml:space="preserve">
+		<value>Om de maand</value>
+	</data>
+	<data name="Every3Months" xml:space="preserve">
+		<value>Elke 3 maanden</value>
+	</data>
+	<data name="Every6Months" xml:space="preserve">
+		<value>Om de 6 maanden</value>
+	</data>
+	<data name="EveryWeekday" xml:space="preserve">
+		<value>Elke weekdag</value>
+	</data>
+	<data name="MonThruFri" xml:space="preserve">
+		<value>Maa tot vrij</value>
+	</data>
+	<data name="SatAndSun" xml:space="preserve">
+		<value>Za en zo</value>
+	</data>
+	<data name="MonWedFri" xml:space="preserve">
+		<value>Ma, wo, vr</value>
+	</data>
+	<data name="TuesAndThurs" xml:space="preserve">
+		<value>Di, don</value>
+	</data>
+	<data name="Trigger" xml:space="preserve">
+		<value>Trigger</value>
+	</data>
+	<data name="Triggers" xml:space="preserve">
+		<value>Triggers</value>
+	</data>
+	<data name="ExpressionValid" xml:space="preserve">
+		<value>Expressie Geldig</value>
+	</data>
+	<data name="ErrorInExpression" xml:space="preserve">
+		<value>Fout in Expressie</value>
+	</data>
+	<data name="TriggerTestResultMessage_f" xml:space="preserve">
+		<value>Volgende Trigger: {0}
+Zal leiden tot na {1} dagen {2} uur, {3} minuten</value>
+	</data>
+	<data name="ThereIsAnotherPriceDefinition_f" xml:space="preserve">
+		<value>Er is nog een prijs definitie met {0} tag</value>
+	</data>
+	<data name="PriceDefinition" xml:space="preserve">
+		<value>Prijs Definitie</value>
+	</data>
+	<data name="PriceDefinitions" xml:space="preserve">
+		<value>Prijs Definities</value>
+	</data>
+	<data name="ClearFilter" xml:space="preserve">
+		<value>Filter</value>
+	</data>
+	<data name="From" xml:space="preserve">
+		<value>Van:</value>
+	</data>
+	<data name="To" xml:space="preserve">
+		<value>Tot:</value>
+	</data>
+	<data name="TipsTotal" xml:space="preserve">
+		<value>Fooi Totaal</value>
+	</data>
+	<data name="TicketTipTotal" xml:space="preserve">
+		<value>Fooi Totaal</value>
+	</data>
+	<data name="LinePriceTag" xml:space="preserve">
+		<value># Regel: Prijskaartje</value>
+	</data>
+	<data name="TicketTipTotalAmount" xml:space="preserve">
+		<value>Totaal bon fooi</value>
+	</data>
+	<data name="PriceTag" xml:space="preserve">
+		<value>Prijskaartje</value>
+	</data>
+	<data name="SaveErrorZeroOrNullInventoryLines" xml:space="preserve">
+		<value>Kan niet opslaan omdat er regels zijn met lege onderdelen van de inventaris of nul hoeveelheid</value>
+	</data>
+	<data name="TriggerExecuted" xml:space="preserve">
+		<value>Trigger Uitgevoerd</value>
+	</data>
+	<data name="MessageReceived" xml:space="preserve">
+		<value>Bericht ontvangen</value>
+	</data>
+	<data name="MenuItemName" xml:space="preserve">
+		<value>Menu-item Naam</value>
+	</data>
+	<data name="PortionName" xml:space="preserve">
+		<value>Portie Naam</value>
+	</data>
+	<data name="LinesGroupedByTag" xml:space="preserve">
+		<value>Gegroepeerd per Tag</value>
+	</data>
+	<data name="SendEmail" xml:space="preserve">
+		<value>E-mail verzenden</value>
+	</data>
+	<data name="AddTicketDiscount" xml:space="preserve">
+		<value>Voeg Bon Korting toe</value>
+	</data>
+	<data name="AddTicketItem" xml:space="preserve">
+		<value>Voeg Bon Artikel toe</value>
+	</data>
+	<data name="UpdateTicketTag" xml:space="preserve">
+		<value>Wijzig bon tag</value>
+	</data>
+	<data name="UpdatePriceTag" xml:space="preserve">
+		<value>Wijzig Prijslijst</value>
+	</data>
+	<data name="RefreshCache" xml:space="preserve">
+		<value>Vernieuwen Cache</value>
+	</data>
+	<data name="BroadcastMessage" xml:space="preserve">
+		<value>Bericht uitzenden</value>
+	</data>
+	<data name="DisplayAppPath" xml:space="preserve">
+		<value>Weergave Applicatie Pad</value>
+	</data>
+	<data name="DisplayUserPath" xml:space="preserve">
+		<value>Weergave Gebruikers Pad</value>
+	</data>
+	<data name="SaveReportToFile" xml:space="preserve">
+		<value>Rapport opslaan naar bestand</value>
+	</data>
+	<data name="PriceDefinitonName" xml:space="preserve">
+		<value>Prijs Definitie Naam</value>
+	</data>
+	<data name="Previous" xml:space="preserve">
+		<value>Vorige</value>
+	</data>
+	<data name="Next" xml:space="preserve">
+		<value>Volgende</value>
+	</data>
+	<data name="AddTag" xml:space="preserve">
+		<value>Tag toevoegen</value>
+	</data>
+	<data name="Delete_ab" xml:space="preserve">
+		<value>Verw</value>
+	</data>
+	<data name="Divide_ab" xml:space="preserve">
+		<value>Deel</value>
+	</data>
+	<data name="Print_ab" xml:space="preserve">
+		<value>Prnt</value>
+	</data>
+	<data name="TicketMovedRetryLastOperation_f" xml:space="preserve">
+		<value>Bon verplaatst naar {0}. Uw laatste wijzigingen niet opgeslagen.</value>
+	</data>
+	<data name="TicketPaidChangesNotSaved" xml:space="preserve">
+		<value>Bon betaald. Uw laatste wijzigingen niet opgeslagen.</value>
+	</data>
+	<data name="TicketChangedRetryLastOperation" xml:space="preserve">
+		<value>Bon veranderd. Uw laatste wijzigingen niet opgeslagen.</value>
+	</data>
+	<data name="TicketPaidLastChangesNotSaved" xml:space="preserve">
+		<value>Bon betaald. Uw laatste wijzigingen niet opgeslagen.</value>
+	</data>
+	<data name="TableChangedRetryLastOperation_f" xml:space="preserve">
+		<value>{0} tafel veranderd. Uw laatste wijzigingen niet opgeslagen.</value>
+	</data>
+	<data name="NewLiabilityTransaction" xml:space="preserve">
+		<value>Nieuwe krediettransactie</value>
+	</data>
+	<data name="NewReceivableTransaction" xml:space="preserve">
+		<value>Nieuwe debetverrichting</value>
+	</data>
+	<data name="AddLiability_r" xml:space="preserve">
+		<value>Krediet</value>
+	</data>
+	<data name="AddReceivable_r" xml:space="preserve">
+		<value>Debet</value>
+	</data>
+	<data name="VoidTicketItems" xml:space="preserve">
+		<value>Ongeldig bon items</value>
+	</data>
+	<data name="SaveErrorMultipleDefaultTerminals" xml:space="preserve">
+		<value>Maak niet meer dan 1 standaard terminal</value>
+	</data>
+	<data name="AllDiscountsRemoved" xml:space="preserve">
+		<value>Alle kortingen verwijderd omdat berekende totale kortingsbedrag hoger is dan bon bedrag.</value>
+	</data>
+	<data name="WeightBarcodeItemIdFormat" xml:space="preserve">
+		<value>Dikte Barcode Item ID Format</value>
+	</data>
+	<data name="SettingCheck" xml:space="preserve">
+		<value>Controleer instellingen</value>
+	</data>
+	<data name="UpdateProgramSetting" xml:space="preserve">
+		<value>Werk programma-instellingen bij</value>
+	</data>
+	<data name="CashPermissions" xml:space="preserve">
+		<value>Kontant geld machtigingen</value>
+	</data>
+	<data name="CanMakeCashTransaction" xml:space="preserve">
+		<value>Mag kontantgeld transactie maken</value>
+	</data>
+	<data name="CanMakeCreditOrDeptTransaction" xml:space="preserve">
+		<value>Mag krediet of debet transactie maken</value>
+	</data>
+	<data name="CanMakeAccountTransaction" xml:space="preserve">
+		<value>Mag rekening transactie maken</value>
+	</data>
+	<data name="SubButtonHeight" xml:space="preserve">
+		<value>Sub-knop Hoogte</value>
+	</data>
+	<data name="MaxItems" xml:space="preserve">
+		<value>Max Artikelen</value>
+	</data>
+	<data name="SortType" xml:space="preserve">
+		<value>Sorteer Type</value>
+	</data>
+	<data name="DeleteErrorProductUsedInMenuItemProperty" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit product toegewezen is aan een menu-item eigenschap</value>
+	</data>
+	<data name="VatTemplates" xml:space="preserve">
+		<value>BTW Sjablonen</value>
+	</data>
+	<data name="VatTemplate" xml:space="preserve">
+		<value>BTW sjabloon</value>
+	</data>
+	<data name="VatTemplateName" xml:space="preserve">
+		<value>BTW sjabloonnaam</value>
+	</data>
+	<data name="Rate" xml:space="preserve">
+		<value>Tarief</value>
+	</data>
+	<data name="VatIncludedToPrice" xml:space="preserve">
+		<value>Inbegrepen bij prijs</value>
+	</data>
+	<data name="Vat" xml:space="preserve">
+		<value>BTW</value>
+	</data>
+	<data name="VatTotal" xml:space="preserve">
+		<value>BTW Totaal</value>
+	</data>
+	<data name="UpdateTicketVat" xml:space="preserve">
+		<value>Werk Bon BTW bij</value>
+	</data>
+	<data name="One" xml:space="preserve">
+		<value>Een</value>
+	</data>
+	<data name="Two" xml:space="preserve">
+		<value>Twee</value>
+	</data>
+	<data name="Three" xml:space="preserve">
+		<value>Drie</value>
+	</data>
+	<data name="Four" xml:space="preserve">
+		<value>Vier</value>
+	</data>
+	<data name="Five" xml:space="preserve">
+		<value>Vijf</value>
+	</data>
+	<data name="Six" xml:space="preserve">
+		<value>Zes</value>
+	</data>
+	<data name="Seven" xml:space="preserve">
+		<value>Zeven</value>
+	</data>
+	<data name="Eight" xml:space="preserve">
+		<value>Acht</value>
+	</data>
+	<data name="Nine" xml:space="preserve">
+		<value>Negen</value>
+	</data>
+	<data name="Nineteen" xml:space="preserve">
+		<value>Negentien</value>
+	</data>
+	<data name="Eighteen" xml:space="preserve">
+		<value>Achttien</value>
+	</data>
+	<data name="Seventeen" xml:space="preserve">
+		<value>Zeventien</value>
+	</data>
+	<data name="Sixteen" xml:space="preserve">
+		<value>Zestien</value>
+	</data>
+	<data name="Fifteen" xml:space="preserve">
+		<value>Vijftien</value>
+	</data>
+	<data name="Fourteen" xml:space="preserve">
+		<value>Veertien</value>
+	</data>
+	<data name="Thirteen" xml:space="preserve">
+		<value>Dertien</value>
+	</data>
+	<data name="Twelve" xml:space="preserve">
+		<value>Twaalf</value>
+	</data>
+	<data name="Eleven" xml:space="preserve">
+		<value>Elf</value>
+	</data>
+	<data name="Ten" xml:space="preserve">
+		<value>Tien</value>
+	</data>
+	<data name="Twenty" xml:space="preserve">
+		<value>Twintig</value>
+	</data>
+	<data name="Thirty" xml:space="preserve">
+		<value>Dertig</value>
+	</data>
+	<data name="Forty" xml:space="preserve">
+		<value>Veertig</value>
+	</data>
+	<data name="Fifty" xml:space="preserve">
+		<value>Vijftig</value>
+	</data>
+	<data name="Sixty" xml:space="preserve">
+		<value>Zestig</value>
+	</data>
+	<data name="Seventy" xml:space="preserve">
+		<value>Zeventig</value>
+	</data>
+	<data name="Eighty" xml:space="preserve">
+		<value>Tachtig</value>
+	</data>
+	<data name="Ninety" xml:space="preserve">
+		<value>Negentig</value>
+	</data>
+	<data name="Thousand" xml:space="preserve">
+		<value>Duizend</value>
+	</data>
+	<data name="Million" xml:space="preserve">
+		<value>Miljoen</value>
+	</data>
+	<data name="Billion" xml:space="preserve">
+		<value>Miljard</value>
+	</data>
+	<data name="Hundred" xml:space="preserve">
+		<value>Honderd</value>
+	</data>
+	<data name="Zero" xml:space="preserve">
+		<value>Nul</value>
+	</data>
+	<data name="Negative" xml:space="preserve">
+		<value>Negatief</value>
+	</data>
+	<data name="Dollar" xml:space="preserve">
+		<value>Euro</value>
+	</data>
+	<data name="Cent" xml:space="preserve">
+		<value>Cent</value>
+	</data>
+	<data name="PluralCurrencySuffix" xml:space="preserve">
+		<value>en</value>
+	</data>
+	<data name="OneHundred" xml:space="preserve">
+		<value>Honderd</value>
+	</data>
+	<data name="OneThousand" xml:space="preserve">
+		<value>Duizend</value>
+	</data>
+	<data name="AlwaysExcludeVat" xml:space="preserve">
+		<value>Altijd exclusief BTW</value>
+	</data>
+	<data name="RoundingTotal" xml:space="preserve">
+		<value>Afronden Totaal</value>
+	</data>
+	<data name="TaxServiceTemplates" xml:space="preserve">
+		<value>Servicesjablonen</value>
+	</data>
+	<data name="ChooseTaxServicesForDepartmentHint_f" xml:space="preserve">
+		<value>Selecteer BTW of diensten voor het gebruik op {0} afdeling.</value>
+	</data>
+	<data name="TaxServiceTemplate" xml:space="preserve">
+		<value>Servicesjabloon</value>
+	</data>
+	<data name="TaxServiceTotal" xml:space="preserve">
+		<value>Diensten Totaal</value>
+	</data>
+	<data name="CalculationMethod" xml:space="preserve">
+		<value>Berekeningsmethode</value>
+	</data>
+	<data name="RateOrAmount" xml:space="preserve">
+		<value>Tarief of bedrag</value>
+	</data>
+	<data name="RateFromTicketAmount" xml:space="preserve">
+		<value>Tarief van bon bedrag</value>
+	</data>
+	<data name="RateFromPreviousTemplate" xml:space="preserve">
+		<value>Tarief van vorig sjabloon-bedrag</value>
+	</data>
+	<data name="FixedAmount" xml:space="preserve">
+		<value>Vast bedrag</value>
+	</data>
+	<data name="RateFromVatIncludedTicketAmount" xml:space="preserve">
+		<value>Prijs van bontotaal inclusief BTW</value>
+	</data>
+	<data name="UnhandledExceptionErrorMessage" xml:space="preserve">
+		<value>SambaPOS heeft een onverwacht probleem. Probleem gegevens gelogd in bestand trace.log</value>
+	</data>
+	<data name="SaveFreeTags" xml:space="preserve">
+		<value>Bewaar gratis tags</value>
+	</data>
+	<data name="RegenerateTicketVat" xml:space="preserve">
+		<value>Herbereken bon-BTW</value>
+	</data>
+	<data name="UpdateTicketTaxService" xml:space="preserve">
+		<value>Werk bon BTW of diensten bij</value>
+	</data>
+	<data name="Included" xml:space="preserve">
+		<value>Inclusief</value>
+	</data>
+	<data name="Excluded" xml:space="preserve">
+		<value>Exclusief</value>
+	</data>
+	<data name="EmptyDiscountRateFeedback" xml:space="preserve">
+		<value>Om kortingen toe te voegen, typt u een percentage en klik op de knop korting. Om korting te verwijderen, druk op korting knop zonder een waarde te typen.</value>
+	</data>
+	<data name="TicketSubTotal" xml:space="preserve">
+		<value>Bon Subtotaal</value>
+	</data>
+	<data name="VatTotalsGroupedByVatTemplate" xml:space="preserve">
+		<value>Totalen gegroepeerd op BTW sjabloon</value>
+	</data>
+	<data name="TaxTotal" xml:space="preserve">
+		<value>BTW Totaal</value>
+	</data>
+	<data name="TaxTotalsGroupedByTaxTemplate" xml:space="preserve">
+		<value>Totalen gegroepeerd op diensten sjabloon</value>
+	</data>
+	<data name="TextWrittenTotalValue" xml:space="preserve">
+		<value>Tekst geschreven totale waarde</value>
+	</data>
+	<data name="TicketLocationChanged" xml:space="preserve">
+		<value>Bon lokatie veranderd</value>
+	</data>
+	<data name="UpdateTicketAccount" xml:space="preserve">
+		<value>Werk bon rekening bij</value>
+	</data>
+	<data name="SaveErrorSelectDefaultDepartment" xml:space="preserve">
+		<value>Selecteer een standaard afdeling</value>
+	</data>
+	<data name="Copy" xml:space="preserve">
+		<value>Kopieren</value>
+	</data>
+	<data name="Send" xml:space="preserve">
+		<value>Versturen</value>
+	</data>
+	<data name="ErrorReportWithoutFeedback" xml:space="preserve">
+		<value>U verstuurt foutrapport zonder uw feedback.
+Geef wat details over hoe het gebeurde.
+
+Doorgaan zonder toevoeging van details?</value>
+	</data>
+	<data name="SambaPOSReporter" xml:space="preserve">
+		<value>SambaPOS Reporter</value>
+	</data>
+	<data name="ErrorMessage" xml:space="preserve">
+		<value>Foutbericht</value>
+	</data>
+	<data name="PleaseEnterABriefExplanationOf" xml:space="preserve">
+		<value>Geef een korte uitleg van de gebeurtenissen die leidden tot deze uitzondering</value>
+	</data>
+	<data name="DetailedReport" xml:space="preserve">
+		<value>Gedetailleerd rapport</value>
+	</data>
+	<data name="Modifier" xml:space="preserve">
+		<value>Optie</value>
+	</data>
+	<data name="ModifierGroup" xml:space="preserve">
+		<value>Optie Groep</value>
+	</data>
+	<data name="ModifierGroupName" xml:space="preserve">
+		<value>Optie Groepsnaam</value>
+	</data>
+	<data name="ModifierGroups" xml:space="preserve">
+		<value>Optie Groepen</value>
+	</data>
+	<data name="Modifiers" xml:space="preserve">
+		<value>Opties</value>
+	</data>
+	<data name="APortionShouldSelected" xml:space="preserve">
+		<value>Een portie moet geselecteerd zijn</value>
+	</data>
+	<data name="ThereIsAnotherRecipeFor_f" xml:space="preserve">
+		<value>Er is een recept voor {0}</value>
+	</data>
+	<data name="DeleteErrorPrinterAssignedToTerminal" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze printer toegewezen is aan een Terminal</value>
+	</data>
+	<data name="DeleteErrorPrinterAssignedToPrinterMap" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat deze printer toegewezen is aan een afdruktaak</value>
+	</data>
+	<data name="PriceTags" xml:space="preserve">
+		<value>Prijs Tagging</value>
+	</data>
+	<data name="AlphaNumeric" xml:space="preserve">
+		<value>Alfanumeriek</value>
+	</data>
+	<data name="Numeric" xml:space="preserve">
+		<value>Numeriek</value>
+	</data>
+	<data name="TagType" xml:space="preserve">
+		<value>Tag Type</value>
+	</data>
+	<data name="PaymentReceived" xml:space="preserve">
+		<value>Betaling ontvangen</value>
+	</data>
+	<data name="ExecutePrintJob" xml:space="preserve">
+		<value>Voer Printopdracht uit</value>
+	</data>
+	<data name="LineCount" xml:space="preserve">
+		<value>Regel aantal</value>
+	</data>
+	<data name="PrintingErrorMessage_f" xml:space="preserve">
+		<value>Er is een probleem tijdens het afdrukken. Gelieve de printer en printer sjabloon-instellingen te controleren.
+
+Foutbericht:
+{0}</value>
+	</data>
+	<data name="DocumentDate_f" xml:space="preserve">
+		<value>Datum: {0: d}</value>
+	</data>
+	<data name="DocumentTime_f" xml:space="preserve">
+		<value>Tijd: {0: t}</value>
+	</data>
+	<data name="LastLinesByPrinterLineCount" xml:space="preserve">
+		<value>Nieuwe regels voor Printregel aantal</value>
+	</data>
+	<data name="LineAddedToTicket" xml:space="preserve">
+		<value>Regel toegevoegd aan bon</value>
+	</data>
+	<data name="LineItemProductTag" xml:space="preserve">
+		<value># regeld: Product Tag</value>
+	</data>
+	<data name="ChangeAmountUpdated" xml:space="preserve">
+		<value>Aangepast Wisselgeld Bedrag</value>
+	</data>
+	<data name="TicketClosed" xml:space="preserve">
+		<value>Bon Gesloten</value>
+	</data>
+	<data name="ApplicationStarted" xml:space="preserve">
+		<value>Toepassing is gestart</value>
+	</data>
+	<data name="LastPaidLines" xml:space="preserve">
+		<value>Laatste Betaalde Regeld</value>
+	</data>
+	<data name="PortionSelected" xml:space="preserve">
+		<value>Geselecteerde portie</value>
+	</data>
+	<data name="ModifierSelected" xml:space="preserve">
+		<value>Optie geselecteerd</value>
+	</data>
+	<data name="Big" xml:space="preserve">
+		<value>Groot</value>
+	</data>
+	<data name="None" xml:space="preserve">
+		<value>Geen</value>
+	</data>
+	<data name="Small" xml:space="preserve">
+		<value>Klein</value>
+	</data>
+	<data name="GiftLastTicketItem" xml:space="preserve">
+		<value>Gift Laatste bon artikel</value>
+	</data>
+	<data name="Other" xml:space="preserve">
+		<value>Ander</value>
+	</data>
+	<data name="PhoneNumberInputMask" xml:space="preserve">
+		<value>Telefoonnummer Invoermasker</value>
+	</data>
+	<data name="Increase" xml:space="preserve">
+		<value>Verhogen</value>
+	</data>
+	<data name="Decrease" xml:space="preserve">
+		<value>Verlagen</value>
+	</data>
+	<data name="SettingName" xml:space="preserve">
+		<value>Instelling Naam</value>
+	</data>
+	<data name="SettingValue" xml:space="preserve">
+		<value>Instelling waarde</value>
+	</data>
+	<data name="UpdateType" xml:space="preserve">
+		<value>Type update</value>
+	</data>
+	<data name="Command" xml:space="preserve">
+		<value>Commando</value>
+	</data>
+	<data name="RoleName" xml:space="preserve">
+		<value>Rol Naam</value>
+	</data>
+	<data name="OldLocation" xml:space="preserve">
+		<value>Oude locatie</value>
+	</data>
+	<data name="NewLocation" xml:space="preserve">
+		<value>Nieuwe locatie</value>
+	</data>
+	<data name="NumericValue" xml:space="preserve">
+		<value>Numerieke waarde</value>
+	</data>
+	<data name="CustomerGroupCode" xml:space="preserve">
+		<value>Klantengroep Code</value>
+	</data>
+	<data name="CustomerId" xml:space="preserve">
+		<value>Klant-ID</value>
+	</data>
+	<data name="PaymentType" xml:space="preserve">
+		<value>Betaling Type</value>
+	</data>
+	<data name="ImageOnly" xml:space="preserve">
+		<value>Alleen afbeelding</value>
+	</data>
+	<data name="UpdateLastTicketItemPriceTag" xml:space="preserve">
+		<value>Update van vorige bon artikel Prijskaartje</value>
+	</data>
+	<data name="UpdateTicketItemPriceTag" xml:space="preserve">
+		<value>Werk Bon artikel prijskaartje bij</value>
+	</data>
+	<data name="TicketLineCancelled" xml:space="preserve">
+		<value>Bon regel geannuleerd</value>
+	</data>
+	<data name="MS_Connected" xml:space="preserve">
+		<value>Verbonden.</value>
+	</data>
+	<data name="MS_Disconnected" xml:space="preserve">
+		<value>Verbinding verbroken</value>
+	</data>
+	<data name="RemoveLastModifier" xml:space="preserve">
+		<value>Verwijder Laatste Optie</value>
+	</data>
+	<data name="ForPrintingTicketTagValue" xml:space="preserve">
+		<value>Voor het afdrukken van Bon Tag waarde X</value>
+	</data>
+	<data name="ForPrintingAppSettingValue" xml:space="preserve">
+		<value>Voor het afdrukken Applicatieinstelling waarde X</value>
+	</data>
+	<data name="ForceClosingActiveWorkPeriod" xml:space="preserve">
+		<value>Geforceerd sluiten Actieve werkperiode</value>
+	</data>
+	<data name="RequestShutdown" xml:space="preserve">
+		<value>Verzoek afsluiten</value>
+	</data>
+	<data name="ActiveConnections_f" xml:space="preserve">
+		<value>{0} actieve verbindingen</value>
+	</data>
+	<data name="Checking" xml:space="preserve">
+		<value>Controleren...</value>
+	</data>
+	<data name="TotalPropertyCount" xml:space="preserve">
+		<value>Totaal Aantal Opties</value>
+	</data>
+	<data name="TotalModifierQuantity" xml:space="preserve">
+		<value>Totale Groep Hoeveelheid</value>
+	</data>
+	<data name="TotalModifierPrice" xml:space="preserve">
+		<value>Totale Groep Prijs</value>
+	</data>
+	<data name="ExecuteTicketOperation" xml:space="preserve">
+		<value>Bon operatie uitvoeren</value>
+	</data>
+	<data name="RemoveModifier" xml:space="preserve">
+		<value>Verwijder Optie</value>
+	</data>
+	<data name="GroupTemplate" xml:space="preserve">
+		<value>Groep Template</value>
+	</data>
+	<data name="AccountNote" xml:space="preserve">
+		<value>Rekening opmerkingn</value>
+	</data>
+	<data name="AccountGroupCode" xml:space="preserve">
+		<value>Rekeing groepcode</value>
+	</data>
+	<data name="ProductGroup" xml:space="preserve">
+		<value>Productgroep</value>
+	</data>
+	<data name="DepartmentSales" xml:space="preserve">
+		<value>Afdeling Sales</value>
+	</data>
+	<data name="ItemsMovedToTable_f" xml:space="preserve">
+		<value>Artikelen verplaatst naar {0} tafel.</value>
+	</data>
+	<data name="DatabaseErrorMessage" xml:space="preserve">
+		<value>Kan geen verbinding met de database maken met de huidige verbindingsinstellingen. Controleer verbinding string en probeer het opnieuw.
+
+Foutbericht:
+</value>
+	</data>
+	<data name="CurrentErrorLoggedMessage" xml:space="preserve">
+		<value>Start-toepassing. Probleem opgeslagen in log-bestand.</value>
+	</data>
+	<data name="SelectionRequired_f" xml:space="preserve">
+		<value>{0} selectie vereist!</value>
+	</data>
+	<data name="GroupTag" xml:space="preserve">
+		<value>Groep Tag</value>
+	</data>
+	<data name="ReceivedBy_f" xml:space="preserve">
+		<value>Ontvangen door {0}</value>
+	</data>
+	<data name="UpdateTicketItemTag" xml:space="preserve">
+		<value>Werk bon artikel Tag bij</value>
+	</data>
+	<data name="HideItOnReports" xml:space="preserve">
+		<value>Verberg het op rapporten</value>
+	</data>
+	<data name="ItemTag" xml:space="preserve">
+		<value>Artikel Tag</value>
+	</data>
+	<data name="nthItemTag" xml:space="preserve">
+		<value>n.th Artikel Tag indien samengevoegd met |</value>
+	</data>
+	<data name="PrintJobHint" xml:space="preserve">
+		<value>Om deze printopdracht te kunnen activeren moet u deze toewijzen aan een terminal.</value>
+	</data>
+	<data name="DeleteErrorProductUsedInPrinterMap" xml:space="preserve">
+		<value>Kan niet verwijderen, omdat dit product toegewezen is aan een printer mapping</value>
+	</data>
+	<data name="CharacterReplacementPattern" xml:space="preserve">
+		<value>Karakter Vervanginging Patroon</value>
+	</data>
+	<data name="CharacterReplacementPatternInfo" xml:space="preserve">
+		<value>Gebruik ß = ss voor het vervangen van niet-ondersteunde tekens. Samenvoegen meerdere waarden met puntkomma (;)</value>
+	</data>
+	<data name="SaveErrorDuplicateItemName_f" xml:space="preserve">
+		<value>Deze naam wordt gebruikt voor een ander {0}.</value>
+	</data>
+	<data name="HideExitButton" xml:space="preserve">
+		<value>Verberg Sluiten Knop</value>
+	</data>
+	<data name="SelectedLinesCount" xml:space="preserve">
+		<value>Geselecteerde Regel Aantal</value>
+	</data>
+</root>

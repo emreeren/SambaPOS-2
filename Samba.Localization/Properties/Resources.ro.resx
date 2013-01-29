@@ -1,0 +1,2842 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Clear" xml:space="preserve">
+		<value>Clar</value>
+	</data>
+	<data name="EnterPin" xml:space="preserve">
+		<value>Introduceţi codul PIN</value>
+	</data>
+	<data name="Exit" xml:space="preserve">
+		<value>Ieşire</value>
+	</data>
+	<data name="Login" xml:space="preserve">
+		<value>Login</value>
+	</data>
+	<data name="CheckDBVersion" xml:space="preserve">
+		<value>Verificaţi Versiunea bazei de date</value>
+	</data>
+	<data name="SqlHint" xml:space="preserve">
+		<value>Click aici pentru informaţii despre lucrul cu baze de date SQL</value>
+	</data>
+	<data name="AdminPasswordHint" xml:space="preserve">
+		<value>PIN-ul admin: 1234
+Schimbarea codului PIN va ascunde această sugestie</value>
+	</data>
+	<data name="AccountName" xml:space="preserve">
+		<value>Nume cont</value>
+	</data>
+	<data name="Address" xml:space="preserve">
+		<value>Adresă</value>
+	</data>
+	<data name="Amount" xml:space="preserve">
+		<value>Sumă</value>
+	</data>
+	<data name="Cash" xml:space="preserve">
+		<value>Numerar</value>
+	</data>
+	<data name="CreditCard" xml:space="preserve">
+		<value>Cardul de credit</value>
+	</data>
+	<data name="Description" xml:space="preserve">
+		<value>Descriere</value>
+	</data>
+	<data name="ExpenseTransactions" xml:space="preserve">
+		<value>Tranzacţii de cheltuieli</value>
+	</data>
+	<data name="GrandTotal" xml:space="preserve">
+		<value>Total general</value>
+	</data>
+	<data name="Income" xml:space="preserve">
+		<value>Venituri</value>
+	</data>
+	<data name="IncomeTransactions" xml:space="preserve">
+		<value>Venituri Tranzacţii</value>
+	</data>
+	<data name="Note" xml:space="preserve">
+		<value>Notă</value>
+	</data>
+	<data name="PhoneNumber" xml:space="preserve">
+		<value>Telefon</value>
+	</data>
+	<data name="Total" xml:space="preserve">
+		<value>Total</value>
+	</data>
+	<data name="Voucher" xml:space="preserve">
+		<value>Bon Valoric</value>
+	</data>
+	<data name="CreditCard_ab" xml:space="preserve">
+		<value>C. Card</value>
+	</data>
+	<data name="Voucher_ab" xml:space="preserve">
+		<value>Vochr</value>
+	</data>
+	<data name="OperationIncome" xml:space="preserve">
+		<value>Inceput zi de lucru</value>
+	</data>
+	<data name="StartOfDay" xml:space="preserve">
+		<value>Început de perioadei de muncă</value>
+	</data>
+	<data name="NewIncomeTransaction" xml:space="preserve">
+		<value>De noi venituri tranzacţiei</value>
+	</data>
+	<data name="NewExpenseTransaction" xml:space="preserve">
+		<value>Noi cheltuieli tranzacţiei</value>
+	</data>
+	<data name="IncomeTransaction_r" xml:space="preserve">
+		<value>Venituri
+Tranzacţie</value>
+	</data>
+	<data name="ExpenseTransaction_r" xml:space="preserve">
+		<value>Cheltuială
+Tranzacţie</value>
+	</data>
+	<data name="Cancel" xml:space="preserve">
+		<value>Anuleaza</value>
+	</data>
+	<data name="CustomerAccounts" xml:space="preserve">
+		<value>Client
+Conturi</value>
+	</data>
+	<data name="CustomerName" xml:space="preserve">
+		<value>Nume client</value>
+	</data>
+	<data name="InternalAccount" xml:space="preserve">
+		<value>Internă cont</value>
+	</data>
+	<data name="Ticket" xml:space="preserve">
+		<value>Bilet</value>
+	</data>
+	<data name="TotalSales" xml:space="preserve">
+		<value>Totalul Vanzarilor</value>
+	</data>
+	<data name="LastOrderDate" xml:space="preserve">
+		<value>Ultima data comenzii</value>
+	</data>
+	<data name="LastOrderStatus" xml:space="preserve">
+		<value>Situatia ultimei comenzi</value>
+	</data>
+	<data name="LastOrder" xml:space="preserve">
+		<value>Ultima comandă</value>
+	</data>
+	<data name="Close" xml:space="preserve">
+		<value>Inchide</value>
+	</data>
+	<data name="Date" xml:space="preserve">
+		<value>Data</value>
+	</data>
+	<data name="Liability" xml:space="preserve">
+		<value>Răspundere</value>
+	</data>
+	<data name="Receiveable" xml:space="preserve">
+		<value>Creanţe</value>
+	</data>
+	<data name="Customer" xml:space="preserve">
+		<value>Client</value>
+	</data>
+	<data name="CustomerList" xml:space="preserve">
+		<value>Lista clienţilor</value>
+	</data>
+	<data name="Customers" xml:space="preserve">
+		<value>Clienţi</value>
+	</data>
+	<data name="SelectCustomer_r" xml:space="preserve">
+		<value>Selecteaza
+Client</value>
+	</data>
+	<data name="NewCustomer_r" xml:space="preserve">
+		<value>
+Client Nou</value>
+	</data>
+	<data name="FindTicket_r" xml:space="preserve">
+		<value>Găsi
+Bilet</value>
+	</data>
+	<data name="ResetCustomer_r" xml:space="preserve">
+		<value>Resetare
+Client</value>
+	</data>
+	<data name="GetPayment_r" xml:space="preserve">
+		<value>Obţine
+Plată</value>
+	</data>
+	<data name="CustomerAccount_r" xml:space="preserve">
+		<value>Client
+Cont</value>
+	</data>
+	<data name="MakePayment_r" xml:space="preserve">
+		<value>Plateste</value>
+	</data>
+	<data name="TicketNumber_f" xml:space="preserve">
+		<value>Numărul de vânzare bilete: {0}</value>
+	</data>
+	<data name="Information" xml:space="preserve">
+		<value>Informaţii</value>
+	</data>
+	<data name="CallerIdDriverError" xml:space="preserve">
+		<value>Pentru a putea afişa IDentitatea apelantului ar trebui să instalaţi driverul hardware.</value>
+	</data>
+	<data name="Calling" xml:space="preserve">
+		<value>Apel</value>
+	</data>
+	<data name="Management" xml:space="preserve">
+		<value>Administrare</value>
+	</data>
+	<data name="Common" xml:space="preserve">
+		<value>Comun</value>
+	</data>
+	<data name="CanOpenDashboard" xml:space="preserve">
+		<value>Nu pot deschide Pnoul de Control</value>
+	</data>
+	<data name="Keyboard" xml:space="preserve">
+		<value>Tastatură</value>
+	</data>
+	<data name="Add_f" xml:space="preserve">
+		<value>Adaugă {0}</value>
+	</data>
+	<data name="Edit_f" xml:space="preserve">
+		<value>Editare {0}</value>
+	</data>
+	<data name="Delete_f" xml:space="preserve">
+		<value>Şterge {0}</value>
+	</data>
+	<data name="Clone_f" xml:space="preserve">
+		<value>Cloneaza {0}</value>
+	</data>
+	<data name="List_f" xml:space="preserve">
+		<value>Lista {0}</value>
+	</data>
+	<data name="Confirmation" xml:space="preserve">
+		<value>Confirmare</value>
+	</data>
+	<data name="DeleteItemConfirmation_f" xml:space="preserve">
+		<value>Şterge {0} [{1}]?</value>
+	</data>
+	<data name="Warning" xml:space="preserve">
+		<value>Avertizare</value>
+	</data>
+	<data name="Save" xml:space="preserve">
+		<value>Salveaza</value>
+	</data>
+	<data name="EditModel_f" xml:space="preserve">
+		<value>Editarea {0} ({1})</value>
+	</data>
+	<data name="AddModel_f" xml:space="preserve">
+		<value>Adăugarea de noi {0}</value>
+	</data>
+	<data name="EmptyNameError" xml:space="preserve">
+		<value>Nu lăsaţi {0} nume gol.</value>
+	</data>
+	<data name="CantSave" xml:space="preserve">
+		<value>Nu se poate salva</value>
+	</data>
+	<data name="GroupCode" xml:space="preserve">
+		<value>Cod Grup</value>
+	</data>
+	<data name="BaseUnit" xml:space="preserve">
+		<value>Unitatea de bază</value>
+	</data>
+	<data name="TransactionUnit" xml:space="preserve">
+		<value>Unitatea de tranzacţie</value>
+	</data>
+	<data name="TransacitonUnitMultiplier" xml:space="preserve">
+		<value>Unitatea de tranzacţie Multiplicator</value>
+	</data>
+	<data name="InventoryItems" xml:space="preserve">
+		<value>Inventar Articole</value>
+	</data>
+	<data name="Recipes" xml:space="preserve">
+		<value>Reţete</value>
+	</data>
+	<data name="Transactions" xml:space="preserve">
+		<value>Tranzacţie</value>
+	</data>
+	<data name="EndOfDayRecords" xml:space="preserve">
+		<value>Inregistrari Sfârşit de zi </value>
+	</data>
+	<data name="Select" xml:space="preserve">
+		<value>Selecteaza</value>
+	</data>
+	<data name="CantDeletePastEndOfDayRecords" xml:space="preserve">
+		<value>Nu se pot sterge inregistrarile sfarsitului de zi precedent</value>
+	</data>
+	<data name="EndOfDayRecord" xml:space="preserve">
+		<value>Inregistrari Sfârşit de zi</value>
+	</data>
+	<data name="CalculateCost" xml:space="preserve">
+		<value>Calculaţi cost</value>
+	</data>
+	<data name="Products" xml:space="preserve">
+		<value>Produse</value>
+	</data>
+	<data name="Cost" xml:space="preserve">
+		<value>Cost</value>
+	</data>
+	<data name="CostPrediction" xml:space="preserve">
+		<value>Predictii Cost</value>
+	</data>
+	<data name="Costs" xml:space="preserve">
+		<value>Cheltuieli</value>
+	</data>
+	<data name="CurrentCost" xml:space="preserve">
+		<value>Cost curent</value>
+	</data>
+	<data name="CurrentInventory" xml:space="preserve">
+		<value>Stocuri curente</value>
+	</data>
+	<data name="InStock" xml:space="preserve">
+		<value>În stoc</value>
+	</data>
+	<data name="InventoryConsumption" xml:space="preserve">
+		<value>Stocuri de consum</value>
+	</data>
+	<data name="InventoryItemName" xml:space="preserve">
+		<value>Nume produs inventar</value>
+	</data>
+	<data name="Portion" xml:space="preserve">
+		<value>Porţie</value>
+	</data>
+	<data name="PredictedInventory" xml:space="preserve">
+		<value>Predictii stocuri</value>
+	</data>
+	<data name="ProductName" xml:space="preserve">
+		<value>Nume Produs</value>
+	</data>
+	<data name="Purchase" xml:space="preserve">
+		<value>Cumpărare</value>
+	</data>
+	<data name="SellAmount" xml:space="preserve">
+		<value>Vandut Suma</value>
+	</data>
+	<data name="Unit" xml:space="preserve">
+		<value>Unitate</value>
+	</data>
+	<data name="RecipeName" xml:space="preserve">
+		<value>Denumire Reteta</value>
+	</data>
+	<data name="Product" xml:space="preserve">
+		<value>Produs</value>
+	</data>
+	<data name="FixedCost" xml:space="preserve">
+		<value>Costuri fixe</value>
+	</data>
+	<data name="Quantity" xml:space="preserve">
+		<value>Cantitate</value>
+	</data>
+	<data name="Recipe" xml:space="preserve">
+		<value>Reţetă</value>
+	</data>
+	<data name="Inventory" xml:space="preserve">
+		<value>Inventar</value>
+	</data>
+	<data name="DocumentNo" xml:space="preserve">
+		<value>Document nr</value>
+	</data>
+	<data name="UnitPrice" xml:space="preserve">
+		<value>Preţ unitar</value>
+	</data>
+	<data name="TransactionDocument" xml:space="preserve">
+		<value>Document Tranzactie</value>
+	</data>
+	<data name="Line" xml:space="preserve">
+		<value>Linie</value>
+	</data>
+	<data name="InventoryItem" xml:space="preserve">
+		<value>Postul stocuri</value>
+	</data>
+	<data name="DeleteErrorDepartmentUsedInRole" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest departament are atribuit un rol de utilizator.</value>
+	</data>
+	<data name="DepartmentName" xml:space="preserve">
+		<value>nume Departament</value>
+	</data>
+	<data name="POSMenu" xml:space="preserve">
+		<value>Meniu POS</value>
+	</data>
+	<data name="TerminalMenu" xml:space="preserve">
+		<value>Meniu Terminal</value>
+	</data>
+	<data name="POSTableView" xml:space="preserve">
+		<value>POS Vezi Tabelul</value>
+	</data>
+	<data name="TerminalTableView" xml:space="preserve">
+		<value>Terminal Vezi Tabelul</value>
+	</data>
+	<data name="OpenTicketView" xml:space="preserve">
+		<value>Deschideţi Bilete Vezi</value>
+	</data>
+	<data name="ColumnCount" xml:space="preserve">
+		<value>Coloana Count</value>
+	</data>
+	<data name="POSDefaultTicketTag" xml:space="preserve">
+		<value>POS Implicit bilete Tag</value>
+	</data>
+	<data name="TerminalDefaultTicketTag" xml:space="preserve">
+		<value>Implicit Terminal bilete Tag</value>
+	</data>
+	<data name="DepartmentType" xml:space="preserve">
+		<value>Departamentul de Tip</value>
+	</data>
+	<data name="FastFood" xml:space="preserve">
+		<value>Fast-Food</value>
+	</data>
+	<data name="ALaCarte" xml:space="preserve">
+		<value>A-la Carte</value>
+	</data>
+	<data name="Delivery" xml:space="preserve">
+		<value>Livrare</value>
+	</data>
+	<data name="Numerators" xml:space="preserve">
+		<value>Numărătorii</value>
+	</data>
+	<data name="TicketNumerator" xml:space="preserve">
+		<value>Bilet de avion Numărător</value>
+	</data>
+	<data name="OrderNumerator" xml:space="preserve">
+		<value>Comanda Numărător</value>
+	</data>
+	<data name="TicketTags" xml:space="preserve">
+		<value>Bilet de avion Tag-uri</value>
+	</data>
+	<data name="TagGroups" xml:space="preserve">
+		<value>Tag grupuri</value>
+	</data>
+	<data name="TagGroup" xml:space="preserve">
+		<value>Tag Group</value>
+	</data>
+	<data name="ChooseTagsForDepartmentHint" xml:space="preserve">
+		<value>Selectaţi tag-uri pentru utilizarea la {0} departament.</value>
+	</data>
+	<data name="Department" xml:space="preserve">
+		<value>Departament</value>
+	</data>
+	<data name="BatchCreteProducts" xml:space="preserve">
+		<value>Batch crea produse</value>
+	</data>
+	<data name="BatchCreateProductsDialogHint" xml:space="preserve">
+		<value>Creaţi o linie pentru fiecare produs cu [Product Name] [Pret] format. Începeţi cu nume de categorii # char.</value>
+	</data>
+	<data name="DeleteErrorProductUsedInMenu" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest produs alocate la un meniu</value>
+	</data>
+	<data name="DeleteErrorProductUsedInReceipt" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest produs atribuit o chitanţă.</value>
+	</data>
+	<data name="DeleteErrorProductPropertyUsedInProduct" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest produs de proprietate atribuite unui produs</value>
+	</data>
+	<data name="PropertyGroupName" xml:space="preserve">
+		<value>Property Group Nume</value>
+	</data>
+	<data name="SingleSelection" xml:space="preserve">
+		<value>Unică de selecţie la</value>
+	</data>
+	<data name="MultipleSelection" xml:space="preserve">
+		<value>Multiple de selecţie</value>
+	</data>
+	<data name="AddPropertyPriceToProductPrice" xml:space="preserve">
+		<value>Adaugă Pornind de la Modifier produs Pret</value>
+	</data>
+	<data name="POSView" xml:space="preserve">
+		<value>Vezi POS</value>
+	</data>
+	<data name="ButtonHeight" xml:space="preserve">
+		<value>Înălţime buton</value>
+	</data>
+	<data name="TerminalView" xml:space="preserve">
+		<value>Vezi Terminal</value>
+	</data>
+	<data name="Properties" xml:space="preserve">
+		<value>Proprietăţi</value>
+	</data>
+	<data name="Property" xml:space="preserve">
+		<value>Proprietate</value>
+	</data>
+	<data name="Price" xml:space="preserve">
+		<value>Preţ</value>
+	</data>
+	<data name="PB" xml:space="preserve">
+		<value>C</value>
+	</data>
+	<data name="PropertyGroup" xml:space="preserve">
+		<value>Property Group</value>
+	</data>
+	<data name="Barcode" xml:space="preserve">
+		<value>Coduri de bare</value>
+	</data>
+	<data name="PortionPrices" xml:space="preserve">
+		<value>Preturi portii</value>
+	</data>
+	<data name="Multiplier" xml:space="preserve">
+		<value>Multiplicator</value>
+	</data>
+	<data name="PropertyGroups" xml:space="preserve">
+		<value>Grupuri de proprietate</value>
+	</data>
+	<data name="SelectPropertyGroupsHint_f" xml:space="preserve">
+		<value>Selectaţi grupuri de proprietate pentru {0} produs.</value>
+	</data>
+	<data name="Departments" xml:space="preserve">
+		<value>Departamentele</value>
+	</data>
+	<data name="Settings" xml:space="preserve">
+		<value>Setări</value>
+	</data>
+	<data name="ProductList" xml:space="preserve">
+		<value>Lista de produse</value>
+	</data>
+	<data name="MenuList" xml:space="preserve">
+		<value>Meniul Listă</value>
+	</data>
+	<data name="BatchPriceList" xml:space="preserve">
+		<value>Preţul de listă Editor</value>
+	</data>
+	<data name="CanChangeDepartment" xml:space="preserve">
+		<value>Schimbarea poate Departamentul</value>
+	</data>
+	<data name="AlphanumericButtonValues" xml:space="preserve">
+		<value>Valori alfanumerice Button</value>
+	</data>
+	<data name="AutoSelect" xml:space="preserve">
+		<value>Selectare automată</value>
+	</data>
+	<data name="ButtonColor" xml:space="preserve">
+		<value>Butonul de culoare</value>
+	</data>
+	<data name="CategoryName" xml:space="preserve">
+		<value>Nume categorie</value>
+	</data>
+	<data name="CategoryProperties" xml:space="preserve">
+		<value>Categorie Proprietăţi</value>
+	</data>
+	<data name="Color" xml:space="preserve">
+		<value>Culoare</value>
+	</data>
+	<data name="DefaultProperties" xml:space="preserve">
+		<value>Implicit Proprietăţi</value>
+	</data>
+	<data name="FastMenu" xml:space="preserve">
+		<value>Meniu rapid</value>
+	</data>
+	<data name="Gift" xml:space="preserve">
+		<value>Cadou</value>
+	</data>
+	<data name="Header" xml:space="preserve">
+		<value>Antet</value>
+	</data>
+	<data name="ImagePath" xml:space="preserve">
+		<value>Image Cale</value>
+	</data>
+	<data name="MenuProperties" xml:space="preserve">
+		<value>Meniul de proprietăţi</value>
+	</data>
+	<data name="NumeratorProperties" xml:space="preserve">
+		<value>Numărător Proprietăţi</value>
+	</data>
+	<data name="NumeratorType" xml:space="preserve">
+		<value>Numărător de tip</value>
+	</data>
+	<data name="NumeratorValue" xml:space="preserve">
+		<value>Numărător Valoare</value>
+	</data>
+	<data name="SortOrder" xml:space="preserve">
+		<value>Ordine de sortare</value>
+	</data>
+	<data name="PageCount" xml:space="preserve">
+		<value>Pagina Count</value>
+	</data>
+	<data name="WrapText" xml:space="preserve">
+		<value>Wrap Text</value>
+	</data>
+	<data name="DeleteErrorMenuViewUsedInDepartment" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest meniu atribuite unui Departament</value>
+	</data>
+	<data name="MenuName" xml:space="preserve">
+		<value>Meniu Nume</value>
+	</data>
+	<data name="MenuCategories" xml:space="preserve">
+		<value>Meniu Categorii</value>
+	</data>
+	<data name="Menu" xml:space="preserve">
+		<value>Meniu</value>
+	</data>
+	<data name="Categories" xml:space="preserve">
+		<value>Categorii</value>
+	</data>
+	<data name="Category" xml:space="preserve">
+		<value>Categorie</value>
+	</data>
+	<data name="CategoryProducts" xml:space="preserve">
+		<value>Categorie Produse</value>
+	</data>
+	<data name="Sort_f" xml:space="preserve">
+		<value>După {0}</value>
+	</data>
+	<data name="ProductProperties" xml:space="preserve">
+		<value>Produs Proprietăţi</value>
+	</data>
+	<data name="AllCategories" xml:space="preserve">
+		<value>Toate Categoriile</value>
+	</data>
+	<data name="AddCategoryHint" xml:space="preserve">
+		<value>Introduceţi Categorii pe care doriţi să adăugaţi</value>
+	</data>
+	<data name="AutoSelectProductsQuestion" xml:space="preserve">
+		<value>Produse auto selectaţi pentru categorii noi?</value>
+	</data>
+	<data name="AddProductsToCategoryHint_f" xml:space="preserve">
+		<value>Selectaţi Produse pentru {0} categorie</value>
+	</data>
+	<data name="DeleteSelectedCategoryQuestion" xml:space="preserve">
+		<value>Ştergeţi Categorie selectate?</value>
+	</data>
+	<data name="SortCategoryProducts" xml:space="preserve">
+		<value>Categorie după Produse</value>
+	</data>
+	<data name="SortCategories" xml:space="preserve">
+		<value>După Categorii</value>
+	</data>
+	<data name="SortCategoryProductsDialogHint_f" xml:space="preserve">
+		<value>Trageţi {0} categorie de produse pentru a modifica ordinea.</value>
+	</data>
+	<data name="SortCategoriesDialogHint_f" xml:space="preserve">
+		<value>Trageţi {0} categorii de meniu pentru a schimba ordinea.</value>
+	</data>
+	<data name="DeleteErrorTagUsedInDepartment" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece această Tag atribuite unui Departament</value>
+	</data>
+	<data name="TicketTagName" xml:space="preserve">
+		<value>Bilet de avion Tag Nume</value>
+	</data>
+	<data name="Numerator" xml:space="preserve">
+		<value>Numărător</value>
+	</data>
+	<data name="DoAfterTicketSelected" xml:space="preserve">
+		<value>Fă-o după bilet de avion selectat</value>
+	</data>
+	<data name="CanUseOnPOS" xml:space="preserve">
+		<value>Utilizarea la POS</value>
+	</data>
+	<data name="CanUseOnTerminal" xml:space="preserve">
+		<value>Utilizarea pe Terminal</value>
+	</data>
+	<data name="SelectionRequired" xml:space="preserve">
+		<value>Necesar de selecţie</value>
+	</data>
+	<data name="NumericTags" xml:space="preserve">
+		<value>Tag-uri numerice</value>
+	</data>
+	<data name="FreeTagging" xml:space="preserve">
+		<value>Etichetarea gratuit ce</value>
+	</data>
+	<data name="ButtonColors" xml:space="preserve">
+		<value>Button Culori</value>
+	</data>
+	<data name="WhenTagSelected" xml:space="preserve">
+		<value>Când Tagged</value>
+	</data>
+	<data name="WhenTagNotSelected" xml:space="preserve">
+		<value>Când neetichetate</value>
+	</data>
+	<data name="SubTags" xml:space="preserve">
+		<value>Tag-uri Sub</value>
+	</data>
+	<data name="TagName" xml:space="preserve">
+		<value>Tag Nume</value>
+	</data>
+	<data name="Account" xml:space="preserve">
+		<value>Cont</value>
+	</data>
+	<data name="NumericTagsShouldBeNumbersErrorMessage" xml:space="preserve">
+		<value>Atunci când "Etichetarea Numeric" selectat toate tag-urile trebuie să conţină valori numerice.</value>
+	</data>
+	<data name="NewTag" xml:space="preserve">
+		<value>Tag noi</value>
+	</data>
+	<data name="TicketTag" xml:space="preserve">
+		<value>Bilet de avion Tag</value>
+	</data>
+	<data name="Refresh" xml:space="preserve">
+		<value>Reîmprospăta</value>
+	</data>
+	<data name="CloseTicket" xml:space="preserve">
+		<value>Inchide bilete</value>
+	</data>
+	<data name="GetPayment" xml:space="preserve">
+		<value>Rezolva</value>
+	</data>
+	<data name="Tag" xml:space="preserve">
+		<value>Etichetă</value>
+	</data>
+	<data name="CanNavigateCash" xml:space="preserve">
+		<value>Ecranul poate intra în numerar</value>
+	</data>
+	<data name="CanOpenNavigation" xml:space="preserve">
+		<value>Poate intra Ecranul de navigare</value>
+	</data>
+	<data name="InternetBrowser" xml:space="preserve">
+		<value>Internet Browser</value>
+	</data>
+	<data name="BatchCreateGiftReasons" xml:space="preserve">
+		<value>Crearea lot Motive cadou</value>
+	</data>
+	<data name="BatchCreateReasonsHint" xml:space="preserve">
+		<value>Adaugă o linie pentru fiecare motiv pe care doriţi să adăugaţi</value>
+	</data>
+	<data name="DeleteErrorGiftReasonInUse" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest motiv cadou utilizate într-un bilet</value>
+	</data>
+	<data name="GiftReasonName" xml:space="preserve">
+		<value>Motivul cadou Nume</value>
+	</data>
+	<data name="GiftReason" xml:space="preserve">
+		<value>Motivul cadou</value>
+	</data>
+	<data name="DeleteErrorNumeratorIsOrderNumerator" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest Numărător utilizate ca Numărător comenzii</value>
+	</data>
+	<data name="DeleteErrorNumeratorIsTicketNumerator" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest Numărător utilizate ca Numărător de vânzare bilete</value>
+	</data>
+	<data name="DeleteErrorNumeratorUsedInTicket" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest Numărător alocate la o etichetă de vânzare bilete</value>
+	</data>
+	<data name="NumeratorName" xml:space="preserve">
+		<value>Numărător Nume</value>
+	</data>
+	<data name="NumeratorFormat" xml:space="preserve">
+		<value>Numărul Format</value>
+	</data>
+	<data name="DeleteErrorTemplateUsedInPrintJob" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest şablon de Imprimare atribuit unei lucrări de imprimare</value>
+	</data>
+	<data name="TemplateName" xml:space="preserve">
+		<value>Nume şablon</value>
+	</data>
+	<data name="HeaderTemplate" xml:space="preserve">
+		<value>Antet şablon</value>
+	</data>
+	<data name="LineTemplate" xml:space="preserve">
+		<value>Linia şablon</value>
+	</data>
+	<data name="GiftLineTemplate" xml:space="preserve">
+		<value>Cadou Linie şablon</value>
+	</data>
+	<data name="VoidLineTemplate" xml:space="preserve">
+		<value>Void Linie şablon</value>
+	</data>
+	<data name="SubLineTemplate" xml:space="preserve">
+		<value>Linia Proprietăţi şablon</value>
+	</data>
+	<data name="MergeLines" xml:space="preserve">
+		<value>Merge Lines</value>
+	</data>
+	<data name="TicketDate" xml:space="preserve">
+		<value>Data de vânzare bilete</value>
+	</data>
+	<data name="TicketTime" xml:space="preserve">
+		<value>Timpul de vânzare bilete</value>
+	</data>
+	<data name="DayDate" xml:space="preserve">
+		<value>Data Day</value>
+	</data>
+	<data name="DayTime" xml:space="preserve">
+		<value>Ora zilei</value>
+	</data>
+	<data name="UniqueTicketId" xml:space="preserve">
+		<value>Id-ul unice de vânzare bilete</value>
+	</data>
+	<data name="TicketNumber" xml:space="preserve">
+		<value>TicketNumber</value>
+	</data>
+	<data name="OptionalTicketTag" xml:space="preserve">
+		<value>Opţional bilete Tag</value>
+	</data>
+	<data name="TableOrUserName" xml:space="preserve">
+		<value>Nume tabel, Daca Nume utilizator gol</value>
+	</data>
+	<data name="UserName" xml:space="preserve">
+		<value>Nume de utilizator</value>
+	</data>
+	<data name="TableName" xml:space="preserve">
+		<value>Tabelul Nume</value>
+	</data>
+	<data name="TicketNote" xml:space="preserve">
+		<value>Notă de vânzare bilete</value>
+	</data>
+	<data name="AccountAddress" xml:space="preserve">
+		<value>Adresa cont</value>
+	</data>
+	<data name="AccountPhone" xml:space="preserve">
+		<value>Telefon cont</value>
+	</data>
+	<data name="LineItemQuantity" xml:space="preserve">
+		<value># Linie: Postul Cantitate</value>
+	</data>
+	<data name="LineItemName" xml:space="preserve">
+		<value># Linia: Postul Nume</value>
+	</data>
+	<data name="LineItemPrice" xml:space="preserve">
+		<value># Linia: Pret Postul</value>
+	</data>
+	<data name="LineItemPriceCents" xml:space="preserve">
+		<value># Linia: Pret articol de pe Centi</value>
+	</data>
+	<data name="LineItemTotal" xml:space="preserve">
+		<value># Linia: Total Postul</value>
+	</data>
+	<data name="LineItemTotalAndQuantity" xml:space="preserve">
+		<value># Linia: Postul total x Cantitate</value>
+	</data>
+	<data name="LineItemTotalWithoutGifts" xml:space="preserve">
+		<value># Linia: Total Postul (Cadouri excluse)</value>
+	</data>
+	<data name="LineItemDetails" xml:space="preserve">
+		<value># Linia: Postul Proprietăţi</value>
+	</data>
+	<data name="LineItemDetailPrice" xml:space="preserve">
+		<value># Linia: Pret imobilier Postul</value>
+	</data>
+	<data name="LineItemDetailQuantity" xml:space="preserve">
+		<value># Linia: Postul de proprietate Cantitate</value>
+	</data>
+	<data name="LineOrderNumber" xml:space="preserve">
+		<value># Linia: Numărul comenzii</value>
+	</data>
+	<data name="LineGiftOrVoidReason" xml:space="preserve">
+		<value># Linia: cadou sau Motivul Void</value>
+	</data>
+	<data name="TicketTotal" xml:space="preserve">
+		<value>Bilet de avion total</value>
+	</data>
+	<data name="TicketPaidTotal" xml:space="preserve">
+		<value>Suma plătită de vânzare bilete</value>
+	</data>
+	<data name="TicketRemainingAmount" xml:space="preserve">
+		<value>Suma rămasă de vânzare bilete</value>
+	</data>
+	<data name="RemainingAmountIfPaid" xml:space="preserve">
+		<value>Suma de plată dacă plătit</value>
+	</data>
+	<data name="DiscountTotalAndTicketTotal" xml:space="preserve">
+		<value>Linii cu discount daca exista</value>
+	</data>
+	<data name="PrinterTemplate" xml:space="preserve">
+		<value>Format pentru imprimare</value>
+	</data>
+	<data name="PrinterName" xml:space="preserve">
+		<value>Nume imprimantă</value>
+	</data>
+	<data name="ShareNameAndPortName" xml:space="preserve">
+		<value>Distribuie Printer Nume / Port Nume</value>
+	</data>
+	<data name="PrinterType" xml:space="preserve">
+		<value>Tip imprimantă</value>
+	</data>
+	<data name="CharacterSet" xml:space="preserve">
+		<value>Set de caractere</value>
+	</data>
+	<data name="LineCharacterCount" xml:space="preserve">
+		<value>Linia Caracter Count</value>
+	</data>
+	<data name="TicketPrinter" xml:space="preserve">
+		<value>Bilet de avion pentru imprimare</value>
+	</data>
+	<data name="Text" xml:space="preserve">
+		<value>Text</value>
+	</data>
+	<data name="Html" xml:space="preserve">
+		<value>HTML</value>
+	</data>
+	<data name="PortPrinter" xml:space="preserve">
+		<value>Port imprimantă</value>
+	</data>
+	<data name="DemoPrinter" xml:space="preserve">
+		<value>Imprimantă Demo (notepad)</value>
+	</data>
+	<data name="Printer" xml:space="preserve">
+		<value>Imprimanta</value>
+	</data>
+	<data name="PrintJobName" xml:space="preserve">
+		<value>Nume de tipărire</value>
+	</data>
+	<data name="ButtonHeader" xml:space="preserve">
+		<value>Button Antet</value>
+	</data>
+	<data name="LockTicket" xml:space="preserve">
+		<value>Lock bilete</value>
+	</data>
+	<data name="UseAtPosScreen" xml:space="preserve">
+		<value>Afişează la POS ecran</value>
+	</data>
+	<data name="UseAtPaymentScreen" xml:space="preserve">
+		<value>Afişează la Ecranul de plată</value>
+	</data>
+	<data name="UseAtTerminal" xml:space="preserve">
+		<value>Afişare La Terminal</value>
+	</data>
+	<data name="UseAtOldTickets" xml:space="preserve">
+		<value>Numai pentru biletele vechi</value>
+	</data>
+	<data name="PrintMapping" xml:space="preserve">
+		<value>Maparea de imprimare</value>
+	</data>
+	<data name="PrintContent" xml:space="preserve">
+		<value>Imprimarea de conţinut</value>
+	</data>
+	<data name="AutoPrintWhen" xml:space="preserve">
+		<value>Auto Print După</value>
+	</data>
+	<data name="AutoPrintPaymentType" xml:space="preserve">
+		<value>Auto Print pentru tipurile de plată</value>
+	</data>
+	<data name="MenuItemGroup" xml:space="preserve">
+		<value>Grup de produse</value>
+	</data>
+	<data name="MenuItem" xml:space="preserve">
+		<value>Produs</value>
+	</data>
+	<data name="Template" xml:space="preserve">
+		<value>Format</value>
+	</data>
+	<data name="Add" xml:space="preserve">
+		<value>Adăuga</value>
+	</data>
+	<data name="Delete" xml:space="preserve">
+		<value>Şterge</value>
+	</data>
+	<data name="Manual" xml:space="preserve">
+		<value>Manual</value>
+	</data>
+	<data name="WhenNewLinesAddedToTicket" xml:space="preserve">
+		<value>Noile linii de adăugat la bilet de avion</value>
+	</data>
+	<data name="WhenTicketPaid" xml:space="preserve">
+		<value>Bilet de avion plătit</value>
+	</data>
+	<data name="AllLines" xml:space="preserve">
+		<value>Toate liniile</value>
+	</data>
+	<data name="OnlyNewLines" xml:space="preserve">
+		<value>Numai noi linii de</value>
+	</data>
+	<data name="LinesGroupedByBarcode" xml:space="preserve">
+		<value>Linii Grupate de coduri de bare</value>
+	</data>
+	<data name="LinesGroupedByGroupCode" xml:space="preserve">
+		<value>Linii Grupate după grupul Cod</value>
+	</data>
+	<data name="PrintJob" xml:space="preserve">
+		<value>De imprimare de locuri de muncă</value>
+	</data>
+	<data name="DeleteSelectedMappingQuestion" xml:space="preserve">
+		<value>Ştergeţi Mapping selectate?</value>
+	</data>
+	<data name="TicketOptions" xml:space="preserve">
+		<value>Setări de vânzare bilete</value>
+	</data>
+	<data name="AutoRounding" xml:space="preserve">
+		<value>Auto rotunjire</value>
+	</data>
+	<data name="WeightBarcodes" xml:space="preserve">
+		<value>Greutate cu coduri de bare</value>
+	</data>
+	<data name="WeightBarcodePefix" xml:space="preserve">
+		<value>Greutate cu coduri de bare Prefix</value>
+	</data>
+	<data name="WeightBarcodeItemIdLength" xml:space="preserve">
+		<value>Id-ul de coduri de bare Postul Greutate Lungime</value>
+	</data>
+	<data name="WeightBarcodeQuantityLength" xml:space="preserve">
+		<value>Coduri de bare în greutate Cantitate Lungime</value>
+	</data>
+	<data name="ProgramSettings" xml:space="preserve">
+		<value>Programul de Setări</value>
+	</data>
+	<data name="DayOperations" xml:space="preserve">
+		<value>Perioadele de lucru</value>
+	</data>
+	<data name="LocalSettings" xml:space="preserve">
+		<value>Setări locale</value>
+	</data>
+	<data name="Terminals" xml:space="preserve">
+		<value>Terminale</value>
+	</data>
+	<data name="Printers" xml:space="preserve">
+		<value>Imprimante</value>
+	</data>
+	<data name="PrintJobs" xml:space="preserve">
+		<value>Locuri de munca de imprimare</value>
+	</data>
+	<data name="PrinterTemplates" xml:space="preserve">
+		<value>Imprimanta Şabloane</value>
+	</data>
+	<data name="VoidReasons" xml:space="preserve">
+		<value>Motive Void</value>
+	</data>
+	<data name="GiftReasons" xml:space="preserve">
+		<value>Motive cadou</value>
+	</data>
+	<data name="SambaPosWebsite" xml:space="preserve">
+		<value>SambaPOS Website</value>
+	</data>
+	<data name="SambaNetwork" xml:space="preserve">
+		<value>Samba de reţea</value>
+	</data>
+	<data name="CanStartEndOfDay" xml:space="preserve">
+		<value>Poate începe Sfârşitul zilei</value>
+	</data>
+	<data name="TerminalName" xml:space="preserve">
+		<value>Terminal Nume</value>
+	</data>
+	<data name="ProgramLanguage" xml:space="preserve">
+		<value>Programul de limbă</value>
+	</data>
+	<data name="DataConnection" xml:space="preserve">
+		<value>Conexiune de date String</value>
+	</data>
+	<data name="MessageServerName" xml:space="preserve">
+		<value>Server Message Nume</value>
+	</data>
+	<data name="MessageServerPort" xml:space="preserve">
+		<value>Server Message Port</value>
+	</data>
+	<data name="AutoStartMessageClient" xml:space="preserve">
+		<value>Auto Start Mesaj clienti</value>
+	</data>
+	<data name="StartClientNow" xml:space="preserve">
+		<value>Start clienti Acum</value>
+	</data>
+	<data name="DeleteErrorShouldHaveAtLeastOneTerminal" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece ar trebui să existe cel puţin un singur terminal.</value>
+	</data>
+	<data name="DefaultTerminal" xml:space="preserve">
+		<value>Implicit Terminal</value>
+	</data>
+	<data name="AutoLogout" xml:space="preserve">
+		<value>Auto Logout</value>
+	</data>
+	<data name="PrinterOptions" xml:space="preserve">
+		<value>Printer Settings</value>
+	</data>
+	<data name="SlipReportPrinter" xml:space="preserve">
+		<value>Slip imprimantă Raport</value>
+	</data>
+	<data name="ReportPrinter" xml:space="preserve">
+		<value>Raport imprimantă</value>
+	</data>
+	<data name="SelectPrintJob" xml:space="preserve">
+		<value>Selectaţi Print Job</value>
+	</data>
+	<data name="Terminal" xml:space="preserve">
+		<value>Terminal</value>
+	</data>
+	<data name="PrintJobList" xml:space="preserve">
+		<value>Lista de imprimare de locuri de muncă</value>
+	</data>
+	<data name="SelectPrintJobsForTerminalHint_f" xml:space="preserve">
+		<value>Selectaţi de locuri de muncă de imprimare pe care doriţi să adăugaţi {0} terminale</value>
+	</data>
+	<data name="BatchAddVoidReasons" xml:space="preserve">
+		<value>Adăugaţi mai multe motive Void</value>
+	</data>
+	<data name="BatchAddVoidReasonsDialogHint" xml:space="preserve">
+		<value>Adaugă o linie pentru fiecare motiv pe care doriţi să adăugaţi</value>
+	</data>
+	<data name="DeleteErrorVoidReasonUsed" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest motiv, folosite într-un bilet de avion</value>
+	</data>
+	<data name="VoidReasonName" xml:space="preserve">
+		<value>Void Motivul Nume</value>
+	</data>
+	<data name="VoidReason" xml:space="preserve">
+		<value>Motivul Void</value>
+	</data>
+	<data name="CashContent" xml:space="preserve">
+		<value>Conţinutul de numerar</value>
+	</data>
+	<data name="WorkPeriodStartDate_f" xml:space="preserve">
+		<value>Data Perioada de lucru: {0}</value>
+	</data>
+	<data name="WorkPeriodStartTime" xml:space="preserve">
+		<value>Timpul de lucru Perioada: {0}</value>
+	</data>
+	<data name="TotalWorkTimeDays_f" xml:space="preserve">
+		<value>Total de lucru Ora:
+{0:0} zile {1:0} {2:0} oră minute</value>
+	</data>
+	<data name="TotalWorkTimeHours_f" xml:space="preserve">
+		<value>Timpul de lucru total: {0:0} {1:0} oră minute</value>
+	</data>
+	<data name="TotalWorkTimeMinutes_f" xml:space="preserve">
+		<value>Timpul de lucru total: {0:0} minute</value>
+	</data>
+	<data name="StartWorkPeriodToEnablePos" xml:space="preserve">
+		<value>Perioada de lucru pe Start pentru a permite POS</value>
+	</data>
+	<data name="StartWorkPeriod" xml:space="preserve">
+		<value>Start Perioada de lucru</value>
+	</data>
+	<data name="EndWorkPeriod" xml:space="preserve">
+		<value>Sfârşitul de lucru Perioada</value>
+	</data>
+	<data name="StartingWorkPeriodCompleted" xml:space="preserve">
+		<value>Perioada de lucru începute.</value>
+	</data>
+	<data name="ThereAreOpenTicketsWarning_f" xml:space="preserve">
+		<value>Există {0} bilete deschise.
+Nu pot sfârşitul perioadei de lucru în timp ce bilete deschise</value>
+	</data>
+	<data name="Table" xml:space="preserve">
+		<value>Tabel</value>
+	</data>
+	<data name="SaveErrorDuplicateTableName" xml:space="preserve">
+		<value>Există deja un tabel cu acest nume.</value>
+	</data>
+	<data name="AddMultipleTables" xml:space="preserve">
+		<value>Adăugaţi Mese Multiple</value>
+	</data>
+	<data name="AddMultipleTableHint" xml:space="preserve">
+		<value>Adaugă o linie pentru fiecare Nume tabel. Începeţi Categorii cu caracter #.</value>
+	</data>
+	<data name="DeleteErrorTicketAssignedToTable" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece există un bilet de avion alocate în acest tabel</value>
+	</data>
+	<data name="DeleteErrorTableUsedInTableView" xml:space="preserve">
+		<value>Nu se poate şterge becasuse acest tabel alocat unei Vezi tabelul</value>
+	</data>
+	<data name="TableViews" xml:space="preserve">
+		<value>Tabelul Vizualizari</value>
+	</data>
+	<data name="Tables" xml:space="preserve">
+		<value>Mese</value>
+	</data>
+	<data name="CanOpenTableList" xml:space="preserve">
+		<value>Se poate afişa Lista Tabel</value>
+	</data>
+	<data name="CanChangeTable" xml:space="preserve">
+		<value>Tabelul poate schimba un Ticket</value>
+	</data>
+	<data name="DeleteErrorTableViewUsedInDepartment" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest tabel Vezi atribuite unui Departament</value>
+	</data>
+	<data name="TableViewName" xml:space="preserve">
+		<value>Vezi Nume</value>
+	</data>
+	<data name="TableViewMode" xml:space="preserve">
+		<value>Vezi Mode</value>
+	</data>
+	<data name="BackgroundColor" xml:space="preserve">
+		<value>Culoarea de fundal</value>
+	</data>
+	<data name="BackgroundImage" xml:space="preserve">
+		<value>Imaginea de fundal</value>
+	</data>
+	<data name="EmptyTableColor" xml:space="preserve">
+		<value>Gol tabel de culori</value>
+	</data>
+	<data name="UnavailableTableColor" xml:space="preserve">
+		<value>Întreg tabel de culori</value>
+	</data>
+	<data name="LockedTableColor" xml:space="preserve">
+		<value>Blocat tabel de culori</value>
+	</data>
+	<data name="NumeratorHeight" xml:space="preserve">
+		<value>Numărător Înălţime</value>
+	</data>
+	<data name="AlphanumericButtons" xml:space="preserve">
+		<value>Butoane alfanumeric</value>
+	</data>
+	<data name="Automatic" xml:space="preserve">
+		<value>Automat</value>
+	</data>
+	<data name="Custom" xml:space="preserve">
+		<value>Obicei</value>
+	</data>
+	<data name="Hidden" xml:space="preserve">
+		<value>Ascuns</value>
+	</data>
+	<data name="SelectTable" xml:space="preserve">
+		<value>Selectaţi Tabel</value>
+	</data>
+	<data name="TableList" xml:space="preserve">
+		<value>Tabel Lista</value>
+	</data>
+	<data name="SelectTableDialogHint_f" xml:space="preserve">
+		<value>Selectaţi tabelele pe care doriţi să le adăugaţi la {0} vedere</value>
+	</data>
+	<data name="TableView" xml:space="preserve">
+		<value>Vezi tabelul</value>
+	</data>
+	<data name="EditMode" xml:space="preserve">
+		<value>Modul de proiectare</value>
+	</data>
+	<data name="NextPage" xml:space="preserve">
+		<value>Pagina urmatoare</value>
+	</data>
+	<data name="PreviousPage" xml:space="preserve">
+		<value>Pagina anterioară</value>
+	</data>
+	<data name="TablesMerged_f" xml:space="preserve">
+		<value>{0} bilet de avion
+fuzionat cu {1} tabel.</value>
+	</data>
+	<data name="TicketMergedToTable_f" xml:space="preserve">
+		<value>Bilet de avion fuzionat cu {0} tabel.</value>
+	</data>
+	<data name="TicketMovedToTable_f" xml:space="preserve">
+		<value>{0} bilet de avion
+sa mutat la {1} tabel.</value>
+	</data>
+	<data name="SelectTableThatYouWantToMoveTicket_f" xml:space="preserve">
+		<value>Selectaţi tabelul nou pentru {0} bilet de avion.</value>
+	</data>
+	<data name="SelectTableForTicket" xml:space="preserve">
+		<value>Selectaţi tabelul pentru bilet.</value>
+	</data>
+	<data name="SelectTableForOperation" xml:space="preserve">
+		<value>Selectaţi tabelul pe care doriţi să adăugaţi comenzi.</value>
+	</data>
+	<data name="FindProduct" xml:space="preserve">
+		<value>Căutare Produs</value>
+	</data>
+	<data name="FindTicket" xml:space="preserve">
+		<value>Găsiţi bilete</value>
+	</data>
+	<data name="FindTable" xml:space="preserve">
+		<value>Găsiţi tabelul</value>
+	</data>
+	<data name="DiscountTotal" xml:space="preserve">
+		<value>Discount total</value>
+	</data>
+	<data name="PaymentTotal" xml:space="preserve">
+		<value>Totalul de plată</value>
+	</data>
+	<data name="Balance" xml:space="preserve">
+		<value>Balanţa</value>
+	</data>
+	<data name="ChargedAmount" xml:space="preserve">
+		<value>Charged</value>
+	</data>
+	<data name="Portions" xml:space="preserve">
+		<value>Portiuni</value>
+	</data>
+	<data name="ExtraModifiers" xml:space="preserve">
+		<value>Modificatori suplimentare</value>
+	</data>
+	<data name="Update" xml:space="preserve">
+		<value>Actualizare</value>
+	</data>
+	<data name="AddAndSave" xml:space="preserve">
+		<value>Adăugaţi şi Salvare</value>
+	</data>
+	<data name="Number" xml:space="preserve">
+		<value>Număr</value>
+	</data>
+	<data name="OpenClose_ab" xml:space="preserve">
+		<value>Op-Cls</value>
+	</data>
+	<data name="TicketOpeningTime" xml:space="preserve">
+		<value>Bilet de deschidere</value>
+	</data>
+	<data name="LastOrderTime" xml:space="preserve">
+		<value>Ultima comandă</value>
+	</data>
+	<data name="LastPaymentTime" xml:space="preserve">
+		<value>Ultima plată</value>
+	</data>
+	<data name="Print" xml:space="preserve">
+		<value>Imprimare</value>
+	</data>
+	<data name="CloseTicket_r" xml:space="preserve">
+		<value>Aproape
+Bilet</value>
+	</data>
+	<data name="CashPayment_r" xml:space="preserve">
+		<value>Numerar
+Plată</value>
+	</data>
+	<data name="CreditCard_r" xml:space="preserve">
+		<value>Credit
+Card</value>
+	</data>
+	<data name="SelectCustomer" xml:space="preserve">
+		<value>Selectaţi clienţilor</value>
+	</data>
+	<data name="AllTickets_r" xml:space="preserve">
+		<value>Toate
+Bilete</value>
+	</data>
+	<data name="Void" xml:space="preserve">
+		<value>Gol</value>
+	</data>
+	<data name="Divide" xml:space="preserve">
+		<value>Diviza</value>
+	</data>
+	<data name="ExtraModifier" xml:space="preserve">
+		<value>Extra Modifier</value>
+	</data>
+	<data name="ReleaseLock" xml:space="preserve">
+		<value>Lansat Lock</value>
+	</data>
+	<data name="ChangePrice" xml:space="preserve">
+		<value>Schimbarea Preţ</value>
+	</data>
+	<data name="ForChangingPriceTypeAPrice" xml:space="preserve">
+		<value>Pentru a schimba tipul de preţ mai întâi un preţ de la numărător</value>
+	</data>
+	<data name="NewTicket" xml:space="preserve">
+		<value>Noi de vânzare bilete</value>
+	</data>
+	<data name="ChangeTable_r" xml:space="preserve">
+		<value>Schimbare
+Tabel</value>
+	</data>
+	<data name="SelectTable_r" xml:space="preserve">
+		<value>Selecta
+Tabel</value>
+	</data>
+	<data name="CustomerInfo_r" xml:space="preserve">
+		<value>Client
+Info</value>
+	</data>
+	<data name="ChangeAmount_f" xml:space="preserve">
+		<value>Datorită schimbărilor: {0}</value>
+	</data>
+	<data name="AccountBalance_r" xml:space="preserve">
+		<value>Cont
+Balanţa</value>
+	</data>
+	<data name="All" xml:space="preserve">
+		<value>Toate</value>
+	</data>
+	<data name="Round" xml:space="preserve">
+		<value>Rundă</value>
+	</data>
+	<data name="Flat" xml:space="preserve">
+		<value>Auto Runda</value>
+	</data>
+	<data name="DiscountPercentSign" xml:space="preserve">
+		<value>Discount%</value>
+	</data>
+	<data name="CanReleaseTicketLock" xml:space="preserve">
+		<value>Poate elimina Lock de vânzare bilete</value>
+	</data>
+	<data name="CanRemoveTicketTag" xml:space="preserve">
+		<value>Poate elimina Tag de vânzare bilete</value>
+	</data>
+	<data name="CanGiftItems" xml:space="preserve">
+		<value>Poate articole pentru cadouri</value>
+	</data>
+	<data name="CanVoidItems" xml:space="preserve">
+		<value>Poate anula Articole</value>
+	</data>
+	<data name="CanMoveTicketLines" xml:space="preserve">
+		<value>Posibilitatea să mutaţi elemente</value>
+	</data>
+	<data name="CanMergeTickets" xml:space="preserve">
+		<value>Poate Merge Bilete</value>
+	</data>
+	<data name="CanDisplayOldTickets" xml:space="preserve">
+		<value>Poate afişa Bilete Vechi</value>
+	</data>
+	<data name="CanMoveUnlockedTicketLines" xml:space="preserve">
+		<value>Se pot muta Lines Unlocked de vânzare bilete</value>
+	</data>
+	<data name="CanUpdateExtraModifiers" xml:space="preserve">
+		<value>Pot actualiza Modificatori Extra</value>
+	</data>
+	<data name="CanGetPayment" xml:space="preserve">
+		<value>Poate primi plata</value>
+	</data>
+	<data name="CanGetFastPayment" xml:space="preserve">
+		<value>Pot primi plata Fast</value>
+	</data>
+	<data name="CanMakeDiscount" xml:space="preserve">
+		<value>Poate face Discount</value>
+	</data>
+	<data name="CanRoundTicketTotal" xml:space="preserve">
+		<value>Poate total de bilete Etapă</value>
+	</data>
+	<data name="CanFlattenTicketTotal" xml:space="preserve">
+		<value>Poate total de bilete Auto Etapă</value>
+	</data>
+	<data name="OnlyOpenTickets" xml:space="preserve">
+		<value>Bilete deschis Numai</value>
+	</data>
+	<data name="AllTickets" xml:space="preserve">
+		<value>Toate biletele</value>
+	</data>
+	<data name="Total_f" xml:space="preserve">
+		<value>Total: {0}</value>
+	</data>
+	<data name="User" xml:space="preserve">
+		<value>Utilizator</value>
+	</data>
+	<data name="MainMenu" xml:space="preserve">
+		<value>Meniul principal</value>
+	</data>
+	<data name="Yes" xml:space="preserve">
+		<value>Da</value>
+	</data>
+	<data name="No" xml:space="preserve">
+		<value>Nu</value>
+	</data>
+	<data name="DeleteErrorAdminUser" xml:space="preserve">
+		<value>Nu se poate şterge ghidul de admin.</value>
+	</data>
+	<data name="DeleteErrorLastUser" xml:space="preserve">
+		<value>Nu se poate şterge ultimul cont de utilizator</value>
+	</data>
+	<data name="DeleteErrorUserDidTicketOperation" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest Ghid de utilizare a creat Bilete.</value>
+	</data>
+	<data name="UserRoleList" xml:space="preserve">
+		<value>Rolul Lista</value>
+	</data>
+	<data name="Users" xml:space="preserve">
+		<value>Utilizatori</value>
+	</data>
+	<data name="UserList" xml:space="preserve">
+		<value>Ghid de utilizare Lista</value>
+	</data>
+	<data name="DeleteErrorThisRoleUsedInAUserAccount" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest rol atribuit unui cont de utilizator</value>
+	</data>
+	<data name="UserRoleName" xml:space="preserve">
+		<value>Rolul Nume</value>
+	</data>
+	<data name="Permissions" xml:space="preserve">
+		<value>Permisiuni</value>
+	</data>
+	<data name="Admin" xml:space="preserve">
+		<value>Admin</value>
+	</data>
+	<data name="UserRole" xml:space="preserve">
+		<value>Ghid de utilizare Rolul</value>
+	</data>
+	<data name="PinCode" xml:space="preserve">
+		<value>Codul Pin</value>
+	</data>
+	<data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
+		<value>Acest Cod PIN utilizat de către un alt cont de utilizator.</value>
+	</data>
+	<data name="OK" xml:space="preserve">
+		<value>Bine</value>
+	</data>
+	<data name="PropertyEditor" xml:space="preserve">
+		<value>Editor de proprietate</value>
+	</data>
+	<data name="Details" xml:space="preserve">
+		<value>Detalii</value>
+	</data>
+	<data name="List" xml:space="preserve">
+		<value>Listă</value>
+	</data>
+	<data name="DisplayAllValues" xml:space="preserve">
+		<value>Afişează Toate valorile</value>
+	</data>
+	<data name="Selected" xml:space="preserve">
+		<value>Selectate</value>
+	</data>
+	<data name="Selected_f" xml:space="preserve">
+		<value>Selectate {0}</value>
+	</data>
+	<data name="WorkPeriodEndsMessage" xml:space="preserve">
+		<value>Perioada de lucru se termină.
+Vizitaţi secţiunea Rapoarte şi de a crea rapoarte de lucru Perioada</value>
+	</data>
+	<data name="DontForgetEndingWorkPeriod" xml:space="preserve">
+		<value>NU UITATI INCHEIEREA perioadei de muncă!</value>
+	</data>
+	<data name="Paid" xml:space="preserve">
+		<value>Plătit</value>
+	</data>
+	<data name="Open" xml:space="preserve">
+		<value>Deschis</value>
+	</data>
+	<data name="AutoFlatten_ab" xml:space="preserve">
+		<value>Auto rotunjire</value>
+	</data>
+	<data name="Rounding" xml:space="preserve">
+		<value>Rotunjire</value>
+	</data>
+	<data name="Flattening" xml:space="preserve">
+		<value>Rotunjire</value>
+	</data>
+	<data name="AccountBalance" xml:space="preserve">
+		<value>Soldul contului</value>
+	</data>
+	<data name="UndefinedPaymentType" xml:space="preserve">
+		<value>Nedefinit tip de plată</value>
+	</data>
+	<data name="Angle" xml:space="preserve">
+		<value>Unghi</value>
+	</data>
+	<data name="CornerRadius" xml:space="preserve">
+		<value>Colţul Raza</value>
+	</data>
+	<data name="Height" xml:space="preserve">
+		<value>Înălţime</value>
+	</data>
+	<data name="Width" xml:space="preserve">
+		<value>Lăţime</value>
+	</data>
+	<data name="Gift_ab" xml:space="preserve">
+		<value>[Cadou]</value>
+	</data>
+	<data name="Void_ab" xml:space="preserve">
+		<value>[Void]</value>
+	</data>
+	<data name="OrderNumber_f" xml:space="preserve">
+		<value>Ord.No: {0:0} - {1}</value>
+	</data>
+	<data name="NewOrder" xml:space="preserve">
+		<value>Noii Ordini</value>
+	</data>
+	<data name="Back" xml:space="preserve">
+		<value>Înapoi</value>
+	</data>
+	<data name="Empty" xml:space="preserve">
+		<value>Gol</value>
+	</data>
+	<data name="TicketTimeDisplay_f" xml:space="preserve">
+		<value>{0} ({1} min.)</value>
+	</data>
+	<data name="Table_f" xml:space="preserve">
+		<value>Tabelul: {0}</value>
+	</data>
+	<data name="Account_f" xml:space="preserve">
+		<value>Cont: {0}</value>
+	</data>
+	<data name="TicketNumberAndTable_f" xml:space="preserve">
+		<value># {0} Tabelul: {1}</value>
+	</data>
+	<data name="TicketNumberAndAccount_f" xml:space="preserve">
+		<value># {0} Tabelul: {1}</value>
+	</data>
+	<data name="AccountNameAndTableName_f" xml:space="preserve">
+		<value># {0} Cont: {1}
+Tabelul: {2}</value>
+	</data>
+	<data name="CantCompleteOperationWhenThereIsZeroPricedProduct" xml:space="preserve">
+		<value>Nu se poate finaliza această operaţie în timp ce ordinele de la zero la preţuri există.</value>
+	</data>
+	<data name="TagCantBeEmpty_f" xml:space="preserve">
+		<value>Nu poate părăsi {0} gol</value>
+	</data>
+	<data name="Reports" xml:space="preserve">
+		<value>Rapoarte</value>
+	</data>
+	<data name="CanDisplayReports" xml:space="preserve">
+		<value>Poate afişa Rapoarte</value>
+	</data>
+	<data name="CanChangeReportFilter" xml:space="preserve">
+		<value>Schimbarea poate Data Filtru Semnalati</value>
+	</data>
+	<data name="Today" xml:space="preserve">
+		<value>Astăzi</value>
+	</data>
+	<data name="Yesterday" xml:space="preserve">
+		<value>Ieri</value>
+	</data>
+	<data name="PastMonth" xml:space="preserve">
+		<value>Luna trecută</value>
+	</data>
+	<data name="ThisMonth" xml:space="preserve">
+		<value>Luna aceasta</value>
+	</data>
+	<data name="ThisWeek" xml:space="preserve">
+		<value>Săptămâna aceasta</value>
+	</data>
+	<data name="PastWeek" xml:space="preserve">
+		<value>Săptămână trecută</value>
+	</data>
+	<data name="UndefinedWithBrackets" xml:space="preserve">
+		<value>[Nedefinit]</value>
+	</data>
+	<data name="TicketWithBrackets" xml:space="preserve">
+		<value>[Bilete]</value>
+	</data>
+	<data name="As_f" xml:space="preserve">
+		<value>Ca de {0}</value>
+	</data>
+	<data name="Accounts" xml:space="preserve">
+		<value>Conturi</value>
+	</data>
+	<data name="NoTransactionsFoundFor_f" xml:space="preserve">
+		<value>Nr tranzacţiile pentru {0}</value>
+	</data>
+	<data name="InternalAccounts" xml:space="preserve">
+		<value>Conturile interne</value>
+	</data>
+	<data name="AccountsLiability" xml:space="preserve">
+		<value>Răspunderea Conturi</value>
+	</data>
+	<data name="AccountsReceivable" xml:space="preserve">
+		<value>Conturi de încasat</value>
+	</data>
+	<data name="CashReport" xml:space="preserve">
+		<value>Tranzacţii cu numerar Raport</value>
+	</data>
+	<data name="DateRangeIsNotActiveWorkPeriod" xml:space="preserve">
+		<value>Intervalul de date nu este în perioada activă de muncă</value>
+	</data>
+	<data name="ReportDoesNotContainsCashState" xml:space="preserve">
+		<value>Raportul nu conţine cantităţi Start</value>
+	</data>
+	<data name="Expenses" xml:space="preserve">
+		<value>Cheltuieli</value>
+	</data>
+	<data name="CashTransactions" xml:space="preserve">
+		<value>Tranzacţii cu numerar</value>
+	</data>
+	<data name="Totals" xml:space="preserve">
+		<value>Totaluri</value>
+	</data>
+	<data name="TotalExpense" xml:space="preserve">
+		<value>Total cheltuieli</value>
+	</data>
+	<data name="Incomes" xml:space="preserve">
+		<value>Venituri</value>
+	</data>
+	<data name="StartAmount" xml:space="preserve">
+		<value>Start Sume</value>
+	</data>
+	<data name="SalesIncome" xml:space="preserve">
+		<value>Vânzări Venituri</value>
+	</data>
+	<data name="TotalIncome" xml:space="preserve">
+		<value>Venituri totale</value>
+	</data>
+	<data name="CashStatus" xml:space="preserve">
+		<value>Stare de numerar</value>
+	</data>
+	<data name="Drawer" xml:space="preserve">
+		<value>Cash Drawer</value>
+	</data>
+	<data name="WorkPeriodReport" xml:space="preserve">
+		<value>Perioada de raport de muncă</value>
+	</data>
+	<data name="Sales" xml:space="preserve">
+		<value>Vânzări</value>
+	</data>
+	<data name="GeneralInformation" xml:space="preserve">
+		<value>Informaţii generale</value>
+	</data>
+	<data name="ItemProperties" xml:space="preserve">
+		<value>Proprietăţi suplimentare Postul</value>
+	</data>
+	<data name="VoidsTotal" xml:space="preserve">
+		<value>Total de goluri</value>
+	</data>
+	<data name="DiscountsTotal" xml:space="preserve">
+		<value>Valoarea totală a reducerilor</value>
+	</data>
+	<data name="GiftsTotal" xml:space="preserve">
+		<value>Cadouri total</value>
+	</data>
+	<data name="TicketCount" xml:space="preserve">
+		<value>Bilet de avion Count</value>
+	</data>
+	<data name="SalesDivTicket" xml:space="preserve">
+		<value>Totalul vânzărilor / bilete</value>
+	</data>
+	<data name="Incomes_f" xml:space="preserve">
+		<value>{0} Venituri</value>
+	</data>
+	<data name="TotalAmount_f" xml:space="preserve">
+		<value>{0} Valoarea totala:</value>
+	</data>
+	<data name="TicketTotal_f" xml:space="preserve">
+		<value>Total de {0}:</value>
+	</data>
+	<data name="TotalAmountDivTag_f" xml:space="preserve">
+		<value>Valoarea totala / {0}:</value>
+	</data>
+	<data name="UserSales" xml:space="preserve">
+		<value>Ghid de utilizare Vânzări</value>
+	</data>
+	<data name="ItemSales" xml:space="preserve">
+		<value>Postul de vânzări</value>
+	</data>
+	<data name="CostReport" xml:space="preserve">
+		<value>Raportul cost cu o schimbare</value>
+	</data>
+	<data name="InventoryReport" xml:space="preserve">
+		<value>Inventarul Raport</value>
+	</data>
+	<data name="CsvBuilder" xml:space="preserve">
+		<value>CSV Builder</value>
+	</data>
+	<data name="AverageCost" xml:space="preserve">
+		<value>Costul mediu al</value>
+	</data>
+	<data name="ThereAreNoCostTransactionsInThisPeriod" xml:space="preserve">
+		<value>Nu sunt tranzacţii cost cu o schimbare în această perioadă de muncă.</value>
+	</data>
+	<data name="InventoryPurchaseReport" xml:space="preserve">
+		<value>Inventarul cumparare Raport</value>
+	</data>
+	<data name="InventoryGroup" xml:space="preserve">
+		<value>Grupul de stocuri</value>
+	</data>
+	<data name="AveragePrice_ab" xml:space="preserve">
+		<value>Avg.Price</value>
+	</data>
+	<data name="ItemSalesReport" xml:space="preserve">
+		<value>Postul de vânzări Raport</value>
+	</data>
+	<data name="SalesByItemGroup" xml:space="preserve">
+		<value>Vânzări de către Grupul Postul</value>
+	</data>
+	<data name="QuantitiesByItemGroup" xml:space="preserve">
+		<value>Cantităţile de către Grupul Postul</value>
+	</data>
+	<data name="Voids" xml:space="preserve">
+		<value>Golurile</value>
+	</data>
+	<data name="Gifts" xml:space="preserve">
+		<value>Cadouri</value>
+	</data>
+	<data name="Discounts" xml:space="preserve">
+		<value>Reduceri</value>
+	</data>
+	<data name="Tickets" xml:space="preserve">
+		<value>Bilete</value>
+	</data>
+	<data name="ByPersonnel_f" xml:space="preserve">
+		<value>{0} de către utilizator</value>
+	</data>
+	<data name="NoPurchaseTransactionInCurrentDateRange" xml:space="preserve">
+		<value>Nu sunt tranzacţii de cumpărare în interval de date.</value>
+	</data>
+	<data name="TicketTemplate" xml:space="preserve">
+		<value>Bilet de şablon</value>
+	</data>
+	<data name="KitchenOrderTemplate" xml:space="preserve">
+		<value>Bucătărie Obligă şablon</value>
+	</data>
+	<data name="InvoicePrinterTemplate" xml:space="preserve">
+		<value>Factură şablon</value>
+	</data>
+	<data name="TicketTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt;TICKET
+&lt;L00&gt;Date: {TICKET DATE}
+&lt;L00&gt;Ora: {TIME}
+&lt;L00&gt;Tabelul nr : {TABLE}
+&lt;L00&gt;Nr bilete: {TICKET NO}
+&lt;F&gt;-</value>
+	</data>
+	<data name="TicketTemplateFooterValue" xml:space="preserve">
+		<value>&lt;F&gt;=
+&lt;EB&gt;
+&lt;J10&gt;{IF DISCOUNT}
+&lt;J10&gt;[Cadou Total: | {GIFT TOTAL}]
+&lt;J10&gt;Total: | {TICKET TOTAL}
+{IF PAID}
+&lt;DB&gt;
+&lt;F&gt;=
+&lt;C10&gt;T H A N K Y O U</value>
+	</data>
+	<data name="KitchenTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt; {USER TABLE}
+&lt;F&gt;-
+&lt;L00&gt;Date: Re: {TICKET DATE}
+&lt;L00&gt;Ora: {TIME}
+&lt;L00&gt;Tabelul nr: {TABLE}
+&lt;L00&gt;Nr bilete: {TICKET NO}
+&lt;F&gt;-</value>
+	</data>
+	<data name="KitchenTemplateVoidedLineTemplateValue" xml:space="preserve">
+		<value>&lt;L00&gt; ** VOID ** {QUANTITY} {NAME}
+        * {PROPERTIES}</value>
+	</data>
+	<data name="InvoiceTemplateHeaderValue" xml:space="preserve">
+		<value>&lt;T&gt;FACTURA
+&lt;L00&gt;Date: {TICKET DATE}
+&lt;L00&gt;Ora: {TIME}
+&lt;L00&gt;Tabelul nr: {TABLE}
+&lt;L00&gt;Nr bilete: {TICKET NO}
+&lt;f&gt; -</value>
+	</data>
+	<data name="KitchenPrinter" xml:space="preserve">
+		<value>Bucătărie imprimantă</value>
+	</data>
+	<data name="InvoicePrinter" xml:space="preserve">
+		<value>Factura pentru imprimare</value>
+	</data>
+	<data name="Server" xml:space="preserve">
+		<value>Server</value>
+	</data>
+	<data name="PrintBill" xml:space="preserve">
+		<value>Print Bill</value>
+	</data>
+	<data name="PrintOrdersToKitchenPrinter" xml:space="preserve">
+		<value>Obligă de imprimare la imprimantă Bucătărie</value>
+	</data>
+	<data name="AllTables" xml:space="preserve">
+		<value>Toate tabelele</value>
+	</data>
+	<data name="Search" xml:space="preserve">
+		<value>Căutare</value>
+	</data>
+	<data name="OpenTicketButtonDuration" xml:space="preserve">
+		<value>{0} min</value>
+	</data>
+	<data name="CIDSettings" xml:space="preserve">
+		<value>Setări CID</value>
+	</data>
+	<data name="Voucher_r" xml:space="preserve">
+		<value>Bon</value>
+	</data>
+	<data name="TicketTemplateGiftedLineTemplateValue" xml:space="preserve">
+		<value>&lt;L00&gt; {QUANTITY} {NAME} | GIFT</value>
+	</data>
+	<data name="NavigationPermissions" xml:space="preserve">
+		<value>Permisiuni de navigare</value>
+	</data>
+	<data name="DepartmentPermissions" xml:space="preserve">
+		<value>Departamentul Permisiuni</value>
+	</data>
+	<data name="TicketPermissions" xml:space="preserve">
+		<value>Bilet de avion Permisiuni</value>
+	</data>
+	<data name="SettlePermissions" xml:space="preserve">
+		<value>Permisiuni de plată</value>
+	</data>
+	<data name="ReportPermissions" xml:space="preserve">
+		<value>Raportarea Permisiuni</value>
+	</data>
+	<data name="NoTicketsFoundForTag" xml:space="preserve">
+		<value>Nu sunt bilete găsit tag-ul {0} tag.</value>
+	</data>
+	<data name="RemainingAmountIfPaidValue_f" xml:space="preserve">
+		<value>Plătit: | {0}
+&lt;J&gt; Grand TOTAL: | {1}</value>
+	</data>
+	<data name="DiscountTotalAndTicketTotalValue_f" xml:space="preserve">
+		<value>Bilet de avion TOTAL: | {0}
+&lt;J&gt; Discount: | {1}</value>
+	</data>
+	<data name="Restaurant" xml:space="preserve">
+		<value>Restaurant</value>
+	</data>
+	<data name="IfNegativeDiscountValue_f" xml:space="preserve">
+		<value>&lt;J&gt; Rotunjire: | {0}</value>
+	</data>
+	<data name="ExportSalesData" xml:space="preserve">
+		<value>Vânzările la export de date</value>
+	</data>
+	<data name="ClickLinksToExportData" xml:space="preserve">
+		<value>Selecteaza intervalul de date, reîmprospăta raportul şi faceţi clic pe link-ul cu privire la exportul de date.</value>
+	</data>
+	<data name="FooterTemplate" xml:space="preserve">
+		<value>Subsol şablon</value>
+	</data>
+	<data name="UiLanguage" xml:space="preserve">
+		<value>UI limbă</value>
+	</data>
+	<data name="OverrideWindowsRegionalSettings" xml:space="preserve">
+		<value>Override pentru Windows Setări regionale</value>
+	</data>
+	<data name="RuleAction" xml:space="preserve">
+		<value>Acţiune</value>
+	</data>
+	<data name="RuleActions" xml:space="preserve">
+		<value>Oferte</value>
+	</data>
+	<data name="NoAction" xml:space="preserve">
+		<value>Nicio acţiune</value>
+	</data>
+	<data name="ShowMessage" xml:space="preserve">
+		<value>Arată mesajul</value>
+	</data>
+	<data name="ActionName" xml:space="preserve">
+		<value>Nume Acţiune</value>
+	</data>
+	<data name="ActionType" xml:space="preserve">
+		<value>Tipul de acţiune</value>
+	</data>
+	<data name="ActionParameter" xml:space="preserve">
+		<value>Parametru de acţiune</value>
+	</data>
+	<data name="Parameters" xml:space="preserve">
+		<value>Parametrii</value>
+	</data>
+	<data name="Message" xml:space="preserve">
+		<value>Mesaj</value>
+	</data>
+	<data name="Rule" xml:space="preserve">
+		<value>Regulă</value>
+	</data>
+	<data name="RuleName" xml:space="preserve">
+		<value>Articolul Nume</value>
+	</data>
+	<data name="EventName" xml:space="preserve">
+		<value>Nume Eveniment</value>
+	</data>
+	<data name="Actions" xml:space="preserve">
+		<value>Oferte</value>
+	</data>
+	<data name="NewProperty" xml:space="preserve">
+		<value>Imobiliare noi</value>
+	</data>
+	<data name="Move" xml:space="preserve">
+		<value>Mişcare</value>
+	</data>
+	<data name="MoveTicketLine" xml:space="preserve">
+		<value>Mişcare</value>
+	</data>
+	<data name="Title" xml:space="preserve">
+		<value>Titlu</value>
+	</data>
+	<data name="DisplayPopup" xml:space="preserve">
+		<value>Afişează Popup</value>
+	</data>
+	<data name="DeleteErrorInventoryItemUsedInEndOfDayRecord" xml:space="preserve">
+		<value>Nu se poate şterge din cauza capăt a documentului zi Cost conţine acest obiect de inventar.</value>
+	</data>
+	<data name="Rules" xml:space="preserve">
+		<value>Reguli</value>
+	</data>
+	<data name="Action" xml:space="preserve">
+		<value>Acţiune</value>
+	</data>
+	<data name="ActionList" xml:space="preserve">
+		<value>Lista de acţiune</value>
+	</data>
+	<data name="SelectActions" xml:space="preserve">
+		<value>Selectaţi Acţiuni</value>
+	</data>
+	<data name="TagValue" xml:space="preserve">
+		<value>Tag Valoare</value>
+	</data>
+	<data name="CustomerNote" xml:space="preserve">
+		<value>Notă client</value>
+	</data>
+	<data name="GiftTotal" xml:space="preserve">
+		<value>Cadou total</value>
+	</data>
+	<data name="UserLogin" xml:space="preserve">
+		<value>Login Utilizator</value>
+	</data>
+	<data name="UserLogout" xml:space="preserve">
+		<value>Ghid de utilizare Logout</value>
+	</data>
+	<data name="TicketCreated" xml:space="preserve">
+		<value>Creat de vânzare bilete</value>
+	</data>
+	<data name="TicketTagSelected" xml:space="preserve">
+		<value>Tag bilet selectate</value>
+	</data>
+	<data name="CustomerSelectedForTicket" xml:space="preserve">
+		<value>Clientul selectate pentru bilete</value>
+	</data>
+	<data name="TicketTotalChanged" xml:space="preserve">
+		<value>Total de bilete schimbat</value>
+	</data>
+	<data name="WorkPeriodStarted" xml:space="preserve">
+		<value>Perioada de lucru începute</value>
+	</data>
+	<data name="WorkPeriodEnded" xml:space="preserve">
+		<value>Perioada de muncă încheiat</value>
+	</data>
+	<data name="ExecuteActionsIf" xml:space="preserve">
+		<value>Starea</value>
+	</data>
+	<data name="ReportName" xml:space="preserve">
+		<value>Raport Nume</value>
+	</data>
+	<data name="FileName" xml:space="preserve">
+		<value>Numele fişierului</value>
+	</data>
+	<data name="DiscountPercentage" xml:space="preserve">
+		<value>Reducere procentuală</value>
+	</data>
+	<data name="TriggerName" xml:space="preserve">
+		<value>Trigger Nume</value>
+	</data>
+	<data name="Expression" xml:space="preserve">
+		<value>Expresie</value>
+	</data>
+	<data name="ExpressionBuilder" xml:space="preserve">
+		<value>Generatorul de expresii</value>
+	</data>
+	<data name="CommonSettings" xml:space="preserve">
+		<value>Setări comune</value>
+	</data>
+	<data name="Minute" xml:space="preserve">
+		<value>Minut</value>
+	</data>
+	<data name="Hour" xml:space="preserve">
+		<value>Oră</value>
+	</data>
+	<data name="Day" xml:space="preserve">
+		<value>Zi</value>
+	</data>
+	<data name="Month" xml:space="preserve">
+		<value>Lună</value>
+	</data>
+	<data name="Weekday" xml:space="preserve">
+		<value>Zi de lucru</value>
+	</data>
+	<data name="EveryMinute" xml:space="preserve">
+		<value>In fiecare minut</value>
+	</data>
+	<data name="Every5Minutes" xml:space="preserve">
+		<value>La fiecare 5 minute</value>
+	</data>
+	<data name="TwiceAnHour" xml:space="preserve">
+		<value>De două ori o oră</value>
+	</data>
+	<data name="OnceAnHour" xml:space="preserve">
+		<value>O dată pe oră</value>
+	</data>
+	<data name="TwiceADay" xml:space="preserve">
+		<value>Două ori pe zi</value>
+	</data>
+	<data name="OnceADay" xml:space="preserve">
+		<value>O dată pe zi</value>
+	</data>
+	<data name="OnceAWeek" xml:space="preserve">
+		<value>O dată pe săptămână</value>
+	</data>
+	<data name="FirstAndFifteenth" xml:space="preserve">
+		<value>1 şi 15</value>
+	</data>
+	<data name="OnceAMonth" xml:space="preserve">
+		<value>O dată pe lună</value>
+	</data>
+	<data name="OnceAYear" xml:space="preserve">
+		<value>O dată pe an</value>
+	</data>
+	<data name="EveryOtherMinute" xml:space="preserve">
+		<value>Fiecare Alte minute</value>
+	</data>
+	<data name="Every10Minutes" xml:space="preserve">
+		<value>La fiecare 10 minute</value>
+	</data>
+	<data name="Every15Minutes" xml:space="preserve">
+		<value>La fiecare 15 minute</value>
+	</data>
+	<data name="Every30Minutes" xml:space="preserve">
+		<value>Fiecare 30 de minute</value>
+	</data>
+	<data name="TopOfTheHour" xml:space="preserve">
+		<value>Începutul de oră</value>
+	</data>
+	<data name="QuarterPast" xml:space="preserve">
+		<value>Trimestrul trecut</value>
+	</data>
+	<data name="HalfPast" xml:space="preserve">
+		<value>Jumătate</value>
+	</data>
+	<data name="QuarterTil" xml:space="preserve">
+		<value>Trimestrul til</value>
+	</data>
+	<data name="EveryHour" xml:space="preserve">
+		<value>In fiecare ora</value>
+	</data>
+	<data name="EveryOtherHour" xml:space="preserve">
+		<value>Fiecare alte oră</value>
+	</data>
+	<data name="Every3Hours" xml:space="preserve">
+		<value>Fiecare 3 ore</value>
+	</data>
+	<data name="Every4Hours" xml:space="preserve">
+		<value>La fiecare 4 ore</value>
+	</data>
+	<data name="Every6Hours" xml:space="preserve">
+		<value>La fiecare 6 ore</value>
+	</data>
+	<data name="Every12Hours" xml:space="preserve">
+		<value>La fiecare 12 ore</value>
+	</data>
+	<data name="TwelveAmMidnight" xml:space="preserve">
+		<value>00 la miezul nopţii</value>
+	</data>
+	<data name="Noon" xml:space="preserve">
+		<value>amiază</value>
+	</data>
+	<data name="PM" xml:space="preserve">
+		<value>p.m.</value>
+	</data>
+	<data name="AM" xml:space="preserve">
+		<value>dimineaţa</value>
+	</data>
+	<data name="EveryDay" xml:space="preserve">
+		<value>În fiecare zi</value>
+	</data>
+	<data name="EveryOtherDay" xml:space="preserve">
+		<value>O dată la două zile</value>
+	</data>
+	<data name="EveryMonth" xml:space="preserve">
+		<value>În fiecare lună</value>
+	</data>
+	<data name="EveryOtherMonth" xml:space="preserve">
+		<value>In fiecare luna alte</value>
+	</data>
+	<data name="Every3Months" xml:space="preserve">
+		<value>La fiecare 3 luni</value>
+	</data>
+	<data name="Every6Months" xml:space="preserve">
+		<value>La fiecare 6 luni</value>
+	</data>
+	<data name="EveryWeekday" xml:space="preserve">
+		<value>În fiecare zi</value>
+	</data>
+	<data name="MonThruFri" xml:space="preserve">
+		<value>Luni prin Vineri</value>
+	</data>
+	<data name="SatAndSun" xml:space="preserve">
+		<value>Sambata si Duminica</value>
+	</data>
+	<data name="MonWedFri" xml:space="preserve">
+		<value>Luni, Miercuri, Vineri</value>
+	</data>
+	<data name="TuesAndThurs" xml:space="preserve">
+		<value>Marti, Joi</value>
+	</data>
+	<data name="Trigger" xml:space="preserve">
+		<value>Trigger</value>
+	</data>
+	<data name="Triggers" xml:space="preserve">
+		<value>Declanşările</value>
+	</data>
+	<data name="ExpressionValid" xml:space="preserve">
+		<value>Valabil exprimare</value>
+	</data>
+	<data name="ErrorInExpression" xml:space="preserve">
+		<value>Eroare la Expression</value>
+	</data>
+	<data name="TriggerTestResultMessage_f" xml:space="preserve">
+		<value>Înainte Trigger: {0}
+Va declanşa după {1} zile, {2} ore, {3} minute</value>
+	</data>
+	<data name="ThereIsAnotherPriceDefinition_f" xml:space="preserve">
+		<value>Nu există altă definiţie Pret cu tag-ul {0}</value>
+	</data>
+	<data name="PriceDefinition" xml:space="preserve">
+		<value>Preţ Definiţie</value>
+	</data>
+	<data name="PriceDefinitions" xml:space="preserve">
+		<value>Preţ Definiţii</value>
+	</data>
+	<data name="ClearFilter" xml:space="preserve">
+		<value>Clear filter</value>
+	</data>
+	<data name="From" xml:space="preserve">
+		<value>De la:</value>
+	</data>
+	<data name="To" xml:space="preserve">
+		<value>Pentru a:</value>
+	</data>
+	<data name="TipsTotal" xml:space="preserve">
+		<value>Sfaturi total</value>
+	</data>
+	<data name="TicketTipTotal" xml:space="preserve">
+		<value>Sfat total</value>
+	</data>
+	<data name="LinePriceTag" xml:space="preserve">
+		<value>Linia #: Tag Preţ</value>
+	</data>
+	<data name="TicketTipTotalAmount" xml:space="preserve">
+		<value>Sfat suma totală bilet de avion</value>
+	</data>
+	<data name="PriceTag" xml:space="preserve">
+		<value>Preţ Tag</value>
+	</data>
+	<data name="SaveErrorZeroOrNullInventoryLines" xml:space="preserve">
+		<value>Nu se poate salva, deoarece există linii cu obiecte de inventar goale sau zero cantitatea</value>
+	</data>
+	<data name="TriggerExecuted" xml:space="preserve">
+		<value>Executat de declanşare</value>
+	</data>
+	<data name="MessageReceived" xml:space="preserve">
+		<value>Mesaj primit</value>
+	</data>
+	<data name="MenuItemName" xml:space="preserve">
+		<value>Meniu Postul Nume</value>
+	</data>
+	<data name="PortionName" xml:space="preserve">
+		<value>Nume portii</value>
+	</data>
+	<data name="LinesGroupedByTag" xml:space="preserve">
+		<value>Linii Grupate după Tag</value>
+	</data>
+	<data name="SendEmail" xml:space="preserve">
+		<value>Trimite un email</value>
+	</data>
+	<data name="AddTicketDiscount" xml:space="preserve">
+		<value>Adaugă Discount de vânzare bilete</value>
+	</data>
+	<data name="AddTicketItem" xml:space="preserve">
+		<value>Adăugare element de vânzare bilete</value>
+	</data>
+	<data name="UpdateTicketTag" xml:space="preserve">
+		<value>Actualizare bilete Tag</value>
+	</data>
+	<data name="UpdatePriceTag" xml:space="preserve">
+		<value>Schimbarea Lista de preturi</value>
+	</data>
+	<data name="RefreshCache" xml:space="preserve">
+		<value>Reîmprospătare cache</value>
+	</data>
+	<data name="BroadcastMessage" xml:space="preserve">
+		<value>Broadcast Mesaj</value>
+	</data>
+	<data name="DisplayAppPath" xml:space="preserve">
+		<value>Afişează App Cale</value>
+	</data>
+	<data name="DisplayUserPath" xml:space="preserve">
+		<value>Afişează utilizatori Cale</value>
+	</data>
+	<data name="SaveReportToFile" xml:space="preserve">
+		<value>Salvaţi Raportează fişier</value>
+	</data>
+	<data name="PriceDefinitonName" xml:space="preserve">
+		<value>Preţ Definiton Nume</value>
+	</data>
+	<data name="Previous" xml:space="preserve">
+		<value>Precedent</value>
+	</data>
+	<data name="Next" xml:space="preserve">
+		<value>Următor</value>
+	</data>
+	<data name="AddTag" xml:space="preserve">
+		<value>Adaugă Tag</value>
+	</data>
+	<data name="Delete_ab" xml:space="preserve">
+		<value>Del</value>
+	</data>
+	<data name="Divide_ab" xml:space="preserve">
+		<value>Div</value>
+	</data>
+	<data name="Print_ab" xml:space="preserve">
+		<value>PRN</value>
+	</data>
+	<data name="TicketMovedRetryLastOperation_f" xml:space="preserve">
+		<value>Bilet de avion sa mutat la {0}. Ultimele modificări nu au fost salvate.</value>
+	</data>
+	<data name="TicketPaidChangesNotSaved" xml:space="preserve">
+		<value>Bilet plătit. Ultimele modificări nu au fost salvate.</value>
+	</data>
+	<data name="TicketChangedRetryLastOperation" xml:space="preserve">
+		<value>Bilet de schimbat. Ultimele modificări nu au fost salvate.</value>
+	</data>
+	<data name="TicketPaidLastChangesNotSaved" xml:space="preserve">
+		<value>Biletului plătit. Ultimele modificări nu au fost salvate.</value>
+	</data>
+	<data name="TableChangedRetryLastOperation_f" xml:space="preserve">
+		<value>{0} tabel actualizat. Ultimele modificări nu au fost salvate.</value>
+	</data>
+	<data name="NewLiabilityTransaction" xml:space="preserve">
+		<value>Noi de credit Transaction</value>
+	</data>
+	<data name="NewReceivableTransaction" xml:space="preserve">
+		<value>Noi de debit tranzacţiei</value>
+	</data>
+	<data name="AddLiability_r" xml:space="preserve">
+		<value>Credit</value>
+	</data>
+	<data name="AddReceivable_r" xml:space="preserve">
+		<value>Debit</value>
+	</data>
+	<data name="VoidTicketItems" xml:space="preserve">
+		<value>Bilete Void Articole</value>
+	</data>
+	<data name="SaveErrorMultipleDefaultTerminals" xml:space="preserve">
+		<value>Nu creaţi mai mult de un singur terminal implicit</value>
+	</data>
+	<data name="AllDiscountsRemoved" xml:space="preserve">
+		<value>Toate reduceri eliminat, deoarece suma calculată discount total este mai mare decât valoarea biletului.</value>
+	</data>
+	<data name="WeightBarcodeItemIdFormat" xml:space="preserve">
+		<value>Id-ul de coduri de bare Postul Greutate Format</value>
+	</data>
+	<data name="SettingCheck" xml:space="preserve">
+		<value>Verificaţi setarea</value>
+	</data>
+	<data name="UpdateProgramSetting" xml:space="preserve">
+		<value>Actualizare a programului Setarea</value>
+	</data>
+	<data name="CashPermissions" xml:space="preserve">
+		<value>Cash Permisiuni</value>
+	</data>
+	<data name="CanMakeCashTransaction" xml:space="preserve">
+		<value>Pot face tranzactii cu numerar</value>
+	</data>
+	<data name="CanMakeCreditOrDeptTransaction" xml:space="preserve">
+		<value>Poate face tranzacţii de credit sau de debit</value>
+	</data>
+	<data name="CanMakeAccountTransaction" xml:space="preserve">
+		<value>Poate face tranzacţie cont</value>
+	</data>
+	<data name="SubButtonHeight" xml:space="preserve">
+		<value>Sub buton Înălţime</value>
+	</data>
+	<data name="MaxItems" xml:space="preserve">
+		<value>Max Articole</value>
+	</data>
+	<data name="SortType" xml:space="preserve">
+		<value>După Tip</value>
+	</data>
+	<data name="DeleteErrorProductUsedInMenuItemProperty" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece acest produs alocate într-o proprietate element de meniu</value>
+	</data>
+	<data name="VatTemplates" xml:space="preserve">
+		<value>Brut Şabloane</value>
+	</data>
+	<data name="VatTemplate" xml:space="preserve">
+		<value>Brut şablon</value>
+	</data>
+	<data name="VatTemplateName" xml:space="preserve">
+		<value>Brut Nume şablon</value>
+	</data>
+	<data name="Rate" xml:space="preserve">
+		<value>Rată</value>
+	</data>
+	<data name="VatIncludedToPrice" xml:space="preserve">
+		<value>Brut Inclus Pret</value>
+	</data>
+	<data name="Vat" xml:space="preserve">
+		<value>Impozit</value>
+	</data>
+	<data name="VatTotal" xml:space="preserve">
+		<value>Brut total</value>
+	</data>
+	<data name="UpdateTicketVat" xml:space="preserve">
+		<value>Actualizare bilete Brut</value>
+	</data>
+	<data name="One" xml:space="preserve">
+		<value>Unul</value>
+	</data>
+	<data name="Two" xml:space="preserve">
+		<value>Două</value>
+	</data>
+	<data name="Three" xml:space="preserve">
+		<value>Trei</value>
+	</data>
+	<data name="Four" xml:space="preserve">
+		<value>Patru</value>
+	</data>
+	<data name="Five" xml:space="preserve">
+		<value>Cinci</value>
+	</data>
+	<data name="Six" xml:space="preserve">
+		<value>Şase</value>
+	</data>
+	<data name="Seven" xml:space="preserve">
+		<value>Şapte</value>
+	</data>
+	<data name="Eight" xml:space="preserve">
+		<value>Opt</value>
+	</data>
+	<data name="Nine" xml:space="preserve">
+		<value>Nouă</value>
+	</data>
+	<data name="Nineteen" xml:space="preserve">
+		<value>Nouăsprezece</value>
+	</data>
+	<data name="Eighteen" xml:space="preserve">
+		<value>Optsprezece</value>
+	</data>
+	<data name="Seventeen" xml:space="preserve">
+		<value>Şaptesprezece</value>
+	</data>
+	<data name="Sixteen" xml:space="preserve">
+		<value>Şaisprezece</value>
+	</data>
+	<data name="Fifteen" xml:space="preserve">
+		<value>Cincisprezece</value>
+	</data>
+	<data name="Fourteen" xml:space="preserve">
+		<value>Paisprezece</value>
+	</data>
+	<data name="Thirteen" xml:space="preserve">
+		<value>Treisprezece</value>
+	</data>
+	<data name="Twelve" xml:space="preserve">
+		<value>Doisprezece</value>
+	</data>
+	<data name="Eleven" xml:space="preserve">
+		<value>Unsprezece</value>
+	</data>
+	<data name="Ten" xml:space="preserve">
+		<value>Zece</value>
+	</data>
+	<data name="Twenty" xml:space="preserve">
+		<value>Douăzeci</value>
+	</data>
+	<data name="Thirty" xml:space="preserve">
+		<value>Treizeci</value>
+	</data>
+	<data name="Forty" xml:space="preserve">
+		<value>Patruzeci</value>
+	</data>
+	<data name="Fifty" xml:space="preserve">
+		<value>Cincizeci</value>
+	</data>
+	<data name="Sixty" xml:space="preserve">
+		<value>Şaizeci</value>
+	</data>
+	<data name="Seventy" xml:space="preserve">
+		<value>Şaptezeci</value>
+	</data>
+	<data name="Eighty" xml:space="preserve">
+		<value>Optzeci</value>
+	</data>
+	<data name="Ninety" xml:space="preserve">
+		<value>Nouăzeci</value>
+	</data>
+	<data name="Thousand" xml:space="preserve">
+		<value>Bin</value>
+	</data>
+	<data name="Million" xml:space="preserve">
+		<value>Milion</value>
+	</data>
+	<data name="Billion" xml:space="preserve">
+		<value>Miliard</value>
+	</data>
+	<data name="Hundred" xml:space="preserve">
+		<value>Sută</value>
+	</data>
+	<data name="Zero" xml:space="preserve">
+		<value>Zero</value>
+	</data>
+	<data name="Negative" xml:space="preserve">
+		<value>Negativ</value>
+	</data>
+	<data name="Dollar" xml:space="preserve">
+		<value>Dolar</value>
+	</data>
+	<data name="Cent" xml:space="preserve">
+		<value>Cent</value>
+	</data>
+	<data name="PluralCurrencySuffix" xml:space="preserve">
+		<value>s</value>
+	</data>
+	<data name="OneHundred" xml:space="preserve">
+		<value>One Hundred</value>
+	</data>
+	<data name="OneThousand" xml:space="preserve">
+		<value>O mie de</value>
+	</data>
+	<data name="AlwaysExcludeVat" xml:space="preserve">
+		<value>Excludeţi întotdeauna FISCAL</value>
+	</data>
+	<data name="RoundingTotal" xml:space="preserve">
+		<value>Rotunjire total</value>
+	</data>
+	<data name="TaxServiceTemplates" xml:space="preserve">
+		<value>Serviciul Şabloane</value>
+	</data>
+	<data name="ChooseTaxServicesForDepartmentHint_f" xml:space="preserve">
+		<value>Selectaţi fiscale sau servicii pentru utilizarea la {0} departament.</value>
+	</data>
+	<data name="TaxServiceTemplate" xml:space="preserve">
+		<value>Serviciul şablon</value>
+	</data>
+	<data name="TaxServiceTotal" xml:space="preserve">
+		<value>Total servicii</value>
+	</data>
+	<data name="CalculationMethod" xml:space="preserve">
+		<value>Metoda de calcul</value>
+	</data>
+	<data name="RateOrAmount" xml:space="preserve">
+		<value>Rată sau o sumă</value>
+	</data>
+	<data name="RateFromTicketAmount" xml:space="preserve">
+		<value>Tarif de la suma de bilete</value>
+	</data>
+	<data name="RateFromPreviousTemplate" xml:space="preserve">
+		<value>Tarif de la suma şablon anterioare</value>
+	</data>
+	<data name="FixedAmount" xml:space="preserve">
+		<value>Suma fixă</value>
+	</data>
+	<data name="RateFromVatIncludedTicketAmount" xml:space="preserve">
+		<value>Tarif de la TAXA suma sunt incluse bilet de avion</value>
+	</data>
+	<data name="UnhandledExceptionErrorMessage" xml:space="preserve">
+		<value>SambaPOS întâmpinat o problemă neaşteptată. Detalii problemă conectat la trace.log fişier</value>
+	</data>
+	<data name="SaveFreeTags" xml:space="preserve">
+		<value>Salvaţi Tag-uri gratuite</value>
+	</data>
+	<data name="RegenerateTicketVat" xml:space="preserve">
+		<value>Regenerare TAXA de vânzare bilete</value>
+	</data>
+	<data name="UpdateTicketTaxService" xml:space="preserve">
+		<value>Actualizaţi Brut bilete sau Serviciul</value>
+	</data>
+	<data name="Included" xml:space="preserve">
+		<value>Inclus</value>
+	</data>
+	<data name="Excluded" xml:space="preserve">
+		<value>Exclus</value>
+	</data>
+	<data name="EmptyDiscountRateFeedback" xml:space="preserve">
+		<value>Pentru a adăuga reduceri, tastaţi o rată de discount şi faceţi clic pe butonul. Pentru a elimina faceţi clic pe butonul cu discount cu discount fără a tasta o valoare.</value>
+	</data>
+	<data name="TicketSubTotal" xml:space="preserve">
+		<value>Sub bilet total</value>
+	</data>
+	<data name="VatTotalsGroupedByVatTemplate" xml:space="preserve">
+		<value>Totaluri grupate în funcţie de şablon Brut</value>
+	</data>
+	<data name="TaxTotal" xml:space="preserve">
+		<value>Brut total</value>
+	</data>
+	<data name="TaxTotalsGroupedByTaxTemplate" xml:space="preserve">
+		<value>Totaluri grupate în funcţie de şablon Serviciul</value>
+	</data>
+	<data name="TextWrittenTotalValue" xml:space="preserve">
+		<value>Text scris valoare totală</value>
+	</data>
+	<data name="TicketLocationChanged" xml:space="preserve">
+		<value>Locul de amplasare bilet de schimbat</value>
+	</data>
+	<data name="UpdateTicketAccount" xml:space="preserve">
+		<value>Actualizare bilete de cont</value>
+	</data>
+	<data name="SaveErrorSelectDefaultDepartment" xml:space="preserve">
+		<value>Vă rugăm să selectaţi un departament implicit</value>
+	</data>
+	<data name="Copy" xml:space="preserve">
+		<value>Copie</value>
+	</data>
+	<data name="Send" xml:space="preserve">
+		<value>Trimite</value>
+	</data>
+	<data name="ErrorReportWithoutFeedback" xml:space="preserve">
+		<value>Sunteţi trimitere raport de eroare, fără feedback-ul dumneavoastră.
+Vă rugăm să oferiţi câteva detalii despre cum sa intamplat.
+
+Deplasare fără a se adăuga detalii?</value>
+	</data>
+	<data name="SambaPOSReporter" xml:space="preserve">
+		<value>Reporter SambaPOS</value>
+	</data>
+	<data name="ErrorMessage" xml:space="preserve">
+		<value>Mesaj de eroare</value>
+	</data>
+	<data name="PleaseEnterABriefExplanationOf" xml:space="preserve">
+		<value>Vă rugăm să introduceţi o scurtă explicaţie a evenimentelor care au condus până la această excepţie</value>
+	</data>
+	<data name="DetailedReport" xml:space="preserve">
+		<value>Raport detaliat</value>
+	</data>
+	<data name="Modifier" xml:space="preserve">
+		<value>Modifier</value>
+	</data>
+	<data name="ModifierGroup" xml:space="preserve">
+		<value>Grupul Modifier</value>
+	</data>
+	<data name="ModifierGroupName" xml:space="preserve">
+		<value>Nume Grupa Modifier</value>
+	</data>
+	<data name="ModifierGroups" xml:space="preserve">
+		<value>Modifier grupuri</value>
+	</data>
+	<data name="Modifiers" xml:space="preserve">
+		<value>Modificatori</value>
+	</data>
+	<data name="APortionShouldSelected" xml:space="preserve">
+		<value>O parte ar trebui să selectat</value>
+	</data>
+	<data name="ThereIsAnotherRecipeFor_f" xml:space="preserve">
+		<value>Există o altă reţetă pentru {0}</value>
+	</data>
+	<data name="DeleteErrorPrinterAssignedToTerminal" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece această imprimantă alocate la un terminal</value>
+	</data>
+	<data name="DeleteErrorPrinterAssignedToPrinterMap" xml:space="preserve">
+		<value>Nu se poate şterge, deoarece această imprimantă atribuit unei lucrări de imprimare</value>
+	</data>
+	<data name="PriceTags" xml:space="preserve">
+		<value>Preţ Etichetarea</value>
+	</data>
+	<data name="AlphaNumeric" xml:space="preserve">
+		<value>Alfanumeric</value>
+	</data>
+	<data name="Numeric" xml:space="preserve">
+		<value>Numeric</value>
+	</data>
+	<data name="TagType" xml:space="preserve">
+		<value>Tag Tip</value>
+	</data>
+	<data name="PaymentReceived" xml:space="preserve">
+		<value>Plată primită</value>
+	</data>
+	<data name="ExecutePrintJob" xml:space="preserve">
+		<value>Executare de muncă de imprimare</value>
+	</data>
+	<data name="LineCount" xml:space="preserve">
+		<value>Linia Count</value>
+	</data>
+	<data name="PrintingErrorMessage_f" xml:space="preserve">
+		<value>Există o problemă în timpul imprimării. Vă rugăm să imprimantei revizuire şi setările şablonului imprimantei.
+
+Mesaj de eroare:
+{0}</value>
+	</data>
+	<data name="DocumentDate_f" xml:space="preserve">
+		<value>Data: {0:d}</value>
+	</data>
+	<data name="DocumentTime_f" xml:space="preserve">
+		<value>Ora: {0:t}</value>
+	</data>
+	<data name="LastLinesByPrinterLineCount" xml:space="preserve">
+		<value>Linii noi de contele Linie pentru imprimare</value>
+	</data>
+	<data name="LineAddedToTicket" xml:space="preserve">
+		<value>Adăugat la linia de vânzare bilete</value>
+	</data>
+	<data name="LineItemProductTag" xml:space="preserve">
+		<value>Linia #: Tag produs</value>
+	</data>
+	<data name="ChangeAmountUpdated" xml:space="preserve">
+		<value>Suma Schimbarea Actualizat în</value>
+	</data>
+	<data name="TicketClosed" xml:space="preserve">
+		<value>Bilete închisă</value>
+	</data>
+	<data name="ApplicationStarted" xml:space="preserve">
+		<value>Aplicaţie începute</value>
+	</data>
+	<data name="LastPaidLines" xml:space="preserve">
+		<value>Ultima Lines Plătit</value>
+	</data>
+	<data name="PortionSelected" xml:space="preserve">
+		<value>Portii selectate</value>
+	</data>
+	<data name="ModifierSelected" xml:space="preserve">
+		<value>ModifierSelected</value>
+	</data>
+	<data name="Big" xml:space="preserve">
+		<value>Mare</value>
+	</data>
+	<data name="None" xml:space="preserve">
+		<value>Nici unul</value>
+	</data>
+	<data name="Small" xml:space="preserve">
+		<value>Mic</value>
+	</data>
+	<data name="GiftLastTicketItem" xml:space="preserve">
+		<value>Ultimele bilete cadou Postul</value>
+	</data>
+	<data name="Other" xml:space="preserve">
+		<value>Alte</value>
+	</data>
+	<data name="PhoneNumberInputMask" xml:space="preserve">
+		<value>Numărul de telefon de intrare Mask</value>
+	</data>
+	<data name="Increase" xml:space="preserve">
+		<value>Creştere</value>
+	</data>
+	<data name="Decrease" xml:space="preserve">
+		<value>Scădere</value>
+	</data>
+	<data name="SettingName" xml:space="preserve">
+		<value>Setarea Nume</value>
+	</data>
+	<data name="SettingValue" xml:space="preserve">
+		<value>Setarea Valoare</value>
+	</data>
+	<data name="UpdateType" xml:space="preserve">
+		<value>Actualizare Tip</value>
+	</data>
+	<data name="Command" xml:space="preserve">
+		<value>Comandă</value>
+	</data>
+	<data name="RoleName" xml:space="preserve">
+		<value>Rolul Nume</value>
+	</data>
+	<data name="OldLocation" xml:space="preserve">
+		<value>Vechi Locul de amplasare</value>
+	</data>
+	<data name="NewLocation" xml:space="preserve">
+		<value>Locul de amplasare nouă</value>
+	</data>
+	<data name="NumericValue" xml:space="preserve">
+		<value>Valoare numerică</value>
+	</data>
+	<data name="CustomerGroupCode" xml:space="preserve">
+		<value>Clienţi grupul Cod</value>
+	</data>
+	<data name="CustomerId" xml:space="preserve">
+		<value>ID-ul clientului</value>
+	</data>
+	<data name="PaymentType" xml:space="preserve">
+		<value>Tip de plată</value>
+	</data>
+	<data name="ImageOnly" xml:space="preserve">
+		<value>Imagine Numai</value>
+	</data>
+	<data name="UpdateLastTicketItemPriceTag" xml:space="preserve">
+		<value>Ultima actualizare Preţ de vânzare bilete Postul Tag</value>
+	</data>
+	<data name="TicketLineCancelled" xml:space="preserve">
+		<value>Linie de vânzare bilete anulate</value>
+	</data>
+	<data name="MS_Connected" xml:space="preserve">
+		<value>Conectat.</value>
+	</data>
+	<data name="MS_Disconnected" xml:space="preserve">
+		<value>Deconectat.</value>
+	</data>
+	<data name="RemoveLastModifier" xml:space="preserve">
+		<value>Eliminaţi Modifier Ultima</value>
+	</data>
+	<data name="ForPrintingTicketTagValue" xml:space="preserve">
+		<value>Pentru imprimare valoarea de vânzare bilete Tag X</value>
+	</data>
+	<data name="ForPrintingAppSettingValue" xml:space="preserve">
+		<value>Pentru aplicaţii de imprimare X Setarea valoare</value>
+	</data>
+	<data name="ForceClosingActiveWorkPeriod" xml:space="preserve">
+		<value>Perioada de închidere Forţei de Muncă activă</value>
+	</data>
+	<data name="RequestShutdown" xml:space="preserve">
+		<value>Solicit Shutdown</value>
+	</data>
+	<data name="ActiveConnections_f" xml:space="preserve">
+		<value>{0} conexiunile active</value>
+	</data>
+	<data name="Checking" xml:space="preserve">
+		<value>Verificarea ...</value>
+	</data>
+	<data name="TotalPropertyCount" xml:space="preserve">
+		<value>Total Modifier numar</value>
+	</data>
+	<data name="TotalModifierQuantity" xml:space="preserve">
+		<value>Grupul Total Cantitate</value>
+	</data>
+	<data name="TotalModifierPrice" xml:space="preserve">
+		<value>Grupul Total Preţ</value>
+	</data>
+	<data name="ExecuteTicketOperation" xml:space="preserve">
+		<value>Executare operaţiei de vânzare bilete</value>
+	</data>
+	<data name="RemoveModifier" xml:space="preserve">
+		<value>Eliminaţi Modificator</value>
+	</data>
+</root>

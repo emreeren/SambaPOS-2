@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Samba.Modules.SettingsModule.ProgramSettingsView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Common="clr-namespace:Samba.Presentation.Common;assembly=Samba.Presentation.Common"
+     mc:Ignorable="d" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="{LocText TicketOptions}" HorizontalAlignment="Left" MinWidth="300">
+                <StackPanel Margin="5">
+                    <Label>
+                        <LocText ResourceIdentifierKey="AutoRounding" Suffix=":" />
+                    </Label>
+                    <Common:FilteredTextBox Type="Number" HorizontalAlignment="Left" Width="50" Text="{Binding AutoRoundDiscount}" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="{LocText WeightBarcodes}" HorizontalAlignment="Left" MinWidth="300">
+                <StackPanel Margin="5">
+                    <Label>
+                        <LocText ResourceIdentifierKey="WeightBarcodePefix" Suffix=":" />
+                    </Label>
+                    <Common:FilteredTextBox Type="Digits" HorizontalAlignment="Left" Width="50" Text="{Binding WeightBarcodePrefix}" />
+                    <Label>
+                        <LocText ResourceIdentifierKey="WeightBarcodeItemIdLength" Suffix=":" />
+                    </Label>
+                    <Common:FilteredTextBox Type="Digits" HorizontalAlignment="Left" Width="50" Text="{Binding WeightBarcodeItemLength}" />
+                    <Label>
+                        <LocText ResourceIdentifierKey="WeightBarcodeItemIdFormat" Suffix=":"/>
+                    </Label>
+                    <TextBox HorizontalAlignment="Left" Width="50" Text="{Binding WeightBarcodeItemFormat}" />
+                    <Label>
+                        <LocText ResourceIdentifierKey="WeightBarcodeQuantityLength" Suffix=":" />
+                    </Label>
+                    <Common:FilteredTextBox Type="Digits" HorizontalAlignment="Left" Width="50" Text="{Binding WeightBarcodeQuantityLength}" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="{LocText Other}" HorizontalAlignment="Left" MinWidth="300">
+                <StackPanel Margin="5">
+                    <Label>
+                        <LocText ResourceIdentifierKey="PhoneNumberInputMask" Suffix=":" />
+                    </Label>
+                    <TextBox HorizontalAlignment="Left" MinWidth="100" Text="{Binding PhoneNumberInputMask}" />
+                </StackPanel>
+            </GroupBox>
+            <Button HorizontalAlignment="Left" Margin="0,10" MinWidth="70" Content="{Binding SaveCommand.Caption}"
+                 Command="{Binding SaveCommand}" />
+            <Label Content="{Binding Error}" Foreground="Red" />
+        </StackPanel>
+    </Grid>
+</UserControl>
