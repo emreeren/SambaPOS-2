@@ -284,6 +284,9 @@ namespace Samba.Modules.TicketModule
                     SelectedItem.RemoveProperty(mig, obj);
             }
             else SelectedItem.ToggleProperty(mig, obj);
+            
+           
+           
             SelectedTicket.RefreshVisuals();
             SelectedTicket.RecalculateTicket();
             if (_removeModifier)
@@ -302,6 +305,7 @@ namespace Samba.Modules.TicketModule
             {
                 SelectedItem.ToggleProperty(obj.MenuItemPropertyGroup, obj.NextProperty);
                 obj.UpdateNextProperty(obj.NextProperty);
+                
             }
             SelectedTicket.RefreshVisuals();
             SelectedTicket.RecalculateTicket();
@@ -337,7 +341,8 @@ namespace Samba.Modules.TicketModule
                 if (SelectedItem.Model.PortionCount > 1) SelectedItemPortions.AddRange(mi.Portions);
                 SelectedItemPropertyGroups.AddRange(mi.PropertyGroups.Where(x => string.IsNullOrEmpty(x.GroupTag)));
 
-                SelectedItemGroupedPropertyItems.AddRange(mi.PropertyGroups.Where(x => !string.IsNullOrEmpty(x.GroupTag) && x.Properties.Count > 1)
+                SelectedItemGroupedPropertyItems.AddRange(mi.PropertyGroups.Where(x => !string.IsNullOrEmpty(x.GroupTag) &&
+                     x.Properties.Count > 1)
                     .GroupBy(x => x.GroupTag)
                     .Select(x => new MenuItemGroupedPropertyViewModel(SelectedItem, x)));
                 RaisePropertyChanged("IsPortionsVisible");

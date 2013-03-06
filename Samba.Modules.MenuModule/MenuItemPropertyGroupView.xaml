@@ -31,7 +31,7 @@
             <TextBox HorizontalAlignment="Left" MinWidth="100" Text="{Binding GroupTag,Mode=TwoWay}" />
             <GroupBox Header="{LocText POSView}" Padding="5"
                  HorizontalAlignment="Left" Margin="0,5,0,0">
-                <UniformGrid HorizontalAlignment="Left">
+                <UniformGrid HorizontalAlignment="Left" Rows="3">
                     <Label>
                         <LocText ResourceIdentifierKey="ColumnCount" Suffix=":"/>
                     </Label>
@@ -44,6 +44,11 @@
                     <Common:FilteredTextBox Type="Digits" Margin="0,0,0,2" HorizontalAlignment="Left"
                          MinWidth="50" Text="{Binding ButtonHeight}">
                     </Common:FilteredTextBox>
+                    
+                    <Label>
+                        <LocText ResourceIdentifierKey="ButtonColor" Suffix=":"/>
+                    </Label>
+                    <Common:FilteredTextBox HorizontalAlignment="Left" MinWidth="50" Margin="0,0,0,2"  Text="{Binding ButtonColor,Mode=TwoWay}" />
                 </UniformGrid>
             </GroupBox>
             <GroupBox Header="{LocText TerminalView}" Padding="5"

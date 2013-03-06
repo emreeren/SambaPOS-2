@@ -20,7 +20,7 @@ namespace Samba.Modules.BasicReports.Reports.InventoryReports
         protected override FlowDocument GetReport()
         {
             var report = new SimpleReport("8cm");
-            report.AddHeader("DQ POS");
+            report.AddHeader("Samba POS");
             report.AddHeader(Resources.InventoryReport);
             report.AddHeader(string.Format(Resources.As_f, DateTime.Now));
 

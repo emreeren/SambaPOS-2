@@ -11,6 +11,7 @@ namespace Samba.Presentation.ViewModels
         public IEnumerable<MenuItemGroupedPropertyItemViewModel> Properties { get; set; }
         public int ColumnCount { get; set; }
         public int ButtonHeight { get; set; }
+        public string ButtonColor { get; set; }
         public int TerminalColumnCount { get; set; }
         public int TerminalButtonHeight { get; set; }
 
@@ -20,6 +21,7 @@ namespace Samba.Presentation.ViewModels
             Properties = menuItemPropertyGroups.Select(x => new MenuItemGroupedPropertyItemViewModel(selectedItem, x)).ToList();
             ColumnCount = menuItemPropertyGroups.First().ColumnCount;
             ButtonHeight = menuItemPropertyGroups.First().ButtonHeight;
+            ButtonColor = menuItemPropertyGroups.First().ButtonColor;
             TerminalButtonHeight = menuItemPropertyGroups.First().TerminalButtonHeight;
             TerminalColumnCount = menuItemPropertyGroups.First().TerminalColumnCount;
         }

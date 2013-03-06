@@ -7,7 +7,7 @@
         xmlns:Common="clr-namespace:Samba.Presentation.Common;assembly=Samba.Presentation.Common" 
         xmlns:Presentation="clr-namespace:Samba.Presentation" 
         xmlns:Services="clr-namespace:Samba.Presentation.Common.Services;assembly=Samba.Presentation.Common" 
-        Title="DQ POS" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
+        Title="Samba POS" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
         WindowState="Normal" SnapsToDevicePixels="True" Height="600" Width="800" Closing="WindowClosing" 
         Loaded="WindowLoaded" Icon="/Samba.Presentation;component/apple.ico">
 

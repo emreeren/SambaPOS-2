@@ -27,7 +27,7 @@ namespace Samba.Login
             set { LocalSettings.LogoPath = value; }
         }
 
-        public string AppLabel { get { return "DQ POS " + LocalSettings.AppVersion + " - " + GetDatabaseLabel(); } }
+        public string AppLabel { get { return "Samba POS " + LocalSettings.AppVersion + " - " + GetDatabaseLabel(); } }
         public string AdminPasswordHint { get { return GetAdminPasswordHint(); } }
         public string SqlHint { get { return GetSqlHint(); } }
         public bool IsExitButtonVisible { get { return !AppServices.CurrentTerminal.HideExitButton; } }
