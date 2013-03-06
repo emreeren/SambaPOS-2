@@ -77,7 +77,7 @@ namespace Samba.Modules.BasicReports.Reports.AccountReport
         public FlowDocument CreateReport(string reportHeader, bool? returnReceivables, bool selectInternalAccounts)
         {
             var report = new SimpleReport("8cm");
-            report.AddHeader("Samba POS");
+            report.AddHeader("DQ POS");
             report.AddHeader(reportHeader);
             report.AddHeader(string.Format(Resources.As_f, DateTime.Now));
 

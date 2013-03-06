@@ -3,10 +3,12 @@
      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Common="clr-namespace:Samba.Presentation.Common;assembly=Samba.Presentation.Common" mc:Ignorable="d" d:DesignHeight="300"
      d:DesignWidth="300">
     <Grid>
+        
         <StackPanel>
             <Label Content="{LocText UserName, Suffix=':'}" />
             <TextBox HorizontalAlignment="Left" MinWidth="200" Text="{Binding Name,ValidatesOnDataErrors=True}">
             </TextBox>
+           
             <Label Content="{LocText PinCode, Suffix=':'}" />
             <Common:FilteredTextBox Name="PasswordTextBox" Type="Digits" HorizontalAlignment="Left" Text="{Binding PinCode,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText UserRole, Suffix=':'}" />
@@ -18,6 +20,17 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+           
+            <Label Content="{LocText ContactPhone, Suffix=':'}" />
+            <Common:FilteredTextBox Name="Phone"  HorizontalAlignment="Left" Text="{Binding Phone,Mode=TwoWay}" MinWidth="100" />
+            <Label Content="{LocText ContactPhone, Suffix=':'}" />
+            <!--
+            <Common:FilteredTextBox Name="EmergencyPhone" HorizontalAlignment="Left" Text="{Binding EmergencyPhone,Mode=TwoWay}" MinWidth="100" />
+            <Label Content="{LocText DateOfBirth, Suffix=':'}" />
+            <Common:FilteredTextBox Name="DateOfBirth"  HorizontalAlignment="Left" Text="{Binding DOB,Mode=TwoWay}" MinWidth="100" />
+            <Label Content="{LocText Address, Suffix=':'}" />
+            <Common:FilteredTextBox Name="Address"  HorizontalAlignment="Left" Text="{Binding Address,Mode=TwoWay}" MinWidth="150" />
+           -->
             <Button HorizontalAlignment="Left" Margin="0,10" MinWidth="70" Content="{Binding SaveCommand.Caption}"
                  Command="{Binding SaveCommand}" />
             <Label Content="{Binding Error}" Foreground="Red" />

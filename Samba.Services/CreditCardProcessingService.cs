@@ -12,19 +12,32 @@ namespace Samba.Services
     {
         PreAuth,
         Force,
-        Cancel
+        Cancel,
+        Swipe
     }
 
     public class CreditCardProcessingResult
     {
         public ProcessType ProcessType { get; set; }
         public decimal Amount { get; set; }
+        public string CardTxResponse { get; set; }
     }
 
     public class CreditCardProcessingData
     {
         public Ticket Ticket { get; set; }
         public decimal TenderedAmount { get; set; }
+       
+       
+
+    }
+
+    public class CreditCardTrackData
+    {
+        public string CardName { get; set; }
+        public string CardExpiry { get; set; }
+        public string CardNumber { get; set; }
+        public string CardType { get; set; }
     }
 
     public interface ICreditCardProcessor
@@ -33,6 +46,7 @@ namespace Samba.Services
         void EditSettings();
         void Process(CreditCardProcessingData creditCardProcessingData);
         bool ForcePayment(int ticketId);
+        
     }
 
     public static class CreditCardProcessingService
@@ -72,5 +86,7 @@ namespace Samba.Services
         {
             return (CanProcessCreditCards && GetDefaultProcessor().ForcePayment(ticketId));
         }
+
+      
     }
 }

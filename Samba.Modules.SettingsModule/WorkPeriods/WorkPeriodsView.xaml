@@ -42,7 +42,8 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
+                    <!-- RowDefinition Height="auto" / -->
+                  
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <TextBlock Text="{LocText Description}" />
@@ -58,11 +59,12 @@
                                 <TextBlock Margin="5" Text="{LocText CreditCard}" />
                                 <TextBlock Margin="5" Text="{LocText Voucher}" />
                                 <Common:FilteredTextBox MinWidth="150" Margin="5" Text="{Binding CashAmount,StringFormat='{}{0:#,##.##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
-                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" IsEnabled="True"/>
                                 <Common:FilteredTextBox MinWidth="150" Margin="5" Text="{Binding CreditCardAmount,StringFormat='{}{0:#,##.##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
-                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" IsEnabled="True"/>
                                 <Common:FilteredTextBox MinWidth="150" Margin="5" Text="{Binding TicketAmount,StringFormat='{}{0:#,##.##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
-                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" IsEnabled="True"/>
+
                             </UniformGrid>
                         </GroupBox>
                         <StackPanel Grid.Column="1" Margin="0,10,0,0">
@@ -72,11 +74,154 @@
                                  Content="{Binding CancelCommand.Caption}" />
                         </StackPanel>
                     </Grid>
+                    <!--Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Header="{LocText CashContentDetails}">
+                            <UniformGrid Rows="2" HorizontalAlignment="Left">
+                                <TextBlock Margin="7" Text="{LocText Bill_100}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_20}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_10}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_5}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_2}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_1}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_25}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_10}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_5}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_2}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_1}" />
+
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+
+                            </UniformGrid>
+                        </GroupBox>
+                    </Grid>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Header="{LocText CreditContentDetails}">
+                            <UniformGrid Rows="2" HorizontalAlignment="Left">
+
+                                <TextBlock Margin="7" Text="{LocText Bill_100}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_20}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_10}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_5}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_2}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_1}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_25}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_10}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_5}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_2}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_1}" />
+
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+
+                            </UniformGrid>
+                        </GroupBox>
+                    </Grid>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <GroupBox Grid.Column="0" HorizontalAlignment="Left" Header="{LocText VoucherContentDetails}">
+                            <UniformGrid Rows="2" HorizontalAlignment="Left">
+
+                                <TextBlock Margin="7" Text="{LocText Bill_100}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_20}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_10}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_5}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_2}" />
+                                <TextBlock Margin="7" Text="{LocText Bill_1}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_25}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_10}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_5}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_2}" />
+                                <TextBlock Margin="7" Text="{LocText Cent_1}" />
+
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7" Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+                                <Common:FilteredTextBox MinWidth="45" Margin="7"  Text="{Binding CashAmount,StringFormat='{}{0:#,##}',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}"
+                                     Type="Number" HorizontalAlignment="Left" TextAlignment="Right" />
+
+                            </UniformGrid>
+                        </GroupBox>
+
+                    </Grid-->
                 </StackPanel>
                 <Viewbox Grid.Row="1">
-                    <VirtualKeyboard:KeyboardView>
-                    </VirtualKeyboard:KeyboardView>
+                    <VirtualKeyboard:KeyboardView2>
+                    </VirtualKeyboard:KeyboardView2>
                 </Viewbox>
+                    
             </Grid>
             <Grid>
                 <Grid.RowDefinitions>

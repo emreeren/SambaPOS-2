@@ -23,5 +23,10 @@ namespace Samba.Presentation.Common.Interaction
         {
             InitializeComponent();
         }
+
+        private void image1_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }
