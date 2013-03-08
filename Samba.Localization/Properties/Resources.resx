@@ -3359,4 +3359,17 @@ Error Message:
   <data name="SelectedLinesCount" xml:space="preserve">
     <value>Selected Lines Count</value>
   </data>
+ <data name="ClockIn" xml:space="preserve">
+    <value>ClockIn</value>
+    <comment>Button.Content</comment>
+  </data>
+  <data name="ClockOut" xml:space="preserve">
+    <value>ClockOut</value>
+    <comment>Button.Content</comment>
+  </data>
+  <data name="ConfirmClockOut" xml:space="preserve">
+    <value>Are you sure you want to ClockOut</value>
+    <comment>MessageBox.Content</comment>
+  </data>
+
 </root>

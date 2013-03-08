@@ -24,13 +24,13 @@
             <Label Content="{LocText ContactPhone, Suffix=':'}" />
             <Common:FilteredTextBox Name="Phone"  HorizontalAlignment="Left" Text="{Binding Phone,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText ContactPhone, Suffix=':'}" />
-            <!--
+            
             <Common:FilteredTextBox Name="EmergencyPhone" HorizontalAlignment="Left" Text="{Binding EmergencyPhone,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText DateOfBirth, Suffix=':'}" />
             <Common:FilteredTextBox Name="DateOfBirth"  HorizontalAlignment="Left" Text="{Binding DOB,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText Address, Suffix=':'}" />
             <Common:FilteredTextBox Name="Address"  HorizontalAlignment="Left" Text="{Binding Address,Mode=TwoWay}" MinWidth="150" />
-           -->
+           
             <Button HorizontalAlignment="Left" Margin="0,10" MinWidth="70" Content="{Binding SaveCommand.Caption}"
                  Command="{Binding SaveCommand}" />
             <Label Content="{Binding Error}" Foreground="Red" />

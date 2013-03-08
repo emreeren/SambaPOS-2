@@ -23,59 +23,10 @@ using Samba.Services;
 
 namespace Samba.Modules.CreditCardModule.FirstData
 {
-    internal class PreauthData
-    {
-        public SecureString SwipeData { get; set; }
-        public string CardHolderName { get; set; }
-        public string CardExpireDate { get; set; }
-        public decimal TenderedAmount { get; set; }
-        public decimal Gratuity { get; set; }
-        public string MerchantAuthCode { get; set; }
-      
-    }
     /*
      * "gateway_id" => "AD1234-00", "password" => "password", "transaction_type" => "00", "amount" => "11", "cardholder_name" => "Test",
      * "cc_number" => "411111111111111", "cc_expiry" => "0314");
      */
-    class CreditCardReq
-    {
-        public string gateway_id { get; set; }
-        public string password { get; set; }
-        public string transaction_type { get; set; }
-        public string amount { get; set; }
-        public string cardholder_name { get; set; }
-        public string cc_number { get; set; }
-        public string cc_expiry { get; set; }
-       
-    }
-
-    class CreditCardResp
-    {
-        public string logon_message { get; set; }
-        public bool transaction_error { get; set; }
-        public bool transaction_approved { get; set; }
-        public string exact_resp_code { get; set; }
-        public string exact_message { get; set; }
-        public string bank_resp_code { get; set; }
-        public string bank_message { get; set; }
-        public string bank_resp_code_2 { get; set; }
-        public int transaction_tag { get; set; }
-        public string authorization_num { get; set; }
-        public string sequence_no { get; set; }
-        public string avs { get; set; }
-        public string cvv2 { get; set; }
-        public string retrieval_ref_no { get; set; }
-        public string merchant_name { get; set; }
-        public string merchant_address { get; set; }
-        public string merchant_city { get; set; }
-        public string merchant_province { get; set; }
-        public string merchant_country { get; set; }
-        public string merchant_postal { get; set; }
-        public string merchant_url { get; set; }
-        public string ctr { get; set; }
-        public string current_balance { get; set; }
-        public string previous_balance { get; set; }
-    }
 
     [Export(typeof(ICreditCardProcessor))]
     class FdCreditCardProcessor : ICreditCardProcessor
@@ -196,9 +147,9 @@ namespace Samba.Modules.CreditCardModule.FirstData
         }
 
        
-        private CreditCardResp Force(Ticket ticket, decimal amount, out string requestStatus)
+        private FdCreditCardResp Force(Ticket ticket, decimal amount, out string requestStatus)
         {
-            CreditCardReq ccinfo = new CreditCardReq();
+            FdCreditCardReq ccinfo = new FdCreditCardReq();
             ccinfo.amount = amount.ToString();
             ccinfo.cardholder_name = _view.CardName.Text;
             ccinfo.cc_expiry = _view.CardExpire.Text;
@@ -253,16 +204,16 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 dataStream.Close();
                 response.Close();
                
-                CreditCardResp ccResp;
+                FdCreditCardResp ccResp;
                 try
                 {
-                    ccResp = JsonConvert.DeserializeObject<CreditCardResp>(responseFromServer);
+                    ccResp = JsonConvert.DeserializeObject<FdCreditCardResp>(responseFromServer);
                 }
                 catch (Exception ex)
                 {
                     JObject jobj = JObject.Parse(responseFromServer);
 
-                     ccResp = new CreditCardResp();
+                     ccResp = new FdCreditCardResp();
                     ccResp.transaction_approved = (jobj["transaction_approved"].ToString() == "1") ? true : false;
                     ccResp.bank_message = jobj["bank_message"].ToString();
                     ccResp.exact_resp_code = jobj["exact_resp_code"].ToString();

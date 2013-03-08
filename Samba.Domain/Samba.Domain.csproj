@@ -90,6 +90,7 @@
     <Compile Include="Models\Settings\Trigger.cs" />
     <Compile Include="Models\Tickets\TicketTag.cs" />
     <Compile Include="Models\Tickets\TicketTagGroup.cs" />
+    <Compile Include="Models\Users\TimeCardEntry.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Tickets\Department.cs">

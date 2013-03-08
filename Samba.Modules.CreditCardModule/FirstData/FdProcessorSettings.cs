@@ -12,18 +12,21 @@ namespace Samba.Modules.CreditCardModule.FirstData
         [DisplayName("Gratuity Template Name"), Category("Settings")]
         public string GratuityTemplateName { get; set; }
         //First Data
-        [DisplayName("GatewayId"), Category("Settings")]
-        public string GatewayId { get; set; }
-        [DisplayName("Password"), Category("Settings")]
-        public string Password { get; set; }
-        [DisplayName("GatewayUri Key"), Category("Settings")]
+        [DisplayName("GatewayUri"), Category("FD")]
         public string GatewayUri { get; set; }
-        [DisplayName("Transaction Key"), Category("Settings"), PasswordPropertyText(true)]
-        public string HmacKey { get; set; }
-        [DisplayName("x_Login"), Category("Settings")]
-        public string LoginId { get; set; }
-        [DisplayName("Currency Code"), Category("Settings"), DefaultValue("USD")]
+        [DisplayName("Currency Code"), Category("FD"), DefaultValue("USD")]
         public string CurrencyCode { get; set; }
+        //FD API V11
+        [DisplayName("GatewayId"), Category("FDV11")]
+        public string GatewayId { get; set; }
+        [DisplayName("Password"), Category("FDV11")]
+        public string Password { get; set; }
+        //API V12
+        [DisplayName("Transaction Key"), Category("FDV12"), PasswordPropertyText(true)]
+        public string HmacKey { get; set; }
+        [DisplayName("x_Login"), Category("FDV12")]
+        public string LoginId { get; set; }
+        
         
 
 

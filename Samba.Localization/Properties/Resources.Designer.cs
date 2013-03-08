@@ -1552,6 +1552,24 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ClockIn.
+        /// </summary>
+        public static string ClockIn {
+            get {
+                return ResourceManager.GetString("ClockIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ClockOut.
+        /// </summary>
+        public static string ClockOut {
+            get {
+                return ResourceManager.GetString("ClockOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clone {0}.
         /// </summary>
         public static string Clone_f {
@@ -1639,6 +1657,15 @@ namespace Samba.Localization.Properties {
         public static string Confirmation {
             get {
                 return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to ClockOut.
+        /// </summary>
+        public static string ConfirmClockOut {
+            get {
+                return ResourceManager.GetString("ConfirmClockOut", resourceCulture);
             }
         }
         
