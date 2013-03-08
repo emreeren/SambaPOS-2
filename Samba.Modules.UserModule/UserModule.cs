@@ -44,7 +44,7 @@ namespace Samba.Modules.UserModule
         {
             _regionManager.RegisterViewWithRegion(RegionNames.RightUserRegion, typeof(LoggedInUserView));
 
-            EventServiceFactory.EventService.GetEvent<GenericEvent<string>>().Subscribe(x =>
+            EventServiceFactory.EventService.GetEvent<GenericEvent<PinData>>().Subscribe(x =>
             {
                 if (x.Topic == EventTopicNames.PinSubmitted)
                     PinEntered(x.Value);
@@ -70,23 +70,23 @@ namespace Samba.Modules.UserModule
             CommonEventPublisher.PublishNavigationCommandEvent(NavigateLogoutCommand);
        }
 
-        public void PinEntered(string pin)
+        public void PinEntered(PinData pinData)
         {
-            var u = AppServices.LoginUser(pin);
+            var u = AppServices.LoginUser(pinData.PinCode);
             if (u != User.Nobody)
             {
-                if (MainDataContext.TimeCardAction != TimeCardActionEnum.None)
+                u.TimeCardAction = pinData.TimeCardAction;
+                if (u.TimeCardAction != 0)
                 {
-                    var timeCardActionBeforeUpdate = MainDataContext.TimeCardAction;
+                    var timeCardActionBeforeUpdate = u.TimeCardAction;
                     MainDataContext.UpdateTimeCardEntry(u);
-                    if (timeCardActionBeforeUpdate == TimeCardActionEnum.ClockOut)
+                    if (timeCardActionBeforeUpdate == 2)
                     {
                         AppServices.LogoutUser();
                         return;
                     }
-                   
+           
                 }
-
                 u.PublishEvent(EventTopicNames.UserLoggedIn);
             }
         }

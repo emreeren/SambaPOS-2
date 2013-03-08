@@ -213,7 +213,7 @@ namespace Samba.Services
         private IEnumerable<User> _users;
         public IEnumerable<User> Users { get { return _users ?? (_users = Dao.Query<User>(x => x.UserRole)); } }
 
-        
+
 
         private IEnumerable<VatTemplate> _vatTemplates;
         public IEnumerable<VatTemplate> VatTemplates
@@ -322,39 +322,7 @@ namespace Samba.Services
                 _lastTwoWorkPeriods = null;
             }
         }
-        /// <summary>
-        /// Get Last Time card entry
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static TimeCardEntry GetLastTimeCardEntry(User user)
-        {
-                      
-            try
-            {
-                return  Dao.Last<TimeCardEntry>(x => x.UserId == user.Id);
-               
-            }
-            catch (Exception ex)
-            {
-                AppServices.LogError(ex);
-               
-            }
-            return null;
-        }
-        /// <summary>
-        /// Add Time Card Entry
-        /// </summary>
-        /// <param name="entry"></param>
-        public static void AddTimeCardEntry(TimeCardEntry timeCardEntry)
-        {
-            using (var workspace = WorkspaceFactory.Create())
-            {
-                             
-                workspace.Add(timeCardEntry);
-                workspace.CommitChanges();
-            }
-        }
+
         public string GetReason(int reasonId)
         {
             return Reasons.ContainsKey(reasonId) ? Reasons[reasonId].Name : Resources.UndefinedWithBrackets;
@@ -727,54 +695,43 @@ namespace Samba.Services
             return AppServices.DataAccessService.GetMenuItem(menuItemId).VatTemplate;
         }
 
-        private static TimeCardActionEnum _timeCardAction = TimeCardActionEnum.None;
+        public static TimeCardEntry GetLastTimeCardEntry(User user)
+        {
+            try
+            {
+                return Dao.Last<TimeCardEntry>(x => x.UserId == user.Id);
+            }
+            catch (Exception ex)
+            {
+                AppServices.LogError(ex);
+            }
+            return null;
+        }
 
-        public static TimeCardActionEnum TimeCardAction { 
-            get { return _timeCardAction; } 
-            set { _timeCardAction = value; }
+        public static void AddTimeCardEntry(TimeCardEntry timeCardEntry)
+        {
+            using (var workspace = WorkspaceFactory.Create())
+            {
+                workspace.Add(timeCardEntry);
+                workspace.CommitChanges();
+            }
         }
 
         public static void UpdateTimeCardEntry(User user)
         {
-            if (TimeCardAction == TimeCardActionEnum.None)
+            if (user.TimeCardAction == 0)
             {
                 return;
             }
-            bool addEntry = false;
-            //var ticketId = Dao.Select<Table, int>(x => x.TicketId, x => x.Name == SelectedTicket.LocationName).FirstOrDefault();
-            var id = user.Id;
-            TimeCardEntry currentTicket = GetLastTimeCardEntry(user);
-            
-            // var currentTicket = Dao.Last<TimeCardEntry>(x => x, x => (x.User.Id == user.Id && (DateTime.Compare(x.DateTime, DateTime.Today) > 0))).Last();
 
-            if (currentTicket != null && (DateTime.Compare(currentTicket.DateTime, DateTime.Today) > 0))
+            var lastEntry = GetLastTimeCardEntry(user);
+
+            if (user.ShouldCreateCardEntry(lastEntry))
             {
-                
-                var existingAction = (TimeCardActionEnum) currentTicket.Action;
-                if (existingAction != TimeCardAction)
-                {
-                    addEntry = true;
-                }
-
+                AddTimeCardEntry(user.CreateTimeCardEntry());
             }
-            if (currentTicket == null && TimeCardAction == TimeCardActionEnum.ClockIn)
-            {
-                addEntry = true;
-            } 
-            if (addEntry)
-            {
-                var timeCardEntry = TimeCardEntry.Crate(TimeCardAction, user.Id);
-                AddTimeCardEntry(timeCardEntry);
 
-                if (TimeCardAction == TimeCardActionEnum.ClockOut)
-                {
-                    AppServices.LogoutUser();
-                    return;
-                }
- 
-            }
-           
-            TimeCardAction = TimeCardActionEnum.None;
+            user.TimeCardAction = 0;
         }
     }
 }

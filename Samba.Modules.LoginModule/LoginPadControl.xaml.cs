@@ -7,7 +7,7 @@ using Samba.Services;
 
 namespace Samba.Login
 {
-    public delegate void PinSubmittedEventHandler(object sender, string pinValue);
+    public delegate void PinSubmittedEventHandler(object sender, PinData pinData);
 
     /// <summary>
     /// Interaction logic for LoginPadControl.xaml
@@ -25,7 +25,7 @@ namespace Samba.Login
 
         private string PinValue { get { return _pinValue; } set { _pinValue = value; UpdatePinTextBox(_pinValue); } }
         private static string EmptyString { get { return " " + Localization.Properties.Resources.EnterPin; } }
-        
+
         private void UpdatePinTextBox(string pinValue)
         {
             PinTextBox.Text = pinValue == EmptyString ? pinValue : "".PadLeft(pinValue.Length, '*');
@@ -46,11 +46,10 @@ namespace Samba.Login
             }
         }
 
-        public void SubmitPin()
+        public void SubmitPin(int timeCardAction)
         {
-           
             if (PinSubmitted != null && AppServices.CanStartApplication())
-                PinSubmitted(this, _pinValue);
+                PinSubmitted(this, new PinData { PinCode = _pinValue, TimeCardAction = timeCardAction });
             else
             {
                 if (!AppServices.CanStartApplication())
@@ -61,20 +60,16 @@ namespace Samba.Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           
-            MainDataContext.TimeCardAction = TimeCardActionEnum.ClockIn;
-            SubmitPin();
+            SubmitPin(1); //Clock In
         }
 
         private void Button_ClockOut(object sender, RoutedEventArgs e)
         {
-             bool answer = InteractionService.UserIntraction.AskQuestion(
-                        Localization.Properties.Resources.ConfirmClockOut);
+            bool answer = InteractionService.UserIntraction.AskQuestion(
+                       Localization.Properties.Resources.ConfirmClockOut);
             if (answer)
             {
-            
-                MainDataContext.TimeCardAction = TimeCardActionEnum.ClockOut;
-                SubmitPin();
+                SubmitPin(2); //Clock Out
             }
         }
 

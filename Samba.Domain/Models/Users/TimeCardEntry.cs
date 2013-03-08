@@ -7,20 +7,13 @@ using Samba.Infrastructure.Data;
 
 namespace Samba.Domain.Models.Users
 {
-    public enum TimeCardActionEnum
-    {
-        None = 0,
-        ClockIn = 1,
-        ClockOut = 2
-    };
-
     public class TimeCardEntry : IEntity
     {
-        public static TimeCardEntry Crate(TimeCardActionEnum action, int userId)
+        public static TimeCardEntry Crate(int action, int userId)
         {
             return new TimeCardEntry
                 {
-                    Action = (int)action,
+                    Action = action,
                     DateTime = DateTime.Now,
                     Name = "",
                     UserId = userId
@@ -32,5 +25,18 @@ namespace Samba.Domain.Models.Users
         public int Action { get; set; }
         public DateTime DateTime { get; set; }
         public int UserId { get; set; }
+
+        public bool ShouldCreateCardEntry(User user)
+        {
+            if ((DateTime.Compare(DateTime, DateTime.Today) > 0))
+            {
+                if (Action != user.TimeCardAction)
+                {
+                    return true;
+                }
+            }
+
+            return user.TimeCardAction == 1;
+        }
     }
 }

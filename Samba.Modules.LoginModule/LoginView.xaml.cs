@@ -24,9 +24,9 @@ namespace Samba.Login
             DataContext = viewModel;
         }
 
-        private void LoginPadControl_PinSubmitted(object sender, string pinValue)
+        private void LoginPadControl_PinSubmitted(object sender, PinData pinData)
         {
-            pinValue.PublishEvent(EventTopicNames.PinSubmitted);
+            pinData.PublishEvent(EventTopicNames.PinSubmitted);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace Samba.Login
 
         private void UserControl_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.Text)&& char.IsDigit(e.Text, 0))
+            if (!string.IsNullOrEmpty(e.Text) && char.IsDigit(e.Text, 0))
                 PadControl.UpdatePinValue(e.Text);
         }
 
@@ -44,8 +44,7 @@ namespace Samba.Login
         {
             if (e.Key == Key.Enter)
             {
-               
-                PadControl.SubmitPin();
+                PadControl.SubmitPin(1);
             }
         }
 
@@ -55,6 +54,6 @@ namespace Samba.Login
             Process.Start(new ProcessStartInfo(u.AbsoluteUri));
             e.Handled = true;
         }
-        
+
     }
 }

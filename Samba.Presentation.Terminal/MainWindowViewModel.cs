@@ -20,8 +20,6 @@ namespace Samba.Presentation.Terminal
     {
         public MainWindowViewModel()
         {
-            //TODO: Para birimi servisinden al.
-
             LocalizeDictionary.ChangeLanguage(LocalSettings.CurrentLanguage);
             LocalSettings.SetTraceLogPath("term");
 
@@ -150,13 +148,14 @@ namespace Samba.Presentation.Terminal
             LoggedInUserViewModel.Refresh();
             if (user != User.Nobody)
             {
-                var timeCardActionBeforeUpdate = MainDataContext.TimeCardAction;
+                var timeCardActionBeforeUpdate = user.TimeCardAction;
                 MainDataContext.UpdateTimeCardEntry(user);
-                if (timeCardActionBeforeUpdate == TimeCardActionEnum.ClockOut)
+                if (timeCardActionBeforeUpdate == 2)
                 {
                     AppServices.LogoutUser();
                     return;
                 }
+
                 if (user.UserRole.DepartmentId != 0 && !AppServices.IsUserPermittedFor(PermissionNames.ChangeDepartment))
                 {
                     AppServices.MainDataContext.SelectedDepartment =
