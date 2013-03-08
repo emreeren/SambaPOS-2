@@ -21,6 +21,8 @@ namespace Samba.Modules.UserModule
         public ICategoryCommand ListUsersCommand { get; set; }
         public ICategoryCommand ListUserRolesCommand { get; set; }
         public ICategoryCommand NavigateLogoutCommand { get; set; }
+        
+       
 
         [ImportingConstructor]
         public UserModule(IRegionManager regionManager)
@@ -29,6 +31,7 @@ namespace Samba.Modules.UserModule
             ListUsersCommand = new CategoryCommand<string>(Resources.UserList, Resources.Users, OnListUsers);
             NavigateLogoutCommand = new CategoryCommand<string>("Logout", Resources.Common, "images/bmp.png", OnNavigateUserLogout) { Order = 99 };
             _regionManager = regionManager;
+           
         }
 
         private static void OnNavigateUserLogout(string obj)
@@ -71,7 +74,21 @@ namespace Samba.Modules.UserModule
         {
             var u = AppServices.LoginUser(pin);
             if (u != User.Nobody)
+            {
+                if (MainDataContext.TimeCardAction != TimeCardActionEnum.None)
+                {
+                    var timeCardActionBeforeUpdate = MainDataContext.TimeCardAction;
+                    MainDataContext.UpdateTimeCardEntry(u);
+                    if (timeCardActionBeforeUpdate == TimeCardActionEnum.ClockOut)
+                    {
+                        AppServices.LogoutUser();
+                        return;
+                    }
+                   
+                }
+
                 u.PublishEvent(EventTopicNames.UserLoggedIn);
+            }
         }
 
         public void OnListUsers(string value)

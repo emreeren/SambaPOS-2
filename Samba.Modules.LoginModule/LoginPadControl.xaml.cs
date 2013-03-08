@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Samba.Domain.Models.Users;
 using Samba.Presentation.Common;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Login
@@ -23,12 +25,10 @@ namespace Samba.Login
 
         private string PinValue { get { return _pinValue; } set { _pinValue = value; UpdatePinTextBox(_pinValue); } }
         private static string EmptyString { get { return " " + Localization.Properties.Resources.EnterPin; } }
-        private void UpdatePinTextBox(string _pinValue)
+        
+        private void UpdatePinTextBox(string pinValue)
         {
-            if (_pinValue == EmptyString)
-                PinTextBox.Text = _pinValue;
-            else
-                PinTextBox.Text = "".PadLeft(_pinValue.Length, '*');
+            PinTextBox.Text = pinValue == EmptyString ? pinValue : "".PadLeft(pinValue.Length, '*');
         }
 
         private bool CheckPinValue()
@@ -48,6 +48,7 @@ namespace Samba.Login
 
         public void SubmitPin()
         {
+           
             if (PinSubmitted != null && AppServices.CanStartApplication())
                 PinSubmitted(this, _pinValue);
             else
@@ -60,7 +61,21 @@ namespace Samba.Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+           
+            MainDataContext.TimeCardAction = TimeCardActionEnum.ClockIn;
             SubmitPin();
+        }
+
+        private void Button_ClockOut(object sender, RoutedEventArgs e)
+        {
+             bool answer = InteractionService.UserIntraction.AskQuestion(
+                        Localization.Properties.Resources.ConfirmClockOut);
+            if (answer)
+            {
+            
+                MainDataContext.TimeCardAction = TimeCardActionEnum.ClockOut;
+                SubmitPin();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

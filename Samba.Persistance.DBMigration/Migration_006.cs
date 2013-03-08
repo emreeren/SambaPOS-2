@@ -115,11 +115,12 @@ EXEC sp_executesql @sql;");
             Create.Column("MultipleSelection").OnTable("MenuItemPropertyGroups").AsBoolean().WithDefaultValue(false);
             Create.Column("ColumnCount").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("ButtonHeight").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
+            Create.Column("ButtonColor").OnTable("MenuItemPropertyGroups").AsString(128).WithDefaultValue("LightGray");
             Create.Column("TerminalColumnCount").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("TerminalButtonHeight").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("CalculateWithParentPrice").OnTable("MenuItemPropertyGroups").AsBoolean().WithDefaultValue(false);
 
-            Execute.Sql("Update MenuItemPropertyGroups set ColumnCount=5, ButtonHeight=65, TerminalColumnCount=4, TerminalButtonHeight=35");
+            Execute.Sql("Update MenuItemPropertyGroups set ColumnCount=5, ButtonHeight=65, ButtonColor='LightGray', TerminalColumnCount=4, TerminalButtonHeight=35");
 
             Create.Column("FixedCost").OnTable("Recipes").AsDecimal(16, 2).WithDefaultValue(0);
 

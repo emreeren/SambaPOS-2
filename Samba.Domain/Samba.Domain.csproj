@@ -54,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -88,6 +89,7 @@
     <Compile Include="Models\Settings\Trigger.cs" />
     <Compile Include="Models\Tickets\TicketTag.cs" />
     <Compile Include="Models\Tickets\TicketTagGroup.cs" />
+    <Compile Include="Models\Users\TimeCardEntry.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Tickets\Department.cs">

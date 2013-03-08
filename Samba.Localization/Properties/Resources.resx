@@ -163,6 +163,50 @@ Changing PIN will hide this hint</value>
     <value>Credit Card</value>
     <comment>GridViewColumn.Header</comment>
   </data>
+  <data name="Bill_100" xml:space="preserve">
+    <value>$100</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Bill_20" xml:space="preserve">
+    <value>$20</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Bill_10" xml:space="preserve">
+    <value>$10</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Bill_5" xml:space="preserve">
+    <value>$5</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Bill_2" xml:space="preserve">
+    <value>$2</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Bill_1" xml:space="preserve">
+    <value>$1</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Cent_25" xml:space="preserve">
+    <value>25c</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Cent_10" xml:space="preserve">
+    <value>10c</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Cent_5" xml:space="preserve">
+    <value>5c</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Cent_2" xml:space="preserve">
+    <value>2c</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
+  <data name="Cent_1" xml:space="preserve">
+    <value>1c</value>
+    <comment>GridViewColumn.Header</comment>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
     <comment>TextBlock.Text</comment>
@@ -196,7 +240,7 @@ Changing PIN will hide this hint</value>
     <comment>GridViewColumn.Header</comment>
   </data>
   <data name="Voucher" xml:space="preserve">
-    <value>Voucher</value>
+    <value>Check</value>
     <comment>GridViewColumn.Header</comment>
   </data>
   <data name="CreditCard_ab" xml:space="preserve">
@@ -204,7 +248,7 @@ Changing PIN will hide this hint</value>
     <comment>GridViewColumn.Header</comment>
   </data>
   <data name="Voucher_ab" xml:space="preserve">
-    <value>Vochr</value>
+    <value>Check</value>
     <comment>GridViewColumn.Header</comment>
   </data>
   <data name="OperationIncome" xml:space="preserve">
@@ -1218,7 +1262,7 @@ Payment</value>
     <comment>GroupBox.Header</comment>
   </data>
   <data name="AutoRounding" xml:space="preserve">
-    <value>Auto Rounding</value>
+    <value>Auto Discounting</value>
     <comment>Label content</comment>
   </data>
   <data name="WeightBarcodes" xml:space="preserve">
@@ -1357,6 +1401,18 @@ Payment</value>
   </data>
   <data name="CashContent" xml:space="preserve">
     <value>Cash Content</value>
+    <comment>GroupBox.Header</comment>
+  </data>
+  <data name="CashContentDetails" xml:space="preserve">
+    <value>Cash Content Details</value>
+    <comment>GroupBox.Header</comment>
+  </data>
+  <data name="CreditContentDetails" xml:space="preserve">
+    <value>Credit Card Content Details</value>
+    <comment>GroupBox.Header</comment>
+  </data>
+  <data name="VoucherContentDetails" xml:space="preserve">
+    <value>Check/voucher Content Details</value>
     <comment>GroupBox.Header</comment>
   </data>
   <data name="WorkPeriodStartDate_f" xml:space="preserve">
@@ -1639,7 +1695,7 @@ Balance</value>
     <value>All</value>
   </data>
   <data name="Round" xml:space="preserve">
-    <value>Round</value>
+    <value>Discount</value>
   </data>
   <data name="Flat" xml:space="preserve">
     <value>Auto Round</value>
@@ -1752,6 +1808,18 @@ Balance</value>
     <value>Pin Code</value>
     <comment>Label.Content</comment>
   </data>
+  <data name="ContactPhone" xml:space="preserve">
+    <value>Contact Phone</value>
+    <comment>Label.Content</comment>
+  </data>
+  <data name="EmergencyPhone" xml:space="preserve">
+    <value>Emergency Contact Phone</value>
+    <comment>Label.Content</comment>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+    <comment>Label.Content</comment>
+  </data>
   <data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
     <value>This Pin Code used by another user account.</value>
   </data>
@@ -1797,10 +1865,10 @@ Visit Reports section and create Work Period Reports</value>
     <value>Open</value>
   </data>
   <data name="AutoFlatten_ab" xml:space="preserve">
-    <value>Auto Rounding</value>
+    <value>Auto Discounting</value>
   </data>
   <data name="Rounding" xml:space="preserve">
-    <value>Rounding</value>
+    <value>Discounting</value>
   </data>
   <data name="Flattening" xml:space="preserve">
     <value>Rounding</value>
@@ -2133,7 +2201,7 @@ Table: {2}</value>
     <value>CID Settings</value>
   </data>
   <data name="Voucher_r" xml:space="preserve">
-    <value>Voucher</value>
+    <value>Check</value>
   </data>
   <data name="TicketTemplateGiftedLineTemplateValue" xml:space="preserve">
     <value>&lt;L00&gt;{QUANTITY} {NAME} |GIFT</value>
@@ -2910,7 +2978,7 @@ Will Trigger after {1} days, {2} hours, {3} minutes</value>
     <comment>CheckBox content</comment>
   </data>
   <data name="RoundingTotal" xml:space="preserve">
-    <value>Rounding Total</value>
+    <value>Discount Total</value>
   </data>
   <data name="TaxServiceTemplates" xml:space="preserve">
     <value>Service Templates</value>
@@ -3261,34 +3329,47 @@ Error Message:
   <data name="UpdateTicketItemTag" xml:space="preserve">
     <value>Update Ticket Item Tag</value>
   </data>
-  <data name="HideItOnReports">
-    <value xml:space="preserve">Hide it on Reports</value>
+  <data name="HideItOnReports" xml:space="preserve">
+    <value>Hide it on Reports</value>
   </data>
-  <data name="ItemTag">
-    <value xml:space="preserve">Item Tag</value>
+  <data name="ItemTag" xml:space="preserve">
+    <value>Item Tag</value>
   </data>
-  <data name="nthItemTag">
-    <value xml:space="preserve">n.th Item Tag if merged with |</value>
+  <data name="nthItemTag" xml:space="preserve">
+    <value>n.th Item Tag if merged with |</value>
   </data>
-  <data name="PrintJobHint">
-    <value xml:space="preserve">To be able to activate this printjob you should assign it to a terminal.</value>
+  <data name="PrintJobHint" xml:space="preserve">
+    <value>To be able to activate this printjob you should assign it to a terminal.</value>
   </data>
   <data name="DeleteErrorProductUsedInPrinterMap" xml:space="preserve">
     <value>Can't delete because this product assigned to a Printer Map</value>
   </data>
-  <data name="CharacterReplacementPattern">
-    <value xml:space="preserve">Character Replacement Pattern</value>
+  <data name="CharacterReplacementPattern" xml:space="preserve">
+    <value>Character Replacement Pattern</value>
   </data>
-  <data name="CharacterReplacementPatternInfo">
-    <value xml:space="preserve">Use ß=ss for replacing unsupported characters. Merge multiple values with semicolon (;) </value>
+  <data name="CharacterReplacementPatternInfo" xml:space="preserve">
+    <value>Use ß=ss for replacing unsupported characters. Merge multiple values with semicolon (;) </value>
   </data>
   <data name="SaveErrorDuplicateItemName_f" xml:space="preserve">
     <value>This name used for another {0}.</value>
   </data>
-  <data name="HideExitButton">
-    <value xml:space="preserve">Hide Exit Button</value>
+  <data name="HideExitButton" xml:space="preserve">
+    <value>Hide Exit Button</value>
   </data>
-  <data name="SelectedLinesCount">
-    <value xml:space="preserve">Selected Lines Count</value>
+  <data name="SelectedLinesCount" xml:space="preserve">
+    <value>Selected Lines Count</value>
   </data>
+ <data name="ClockIn" xml:space="preserve">
+    <value>ClockIn</value>
+    <comment>Button.Content</comment>
+  </data>
+  <data name="ClockOut" xml:space="preserve">
+    <value>ClockOut</value>
+    <comment>Button.Content</comment>
+  </data>
+  <data name="ConfirmClockOut" xml:space="preserve">
+    <value>Are you sure you want to ClockOut</value>
+    <comment>MessageBox.Content</comment>
+  </data>
+
 </root>

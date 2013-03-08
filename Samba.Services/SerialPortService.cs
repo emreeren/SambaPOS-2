@@ -30,6 +30,18 @@ namespace Samba.Services
             }
         }
 
+        public static SerialPort GetPort(string portName)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            return Ports[portName];
+        }
+       
+
+       
+
         public static void WritePort(string portName, string data)
         {
             WritePort(portName, Encoding.ASCII.GetBytes(data));
@@ -38,6 +50,71 @@ namespace Samba.Services
         public static void WritePort(string portName, string data, int codePage)
         {
             WritePort(portName, Encoding.GetEncoding(codePage).GetBytes(data));
+        }
+
+        public static byte[] ReadBufferPort(string portName, int length, int timeoutInMillSec)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            var port = Ports[portName];
+
+            try
+            {
+                if (!port.IsOpen) port.Open();
+                if (port.IsOpen)
+                {
+                    if (timeoutInMillSec >= 0)
+                    {
+                        port.ReadTimeout = timeoutInMillSec;
+                    }
+
+                    var buffer = new byte[length];
+                    port.Read(buffer, 0, length);
+                    return buffer;
+                }
+            }
+            catch (IOException)
+            {
+
+            }
+            return null;
+        }
+        public static string ReadPort(string portName, int length, int timeoutInMillSec = -1)
+        {
+            var buffer = ReadBufferPort(portName, length, timeoutInMillSec);
+            return Encoding.ASCII.GetString(buffer);
+        }
+
+        public static string ReadLineFromPort(string portName, int timeoutInMillSec = 5000)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            var port = Ports[portName];
+
+            try
+            {
+                if (!port.IsOpen) port.Open();
+                if (port.IsOpen)
+                {
+                    if (timeoutInMillSec >= 0)
+                    {
+                        port.ReadTimeout = timeoutInMillSec;
+                    }
+
+
+                    return port.ReadLine();
+
+                }
+            }
+            catch (IOException)
+            {
+
+            }
+            return "";
         }
 
         public static void ResetCache()

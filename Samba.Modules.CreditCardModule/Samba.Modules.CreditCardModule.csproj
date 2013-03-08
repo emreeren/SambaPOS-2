@@ -30,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
@@ -38,6 +39,9 @@
     </Reference>
     <Reference Include="Microsoft.Practices.Prism.MefExtensions">
       <HintPath>..\Lib\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -60,6 +64,15 @@
       <DependentUpon>ExternalProcessorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExternalProcessor\ExternalProcessorViewModel.cs" />
+    <Compile Include="FirstData\FdCreditCardReq.cs" />
+    <Compile Include="FirstData\FdCreditCardResp.cs" />
+    <Compile Include="FirstData\FdCreditCardProcessor.cs" />
+    <Compile Include="FirstData\FdProcessorSettings.cs" />
+    <Compile Include="FirstData\FdProcessorView.xaml.cs">
+      <DependentUpon>FdProcessorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FirstData\FdProcessorViewModel.cs" />
+    <Compile Include="FirstData\PreauthData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleProcessor\SimpleCreditCardProcessor.cs" />
     <Compile Include="SimpleProcessor\SimpleCreditCardProcessorSettings.cs" />
@@ -95,7 +108,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FirstData\FdProcessorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

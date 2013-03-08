@@ -2,7 +2,7 @@
      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
      xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
              x:Class="Samba.Login.LoginPadControl"
-     mc:Ignorable="d" Loaded="UserControl_Loaded">
+     mc:Ignorable="d" Loaded="UserControl_Loaded" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="ButtonFocusVisual">
             <Setter Property="Control.Template">
@@ -158,6 +158,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -184,11 +185,17 @@
              Click="Button_Click_8" />
         <Button Content="9" Grid.Row="3" Grid.Column="2" Margin="3" Style="{DynamicResource GreenButtonStyle}"
              Click="Button_Click_9" />
-        <Button Content="{LocText Clear}" Grid.Row="4"
-             Grid.Column="0" Margin="3" Style="{DynamicResource GreenButtonStyle}" Click="Button_Click_11" />
-        <Button Content="0" Grid.Row="4" Grid.Column="1" Margin="3" Style="{DynamicResource GreenButtonStyle}"
+        <Button Content="{LocText Clear}" Grid.Row="5"
+             Grid.Column="0"  Margin="3" Style="{DynamicResource GreenButtonStyle}" Click="Button_Click_11" />
+        <Button Content="0" Grid.Row="4" Grid.Column="0" Margin="3" Style="{DynamicResource GreenButtonStyle}"
              Click="Button_Click_10" />
         <Button Content="{LocText Login}" Grid.Row="4" Name="LoginButton"
-             Grid.Column="2" Margin="3" Style="{DynamicResource SubmitButtonStyle}" Click="Button_Click" />
+             Grid.Column="1"  Grid.ColumnSpan="2" Margin="3"  Style="{DynamicResource SubmitButtonStyle}" Click="Button_Click" />
+        
+        <Button Content="{LocText ClockOut}" Grid.Row="5" Name="ClockOutButton"
+            Grid.Column="1" Grid.ColumnSpan="2"  Margin="3" Style="{DynamicResource SubmitButtonStyle}"  Click="Button_ClockOut" />
+      
     </Grid>
+    
+
 </UserControl>

@@ -150,6 +150,13 @@ namespace Samba.Presentation.Terminal
             LoggedInUserViewModel.Refresh();
             if (user != User.Nobody)
             {
+                var timeCardActionBeforeUpdate = MainDataContext.TimeCardAction;
+                MainDataContext.UpdateTimeCardEntry(user);
+                if (timeCardActionBeforeUpdate == TimeCardActionEnum.ClockOut)
+                {
+                    AppServices.LogoutUser();
+                    return;
+                }
                 if (user.UserRole.DepartmentId != 0 && !AppServices.IsUserPermittedFor(PermissionNames.ChangeDepartment))
                 {
                     AppServices.MainDataContext.SelectedDepartment =
