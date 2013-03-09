@@ -149,6 +149,7 @@ namespace Samba.Domain.Models.Tickets
                 var groupItems = Properties.Where(x => x.PropertyGroupId == group.Id).ToList();
                 foreach (var tip in groupItems) Properties.Remove(tip);
                 if (group.MultipleSelection) Quantity = 1;
+              
                 return null;
             }
 

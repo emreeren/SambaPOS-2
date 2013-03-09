@@ -116,17 +116,20 @@ namespace Samba.Modules.TicketModule
         {
             var result = new List<CommandButtonViewModel>();
 
+
             result.Add(new CommandButtonViewModel
-                           {
-                               Caption = SetDiscountRateCommand.Caption,
-                               Command = SetDiscountRateCommand
-                           });
+            {
+                Caption = SetDiscountRateCommand.Caption,
+                Command = SetDiscountRateCommand
+            });
 
             result.Add(new CommandButtonViewModel
                            {
                                Caption = SetDiscountAmountCommand.Caption,
                                Command = SetDiscountAmountCommand
                            });
+
+            
 
             result.Add(new CommandButtonViewModel
                            {

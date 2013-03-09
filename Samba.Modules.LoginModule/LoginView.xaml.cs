@@ -4,7 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel.Composition;
 using System.Windows.Input;
+using Samba.Domain.Models.Users;
 using Samba.Presentation.Common;
+using Samba.Services;
 
 namespace Samba.Login
 {
@@ -40,8 +42,11 @@ namespace Samba.Login
 
         private void UserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
+            {
+               
                 PadControl.SubmitPin();
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

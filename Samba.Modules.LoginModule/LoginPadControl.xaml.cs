@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Samba.Domain.Models.Users;
 using Samba.Presentation.Common;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Login
@@ -48,6 +50,7 @@ namespace Samba.Login
 
         public void SubmitPin()
         {
+           
             if (PinSubmitted != null && AppServices.CanStartApplication())
                 PinSubmitted(this, _pinValue);
             else
@@ -60,7 +63,21 @@ namespace Samba.Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+           
+            MainDataContext.TimeCardAction = TimeCardEntry.TimeCardActionEnum.ClockIn;
             SubmitPin();
+        }
+
+        private void Button_ClockOut(object sender, RoutedEventArgs e)
+        {
+             bool answer = InteractionService.UserIntraction.AskQuestion(
+                        Localization.Properties.Resources.ConfirmClockOut);
+            if (answer)
+            {
+            
+                MainDataContext.TimeCardAction = TimeCardEntry.TimeCardActionEnum.ClockOut;
+                SubmitPin();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

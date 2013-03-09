@@ -27,6 +27,7 @@ namespace Samba.Modules.MenuModule
         public bool ForceValue { get { return Model.ForceValue; } set { Model.ForceValue = value; } }
         public bool CalculateWithParentPrice { get { return Model.CalculateWithParentPrice; } set { Model.CalculateWithParentPrice = value; } }
         public int ButtonHeight { get { return Model.ButtonHeight; } set { Model.ButtonHeight = value; } }
+        public string ButtonColor { get { return Model.ButtonColor; } set { Model.ButtonColor = value; } }
         public int ColumnCount { get { return Model.ColumnCount; } set { Model.ColumnCount = value; } }
         public int TerminalButtonHeight { get { return Model.TerminalButtonHeight; } set { Model.TerminalButtonHeight = value; } }
         public int TerminalColumnCount { get { return Model.TerminalColumnCount; } set { Model.TerminalColumnCount = value; } }

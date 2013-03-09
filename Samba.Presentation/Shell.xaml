@@ -7,7 +7,7 @@
         xmlns:Common="clr-namespace:Samba.Presentation.Common;assembly=Samba.Presentation.Common" 
         xmlns:Presentation="clr-namespace:Samba.Presentation" 
         xmlns:Services="clr-namespace:Samba.Presentation.Common.Services;assembly=Samba.Presentation.Common" 
-        Title="Samba Pos Shell" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
+        Title="Samba POS" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow"
         WindowState="Normal" SnapsToDevicePixels="True" Height="600" Width="800" Closing="WindowClosing" 
         Loaded="WindowLoaded" Icon="/Samba.Presentation;component/apple.ico">
 
@@ -29,8 +29,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Stretch">
-            <Image Source="/Samba.Presentation;component/Images/apple-icon.png" Stretch="UniformToFill"></Image>
-            <TextBlock Margin="10,0" FontWeight="Bold" FontSize="24" Foreground="White" MouseDown="TextBlockMouseDown" VerticalAlignment="Center">SAMBA POS</TextBlock>
+            <Image Margin="0,1,0,-1" Source="/Samba.Presentation;component/Images/apple-icon.png" Stretch="UniformToFill"></Image>
+            <TextBlock Margin="5,0" FontWeight="Bold" FontSize="18" Foreground="White" MouseDown="TextBlockMouseDown" VerticalAlignment="Center">POS</TextBlock>
             <TextBlock Margin="10,0" FontWeight="Bold" MouseDown="TextBlockMouseDown" VerticalAlignment="Center">
                 <TextBlock.Text>
                     <Binding Source="{x:Static Services:PresentationServices.SubTitle}" Path="ApplicationTitle"></Binding>
@@ -43,6 +43,7 @@
                 </TextBlock.FontSize>
             </TextBlock>
         </StackPanel>
+        
         <TextBlock Name="TimeLabel" Grid.Row="0" Grid.Column="1" Margin="10,5,10,0" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Lucida Console">SAAT</TextBlock>
 
         
@@ -90,6 +91,8 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
+            <!--TextBlock Name="TimeLabel" Grid.Column="1" Margin="150,2,0,0" FontSize="16" Foreground="Red" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontFamily="Lucida Console" Height="20">SAAT</TextBlock-->
+
         </Grid>
     </Grid>
 </Window>

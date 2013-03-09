@@ -491,7 +491,7 @@ namespace Samba.Modules.TicketModule
         {
             if (obj.Topic == EventTopicNames.PaymentProcessed && AppServices.ActiveAppScreen != AppScreens.Payment)
             {
-                if (obj.Value.ProcessType == ProcessType.Force)
+                if (obj.Value.ProcessType == ProcessType.Force || obj.Value.ProcessType == ProcessType.External)
                 {
                     TicketViewModel.AddPaymentToSelectedTicket(AppServices.MainDataContext.SelectedTicket.GetRemainingAmount(), PaymentType.CreditCard);
                     if (AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)

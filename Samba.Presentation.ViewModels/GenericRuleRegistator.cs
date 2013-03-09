@@ -57,6 +57,7 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterActionType("UpdateTicketAccount", Resources.UpdateTicketAccount, new { AccountPhone = "", AccountName = "", Note = "" });
             RuleActionTypeRegistry.RegisterActionType("ExecutePrintJob", Resources.ExecutePrintJob, new { PrintJobName = "", TicketItemTag = "" });
             RuleActionTypeRegistry.RegisterActionType("UpdateApplicationSubTitle", "Update Application Subtitle", new { Title = "", Color = "White", FontSize = 12 });
+            
         }
 
         private static void RegisterRules()

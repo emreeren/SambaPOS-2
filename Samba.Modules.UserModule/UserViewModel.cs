@@ -39,6 +39,12 @@ namespace Samba.Modules.UserModule
             }
         }
 
+        public string Address { get { return Model.Address; } set { Model.Address = value; } }
+        public string Phone { get { return Model.Phone; } set { Model.Phone = value; } }
+        public string EmergencyPhone { get { return Model.EmergencyPhone; } set { Model.EmergencyPhone = value; } }
+
+        public string DOB { get { return Model.DOB; } set { Model.DOB = value; } }
+
         public UserRole Role { get { return Model.UserRole; } set { Model.UserRole = value; } }
 
         public IEnumerable<UserRole> Roles { get; private set; }

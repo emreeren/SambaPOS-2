@@ -20,7 +20,12 @@ namespace Samba.Domain.Models.Users
         public string Name { get; set; }
         public byte[] LastUpdateTime { get; set; }
         public string PinCode { get; set; }
-
+        
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string EmergencyPhone { get; set; }
+        public string DOB { get; set; }
+        
         private UserRole _userRole;
         public virtual UserRole UserRole
         {

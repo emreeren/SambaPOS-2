@@ -52,7 +52,7 @@ namespace Samba.Presentation
                 });
 
             UserRegion.Visibility = Visibility.Collapsed;
-            RightUserRegion.Visibility = Visibility.Collapsed;
+            RightUserRegion.Visibility = Visibility.Collapsed;           
             Height = Properties.Settings.Default.ShellHeight;
             Width = Properties.Settings.Default.ShellWidth;
 
@@ -69,7 +69,9 @@ namespace Samba.Presentation
 
         void TimerTick(object sender, EventArgs e)
         {
-            var time = DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString();
+            //rjoshi
+            var time = DateTime.Now.ToString("ddd M/d/yyyy h:mm tt");
+            //var time ToLongDateString() + " " + DateTime.Now.ToShortTimeString();
             TimeLabel.Text = TimeLabel.Text.Contains(":") ? time.Replace(":", " ") : time;
             MethodQueue.RunQueue();
         }
