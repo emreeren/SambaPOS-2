@@ -41,6 +41,7 @@ namespace Samba.Domain.Models.Menus
             _properties = new List<MenuItemProperty>();
             ColumnCount = 5;
             ButtonHeight = 65;
+            ButtonColor = "LightGray";
             TerminalColumnCount = 4;
             TerminalButtonHeight = 35;
         }

@@ -7,7 +7,7 @@ using Samba.Infrastructure.Data;
 
 namespace Samba.Domain.Models.Users
 {
-    public class TimeCardEntry : IEntity
+    public class TimeCardEntry 
     {
         public static TimeCardEntry Crate(int action, int userId)
         {
@@ -15,13 +15,11 @@ namespace Samba.Domain.Models.Users
                 {
                     Action = action,
                     DateTime = DateTime.Now,
-                    Name = "",
                     UserId = userId
                 };
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
         public int Action { get; set; }
         public DateTime DateTime { get; set; }
         public int UserId { get; set; }
