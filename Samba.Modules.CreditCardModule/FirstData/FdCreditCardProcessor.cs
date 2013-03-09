@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security;
 using System.Security.Cryptography;
@@ -20,6 +21,7 @@ using Samba.Infrastructure;
 using Samba.Presentation.Common;
 using Samba.Presentation.Common.Services;
 using Samba.Services;
+using Samba.Services.Printing;
 
 namespace Samba.Modules.CreditCardModule.FirstData
 {
@@ -36,8 +38,6 @@ namespace Samba.Modules.CreditCardModule.FirstData
         private static readonly FdProcessorSettings Settings = new FdProcessorSettings();
         private static readonly IDictionary<int, PreauthData> PreauthDataCache = new Dictionary<int, PreauthData>();
 
-       
-
         public Ticket SelectedTicket { get; set; }
 
         [ImportingConstructor]
@@ -45,9 +45,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
         {
             _viewModel = viewModel;
             _viewModel.Processed += ViewModelProcessed;
-           
             Settings.Load();
-
         }
 
         public string Name
@@ -68,7 +66,6 @@ namespace Samba.Modules.CreditCardModule.FirstData
             _viewModel.CanPreAuth = !PreauthDataCache.ContainsKey(SelectedTicket.Id);
             _viewModel.TenderedAmount = creditCardProcessingData.TenderedAmount;
             _viewModel.Gratuity = (creditCardProcessingData.TenderedAmount * Settings.GratuityRate) / 100;
-                    
             _viewModel.AuthCode = "";
             _view = new FdProcessorView(_viewModel);
             _view.ShowDialog();
@@ -79,54 +76,57 @@ namespace Samba.Modules.CreditCardModule.FirstData
             return PreauthDataCache.ContainsKey(ticketId);
         }
 
-       
         public void ViewModelProcessed(object sender, OnProcessedArgs args)
         {
             var processType = args.ProcessType;
             var gratuity = _viewModel.Gratuity;
             var ticket = SelectedTicket;
 
-           if (processType == ProcessType.Swipe)
-           {
-               var ccData = ReadCreditCardTrackData();
-               if (ccData == null)
-               {
-                   _view.CardStatus.Text = "Failed to read Credit Card information. Please try again.";
-                   _view.Refresh();
-                   return;
-               }
-               _view.CardExpire.Text = ccData.CardExpiry;
-               _view.CardName.Text = ccData.CardName;
-               _view.CardNumber.Password = ccData.CardNumber;
-               _view.CardStatus.Text = "Successfully read the card";
-               _view.Refresh();
-               return;
-           }
-           
+            if (processType == ProcessType.Swipe)
+            {
+                var ccData = ReadCreditCardTrackData();
+                if (ccData == null)
+                {
+                    _view.CardStatus.Text = "Failed to read Credit Card information. Please try again.";
+                    _view.Refresh();
+                    return;
+                }
+                _view.CardExpire.Text = ccData.CardExpiry;
+                _view.CardName.Text = ccData.CardName;
+                _view.CardNumber.Password = ccData.CardNumber;
+                _view.CardStatus.Text = "Successfully read the card";
+                _view.Refresh();
+                return;
+            }
 
             var result = new CreditCardProcessingResult { ProcessType = processType };
 
-
-
             if (processType == ProcessType.Force)
             {
-                
+
                 var amount = _viewModel.TenderedAmount + gratuity;
                 string requestStatus;
-               
+
                 var resp = Force(ticket, amount, out requestStatus);
                 if (resp != null)
                 {
                     //rjoshi fix me
-                    AppServices.PrintService.PrintSlipReport(new FlowDocument(new Paragraph(new Run(resp.ctr))));
+                    //AppServices.PrintService.PrintSlipReport(new FlowDocument(new Paragraph(new Run(resp.ctr))));
+
+                    var content = resp.ctr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter).DoPrint(content);
+
                     if (resp.transaction_approved)
                     {
                         result.Amount = amount;
+
+                        //ar pj = AppServices.CurrentTerminal.PrintJobs.FirstOrDefault(x => x.Name == "blah");
+                        //if (pj != null) AppServices.PrintService.ExecutePrintJob(pj);
                         //TODO Print job
                     }
                     else
                     {
-                        _view.CardStatus.Text = resp.bank_message;                      
+                        _view.CardStatus.Text = resp.bank_message;
                         _view.Refresh();
                         return;
                     }
@@ -137,16 +137,13 @@ namespace Samba.Modules.CreditCardModule.FirstData
                     _view.Refresh();
                     return;
                 }
-
-
-
             }
             InteractionService.UserIntraction.DeblurMainWindow();
             _view.Close();
             result.PublishEvent(EventTopicNames.PaymentProcessed);
         }
 
-       
+
         private FdCreditCardResp Force(Ticket ticket, decimal amount, out string requestStatus)
         {
             FdCreditCardReq ccinfo = new FdCreditCardReq();
@@ -161,13 +158,13 @@ namespace Samba.Modules.CreditCardModule.FirstData
             var byteArray = Encoding.UTF8.GetBytes(jsonPayload);
             try
             {
-                var req = (HttpWebRequest) WebRequest.Create(Settings.GatewayUri);
+                var req = (HttpWebRequest)WebRequest.Create(Settings.GatewayUri);
                 req.Method = "POST";
                 req.ContentType = "application/json; charset=utf-8";
                 req.Accept = "application/json";
                 req.Proxy = null;
-              //  req.Timeout = 5000;
-               // req.KeepAlive = true;
+                //  req.Timeout = 5000;
+                // req.KeepAlive = true;
 
                 /*
                 string gge4_date = DateTime.UtcNow.ToString("%Y-%m-%dT%H:%M:%S") + 'Z';
@@ -193,9 +190,9 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 // Close the Stream object.
                 dataStream.Close();
                 //var task = MakeAsyncRequest(req);
-               
+
                 WebResponse response = req.GetResponse();
-                requestStatus = ((HttpWebResponse) response).StatusDescription;
+                requestStatus = ((HttpWebResponse)response).StatusDescription;
                 dataStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(dataStream);
                 // Read the content.
@@ -203,7 +200,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 reader.Close();
                 dataStream.Close();
                 response.Close();
-               
+
                 FdCreditCardResp ccResp;
                 try
                 {
@@ -213,7 +210,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 {
                     JObject jobj = JObject.Parse(responseFromServer);
 
-                     ccResp = new FdCreditCardResp();
+                    ccResp = new FdCreditCardResp();
                     ccResp.transaction_approved = (jobj["transaction_approved"].ToString() == "1") ? true : false;
                     ccResp.bank_message = jobj["bank_message"].ToString();
                     ccResp.exact_resp_code = jobj["exact_resp_code"].ToString();
@@ -225,13 +222,12 @@ namespace Samba.Modules.CreditCardModule.FirstData
             }
             catch (Exception ex)
             {
-                requestStatus =  ex.Message;
+                requestStatus = ex.Message;
                 return null;
             }
         }
         public static Task<string> MakeAsyncRequest(HttpWebRequest request)
         {
-           
             Task<WebResponse> task = Task.Factory.FromAsync(
                 request.BeginGetResponse,
                 asyncResult => request.EndGetResponse(asyncResult),
@@ -359,7 +355,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
 
                 ccTrack.CardName = FormatName(CardData[1]);
                 ccTrack.CardNumber = FormatCardNumber(CardData[0]);
-                ccTrack.CardExpiry= CardData[2].Substring(2, 2) +  CardData[2].Substring(0, 2);
+                ccTrack.CardExpiry = CardData[2].Substring(2, 2) + CardData[2].Substring(0, 2);
 
                 return ccTrack;
             }
@@ -369,7 +365,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 //1234123412341234=0305101193010877?
                 CreditCardTrackData ccTrack = new CreditCardTrackData();
                 ccTrack.CardNumber = FormatCardNumber(CardData[0]);
-                ccTrack.CardExpiry = CardData[1].Substring(2, 2) +  CardData[1].Substring(0, 2);
+                ccTrack.CardExpiry = CardData[1].Substring(2, 2) + CardData[1].Substring(0, 2);
 
                 return ccTrack;
             }

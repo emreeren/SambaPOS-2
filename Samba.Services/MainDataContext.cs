@@ -476,7 +476,7 @@ namespace Samba.Services
                     else if (currentTicket.LastPaymentDate != SelectedTicket.LastPaymentDate)
                     {
                         var currentPaymentIds = SelectedTicket.Payments.Select(x => x.Id).Distinct();
-                        var unknownPayments = currentTicket.Payments.Where(x => !currentPaymentIds.Contains(x.Id)).FirstOrDefault();
+                        var unknownPayments = currentTicket.Payments.FirstOrDefault(x => !currentPaymentIds.Contains(x.Id));
                         if (unknownPayments != null)
                         {
                             result.ErrorMessage = Resources.TicketPaidLastChangesNotSaved;
@@ -514,7 +514,7 @@ namespace Samba.Services
 
                 if (SelectedTicket.TicketItems.Count > 0)
                 {
-                    if (SelectedTicket.TicketItems.Where(x => !x.Locked).FirstOrDefault() != null)
+                    if (SelectedTicket.TicketItems.FirstOrDefault(x => !x.Locked) != null)
                     {
                         SelectedTicket.MergeLinesAndUpdateOrderNumbers(NumberGenerator.GetNextNumber(SelectedDepartment.OrderNumerator.Id));
                     }

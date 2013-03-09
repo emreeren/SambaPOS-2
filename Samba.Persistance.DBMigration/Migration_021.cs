@@ -17,6 +17,7 @@ namespace Samba.Persistance.DBMigration
 
 		    Create.Table("TimeCardEntries")
 		          .WithColumn("Id").AsInt32().Identity().PrimaryKey()
+                  .WithColumn("Name").AsString(128).Nullable()
 		          .WithColumn("UserId").AsInt32().WithDefaultValue(0)
 		          .WithColumn("Action").AsInt32().WithDefaultValue(0)
 		          .WithColumn("DateTime").AsDateTime().WithDefaultValue(new DateTime(2000, 1, 1));
