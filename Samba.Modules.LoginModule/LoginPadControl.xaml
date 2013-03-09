@@ -161,9 +161,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70" />
-            <ColumnDefinition Width="70" />
-            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="95" />
+            <ColumnDefinition Width="95" />
+            <ColumnDefinition Width="95" />
         </Grid.ColumnDefinitions>
         <TextBox Text="{LocText EnterPin}" Grid.ColumnSpan="3"
              FontWeight="Bold" FontSize="32" Margin="5" Name="PinTextBox" IsReadOnly="True" />

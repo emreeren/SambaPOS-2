@@ -3359,7 +3359,7 @@ Error Message:
   <data name="SelectedLinesCount" xml:space="preserve">
     <value>Selected Lines Count</value>
   </data>
- <data name="ClockIn" xml:space="preserve">
+  <data name="ClockIn" xml:space="preserve">
     <value>ClockIn</value>
     <comment>Button.Content</comment>
   </data>
@@ -3371,5 +3371,16 @@ Error Message:
     <value>Are you sure you want to ClockOut</value>
     <comment>MessageBox.Content</comment>
   </data>
-
+  <data name="CreditCardReadFailed" xml:space="preserve">
+    <value>Failed to read Credit Card information. Please try again.</value>
+  </data>
+  <data name="CreditCardReadSuccess" xml:space="preserve">
+    <value>Successfully read credit card information.</value>
+  </data>
+  <data name="CreditCardRequestSendFailure" xml:space="preserve">
+    <value>Failed to send credit card request to the server.</value>
+  </data>
+  <data name="SwipeCreditCard" xml:space="preserve">
+    <value>Please swipe the credit card.</value>
+  </data>
 </root>

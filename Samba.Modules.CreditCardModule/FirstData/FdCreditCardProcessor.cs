@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using Microsoft.Practices.Prism.Regions;
 using Newtonsoft.Json;
@@ -20,6 +21,7 @@ using Samba.Infrastructure;
 using Samba.Presentation.Common;
 using Samba.Presentation.Common.Services;
 using Samba.Services;
+using Samba.Services.Printing;
 
 namespace Samba.Modules.CreditCardModule.FirstData
 {
@@ -34,8 +36,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
         private readonly FdProcessorViewModel _viewModel;
         private FdProcessorView _view;
         private static readonly FdProcessorSettings Settings = new FdProcessorSettings();
-        private static readonly IDictionary<int, PreauthData> PreauthDataCache = new Dictionary<int, PreauthData>();
-
+        
        
 
         public Ticket SelectedTicket { get; set; }
@@ -45,7 +46,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
         {
             _viewModel = viewModel;
             _viewModel.Processed += ViewModelProcessed;
-           
+          
             Settings.Load();
 
         }
@@ -65,18 +66,19 @@ namespace Samba.Modules.CreditCardModule.FirstData
         {
             InteractionService.UserIntraction.BlurMainWindow();
             SelectedTicket = creditCardProcessingData.Ticket;
-            _viewModel.CanPreAuth = !PreauthDataCache.ContainsKey(SelectedTicket.Id);
+            _viewModel.CanPreAuth = true;
             _viewModel.TenderedAmount = creditCardProcessingData.TenderedAmount;
             _viewModel.Gratuity = (creditCardProcessingData.TenderedAmount * Settings.GratuityRate) / 100;
-                    
-            _viewModel.AuthCode = "";
+           
             _view = new FdProcessorView(_viewModel);
+            _view.FdTransactionType.SelectedIndex = 0;
+            _viewModel.AuthCode = "";
             _view.ShowDialog();
         }
 
         public bool ForcePayment(int ticketId)
         {
-            return PreauthDataCache.ContainsKey(ticketId);
+            return false;
         }
 
        
@@ -85,43 +87,67 @@ namespace Samba.Modules.CreditCardModule.FirstData
             var processType = args.ProcessType;
             var gratuity = _viewModel.Gratuity;
             var ticket = SelectedTicket;
+            var txType = ((ComboBoxItem)_view.FdTransactionType.SelectedItem).Tag;
 
+            var result = new CreditCardProcessingResult { ProcessType = processType };
+            var amount = _viewModel.TenderedAmount + gratuity;
+            if (processType == ProcessType.External)
+            {
+                result.Amount = amount;
+                InteractionService.UserIntraction.DeblurMainWindow();
+                _view.Close();
+                result.PublishEvent(EventTopicNames.PaymentProcessed);
+                return;
+            }
+           
+            
            if (processType == ProcessType.Swipe)
            {
-               var ccData = ReadCreditCardTrackData();
+               string debugTrack = "";
+               _view.CardStatus.Text = Samba.Localization.Properties.Resources.SwipeCreditCard;
+               _view.Refresh();
+               var ccData = ReadCreditCardTrackData(out debugTrack);
                if (ccData == null)
                {
-                   _view.CardStatus.Text = "Failed to read Credit Card information. Please try again.";
+                   if (String.IsNullOrWhiteSpace(debugTrack))
+                   {
+                       _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadFailed;
+                   }
+                   else
+                   {
+                       _view.CardStatus.Text = debugTrack;
+                   }
                    _view.Refresh();
                    return;
                }
+               
                _view.CardExpire.Text = ccData.CardExpiry;
                _view.CardName.Text = ccData.CardName;
                _view.CardNumber.Password = ccData.CardNumber;
-               _view.CardStatus.Text = "Successfully read the card";
+               _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadSuccess;
                _view.Refresh();
                return;
            }
            
 
-            var result = new CreditCardProcessingResult { ProcessType = processType };
-
-
-
+          
             if (processType == ProcessType.Force)
             {
-                
-                var amount = _viewModel.TenderedAmount + gratuity;
+                              
                 string requestStatus;
-               
+                _view.CardStatus.Text = "";
+                _view.Refresh();
                 var resp = Force(ticket, amount, out requestStatus);
                 if (resp != null)
                 {
                     //rjoshi fix me
-                    AppServices.PrintService.PrintSlipReport(new FlowDocument(new Paragraph(new Run(resp.ctr))));
+                    var content = resp.ctr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter).DoPrint(content);
+
                     if (resp.transaction_approved)
                     {
                         result.Amount = amount;
+                        _view.CardStatus.Text = resp.bank_message; 
                         //TODO Print job
                     }
                     else
@@ -133,13 +159,16 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 }
                 else
                 {
-                    _view.CardStatus.Text = "Failed to send request. " + requestStatus;
+                    _view.CardStatus.Text = Localization.Properties.Resources.CreditCardRequestSendFailure + " " + requestStatus;
                     _view.Refresh();
                     return;
                 }
 
 
 
+            }else if (processType == ProcessType.External)
+            {
+                result.Amount = amount;
             }
             InteractionService.UserIntraction.DeblurMainWindow();
             _view.Close();
@@ -149,198 +178,51 @@ namespace Samba.Modules.CreditCardModule.FirstData
        
         private FdCreditCardResp Force(Ticket ticket, decimal amount, out string requestStatus)
         {
-            FdCreditCardReq ccinfo = new FdCreditCardReq();
-            ccinfo.amount = amount.ToString();
-            ccinfo.cardholder_name = _view.CardName.Text;
-            ccinfo.cc_expiry = _view.CardExpire.Text;
-            ccinfo.cc_number = _view.CardNumber.Password;
-            ccinfo.gateway_id = Settings.GatewayId;
-            ccinfo.password = Settings.Password;
-            ccinfo.transaction_type = "00";
-            string jsonPayload = JsonConvert.SerializeObject(ccinfo);
-            var byteArray = Encoding.UTF8.GetBytes(jsonPayload);
-            try
+            var txType = ((ComboBoxItem)_view.FdTransactionType.SelectedItem).Tag.ToString();
+            FdCreditCardReq fdReq = new FdCreditCardReq(txType);
+            fdReq.amount = amount.ToString();
+            fdReq.cardholder_name = _view.CardName.Text;
+            fdReq.cc_expiry = _view.CardExpire.Text;
+            fdReq.cc_number = _view.CardNumber.Password;
+            fdReq.gateway_id = Settings.GatewayId;
+            fdReq.password = Settings.Password;
+            fdReq.transaction_type = txType;
+            fdReq.reference_no = ticket.Id.ToString();
+
+            FdCreditCardResp fdResp;
+            var fdGwMgr = new FdGatewayManager(Settings.GatewayUri, FdGatewayManager.ApiVersion.V11);
+            if (fdGwMgr.SendFdCreditCardRequest(fdReq, out fdResp, out requestStatus))
             {
-                var req = (HttpWebRequest) WebRequest.Create(Settings.GatewayUri);
-                req.Method = "POST";
-                req.ContentType = "application/json; charset=utf-8";
-                req.Accept = "application/json";
-                req.Proxy = null;
-              //  req.Timeout = 5000;
-               // req.KeepAlive = true;
-
-                /*
-                string gge4_date = DateTime.UtcNow.ToString("%Y-%m-%dT%H:%M:%S") + 'Z';
-   
-               
-                string fpSequence = new Random().Next().ToString();
-                var time = (DateTime.UtcNow - new DateTime(1970, 1, 1));;
-                int timeStamp = (int)time.TotalSeconds;
-
-                string hmacData = String.Format("{0}^{1}^{2}^{3}^{4}", Settings.LoginId, fpSequence,
-                                                timeStamp, amount, Settings.CurrencyCode);
-                HMACMD5 hmac = new HMACMD5(Encoding.ASCII.GetBytes(Settings.HmacKey));
-                byte[] hmacBuffer = Encoding.ASCII.GetBytes(hmacData);
-                MemoryStream hmacStream = new MemoryStream(hmacBuffer);
-               
-                string hash = System.Convert.ToBase64String( hmac.ComputeHash(hmacStream));
-                */
-
-                req.ContentLength = byteArray.Length;
-                Stream dataStream = req.GetRequestStream();
-                // Write the data to the request stream.
-                dataStream.Write(byteArray, 0, byteArray.Length);
-                // Close the Stream object.
-                dataStream.Close();
-                //var task = MakeAsyncRequest(req);
-               
-                WebResponse response = req.GetResponse();
-                requestStatus = ((HttpWebResponse) response).StatusDescription;
-                dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                // Read the content.
-                string responseFromServer = reader.ReadToEnd();
-                reader.Close();
-                dataStream.Close();
-                response.Close();
-               
-                FdCreditCardResp ccResp;
-                try
-                {
-                    ccResp = JsonConvert.DeserializeObject<FdCreditCardResp>(responseFromServer);
-                }
-                catch (Exception ex)
-                {
-                    JObject jobj = JObject.Parse(responseFromServer);
-
-                     ccResp = new FdCreditCardResp();
-                    ccResp.transaction_approved = (jobj["transaction_approved"].ToString() == "1") ? true : false;
-                    ccResp.bank_message = jobj["bank_message"].ToString();
-                    ccResp.exact_resp_code = jobj["exact_resp_code"].ToString();
-
-                }
-
-                requestStatus = ccResp.bank_message;
-                return ccResp;
+                return fdResp;
             }
-            catch (Exception ex)
+            else
             {
-                requestStatus =  ex.Message;
                 return null;
             }
         }
-        public static Task<string> MakeAsyncRequest(HttpWebRequest request)
+       
+        
+        /// <summary>
+        /// Read Credit card data
+        /// </summary>
+        /// <param name="trackDebug"></param>
+        /// <returns></returns>
+        protected CreditCardTrackData ReadCreditCardTrackData(out string trackDebug)
         {
+            
+            string error = "";
+            string tracks = SerialPortService.ReadExisting(Settings.ComPort,Settings.ComBaudRate,  Settings.ComReadTimeout, ref error);
+            if (!String.IsNullOrEmpty(tracks))
+            {
+                trackDebug = "Track1:" + tracks;
+                var trackData = ParseSwipeData(tracks);
+                if (trackData != null)
+                {
+                    return trackData;
+                }
+            }
+            trackDebug = "Track1:" + error;
            
-            Task<WebResponse> task = Task.Factory.FromAsync(
-                request.BeginGetResponse,
-                asyncResult => request.EndGetResponse(asyncResult),
-                (object)null);
-
-            return task.ContinueWith(t => ReadStreamFromResponse(t.Result));
-        }
-
-        private static string ReadStreamFromResponse(WebResponse response)
-        {
-            using (Stream responseStream = response.GetResponseStream())
-            using (StreamReader sr = new StreamReader(responseStream))
-            {
-                //Need to return this response 
-                string strContent = sr.ReadToEnd();
-                return strContent;
-            }
-        }
-        static void AddPreauthData(int ticketId, SecureString swipeData, string authCode, decimal tenderedAmount, decimal gratuity)
-        {
-            Debug.Assert(!PreauthDataCache.ContainsKey(ticketId));
-            PreauthDataCache.Add(ticketId, new PreauthData
-            {
-                MerchantAuthCode = authCode,
-                SwipeData = swipeData,
-                TenderedAmount = tenderedAmount,
-                Gratuity = gratuity
-            });
-        }
-
-        static PreauthData GetPreauthData(int ticketId)
-        {
-            if (PreauthDataCache.ContainsKey(ticketId))
-            {
-                var result = PreauthDataCache[ticketId];
-                PreauthDataCache.Remove(ticketId);
-                return result;
-            }
-            return null;
-        }
-
-        private static decimal Force(SecureString swipeData, Ticket ticket, decimal tenderedAmount, decimal gratuity)
-        {
-            var result = tenderedAmount;
-            if (!PreauthDataCache.ContainsKey(ticket.Id))
-                result = Preauth(swipeData, ticket, tenderedAmount, gratuity);
-            ForceWithPreauth(ticket.Id);
-            return result;
-        }
-
-        private static void ForceWithPreauth(int ticketId)
-        {
-            // Force preauth payment
-            Debug.Assert(PreauthDataCache.ContainsKey(ticketId));
-            var preauthData = GetPreauthData(ticketId);
-            using (var sm = new SecureStringToStringMarshaler(preauthData.SwipeData))
-            {
-                // access swipedata as demonstrated here 
-                InteractionService.UserIntraction.GiveFeedback("Force:\r" + sm.String);
-                // *------------------------
-                // force with preauth data;
-                // *------------------------
-            }
-            preauthData.SwipeData.Clear(); // we don't need swipedata anymore...
-        }
-
-        private static decimal Preauth(SecureString swipeData, Ticket ticket, decimal tenderedAmount, decimal gratuity)
-        {
-            // preauthPayment
-
-            if (gratuity > 0 && Settings.GratuityService != null) // add gratuity amount to ticket
-                ticket.AddTaxService(Settings.GratuityService.Id, Settings.GratuityService.CalculationMethod, gratuity);
-
-            using (var sm = new SecureStringToStringMarshaler(swipeData))
-            {
-                // access swipedata as demonstrated here 
-                InteractionService.UserIntraction.GiveFeedback(string.Format("Amount:{0}\r\rPreauth:\r{1}", ticket.GetRemainingAmount(), sm.String));
-                // *------------------------
-                // Preauth Here
-                // *------------------------
-            }
-            AddPreauthData(ticket.Id, swipeData, "FIRST Data MERCHANT AUTH CODE", tenderedAmount, gratuity);
-            return tenderedAmount + gratuity;
-        }
-
-        protected CreditCardTrackData ReadCreditCardTrackData()
-        {
-            // _viewModel.CardExpiry = creditCardProcessingData.CardExpiry;
-            // _viewModel.CardName = creditCardProcessingData.CardName;
-            //  _viewModel.CardNumber = creditCardProcessingData.CardNumber;
-            string track1 = SerialPortService.ReadLineFromPort("COM4");
-            if (!String.IsNullOrEmpty(track1))
-            {
-                var trackData = ParseSwipeData(track1);
-                if (trackData != null)
-                {
-                    return trackData;
-                }
-            }
-
-            string track2 = SerialPortService.ReadLineFromPort("COM4");
-            if (!String.IsNullOrEmpty(track2))
-            {
-                var trackData = ParseSwipeData(track2);
-                if (trackData != null)
-                {
-                    return trackData;
-                }
-            }
             return null;
         }
         private CreditCardTrackData ParseSwipeData(string swipeData)
@@ -348,31 +230,49 @@ namespace Samba.Modules.CreditCardModule.FirstData
             bool CaretPresent = false;
             bool EqualPresent = false;
 
-            CaretPresent = swipeData.Contains("^");
-            EqualPresent = swipeData.Contains("=");
+            
 
-            if (CaretPresent)
+            var tracks = swipeData.Split(new char[] {'?'});
+
+            if (tracks == null || tracks.Length == 0)
             {
-                CreditCardTrackData ccTrack = new CreditCardTrackData();
-                string[] CardData = swipeData.Split('^');
-                //B1234123412341234^CardUser/John^030510100000019301000000877000000?
-
-                ccTrack.CardName = FormatName(CardData[1]);
-                ccTrack.CardNumber = FormatCardNumber(CardData[0]);
-                ccTrack.CardExpiry= CardData[2].Substring(2, 2) +  CardData[2].Substring(0, 2);
-
-                return ccTrack;
+                return null;
             }
-            else if (EqualPresent)
+
+            foreach (var track in tracks)
             {
-                string[] CardData = swipeData.Split('=');
-                //1234123412341234=0305101193010877?
-                CreditCardTrackData ccTrack = new CreditCardTrackData();
-                ccTrack.CardNumber = FormatCardNumber(CardData[0]);
-                ccTrack.CardExpiry = CardData[1].Substring(2, 2) +  CardData[1].Substring(0, 2);
 
-                return ccTrack;
-            }
+                CaretPresent = swipeData.Contains("^");
+                EqualPresent = swipeData.Contains("=");
+
+                if (CaretPresent)
+                {
+                    CreditCardTrackData ccTrack = new CreditCardTrackData();
+                    string[] CardData = swipeData.Split('^');
+                    //%B1234123412341234^CardUser/John^030510100000019301000000877000000?
+
+                    ccTrack.CardName = FormatName(CardData[1]);                 
+                    ccTrack.CardNumber = FormatCardNumber(CardData[0]);
+                    ccTrack.CardExpiry = CardData[2].Substring(2, 2) + CardData[2].Substring(0, 2);
+                    ccTrack.ServiceCode = CardData[2].Substring(4, 3);
+                    ccTrack.DiscretionaryData = CardData[2].Substring(7);
+                    return ccTrack;
+                }
+                 if(EqualPresent)
+                {
+                   
+                        string[] CardData = swipeData.Split('=');
+                        //;1234123412341234=0305101 193010877?
+                        CreditCardTrackData ccTrack = new CreditCardTrackData();
+                        ccTrack.CardNumber = FormatCardNumber(CardData[0].Substring(1));
+                        ccTrack.CardExpiry = CardData[1].Substring(2, 2) + CardData[1].Substring(0, 2);
+                        ccTrack.ServiceCode = CardData[1].Substring(4, 3);
+                        ccTrack.DiscretionaryData = CardData[1].Substring(7);
+
+                        return ccTrack;
+                    }
+                }
+            
             return null;
         }
 
@@ -393,7 +293,8 @@ namespace Samba.Modules.CreditCardModule.FirstData
             {
                 string[] NameSplit = o.Split('/');
 
-                result = NameSplit[1] + " " + NameSplit[0];
+                result = NameSplit[1].Trim() + " " + NameSplit[0].Trim();
+               
             }
             else
             {

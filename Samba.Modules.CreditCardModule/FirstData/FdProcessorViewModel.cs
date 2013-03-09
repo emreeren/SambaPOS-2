@@ -33,6 +33,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
             PreAuthCommand = new DelegateCommand(OnPreAuth, CanPreAuthExecute);
             CancelCommand = new DelegateCommand(OnCancel);
             SwipeCommand = new DelegateCommand(OnSwipe);
+            ExternalCommand = new DelegateCommand(OnExternal);
         }
 
         private bool CanPreAuthExecute()
@@ -61,9 +62,14 @@ namespace Samba.Modules.CreditCardModule.FirstData
             InvokeProcessed(new OnProcessedArgs { ProcessType = ProcessType.Swipe });
         }
 
-        
+        private void OnExternal()
+        {
+            InvokeProcessed(new OnProcessedArgs { ProcessType = ProcessType.External });
+        }
 
-       
+
+
+        public DelegateCommand ExternalCommand { get; set; }
         public DelegateCommand ForceCommand { get; set; }
         public DelegateCommand PreAuthCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }

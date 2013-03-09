@@ -25,13 +25,12 @@ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             </TextBlock.Effect>
         </TextBlock>
         <StackPanel Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center">
-            <Border Grid.Column="1" Width="254" Height="361" CornerRadius="10" BorderThickness="2"
-                 BorderBrush="LightSteelBlue">
-                <Login1:LoginPadControl x:Name="PadControl" Margin="15" PinSubmitted="LoginPadControl_PinSubmitted" Height="325" Width="198" />
+            <Border Grid.Column="1"  Height="400" CornerRadius="5" BorderThickness="2"
+                 BorderBrush="LightSteelBlue" HorizontalAlignment="Center">
+                <Login1:LoginPadControl x:Name="PadControl"  HorizontalAlignment="Center" Margin="5" PinSubmitted="LoginPadControl_PinSubmitted" />
             </Border>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="{Binding AdminPasswordHint}"
                  TextAlignment="Center" />
-            
             <Button HorizontalAlignment="Center" MinWidth="100" Height="50" FontWeight="Bold" FontSize="18"
                  Margin="5" Click="Button_Click" Visibility="{Binding IsExitButtonVisible,Converter={StaticResource VisibilityConverter}}">
                 <DockPanel>

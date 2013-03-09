@@ -1752,6 +1752,33 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to read Credit Card information. Please try again..
+        /// </summary>
+        public static string CreditCardReadFailed {
+            get {
+                return ResourceManager.GetString("CreditCardReadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully read credit card information..
+        /// </summary>
+        public static string CreditCardReadSuccess {
+            get {
+                return ResourceManager.GetString("CreditCardReadSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to send credit card request to the server..
+        /// </summary>
+        public static string CreditCardRequestSendFailure {
+            get {
+                return ResourceManager.GetString("CreditCardRequestSendFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credit Card Content Details.
         /// </summary>
         public static string CreditContentDetails {
@@ -6719,6 +6746,15 @@ namespace Samba.Localization.Properties {
         public static string SubTags {
             get {
                 return ResourceManager.GetString("SubTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please swipe the credit card..
+        /// </summary>
+        public static string SwipeCreditCard {
+            get {
+                return ResourceManager.GetString("SwipeCreditCard", resourceCulture);
             }
         }
         
