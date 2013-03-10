@@ -1,6 +1,8 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using Samba.Domain;
 using Samba.Domain.Models.Tickets;
@@ -13,7 +15,8 @@ namespace Samba.Services
         PreAuth,
         Force,
         Cancel,
-        Swipe
+        Swipe,
+        External //external processing. system assume payment received
     }
 
     public class CreditCardProcessingResult
@@ -36,8 +39,9 @@ namespace Samba.Services
     {
         public string CardName { get; set; }
         public string CardExpiry { get; set; }
-        public string CardNumber { get; set; }
-        public string CardType { get; set; }
+        public String CardNumber { get; set; }
+        public string ServiceCode { get; set; }
+        public string DiscretionaryData { get; set; }
     }
 
     public interface ICreditCardProcessor

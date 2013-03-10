@@ -4,11 +4,13 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Samba.Services
 {
     public static class SerialPortService
     {
+        
         private static readonly Dictionary<string, SerialPort> Ports = new Dictionary<string, SerialPort>();
 
         public static void WritePort(string portName, byte[] data)
@@ -87,16 +89,23 @@ namespace Samba.Services
             return Encoding.ASCII.GetString(buffer);
         }
 
-        public static string ReadLineFromPort(string portName, int timeoutInMillSec = 5000)
+        
+
+        public static string ReadExisting(string portName, int baudRate, int timeoutInMillSec, ref string error)
         {
             if (!Ports.ContainsKey(portName))
             {
-                Ports.Add(portName, new SerialPort(portName));
+                Ports.Add(portName, new SerialPort(portName,baudRate));
+
             }
             var port = Ports[portName];
-
+           
             try
             {
+                if (port.BaudRate != baudRate)
+                {
+                    port.Close();
+                }
                 if (!port.IsOpen) port.Open();
                 if (port.IsOpen)
                 {
@@ -105,14 +114,24 @@ namespace Samba.Services
                         port.ReadTimeout = timeoutInMillSec;
                     }
 
-
-                    return port.ReadLine();
-
+                    
+                    while (timeoutInMillSec > 0)
+                    {
+                        string data = port.ReadExisting();
+                        if (!String.IsNullOrEmpty(data))
+                        {
+                            return data;
+                        }
+                        Thread.Sleep(1000);
+                        timeoutInMillSec -= 1000;
+                    }
+                    
+                    
                 }
             }
-            catch (IOException)
+            catch (Exception exception)
             {
-
+                error = exception.Message;
             }
             return "";
         }

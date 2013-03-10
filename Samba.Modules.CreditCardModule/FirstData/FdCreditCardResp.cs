@@ -1,6 +1,6 @@
 ﻿namespace Samba.Modules.CreditCardModule.FirstData
 {
-    class FdCreditCardResp
+    public class FdCreditCardResp
     {
         public string logon_message { get; set; }
         public bool transaction_error { get; set; }

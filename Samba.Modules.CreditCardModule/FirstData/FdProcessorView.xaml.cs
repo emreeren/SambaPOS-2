@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using Samba.Modules.CreditCardModule.ExternalProcessor;
 using Samba.Presentation.Common;
 
@@ -20,5 +21,6 @@ namespace Samba.Modules.CreditCardModule.FirstData
         {
             CardNumber.BackgroundFocus();
         }
+        
     }
 }

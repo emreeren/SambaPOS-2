@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:VirtualKeyboard="clr-namespace:Samba.Presentation.Common.VirtualKeyboard;assembly=Samba.Presentation.Common" mc:Ignorable="d" FontSize="20"
-             Height="625" Width="700" WindowStartupLocation="CenterScreen" 
+             Height="570" Width="600" WindowStartupLocation="CenterScreen" 
         WindowStyle="None"
         Name="FdProcessorWindow" Loaded="FdProcessorWindow_Loaded" 
         Title="First Data Credit Card Processor">
+    
     <Border BorderThickness="5" BorderBrush="CornflowerBlue">
         <Grid>
             <Grid.RowDefinitions>
@@ -19,13 +20,30 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0">
 
+                <ComboBox Name="FdTransactionType"  HorizontalContentAlignment="Center" Width="350" Background="White" Foreground="Blue" FontWeight="Bold" BorderBrush="Red" BorderThickness="3">
+                    <ComboBoxItem Tag="00"  IsSelected="True">Purchase</ComboBoxItem>
+                    <ComboBoxItem Tag="01">PreAuthorization</ComboBoxItem>
+                    <ComboBoxItem Tag="03">ForcedPost</ComboBoxItem>
+                    <ComboBoxItem Tag="85">Activation</ComboBoxItem>
+                    <ComboBoxItem Tag="88">Reload</ComboBoxItem>
+                    <ComboBoxItem Tag="86">BalanceInquiry</ComboBoxItem>
+                    <ComboBoxItem Tag="89">Deactivation</ComboBoxItem>
+                    <ComboBoxItem Tag="04">Refund</ComboBoxItem>
+                    <ComboBoxItem Tag="13">Void</ComboBoxItem>
+                    <ComboBoxItem Tag="05">PreAuthorizationOnly</ComboBoxItem>
+                    <ComboBoxItem Tag="07">PayPalOrder</ComboBoxItem>
+                    <ComboBoxItem Tag="32">TaggedPreAuthorizationCompletion</ComboBoxItem>
+                    <ComboBoxItem Tag="33">TaggedVoid</ComboBoxItem>
+                    <ComboBoxItem Tag="83">CashOut</ComboBoxItem>
+                </ComboBox>
+               
                 <Label HorizontalContentAlignment="Center">Tendered Amount</Label>
                 <Border BorderThickness="2" BorderBrush="Red" HorizontalAlignment="Center">
                     <TextBlock FontWeight="Bold" FontSize="25" TextAlignment="Center" HorizontalAlignment="Center" MinWidth="250" Text="{Binding TenderedAmount,StringFormat='#,#0.00'}"/>
                 </Border>
 
 
-                <StackPanel Visibility="{Binding CanPreAuth,Converter={StaticResource VisibilityConverter}}" Height="272">
+                <StackPanel Visibility="{Binding CanPreAuth,Converter={StaticResource VisibilityConverter}}" Height="258">
                    
 
                         <!--Label HorizontalContentAlignment="Center">Gratuity</Label>
@@ -38,7 +56,7 @@
                     <Label HorizontalContentAlignment="Center" FontSize="15" FontWeight="DemiBold">Card Expire Date:</Label>
                     <TextBox Name="CardExpire" HorizontalAlignment="Center" MinWidth="250" Height="30"/>
                     <Label HorizontalContentAlignment="Center" FontSize="15" FontWeight="DemiBold">Status:</Label>
-                    <TextBox Name="CardStatus" FontWeight="Bold" TextAlignment="Center" MinWidth="550" Height="61" TextWrapping="Wrap" AcceptsReturn="True"
+                    <TextBox Name="CardStatus" FontWeight="Bold" TextAlignment="Center" MinWidth="460" Height="67" TextWrapping="Wrap" AcceptsReturn="True"
                                VerticalScrollBarVisibility="Auto" IsEnabled="False" Background="White" Foreground="OrangeRed"/>
                
                 </StackPanel>
@@ -49,9 +67,10 @@
                 <Button Margin="4" Width="100" Command="{Binding ForceCommand}">Send</Button>
                 <!-- Button Margin="4" Width="100" Command="{Binding PreAuthCommand}">PreAuth</Button -->              
                 <Button Margin="4" Width="100" Command="{Binding CancelCommand}">Cancel</Button>
+                <Button Margin="4" Width="100" Command="{Binding ExternalCommand}" >External </Button>
             </UniformGrid>
             <Viewbox Grid.Row="1" Grid.ColumnSpan="2">
-                <VirtualKeyboard:KeyboardView/>
+                <VirtualKeyboard:KeyboardView Height="283" />
             </Viewbox>
 
         </Grid>
