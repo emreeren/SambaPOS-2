@@ -60,17 +60,7 @@ namespace Samba.Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SubmitPin(1); //Clock In
-        }
-
-        private void Button_ClockOut(object sender, RoutedEventArgs e)
-        {
-            bool answer = InteractionService.UserIntraction.AskQuestion(
-                       Localization.Properties.Resources.ConfirmClockOut);
-            if (answer)
-            {
-                SubmitPin(2); //Clock Out
-            }
+            SubmitPin(1);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

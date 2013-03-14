@@ -31,15 +31,26 @@ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             </Border>
             <TextBlock FontSize="14" HorizontalAlignment="Center" Text="{Binding AdminPasswordHint}"
                  TextAlignment="Center" />
-            <Button HorizontalAlignment="Center" MinWidth="100" Height="50" FontWeight="Bold" FontSize="18"
-                 Margin="5" Click="Button_Click" Visibility="{Binding IsExitButtonVisible,Converter={StaticResource VisibilityConverter}}">
-                <DockPanel>
-                    <Image Source="Images/LanShutDown.icon.gif" Stretch="None"/>
-                    <Label>
-                        <LocText ResourceIdentifierKey="Exit"/>
-                    </Label>
-                </DockPanel>
-            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button MinWidth="150" Height="50" FontWeight="Bold" FontSize="18" Focusable="False"
+                 Margin="5" Click="ButtonBase2_OnClick" Visibility="{Binding IsExitButtonVisible,Converter={StaticResource VisibilityConverter}}">
+                    <DockPanel>
+                        <Image Source="Images/LanShutDown.icon.gif" Stretch="None"/>
+                        <Label>
+                            <LocText ResourceIdentifierKey="ClockOut"/>
+                        </Label>
+                    </DockPanel>
+                </Button>
+                <Button MinWidth="150" Height="50" FontWeight="Bold" FontSize="18" Margin="5" Focusable="False"
+                        Click="ButtonBase_OnClick" Visibility="{Binding IsExitButtonVisible,Converter={StaticResource VisibilityConverter}}">
+                    <DockPanel>
+                        <Image Source="Images/LanShutDown.icon.gif" Stretch="None"/>
+                        <Label>
+                            <LocText ResourceIdentifierKey="Exit"/>
+                        </Label>
+                    </DockPanel>
+                </Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

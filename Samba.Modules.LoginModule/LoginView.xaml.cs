@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Samba.Domain.Models.Users;
 using Samba.Presentation.Common;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Login
@@ -17,21 +18,19 @@ namespace Samba.Login
     [Export]
     public partial class LoginView : UserControl
     {
+        private readonly LoginViewModel _viewModel;
+
         [ImportingConstructor]
         public LoginView(LoginViewModel viewModel)
         {
+            _viewModel = viewModel;
             InitializeComponent();
             DataContext = viewModel;
         }
 
         private void LoginPadControl_PinSubmitted(object sender, PinData pinData)
         {
-            pinData.PublishEvent(EventTopicNames.PinSubmitted);
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            _viewModel.SubmitPin(pinData);
         }
 
         private void UserControl_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -55,5 +54,19 @@ namespace Samba.Login
             e.Handled = true;
         }
 
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ButtonBase2_OnClick(object sender, RoutedEventArgs e)
+        {
+            bool answer = InteractionService.UserIntraction.AskQuestion(
+                Localization.Properties.Resources.ConfirmClockOut);
+            if (answer)
+            {
+                PadControl.SubmitPin(2); //Clock Out
+            }
+        }
     }
 }
