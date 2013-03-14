@@ -10,7 +10,7 @@ namespace Samba.Services
 {
     public static class SerialPortService
     {
-        
+
         private static readonly Dictionary<string, SerialPort> Ports = new Dictionary<string, SerialPort>();
 
         public static void WritePort(string portName, byte[] data)
@@ -40,9 +40,6 @@ namespace Samba.Services
             }
             return Ports[portName];
         }
-       
-
-       
 
         public static void WritePort(string portName, string data)
         {
@@ -83,23 +80,21 @@ namespace Samba.Services
             }
             return null;
         }
+
         public static string ReadPort(string portName, int length, int timeoutInMillSec = -1)
         {
             var buffer = ReadBufferPort(portName, length, timeoutInMillSec);
             return Encoding.ASCII.GetString(buffer);
         }
 
-        
-
         public static string ReadExisting(string portName, int baudRate, int timeoutInMillSec, ref string error)
         {
             if (!Ports.ContainsKey(portName))
             {
-                Ports.Add(portName, new SerialPort(portName,baudRate));
-
+                Ports.Add(portName, new SerialPort(portName, baudRate));
             }
             var port = Ports[portName];
-           
+
             try
             {
                 if (port.BaudRate != baudRate)
@@ -114,7 +109,7 @@ namespace Samba.Services
                         port.ReadTimeout = timeoutInMillSec;
                     }
 
-                    
+
                     while (timeoutInMillSec > 0)
                     {
                         string data = port.ReadExisting();
@@ -125,8 +120,8 @@ namespace Samba.Services
                         Thread.Sleep(1000);
                         timeoutInMillSec -= 1000;
                     }
-                    
-                    
+
+
                 }
             }
             catch (Exception exception)
