@@ -717,21 +717,19 @@ namespace Samba.Services
             }
         }
 
-        public static void UpdateTimeCardEntry(User user)
+        public static void UpdateTimeCardEntry(User user, int timeCardAction)
         {
-            if (user.TimeCardAction == 0)
+            if (timeCardAction == 0)
             {
                 return;
             }
 
             var lastEntry = GetLastTimeCardEntry(user);
 
-            if (user.ShouldCreateCardEntry(lastEntry))
+            if (user.ShouldCreateCardEntry(lastEntry, timeCardAction))
             {
-                AddTimeCardEntry(user.CreateTimeCardEntry());
+                AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
             }
-
-            user.TimeCardAction = 0;
         }
     }
 }

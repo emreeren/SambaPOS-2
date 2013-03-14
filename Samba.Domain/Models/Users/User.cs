@@ -31,8 +31,7 @@ namespace Samba.Domain.Models.Users
         public string ContactPhone { get; set; }
         public string EmergencyPhone { get; set; }
         public string DateOfBirth { get; set; }
-        public int TimeCardAction { get; set; }  // 0 None, 1 ClockIn, 2 ClockOut
-        
+
         private UserRole _userRole;
         public virtual UserRole UserRole
         {
@@ -48,24 +47,24 @@ namespace Samba.Domain.Models.Users
             get { return Name; }
         }
 
-        public TimeCardEntry CreateTimeCardEntry()
+        public TimeCardEntry CreateTimeCardEntry(int timeCardAction)
         {
-            return TimeCardEntry.Crate(TimeCardAction, Id);
+            return TimeCardEntry.Crate(timeCardAction, Id);
         }
 
-        public bool ShouldCreateCardEntry(TimeCardEntry currentCardEntry)
+        public bool ShouldCreateCardEntry(TimeCardEntry currentCardEntry, int timeCardAction)
         {
             var result = false;
 
             if (currentCardEntry != null && (DateTime.Compare(currentCardEntry.DateTime, DateTime.Today) > 0))
             {
-                if (currentCardEntry.Action != TimeCardAction)
+                if (currentCardEntry.Action != timeCardAction)
                 {
                     result = true;
                 }
             }
 
-            if (currentCardEntry == null && TimeCardAction == 1) //Clock In
+            if (currentCardEntry == null && timeCardAction == 1) //Clock In
             {
                 result = true;
             }

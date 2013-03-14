@@ -148,13 +148,8 @@ namespace Samba.Presentation.Terminal
             LoggedInUserViewModel.Refresh();
             if (user != User.Nobody)
             {
-                var timeCardActionBeforeUpdate = user.TimeCardAction;
-                MainDataContext.UpdateTimeCardEntry(user);
-                if (timeCardActionBeforeUpdate == 2)
-                {
-                    AppServices.LogoutUser();
-                    return;
-                }
+                //There is no clockout ui for terminal.
+                MainDataContext.UpdateTimeCardEntry(user, 0);
 
                 if (user.UserRole.DepartmentId != 0 && !AppServices.IsUserPermittedFor(PermissionNames.ChangeDepartment))
                 {

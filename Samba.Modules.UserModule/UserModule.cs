@@ -21,8 +21,8 @@ namespace Samba.Modules.UserModule
         public ICategoryCommand ListUsersCommand { get; set; }
         public ICategoryCommand ListUserRolesCommand { get; set; }
         public ICategoryCommand NavigateLogoutCommand { get; set; }
-        
-       
+
+
 
         [ImportingConstructor]
         public UserModule(IRegionManager regionManager)
@@ -31,7 +31,7 @@ namespace Samba.Modules.UserModule
             ListUsersCommand = new CategoryCommand<string>(Resources.UserList, Resources.Users, OnListUsers);
             NavigateLogoutCommand = new CategoryCommand<string>("Logout", Resources.Common, "images/bmp.png", OnNavigateUserLogout) { Order = 99 };
             _regionManager = regionManager;
-           
+
         }
 
         private static void OnNavigateUserLogout(string obj)
@@ -68,24 +68,21 @@ namespace Samba.Modules.UserModule
             CommonEventPublisher.PublishDashboardCommandEvent(ListUserRolesCommand);
             CommonEventPublisher.PublishDashboardCommandEvent(ListUsersCommand);
             CommonEventPublisher.PublishNavigationCommandEvent(NavigateLogoutCommand);
-       }
+        }
 
         public void PinEntered(PinData pinData)
         {
             var u = AppServices.LoginUser(pinData.PinCode);
             if (u != User.Nobody)
             {
-                u.TimeCardAction = pinData.TimeCardAction;
-                if (u.TimeCardAction != 0)
+                if (pinData.TimeCardAction != 0)
                 {
-                    var timeCardActionBeforeUpdate = u.TimeCardAction;
-                    MainDataContext.UpdateTimeCardEntry(u);
-                    if (timeCardActionBeforeUpdate == 2)
+                    MainDataContext.UpdateTimeCardEntry(u, pinData.TimeCardAction);
+                    if (pinData.TimeCardAction == 2)
                     {
                         AppServices.LogoutUser();
                         return;
                     }
-           
                 }
                 u.PublishEvent(EventTopicNames.UserLoggedIn);
             }

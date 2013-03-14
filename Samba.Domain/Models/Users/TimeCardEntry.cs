@@ -25,18 +25,5 @@ namespace Samba.Domain.Models.Users
         public int Action { get; set; }
         public DateTime DateTime { get; set; }
         public int UserId { get; set; }
-
-        public bool ShouldCreateCardEntry(User user)
-        {
-            if ((DateTime.Compare(DateTime, DateTime.Today) > 0))
-            {
-                if (Action != user.TimeCardAction)
-                {
-                    return true;
-                }
-            }
-
-            return user.TimeCardAction == 1;
-        }
     }
 }
