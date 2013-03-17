@@ -387,6 +387,9 @@ Payment</value>
   <data name="Add_f" xml:space="preserve">
     <value>Add {0}</value>
   </data>
+  <data name="AddBatch_f" xml:space="preserve">
+    <value>Add Batch {0}</value>
+  </data>
   <data name="Edit_f" xml:space="preserve">
     <value>Edit {0}</value>
   </data>
@@ -650,6 +653,12 @@ Payment</value>
   </data>
   <data name="BatchCreateProductsDialogHint" xml:space="preserve">
     <value>Create a line for each product with [Product Name] [Price] format. Start Category Names with # char.</value>
+  </data>
+  <data name="BatchCreateMenuProperties" xml:space="preserve">
+    <value>Batch Create Modifiers</value>
+  </data>
+  <data name="BatchCreateMenuPropertiesDialogHint" xml:space="preserve">
+    <value>Create a line for each Modifier with [Property Name]|[Product Name]|[Price] format.</value>
   </data>
   <data name="DeleteErrorProductUsedInMenu" xml:space="preserve">
     <value>Can't delete because this Product assigned to a Menu</value>
@@ -3382,5 +3391,8 @@ Error Message:
   </data>
   <data name="SwipeCreditCard" xml:space="preserve">
     <value>Please swipe the credit card.</value>
+  </data>
+  <data name="DefaultMenuPortion" xml:space="preserve">
+    <value>Normal</value>
   </data>
 </root>

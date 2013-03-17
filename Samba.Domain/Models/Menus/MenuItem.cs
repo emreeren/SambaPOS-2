@@ -77,12 +77,16 @@ namespace Samba.Domain.Models.Menus
 
         public static MenuItemPortion AddDefaultMenuPortion(MenuItem item)
         {
-            return item.AddPortion("Normal", 0, LocalSettings.CurrencySymbol);
+            return item.AddPortion(Localization.Properties.Resources.DefaultMenuPortion ?? "Normal", 0, LocalSettings.CurrencySymbol);
         }
 
         public static MenuItemProperty AddDefaultMenuItemProperty(MenuItemPropertyGroup item)
         {
             return item.AddProperty("", 0, LocalSettings.CurrencySymbol);
+        }
+        public static MenuItemProperty AddDefaultMenuItemProperty(MenuItemPropertyGroup item, string name, decimal price)
+        {
+            return item.AddProperty(name, price, LocalSettings.CurrencySymbol);
         }
 
         public static MenuItem Create()

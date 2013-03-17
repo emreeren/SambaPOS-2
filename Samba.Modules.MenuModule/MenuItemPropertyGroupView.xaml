@@ -115,6 +115,7 @@
                     <ContextMenu>
                         <MenuItem Command="{Binding AddPropertyCommand}" Header="{Binding AddPropertyCommand.Caption}" />
                         <MenuItem Command="{Binding DeletePropertyCommand}" Header="{Binding DeletePropertyCommand.Caption}" />
+                        <MenuItem Command="{Binding BatchAddPropertyCommand}" Header="{Binding BatchAddPropertyCommand.Caption}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -127,6 +128,11 @@
                 <TextBlock Margin="2,3">
                         <Hyperlink Command="{Binding DeletePropertyCommand}">
                             <TextBlock Text="{Binding Path=DeletePropertyCommand.Caption}" />
+                        </Hyperlink>
+                    </TextBlock>
+                <TextBlock Margin="2,3">
+                        <Hyperlink Command="{Binding BatchAddPropertyCommand}">
+                            <TextBlock Text="{Binding Path=BatchAddPropertyCommand.Caption}" />
                         </Hyperlink>
                     </TextBlock>
             </StackPanel>

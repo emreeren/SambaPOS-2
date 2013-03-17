@@ -8,6 +8,8 @@ using Samba.Infrastructure.Data;
 using Samba.Localization.Properties;
 using Samba.Presentation.Common;
 using Samba.Presentation.Common.ModelBase;
+using Samba.Presentation.Common.Services;
+using Samba.Services;
 
 namespace Samba.Modules.MenuModule
 {
@@ -20,6 +22,7 @@ namespace Samba.Modules.MenuModule
 
         public MenuItemPropertyViewModel SelectedProperty { get; set; }
         public ICaptionCommand AddPropertyCommand { get; set; }
+        public ICaptionCommand BatchAddPropertyCommand { get; set; }
         public ICaptionCommand DeletePropertyCommand { get; set; }
 
         public bool SingleSelection { get { return Model.SingleSelection; } set { Model.SingleSelection = value; } }
@@ -38,6 +41,8 @@ namespace Samba.Modules.MenuModule
         {
             _properties = new ObservableCollection<MenuItemPropertyViewModel>(GetProperties(model));
             AddPropertyCommand = new CaptionCommand<string>(string.Format(Resources.Add_f, Resources.Modifier), OnAddPropertyExecuted);
+            BatchAddPropertyCommand = new CaptionCommand<string>(string.Format(Resources.AddBatch_f, Resources.Modifier), OnBatchAddPropertyExecuted);
+          
             DeletePropertyCommand = new CaptionCommand<string>(string.Format(Resources.Delete_f, Resources.Modifier), OnDeletePropertyExecuted, CanDeleteProperty);
         }
 
@@ -58,6 +63,20 @@ namespace Samba.Modules.MenuModule
         private void OnAddPropertyExecuted(string obj)
         {
             Properties.Add(new MenuItemPropertyViewModel(MenuItem.AddDefaultMenuItemProperty(Model)));
+        }
+
+        private void OnBatchAddPropertyExecuted(string obj)
+        {
+            var values = InteractionService.UserIntraction.GetStringFromUser(
+                Resources.BatchCreateMenuProperties,
+                Resources.BatchCreateMenuPropertiesDialogHint);
+            var createdMenuProperties = new DataCreationService().BatchCreateMenuProperties(values, Model);
+
+            foreach (var prop in createdMenuProperties)
+            {
+                Properties.Add(new MenuItemPropertyViewModel(prop));
+            }
+           
         }
 
         private static IEnumerable<MenuItemPropertyViewModel> GetProperties(MenuItemPropertyGroup baseModel)

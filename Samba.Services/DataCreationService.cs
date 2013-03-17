@@ -244,8 +244,48 @@ namespace Samba.Services
                     {
                         currentCategory = item.Trim('#', ' ');
                     }
+                    else if (item.Contains("|"))
+                    {
+                        //Sundae|Small:1.99|Medium:2.99|Large:3.99
+                        IList<string> parts = new List<string>(item.Split('|'));                      
+                        var mi = MenuItem.Create();
+                        mi.Name = parts[0];
+                        for (int i = 1; i < parts.Count; i++)
+                        {
+                            
+                            var tokens = parts[i].Split(':');
+                            if (tokens.Count() != 2)
+                            {
+                                var price = ConvertToDecimal(tokens[0], ds);
+                                mi.Portions[i - 1].Price.Amount = price;
+                            }
+                            else
+                            {
+                                
+                                var price = ConvertToDecimal(tokens[1], ds);
+                                if (mi.Portions.Count < i - 1)
+                                {
+                                    var mp = new MenuItemPortion();
+                                    mp.Price = new Price(price,"");
+                                    mp.Name = tokens[0];
+                                    mi.Portions.Add(mp);
+                                }
+                               
+                            }
+                           
+                        }
+                        mi.GroupCode = currentCategory;
+                        workspace.Add(mi);
+                        foreach (var p in mi.Portions)
+                        {
+                            workspace.Add(p);
+                        }
+                        
+                        result.Add(mi);
+                    }
                     else if (item.Contains(" "))
                     {
+                        //Sundae 2.99
                         IList<string> parts = new List<string>(item.Split(' '));
                         var price = ConvertToDecimal(parts[parts.Count - 1], ds);
                         parts.RemoveAt(parts.Count - 1);
@@ -263,7 +303,27 @@ namespace Samba.Services
             }
             return result;
         }
-
+        public IEnumerable<MenuItemProperty> BatchCreateMenuProperties(string[] values, MenuItemPropertyGroup item)
+        {
+            IList<MenuItemProperty> result = new List<MenuItemProperty>();
+             var ds = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            if (values.Length > 0)
+            {
+                foreach (var propertyLine in values)
+                {
+                   
+                    var tokens = propertyLine.Split('|');
+                    var price = ConvertToDecimal("0.00", ds);
+                    var name = tokens[0];
+                    if (tokens.Count() > 1)
+                    {
+                        price = ConvertToDecimal(tokens[1], ds);
+                    }
+                    result.Add(MenuItem.AddDefaultMenuItemProperty(item, name, price));
+                }
+            }
+            return result;
+        }
         public IEnumerable<Reason> BatchCreateReasons(string[] values, int reasonType, IWorkspace workspace)
         {
             IList<Reason> result = new List<Reason>();
