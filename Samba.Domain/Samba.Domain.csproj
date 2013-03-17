@@ -54,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -88,6 +89,7 @@
     <Compile Include="Models\Settings\Trigger.cs" />
     <Compile Include="Models\Tickets\TicketTag.cs" />
     <Compile Include="Models\Tickets\TicketTagGroup.cs" />
+    <Compile Include="Models\Users\TimeCardEntry.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Models\Customers\Customer.cs" />
     <Compile Include="Models\Tickets\Department.cs">
@@ -143,6 +145,10 @@
     <ProjectReference Include="..\Samba.Infrastructure\Samba.Infrastructure.csproj">
       <Project>{B184E8F8-A507-4C3D-B580-184E3776A95C}</Project>
       <Name>Samba.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Samba.Localization\Samba.Localization.csproj">
+      <Project>{406B96A6-C886-4149-AD88-A2402EDB2B90}</Project>
+      <Name>Samba.Localization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

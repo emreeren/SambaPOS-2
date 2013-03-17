@@ -22,6 +22,8 @@ namespace Samba.Modules.UserModule
         public ICategoryCommand ListUserRolesCommand { get; set; }
         public ICategoryCommand NavigateLogoutCommand { get; set; }
 
+
+
         [ImportingConstructor]
         public UserModule(IRegionManager regionManager)
         {
@@ -29,6 +31,7 @@ namespace Samba.Modules.UserModule
             ListUsersCommand = new CategoryCommand<string>(Resources.UserList, Resources.Users, OnListUsers);
             NavigateLogoutCommand = new CategoryCommand<string>("Logout", Resources.Common, "images/bmp.png", OnNavigateUserLogout) { Order = 99 };
             _regionManager = regionManager;
+
         }
 
         private static void OnNavigateUserLogout(string obj)
@@ -41,7 +44,7 @@ namespace Samba.Modules.UserModule
         {
             _regionManager.RegisterViewWithRegion(RegionNames.RightUserRegion, typeof(LoggedInUserView));
 
-            EventServiceFactory.EventService.GetEvent<GenericEvent<string>>().Subscribe(x =>
+            EventServiceFactory.EventService.GetEvent<GenericEvent<PinData>>().Subscribe(x =>
             {
                 if (x.Topic == EventTopicNames.PinSubmitted)
                     PinEntered(x.Value);
@@ -65,13 +68,24 @@ namespace Samba.Modules.UserModule
             CommonEventPublisher.PublishDashboardCommandEvent(ListUserRolesCommand);
             CommonEventPublisher.PublishDashboardCommandEvent(ListUsersCommand);
             CommonEventPublisher.PublishNavigationCommandEvent(NavigateLogoutCommand);
-       }
+        }
 
-        public void PinEntered(string pin)
+        public void PinEntered(PinData pinData)
         {
-            var u = AppServices.LoginUser(pin);
+            var u = AppServices.LoginUser(pinData.PinCode);
             if (u != User.Nobody)
+            {
+                if (pinData.TimeCardAction != 0)
+                {
+                    MainDataContext.UpdateTimeCardEntry(u, pinData.TimeCardAction);
+                    if (pinData.TimeCardAction == 2)
+                    {
+                        AppServices.LogoutUser();
+                        return;
+                    }
+                }
                 u.PublishEvent(EventTopicNames.UserLoggedIn);
+            }
         }
 
         public void OnListUsers(string value)

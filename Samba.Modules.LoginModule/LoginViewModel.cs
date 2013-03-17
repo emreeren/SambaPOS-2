@@ -2,8 +2,11 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Windows;
+using Samba.Domain.Models.Users;
 using Samba.Infrastructure.Settings;
 using Samba.Localization.Properties;
+using Samba.Presentation.Common;
 using Samba.Services;
 
 namespace Samba.Login
@@ -52,6 +55,11 @@ namespace Samba.Login
             }
 
             return "";
+        }
+
+        public void SubmitPin(PinData pinData)
+        {
+            pinData.PublishEvent(EventTopicNames.PinSubmitted);
         }
     }
 }

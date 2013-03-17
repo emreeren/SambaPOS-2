@@ -4,11 +4,13 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Samba.Services
 {
     public static class SerialPortService
     {
+
         private static readonly Dictionary<string, SerialPort> Ports = new Dictionary<string, SerialPort>();
 
         public static void WritePort(string portName, byte[] data)
@@ -30,6 +32,15 @@ namespace Samba.Services
             }
         }
 
+        public static SerialPort GetPort(string portName)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            return Ports[portName];
+        }
+
         public static void WritePort(string portName, string data)
         {
             WritePort(portName, Encoding.ASCII.GetBytes(data));
@@ -38,6 +49,86 @@ namespace Samba.Services
         public static void WritePort(string portName, string data, int codePage)
         {
             WritePort(portName, Encoding.GetEncoding(codePage).GetBytes(data));
+        }
+
+        public static byte[] ReadBufferPort(string portName, int length, int timeoutInMillSec)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            var port = Ports[portName];
+
+            try
+            {
+                if (!port.IsOpen) port.Open();
+                if (port.IsOpen)
+                {
+                    if (timeoutInMillSec >= 0)
+                    {
+                        port.ReadTimeout = timeoutInMillSec;
+                    }
+
+                    var buffer = new byte[length];
+                    port.Read(buffer, 0, length);
+                    return buffer;
+                }
+            }
+            catch (IOException)
+            {
+
+            }
+            return null;
+        }
+
+        public static string ReadPort(string portName, int length, int timeoutInMillSec = -1)
+        {
+            var buffer = ReadBufferPort(portName, length, timeoutInMillSec);
+            return Encoding.ASCII.GetString(buffer);
+        }
+
+        public static string ReadExisting(string portName, int baudRate, int timeoutInMillSec, ref string error)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName, baudRate));
+            }
+            var port = Ports[portName];
+
+            try
+            {
+                if (port.BaudRate != baudRate)
+                {
+                    port.Close();
+                }
+                if (!port.IsOpen) port.Open();
+                if (port.IsOpen)
+                {
+                    if (timeoutInMillSec >= 0)
+                    {
+                        port.ReadTimeout = timeoutInMillSec;
+                    }
+
+
+                    while (timeoutInMillSec > 0)
+                    {
+                        string data = port.ReadExisting();
+                        if (!String.IsNullOrEmpty(data))
+                        {
+                            return data;
+                        }
+                        Thread.Sleep(1000);
+                        timeoutInMillSec -= 1000;
+                    }
+
+
+                }
+            }
+            catch (Exception exception)
+            {
+                error = exception.Message;
+            }
+            return "";
         }
 
         public static void ResetCache()
