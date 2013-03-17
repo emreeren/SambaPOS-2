@@ -23,6 +23,7 @@ namespace Samba.Domain.Models.Menus
 
         public int ColumnCount { get; set; }
         public int ButtonHeight { get; set; }
+        public string ButtonColor { get; set; }
         public int TerminalColumnCount { get; set; }
         public int TerminalButtonHeight { get; set; }
 
@@ -39,7 +40,8 @@ namespace Samba.Domain.Models.Menus
         {
             _properties = new List<MenuItemProperty>();
             ColumnCount = 5;
-            ButtonHeight = 65;
+            ButtonHeight = 50;
+            ButtonColor = "LightBlue";
             TerminalColumnCount = 4;
             TerminalButtonHeight = 35;
         }

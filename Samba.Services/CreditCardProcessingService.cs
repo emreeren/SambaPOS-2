@@ -1,6 +1,8 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using Samba.Domain;
 using Samba.Domain.Models.Tickets;
@@ -12,19 +14,34 @@ namespace Samba.Services
     {
         PreAuth,
         Force,
-        Cancel
+        Cancel,
+        Swipe,
+        External //external processing. system assume payment received
     }
 
     public class CreditCardProcessingResult
     {
         public ProcessType ProcessType { get; set; }
         public decimal Amount { get; set; }
+        public string CardTxResponse { get; set; }
     }
 
     public class CreditCardProcessingData
     {
         public Ticket Ticket { get; set; }
         public decimal TenderedAmount { get; set; }
+       
+       
+
+    }
+
+    public class CreditCardTrackData
+    {
+        public string CardName { get; set; }
+        public string CardExpiry { get; set; }
+        public String CardNumber { get; set; }
+        public string ServiceCode { get; set; }
+        public string DiscretionaryData { get; set; }
     }
 
     public interface ICreditCardProcessor
@@ -33,6 +50,7 @@ namespace Samba.Services
         void EditSettings();
         void Process(CreditCardProcessingData creditCardProcessingData);
         bool ForcePayment(int ticketId);
+        
     }
 
     public static class CreditCardProcessingService
@@ -72,5 +90,7 @@ namespace Samba.Services
         {
             return (CanProcessCreditCards && GetDefaultProcessor().ForcePayment(ticketId));
         }
+
+      
     }
 }

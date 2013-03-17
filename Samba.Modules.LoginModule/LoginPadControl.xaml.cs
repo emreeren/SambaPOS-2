@@ -1,11 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Samba.Domain.Models.Users;
 using Samba.Presentation.Common;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Login
 {
-    public delegate void PinSubmittedEventHandler(object sender, string pinValue);
+    public delegate void PinSubmittedEventHandler(object sender, PinData pinData);
 
     /// <summary>
     /// Interaction logic for LoginPadControl.xaml
@@ -23,12 +25,10 @@ namespace Samba.Login
 
         private string PinValue { get { return _pinValue; } set { _pinValue = value; UpdatePinTextBox(_pinValue); } }
         private static string EmptyString { get { return " " + Localization.Properties.Resources.EnterPin; } }
-        private void UpdatePinTextBox(string _pinValue)
+
+        private void UpdatePinTextBox(string pinValue)
         {
-            if (_pinValue == EmptyString)
-                PinTextBox.Text = _pinValue;
-            else
-                PinTextBox.Text = "".PadLeft(_pinValue.Length, '*');
+            PinTextBox.Text = pinValue == EmptyString ? pinValue : "".PadLeft(pinValue.Length, '*');
         }
 
         private bool CheckPinValue()
@@ -46,10 +46,10 @@ namespace Samba.Login
             }
         }
 
-        public void SubmitPin()
+        public void SubmitPin(int timeCardAction)
         {
             if (PinSubmitted != null && AppServices.CanStartApplication())
-                PinSubmitted(this, _pinValue);
+                PinSubmitted(this, new PinData { PinCode = _pinValue, TimeCardAction = timeCardAction });
             else
             {
                 if (!AppServices.CanStartApplication())
@@ -60,7 +60,7 @@ namespace Samba.Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SubmitPin();
+            SubmitPin(1);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

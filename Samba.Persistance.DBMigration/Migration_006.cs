@@ -115,6 +115,7 @@ EXEC sp_executesql @sql;");
             Create.Column("MultipleSelection").OnTable("MenuItemPropertyGroups").AsBoolean().WithDefaultValue(false);
             Create.Column("ColumnCount").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("ButtonHeight").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
+            
             Create.Column("TerminalColumnCount").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("TerminalButtonHeight").OnTable("MenuItemPropertyGroups").AsInt32().WithDefaultValue(0);
             Create.Column("CalculateWithParentPrice").OnTable("MenuItemPropertyGroups").AsBoolean().WithDefaultValue(false);

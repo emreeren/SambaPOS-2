@@ -20,8 +20,6 @@ namespace Samba.Presentation.Terminal
     {
         public MainWindowViewModel()
         {
-            //TODO: Para birimi servisinden al.
-
             LocalizeDictionary.ChangeLanguage(LocalSettings.CurrentLanguage);
             LocalSettings.SetTraceLogPath("term");
 
@@ -150,6 +148,9 @@ namespace Samba.Presentation.Terminal
             LoggedInUserViewModel.Refresh();
             if (user != User.Nobody)
             {
+                //There is no clockout ui for terminal.
+                MainDataContext.UpdateTimeCardEntry(user, 0);
+
                 if (user.UserRole.DepartmentId != 0 && !AppServices.IsUserPermittedFor(PermissionNames.ChangeDepartment))
                 {
                     AppServices.MainDataContext.SelectedDepartment =

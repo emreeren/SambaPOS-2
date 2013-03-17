@@ -23,15 +23,14 @@
                     <TextBlock FontWeight="Bold" FontSize="25" TextAlignment="Center" HorizontalAlignment="Center" MinWidth="250" Text="{Binding TenderedAmount,StringFormat='#,#0.00'}"/>
                 </Border>
                 <StackPanel Visibility="{Binding CanPreAuth,Converter={StaticResource VisibilityConverter}}">
-                    <Label HorizontalContentAlignment="Center">Gratuity</Label>
-                    <TextBlock FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" MinWidth="250" Text="{Binding Gratuity,StringFormat='#,#0.00'}"/>
                     <Label HorizontalContentAlignment="Center">Swipe Data</Label>
                     <PasswordBox Name="SwipeDataBox" HorizontalAlignment="Center" MinWidth="250"/>
+                   
                 </StackPanel>
             </StackPanel>
             <UniformGrid Grid.Column="1" Columns="1">
                 <Button Margin="4" Width="100" Command="{Binding PreAuthCommand}">PreAuth</Button>
-                <Button Margin="4" Width="100" Command="{Binding ForceCommand}">Force</Button>
+                <Button Margin="4" Width="100" Command="{Binding ForceCommand}">Force</Button>                             
                 <Button Margin="4" Width="100" Command="{Binding CancelCommand}">Cancel</Button>
             </UniformGrid>
             <Viewbox Grid.Row="1" Grid.ColumnSpan="2">

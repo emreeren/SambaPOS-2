@@ -121,7 +121,7 @@ namespace Samba.Services
 
             public Table GetTicketTable()
             {
-                Debug.Assert(!string.IsNullOrEmpty(Ticket.LocationName));
+                Debug.Assert(!String.IsNullOrEmpty(Ticket.LocationName));
                 Debug.Assert(Ticket != null);
                 return _workspace.Single<Table>(x => x.Name == Ticket.LocationName);
             }
@@ -213,6 +213,8 @@ namespace Samba.Services
         private IEnumerable<User> _users;
         public IEnumerable<User> Users { get { return _users ?? (_users = Dao.Query<User>(x => x.UserRole)); } }
 
+
+
         private IEnumerable<VatTemplate> _vatTemplates;
         public IEnumerable<VatTemplate> VatTemplates
         {
@@ -232,6 +234,7 @@ namespace Samba.Services
         public Ticket SelectedTicket { get { return _ticketWorkspace.Ticket; } }
 
         private Department _selectedDepartment;
+
         public Department SelectedDepartment
         {
             get { return _selectedDepartment; }
@@ -327,7 +330,7 @@ namespace Samba.Services
 
         public void UpdateTicketTable(Ticket ticket)
         {
-            if (string.IsNullOrEmpty(ticket.LocationName)) return;
+            if (String.IsNullOrEmpty(ticket.LocationName)) return;
             var table = _ticketWorkspace.LoadTable(ticket.LocationName);
             if (table != null)
             {
@@ -397,7 +400,7 @@ namespace Samba.Services
 
             Debug.Assert(SelectedTicket != null);
 
-            if (!string.IsNullOrEmpty(SelectedTicket.LocationName))
+            if (!String.IsNullOrEmpty(SelectedTicket.LocationName))
             {
                 var oldTable = _ticketWorkspace.GetTicketTable();
                 if (oldTable.TicketId == SelectedTicket.Id)
@@ -449,7 +452,7 @@ namespace Samba.Services
                     var currentTicket = Dao.Single<Ticket>(x => x.Id == SelectedTicket.Id, x => x.TicketItems, x => x.Payments);
                     if (currentTicket.LocationName != SelectedTicket.LocationName)
                     {
-                        result.ErrorMessage = string.Format(Resources.TicketMovedRetryLastOperation_f, currentTicket.LocationName);
+                        result.ErrorMessage = String.Format(Resources.TicketMovedRetryLastOperation_f, currentTicket.LocationName);
                         changed = true;
                     }
 
@@ -473,7 +476,7 @@ namespace Samba.Services
                     else if (currentTicket.LastPaymentDate != SelectedTicket.LastPaymentDate)
                     {
                         var currentPaymentIds = SelectedTicket.Payments.Select(x => x.Id).Distinct();
-                        var unknownPayments = currentTicket.Payments.Where(x => !currentPaymentIds.Contains(x.Id)).FirstOrDefault();
+                        var unknownPayments = currentTicket.Payments.FirstOrDefault(x => !currentPaymentIds.Contains(x.Id));
                         if (unknownPayments != null)
                         {
                             result.ErrorMessage = Resources.TicketPaidLastChangesNotSaved;
@@ -483,13 +486,13 @@ namespace Samba.Services
                 }
             }
 
-            if (!string.IsNullOrEmpty(SelectedTicket.LocationName) && SelectedTicket.Id == 0)
+            if (!String.IsNullOrEmpty(SelectedTicket.LocationName) && SelectedTicket.Id == 0)
             {
                 var ticketId = Dao.Select<Table, int>(x => x.TicketId, x => x.Name == SelectedTicket.LocationName).FirstOrDefault();
                 {
                     if (ticketId > 0)
                     {
-                        result.ErrorMessage = string.Format(Resources.TableChangedRetryLastOperation_f, SelectedTicket.LocationName);
+                        result.ErrorMessage = String.Format(Resources.TableChangedRetryLastOperation_f, SelectedTicket.LocationName);
                         changed = true;
                     }
                 }
@@ -511,7 +514,7 @@ namespace Samba.Services
 
                 if (SelectedTicket.TicketItems.Count > 0)
                 {
-                    if (SelectedTicket.TicketItems.Where(x => !x.Locked).FirstOrDefault() != null)
+                    if (SelectedTicket.TicketItems.FirstOrDefault(x => !x.Locked) != null)
                     {
                         SelectedTicket.MergeLinesAndUpdateOrderNumbers(NumberGenerator.GetNextNumber(SelectedDepartment.OrderNumerator.Id));
                     }
@@ -523,7 +526,7 @@ namespace Samba.Services
                         _ticketWorkspace.CommitChanges();
                     }
 
-                    Debug.Assert(!string.IsNullOrEmpty(SelectedTicket.TicketNumber));
+                    Debug.Assert(!String.IsNullOrEmpty(SelectedTicket.TicketNumber));
                     Debug.Assert(SelectedTicket.Id > 0);
 
                     //Otomatik yazdırma
@@ -552,7 +555,7 @@ namespace Samba.Services
         public void UpdateTicketNumber(Ticket ticket, Numerator numerator)
         {
             if (numerator == null) numerator = SelectedDepartment.TicketNumerator;
-            if (string.IsNullOrEmpty(ticket.TicketNumber))
+            if (String.IsNullOrEmpty(ticket.TicketNumber))
                 ticket.TicketNumber = NumberGenerator.GetNextString(numerator.Id);
         }
 
@@ -651,7 +654,7 @@ namespace Samba.Services
                     var tData = Dao.Single<Ticket, dynamic>(targetTicketId, x => new { x.LocationName, x.TicketNumber });
                     info = tData.LocationName + " - " + tData.TicketNumber;
                 }
-                if (!string.IsNullOrEmpty(SelectedTicket.Note)) SelectedTicket.Note += "\r";
+                if (!String.IsNullOrEmpty(SelectedTicket.Note)) SelectedTicket.Note += "\r";
                 SelectedTicket.Note += SelectedTicket.LocationName + " => " + info;
             }
 
@@ -690,6 +693,43 @@ namespace Samba.Services
         public VatTemplate GetVatTemplate(int menuItemId)
         {
             return AppServices.DataAccessService.GetMenuItem(menuItemId).VatTemplate;
+        }
+
+        public static TimeCardEntry GetLastTimeCardEntry(User user)
+        {
+            try
+            {
+                return Dao.Last<TimeCardEntry>(x => x.UserId == user.Id);
+            }
+            catch (Exception ex)
+            {
+                AppServices.LogError(ex);
+            }
+            return null;
+        }
+
+        public static void AddTimeCardEntry(TimeCardEntry timeCardEntry)
+        {
+            using (var workspace = WorkspaceFactory.Create())
+            {
+                workspace.Add(timeCardEntry);
+                workspace.CommitChanges();
+            }
+        }
+
+        public static void UpdateTimeCardEntry(User user, int timeCardAction)
+        {
+            if (timeCardAction == 0)
+            {
+                return;
+            }
+
+            var lastEntry = GetLastTimeCardEntry(user);
+
+            if (user.ShouldCreateCardEntry(lastEntry, timeCardAction))
+            {
+                AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
+            }
         }
     }
 }
