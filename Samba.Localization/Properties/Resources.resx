@@ -2248,6 +2248,9 @@ Table: {2}</value>
   <data name="TF_UniqueTicketId" xml:space="preserve">
     <value>{TICKET ID}</value>
   </data>
+  <data name="TF_TerminalName" xml:space="preserve">
+    <value>{TERMINAL NAME}</value>
+  </data>
   <data name="TF_TicketNumber" xml:space="preserve">
     <value>{TICKET NO}</value>
   </data>
@@ -2748,6 +2751,9 @@ Will Trigger after {1} days, {2} hours, {3} minutes</value>
   <data name="SaveReportToFile" xml:space="preserve">
     <value>Save Report to File</value>
   </data>
+  <data name="PrintReport" xml:space="preserve">
+    <value>Print Report</value>
+  </data>
   <data name="PriceDefinitonName" xml:space="preserve">
     <value>Price Definiton Name</value>
     <comment>Label.Content</comment>
@@ -3140,6 +3146,12 @@ Continue without adding details?</value>
   <data name="ExecutePrintJob" xml:space="preserve">
     <value>Execute Print Job</value>
   </data>
+  <data name="PrintLastTicket" xml:space="preserve">
+    <value>Print Last Ticket</value>
+  </data>
+  <data name="NotifyToCloseCashDrawer" xml:space="preserve">
+    <value>Notify to Close Cash Drawer</value>
+  </data>
   <data name="LineCount" xml:space="preserve">
     <value>Line Count</value>
   </data>
@@ -3201,6 +3213,9 @@ Error Message:
   </data>
   <data name="PhoneNumberInputMask" xml:space="preserve">
     <value>Phone Number Input Mask</value>
+  </data>
+  <data name="CustomPosName" xml:space="preserve">
+    <value>POS Name to use in reports</value>
   </data>
   <data name="Increase" xml:space="preserve">
     <value>Increase</value>
@@ -3395,4 +3410,14 @@ Error Message:
   <data name="DefaultMenuPortion" xml:space="preserve">
     <value>Normal</value>
   </data>
+
+<data name="ConfirmPrintWorkPeriodReport" xml:space="preserve">
+  <value>Do you want to print Work Period Report?</value>
+</data>
+
+ 
+  
+<data name="YouMustCloseCashDrawerToContinue" xml:space="preserve">
+  <value>You must close cash drawer. Close Cash Drawer and Press OK.</value>
+</data>
 </root>

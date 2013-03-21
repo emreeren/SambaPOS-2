@@ -95,6 +95,11 @@ namespace Samba.Modules.BasicReports
             }
         }
 
+        public static void PrintReport(FlowDocument document)
+        {
+            AppServices.PrintService.PrintSlipReport(document);
+        }
+
         internal string AskFileName(string defaultName, string extenstion)
         {
             defaultName = defaultName.Replace(" ", "_");
@@ -242,7 +247,7 @@ namespace Samba.Modules.BasicReports
 
         public void AddDefaultReportHeader(SimpleReport report, WorkPeriod workPeriod, string caption)
         {
-            report.AddHeader("Samba POS");
+            report.AddHeader(AppServices.SettingService.CustomPosName);
             report.AddHeader(caption);
             if (workPeriod.EndDate > workPeriod.StartDate)
                 report.AddHeader(workPeriod.StartDate.ToString("dd MMMM yyyy HH:mm") +

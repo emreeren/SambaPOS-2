@@ -221,7 +221,7 @@ namespace Samba.Services.Printing
         {
             string result = document;
             if (string.IsNullOrEmpty(document)) return "";
-
+            result = FormatData(result, Resources.TF_TerminalName, () => AppServices.CurrentTerminal.Name);
             result = FormatData(result, Resources.TF_TicketDate, () => ticket.Date.ToShortDateString());
             result = FormatData(result, Resources.TF_TicketTime, () => ticket.Date.ToShortTimeString());
             result = FormatData(result, Resources.TF_DayDate, () => DateTime.Now.ToShortDateString());

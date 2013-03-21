@@ -19,11 +19,26 @@ namespace Samba.Services
         External //external processing. system assume payment received
     }
 
+    public enum CreditCardTransactionStatus
+    {
+        Declined,
+        Approved,
+        PartialApproved
+    }
+
     public class CreditCardProcessingResult
     {
         public ProcessType ProcessType { get; set; }
         public decimal Amount { get; set; }
-        public string CardTxResponse { get; set; }
+        public string TransactionResponse { get; set; }
+        public CreditCardTransactionStatus TransactionStatus { get; set; }
+        public string TransactionType { get; set; }
+        public string CustomerName { get; set; }
+        public string Authorizationcode { get; set; }
+        public string CreditCardNumber { get; set; }
+        public decimal RemaningBalance;
+        public string ServiceCode { get; set; }
+
     }
 
     public class CreditCardProcessingData

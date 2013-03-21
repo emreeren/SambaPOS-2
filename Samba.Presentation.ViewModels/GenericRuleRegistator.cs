@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Timers;
+using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Samba.Domain.Models.Customers;
@@ -17,12 +20,15 @@ using Samba.Presentation.Common;
 using Samba.Presentation.Common.Services;
 using Samba.Services;
 using Samba.Infrastructure.Data.Serializer;
+using Trigger = Samba.Domain.Models.Settings.Trigger;
+
 
 namespace Samba.Presentation.ViewModels
 {
     public static class GenericRuleRegistator
     {
         private static bool _registered;
+        private static readonly Dictionary<string, Timer>  _timerTable = new Dictionary<string, Timer>();
         public static void RegisterOnce()
         {
             Debug.Assert(_registered == false);
@@ -57,6 +63,9 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterActionType("UpdateTicketAccount", Resources.UpdateTicketAccount, new { AccountPhone = "", AccountName = "", Note = "" });
             RuleActionTypeRegistry.RegisterActionType("ExecutePrintJob", Resources.ExecutePrintJob, new { PrintJobName = "", TicketItemTag = "" });
             RuleActionTypeRegistry.RegisterActionType("UpdateApplicationSubTitle", "Update Application Subtitle", new { Title = "", Color = "White", FontSize = 12 });
+            RuleActionTypeRegistry.RegisterActionType("PrintLastTicket", Resources.PrintLastTicket, new { PrintJobName = "" });
+            RuleActionTypeRegistry.RegisterActionType("StartCashDrawerOpenTimer", Resources.NotifyToCloseCashDrawer, new { COMPort="COM4", CashDrawerReadCommand="06", TimerDurationtInSec = 60 });
+           
         }
 
         private static void RegisterRules()
@@ -552,9 +561,118 @@ namespace Samba.Presentation.ViewModels
                         }
                     }
                 }
+
+                if (x.Value.Action.ActionType == "PrintLastTicket")
+                {
+                    var ticket = x.Value.GetDataValue<Ticket>("Ticket");
+                    var pjName = x.Value.GetAsString("PrintJobName");
+                    
+
+                    if (!string.IsNullOrEmpty(pjName))
+                    {
+                        var j = AppServices.CurrentTerminal.PrintJobs.SingleOrDefault(y => y.Name == pjName);
+
+                        if (j != null)
+                        {
+                            if (ticket != null)
+                            {
+                               
+                                AppServices.PrintService.ManualPrintTicket(ticket, j);
+                            }
+                            else
+                                AppServices.PrintService.ExecutePrintJob(j);
+                        }
+                    }
+                }
+
+                if (x.Value.Action.ActionType == "StartCashDrawerOpenTimer")
+                {
+                    const string timerName = "CashDrawerOpenTimer";
+                     var comPort = x.Value.GetAsString("COMPort");
+                    var command = x.Value.GetAsString("CashDrawerReadCommand");
+                    var timeToWait = x.Value.GetAsInteger("TimerDurationtInSec");
+                    //CashDrawerReadCommand="06", TimeToWait
+
+                    if (!string.IsNullOrEmpty(command) && !string.IsNullOrWhiteSpace(comPort) && timeToWait > 0)
+                    {
+                       if (_timerTable.ContainsKey(timerName))
+                       {
+                           var t = _timerTable[timerName];
+
+                           if (t == null)
+                           {
+                               t = new Timer(timeToWait);
+                           }
+                           else if (t.Enabled)
+                           {
+                               t.Stop();
+                           }
+                           t.Interval = timeToWait;
+                          
+                          
+                       }
+                       else
+                       {
+                           var t = new Timer(timeToWait);
+                           t.Elapsed += (sender, e) => OnTimerExpired(sender, e, timerName, comPort, command);
+                           
+                           _timerTable.Add(timerName, t);
+
+                       }
+                       _timerTable[timerName].Enabled = true;
+                    }else
+                    {
+                        MessageBox.Show("Invalid Config for Cash Drawer Timer port");
+                    }
+                }
             });
         }
+        private static void OnTimerExpired(object sender, ElapsedEventArgs e, string timerName, string portName, string command)
+        {
+            var t = sender as Timer;
+            if (t != null)
+            {
+                if ("CashDrawerOpenTimer" == timerName)
+                {
+                    for(int  i = 0; i < 5; i++) {
+                    SerialPortService.WritePort(portName, command);
+                    string error = "";
+                    string data = SerialPortService.ReadExisting(portName, -1, 1000, ref error);
 
+                        if (!String.IsNullOrEmpty(data))
+                        {
+                            bool cashDrawerOpen = false;
+                            var buffer = Encoding.ASCII.GetBytes(data);
+                            //IBM specific bit 4 cash drawe 1, bit 3 cash drawe 2
+                            if ((buffer[0] & (1 << 4 - 1)) != 0) //cash drawer 1 connected status bit 4
+                            {
+                                if ((buffer[0] & (1 << 6 - 1)) != 0) //bit 6 for status of cash drawe 1
+                                {
+                                    cashDrawerOpen = true;
+                                }
+                            }
+
+                            if ((buffer[0] & (1 << 3 - 1)) != 0) //cash drawer 2 connected status bit 3
+                            {
+                                if ((buffer[6] & (1 << 5 - 1)) != 0) ////bit 6 for status of cash drawe 1
+                                {
+                                    cashDrawerOpen = true;
+                                }
+                            }
+                            if (cashDrawerOpen)
+                            {
+                                MessageBox.Show(Resources.YouMustCloseCashDrawerToContinue, Resources.Warning,MessageBoxButton.OK);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
         private static void RegisterNotifiers()
         {
             EventServiceFactory.EventService.GetEvent<GenericEvent<Message>>().Subscribe(x =>

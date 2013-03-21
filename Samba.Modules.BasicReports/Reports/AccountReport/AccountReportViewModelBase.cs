@@ -9,6 +9,7 @@ using Samba.Domain.Models.Tickets;
 using Samba.Domain.Models.Transactions;
 using Samba.Localization.Properties;
 using Samba.Persistance.Data;
+using Samba.Services;
 
 namespace Samba.Modules.BasicReports.Reports.AccountReport
 {
@@ -77,7 +78,7 @@ namespace Samba.Modules.BasicReports.Reports.AccountReport
         public FlowDocument CreateReport(string reportHeader, bool? returnReceivables, bool selectInternalAccounts)
         {
             var report = new SimpleReport("8cm");
-            report.AddHeader("Samba POS");
+            report.AddHeader(AppServices.SettingService.CustomPosName);
             report.AddHeader(reportHeader);
             report.AddHeader(string.Format(Resources.As_f, DateTime.Now));
 

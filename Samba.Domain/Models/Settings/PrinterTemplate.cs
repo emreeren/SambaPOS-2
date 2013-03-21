@@ -16,7 +16,7 @@ namespace Samba.Domain.Models.Settings
         public string VoidedLineTemplate { get; set; }
         [StringLength(500)]
         public string GiftLineTemplate { get; set; }
-        [StringLength(500)]
+        [StringLength(1000)]
         public string FooterTemplate { get; set; }
         [StringLength(500)]
         public string GroupTemplate { get; set; }

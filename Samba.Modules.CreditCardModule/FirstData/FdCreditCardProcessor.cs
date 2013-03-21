@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -62,8 +63,10 @@ namespace Samba.Modules.CreditCardModule.FirstData
 
         public void Process(CreditCardProcessingData creditCardProcessingData)
         {
+            
             InteractionService.UserIntraction.BlurMainWindow();
             SelectedTicket = creditCardProcessingData.Ticket;
+            ReSetTagsForSelectedTicket();
             _viewModel.CanPreAuth = true;
             _viewModel.TenderedAmount = creditCardProcessingData.TenderedAmount;
             _viewModel.Gratuity = (creditCardProcessingData.TenderedAmount * Settings.GratuityRate) / 100;
@@ -130,32 +133,47 @@ namespace Samba.Modules.CreditCardModule.FirstData
           
             if (processType == ProcessType.Force)
             {
-                              
+                            
                 string requestStatus;
                 _view.CardStatus.Text = "";
                 _view.Refresh();
+                int n;
+                if (!int.TryParse(_view.CardExpire.Text, out n))
+                {
+                    _view.CardStatus.Text = "Invalid character in Card Expire. It must be MMYY and digits only";
+                   _view.Refresh();
+                    return;
+                }
 
                 var resp = Force(ticket, amount, out requestStatus);
                 if (resp != null)
                 {
                     //rjoshi fix me
 
-                    var content = resp.ctr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter).DoPrint(content);
-
-                    if (resp.transaction_approved)
+                   //ar content = resp.ctr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    var content = resp.ctr.Split(new[] { '\r', '\n' });
+                    if (!Settings.MergeCreditCardReceipt)
                     {
-                        result.Amount = amount;
-                        _view.CardStatus.Text = resp.bank_message; 
-
-                        //TODO Print job
+                        PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter).DoPrint(content);
                     }
-                    else
+                    result.Amount = Decimal.Parse(resp.amount);
+                    result.Authorizationcode = resp.authorization_num;
+                    result.CreditCardNumber = resp.cc_number;
+                    result.CustomerName = resp.cardholder_name;
+                    result.ServiceCode = resp.transaction_type;
+                    if (!String.IsNullOrWhiteSpace(resp.current_balance))
                     {
-                        _view.CardStatus.Text = resp.bank_message;
-                        _view.Refresh();
+                        result.RemaningBalance = Decimal.Parse(resp.current_balance);
+                    }
+                    result.TransactionType = resp.transaction_type;
+                    SetTagsForSelectedTicket(resp);
+                    _view.CardStatus.Text = resp.bank_message;
+                    _view.Refresh();
+                    if (!resp.transaction_approved)
+                    {                                       
                         return;
                     }
+                   
                 }
                 else
                 {
@@ -170,12 +188,64 @@ namespace Samba.Modules.CreditCardModule.FirstData
             }
             InteractionService.UserIntraction.DeblurMainWindow();
             _view.Close();
+            
             result.PublishEvent(EventTopicNames.PaymentProcessed);
         }
 
+        void SetTagsForSelectedTicket(FdCreditCardResp resp)
+        {
+            if (!Settings.MergeCreditCardReceipt)
+            {
+                return;
+            }
+            SelectedTicket.SetTagValue("CC_NAME", resp.cardholder_name);
+            decimal amount;
+            if (Decimal.TryParse(resp.amount, out amount))
+            {
+                SelectedTicket.SetTagValue("CC_AMOUNT", amount.ToString("#,#0.00"));
+            }
+            else
+            {
+                SelectedTicket.SetTagValue("CC_AMOUNT", resp.amount);
+            }
+            
+            SelectedTicket.SetTagValue("CC_AUTHCODE", resp.authorization_num);
+            SelectedTicket.SetTagValue("CC_NUMBER", resp.cc_number);
+            
 
+
+            var ccTxType = FdCreditCardReq.FdTransactionType.Purchase;
+            if (Enum.TryParse(resp.transaction_type, true, out ccTxType))
+            {
+                SelectedTicket.SetTagValue("CC_TXTYPE", ccTxType.ToString());
+            }
+            else
+            {
+                SelectedTicket.SetTagValue("CC_TXTYPE", resp.transaction_type);
+            }
+            if (!String.IsNullOrWhiteSpace(resp.current_balance))
+            {
+                SelectedTicket.SetTagValue("CC_REMANING_BALANCE", resp.current_balance);
+            }
+            
+            if (!String.IsNullOrWhiteSpace(resp.amount) && amount >= Settings.SignRequiredAmount)
+            {
+                SelectedTicket.SetTagValue("CC_SIGN", "------------------");
+            }
+        }
+        void ReSetTagsForSelectedTicket()
+        {
+            SelectedTicket.SetTagValue("CC_AMOUNT", "");
+            SelectedTicket.SetTagValue("CC_AUTHCODE", "");
+            SelectedTicket.SetTagValue("CC_NUMBER", "");
+            SelectedTicket.SetTagValue("CC_NAME", "");
+            SelectedTicket.SetTagValue("CC_TXTYPE", "");          
+            SelectedTicket.SetTagValue("CC_REMANING_BALANCE", "");
+            SelectedTicket.SetTagValue("CC_SIGN", "");
+        }
         private FdCreditCardResp Force(Ticket ticket, decimal amount, out string requestStatus)
         {
+            
             var txType = ((ComboBoxItem)_view.FdTransactionType.SelectedItem).Tag.ToString();
             FdCreditCardReq fdReq = new FdCreditCardReq(txType);
             fdReq.amount = amount.ToString();

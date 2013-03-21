@@ -41,7 +41,7 @@ namespace Samba.Persistance.DBMigration
             Alter.Column("LineTemplate").OnTable("PrinterTemplates").AsString(500).Nullable();
             Alter.Column("VoidedLineTemplate").OnTable("PrinterTemplates").AsString(500).Nullable();
             Alter.Column("GiftLineTemplate").OnTable("PrinterTemplates").AsString(500).Nullable();
-            Alter.Column("FooterTemplate").OnTable("PrinterTemplates").AsString(500).Nullable();
+            Alter.Column("FooterTemplate").OnTable("PrinterTemplates").AsString(1000).Nullable();
 
             Create.Column("PrintJobData").OnTable("Tickets").AsString(128).Nullable();
             Delete.Column("LastUpdateTime").FromTable("Tickets");

@@ -17,6 +17,7 @@ namespace Samba.Modules.SettingsModule
         public int WeightBarcodeQuantityLength { get; set; }
         public decimal AutoRoundDiscount { get; set; }
         public string PhoneNumberInputMask { get; set; }
+        public string CustomPosName { get; set; }
 
         public ICaptionCommand SaveCommand { get; set; }
 
@@ -29,6 +30,7 @@ namespace Samba.Modules.SettingsModule
             WeightBarcodeQuantityLength = AppServices.SettingService.WeightBarcodeQuantityLength;
             PhoneNumberInputMask = AppServices.SettingService.PhoneNumberInputMask;
             AutoRoundDiscount = AppServices.SettingService.AutoRoundDiscount;
+            CustomPosName = AppServices.SettingService.CustomPosName;
         }
 
         private void OnSave(object obj)
@@ -39,6 +41,7 @@ namespace Samba.Modules.SettingsModule
             AppServices.SettingService.AutoRoundDiscount = AutoRoundDiscount;
             AppServices.SettingService.WeightBarcodeItemFormat = WeightBarcodeItemFormat;
             AppServices.SettingService.PhoneNumberInputMask = PhoneNumberInputMask;
+            AppServices.SettingService.CustomPosName = CustomPosName;
             AppServices.SettingService.SaveChanges();
             CommonEventPublisher.PublishViewClosedEvent(this);
         }

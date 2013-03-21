@@ -29,6 +29,8 @@ namespace Samba.Modules.BasicReports
             RuleActionTypeRegistry.RegisterActionType("SaveReportToFile", Resources.SaveReportToFile, new { ReportName = "", FileName = "" });
             RuleActionTypeRegistry.RegisterParameterSoruce("ReportName", () => ReportContext.Reports.Select(x => x.Header));
 
+            RuleActionTypeRegistry.RegisterActionType("PrintReport", Resources.PrintReport, new { ReportName = ""});
+            
             EventServiceFactory.EventService.GetEvent<GenericEvent<ActionData>>().Subscribe(x =>
             {
                 if (x.Value.Action.ActionType == "SaveReportToFile")
@@ -45,6 +47,27 @@ namespace Samba.Modules.BasicReports
                             try
                             {
                                 ReportViewModelBase.SaveAsXps(fileName, document);
+                            }
+                            catch (Exception e)
+                            {
+                                AppServices.LogError(e);
+                            }
+                        }
+                    }
+                }
+                if (x.Value.Action.ActionType == "PrintReport")
+                {
+                    var reportName = x.Value.GetAsString("ReportName");                  
+                    if (!string.IsNullOrEmpty(reportName))
+                    {
+                        var report = ReportContext.Reports.Where(y => y.Header == reportName).FirstOrDefault();
+                        if (report != null)
+                        {
+                            ReportContext.CurrentWorkPeriod = AppServices.MainDataContext.CurrentWorkPeriod;
+                            var document = report.GetReportDocument();
+                            try
+                            {
+                                ReportViewModelBase.PrintReport(document);
                             }
                             catch (Exception e)
                             {

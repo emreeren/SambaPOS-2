@@ -91,7 +91,14 @@ namespace Samba.Services
         {
             if (!Ports.ContainsKey(portName))
             {
-                Ports.Add(portName, new SerialPort(portName, baudRate));
+                if (baudRate > 0)
+                {
+                    Ports.Add(portName, new SerialPort(portName, baudRate));
+                }
+                else
+                {
+                    Ports.Add(portName, new SerialPort(portName));
+                }
             }
             var port = Ports[portName];
 

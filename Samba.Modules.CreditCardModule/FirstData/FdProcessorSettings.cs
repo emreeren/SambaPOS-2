@@ -19,6 +19,10 @@ namespace Samba.Modules.CreditCardModule.FirstData
         public decimal GratuityRate { get; set; }
         [DisplayName("Gratuity Template Name"), Category("Settings")]
         public string GratuityTemplateName { get; set; }
+        [DisplayName("Merge Credit Card Receipt"), Category("Settings"), DefaultValue(true)]
+        public bool MergeCreditCardReceipt { get; set; }
+        [DisplayName("Sign Required Amount"), Category("Settings"), DefaultValue(20.00)]
+        public decimal SignRequiredAmount { get; set; }
         //First Data
         [DisplayName("GatewayUri"), Category("FD")]
         public string GatewayUri { get; set; }
@@ -52,6 +56,9 @@ namespace Samba.Modules.CreditCardModule.FirstData
             GratuityRate = AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYRATE").DecimalValue;
             GratuityTemplateName = AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYTEMPLATE").StringValue;
             GratuityService = AppServices.MainDataContext.TaxServiceTemplates.FirstOrDefault(x => x.Name == GratuityTemplateName);
+            SignRequiredAmount = AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED)AMOUNT").DecimalValue;
+            MergeCreditCardReceipt =
+                AppServices.SettingService.ReadGlobalSetting("CC_MERGE_CREDITCARD_RECEIPT").BoolValue;
 
             GatewayId = AppServices.SettingService.ReadGlobalSetting("FD_GATEWAY_ID").StringValue;
             Password = AppServices.SettingService.ReadGlobalSetting("FD_PASSWORD").StringValue;
@@ -70,6 +77,10 @@ namespace Samba.Modules.CreditCardModule.FirstData
 
             AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYRATE").DecimalValue = GratuityRate;
             AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYTEMPLATE").StringValue = GratuityTemplateName;
+
+            AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED)AMOUNT").DecimalValue = SignRequiredAmount;
+            AppServices.SettingService.ReadGlobalSetting("CC_MERGE_CREDITCARD_RECEIPT").BoolValue =
+                MergeCreditCardReceipt;
 
             //First Data
             AppServices.SettingService.ReadGlobalSetting("FD_GATEWAY_ID").StringValue = GatewayId;

@@ -1697,6 +1697,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to print Work Period Report?.
+        /// </summary>
+        public static string ConfirmPrintWorkPeriodReport {
+            get {
+                return ResourceManager.GetString("ConfirmPrintWorkPeriodReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Phone.
         /// </summary>
         public static string ContactPhone {
@@ -1967,6 +1976,15 @@ namespace Samba.Localization.Properties {
         public static string CustomerSelectedForTicket {
             get {
                 return ResourceManager.GetString("CustomerSelectedForTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to POS Name to use in reports.
+        /// </summary>
+        public static string CustomPosName {
+            get {
+                return ResourceManager.GetString("CustomPosName", resourceCulture);
             }
         }
         
@@ -4815,6 +4833,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notify to Close Cash Drawer.
+        /// </summary>
+        public static string NotifyToCloseCashDrawer {
+            get {
+                return ResourceManager.GetString("NotifyToCloseCashDrawer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No transactions for {0}.
         /// </summary>
         public static string NoTransactionsFoundFor_f {
@@ -5621,6 +5648,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print Last Ticket.
+        /// </summary>
+        public static string PrintLastTicket {
+            get {
+                return ResourceManager.GetString("PrintLastTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print Mapping.
         /// </summary>
         public static string PrintMapping {
@@ -5635,6 +5671,15 @@ namespace Samba.Localization.Properties {
         public static string PrintOrdersToKitchenPrinter {
             get {
                 return ResourceManager.GetString("PrintOrdersToKitchenPrinter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print Report.
+        /// </summary>
+        public static string PrintReport {
+            get {
+                return ResourceManager.GetString("PrintReport", resourceCulture);
             }
         }
         
@@ -7345,6 +7390,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {TERMINAL NAME}.
+        /// </summary>
+        public static string TF_TerminalName {
+            get {
+                return ResourceManager.GetString("TF_TerminalName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {TICKET DATE}.
         /// </summary>
         public static string TF_TicketDate {
@@ -8917,6 +8971,15 @@ namespace Samba.Localization.Properties {
         public static string Yesterday {
             get {
                 return ResourceManager.GetString("Yesterday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must close cash drawer. Close Cash Drawer and Press OK..
+        /// </summary>
+        public static string YouMustCloseCashDrawerToContinue {
+            get {
+                return ResourceManager.GetString("YouMustCloseCashDrawerToContinue", resourceCulture);
             }
         }
         

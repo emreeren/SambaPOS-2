@@ -28,6 +28,11 @@ namespace Samba.Services
                 PhoneNumberInputMask = "##########";
                 SaveChanges();
             }
+            if (String.IsNullOrEmpty(CustomPosName))
+            {
+                CustomPosName = "Samba POS";
+                SaveChanges();
+            }
         }
 
         public string PhoneNumberInputMask
@@ -65,7 +70,11 @@ namespace Samba.Services
             get { return GetAutoRoundDiscount().DecimalValue; }
             set { GetAutoRoundDiscount().DecimalValue = value; }
         }
-
+        public string CustomPosName
+        {
+            get { return GetCustomPosName().StringValue; }
+            set { GetCustomPosName().StringValue = value; }
+        }
         private SettingGetter _weightBarcodePrefix;
         private SettingGetter GetWeightBarcodePrefix()
         {
@@ -102,6 +111,13 @@ namespace Samba.Services
             return _phoneNumberInputMask ?? (_phoneNumberInputMask = GetSetting("PhoneNumberInputMask"));
         }
 
+
+        private SettingGetter _customPosName;
+        public SettingGetter GetCustomPosName()
+        {
+            return _customPosName ?? (_customPosName = GetSetting("CustomPosName"));
+        }
+             
         public SettingGetter ReadLocalSetting(string settingName)
         {
             if (!_customSettingCache.ContainsKey(settingName))

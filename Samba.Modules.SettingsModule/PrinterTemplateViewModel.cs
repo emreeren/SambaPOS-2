@@ -45,6 +45,7 @@ namespace Samba.Modules.SettingsModule
             result.Add(Resources.TF_DayDate, Resources.DayDate);
             result.Add(Resources.TF_DayTime, Resources.DayTime);
             result.Add(Resources.TF_UniqueTicketId, Resources.UniqueTicketId);
+            result.Add(Resources.TF_TerminalName, Resources.TerminalName);
             result.Add(Resources.TF_TicketNumber, Resources.TicketNumber);
             result.Add(Resources.TF_TicketTag, Resources.TicketTag);
             result.Add("{DEPARTMENT}", Resources.DepartmentName);
