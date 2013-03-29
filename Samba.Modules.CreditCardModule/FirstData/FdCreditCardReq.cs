@@ -8,10 +8,12 @@
         public FdCreditCardReq(FdTransactionType txType)
         {
             transaction_type = ((int)txType).ToString("00");
+            partial_redemption = true;
         }
         public FdCreditCardReq(string txType)
         {
             transaction_type = txType;
+            partial_redemption = true;
         }
         public string gateway_id { get; set; }
         public string password { get; set; }
@@ -21,6 +23,8 @@
         public string cc_expiry { get; set; }
         public string cardholder_name { get; set; }
         public string reference_no { get; set; }
+        public bool partial_redemption { get; set; }
+        public string credit_card_type { get; set; }
 
         
             public enum FdTransactionType

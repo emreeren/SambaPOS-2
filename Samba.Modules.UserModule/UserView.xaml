@@ -27,6 +27,8 @@
             <TextBox HorizontalAlignment="Left" Text="{Binding EmergencyPhone,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText DateOfBirth, Suffix=':'}" />
             <TextBox HorizontalAlignment="Left" Text="{Binding DateOfBirth,Mode=TwoWay}" MinWidth="100" />
+            <Label Content="{LocText Wages, Suffix=':'}" />
+            <TextBox HorizontalAlignment="Left" Text="{Binding Wages,Mode=TwoWay}" MinWidth="100" />
             <Label Content="{LocText Address, Suffix=':'}" />
             <TextBox HorizontalAlignment="Left" Text="{Binding Address,Mode=TwoWay}" MinWidth="150" />
            

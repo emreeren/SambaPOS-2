@@ -78,6 +78,7 @@
     <Compile Include="Reports\MenuGroupBuilder.cs" />
     <Compile Include="Reports\MenuItemGroupInfo.cs" />
     <Compile Include="Reports\MenuItemSellInfo.cs" />
+    <Compile Include="Reports\Payroll\PayrollReportViewModel.cs" />
     <Compile Include="Reports\TenderedAmount.cs" />
     <Compile Include="Reports\TicketTagInfo.cs" />
     <Compile Include="Reports\UserInfo.cs" />

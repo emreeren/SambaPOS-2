@@ -929,6 +929,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Store to Cache (In Memory).
+        /// </summary>
+        public static string CachePrinter {
+            get {
+                return ResourceManager.GetString("CachePrinter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calculate Cost.
         /// </summary>
         public static string CalculateCost {
@@ -4788,6 +4797,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no last printed ticket stored.You must configure CachePrinterJob..
+        /// </summary>
+        public static string NoLastPrintedTicketExists {
+            get {
+                return ResourceManager.GetString("NoLastPrintedTicketExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string None {
@@ -5243,6 +5261,15 @@ namespace Samba.Localization.Properties {
         public static string PaymentType {
             get {
                 return ResourceManager.GetString("PaymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payroll Report.
+        /// </summary>
+        public static string PayrollReport {
+            get {
+                return ResourceManager.GetString("PayrollReport", resourceCulture);
             }
         }
         
@@ -7689,6 +7716,24 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TOGO.
+        /// </summary>
+        public static string TicketNote_r {
+            get {
+                return ResourceManager.GetString("TicketNote_r", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TOGO.
+        /// </summary>
+        public static string TicketNoteTogo {
+            get {
+                return ResourceManager.GetString("TicketNoteTogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TicketNumber.
         /// </summary>
         public static string TicketNumber {
@@ -8781,6 +8826,15 @@ namespace Samba.Localization.Properties {
         public static string VoucherContentDetails {
             get {
                 return ResourceManager.GetString("VoucherContentDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wages.
+        /// </summary>
+        public static string Wages {
+            get {
+                return ResourceManager.GetString("Wages", resourceCulture);
             }
         }
         

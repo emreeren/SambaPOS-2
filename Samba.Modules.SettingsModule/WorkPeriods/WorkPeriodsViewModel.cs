@@ -176,6 +176,8 @@ namespace Samba.Modules.SettingsModule.WorkPeriods
             RuleExecutor.NotifyEvent(RuleEventNames.WorkPeriodEnds, new { WorkPeriod = AppServices.MainDataContext.CurrentWorkPeriod, UserName = AppServices.CurrentLoggedInUser.Name });
             InteractionService.UserIntraction.GiveFeedback(Resources.WorkPeriodEndsMessage);
             EventServiceFactory.EventService.PublishEvent(EventTopicNames.ActivateNavigation);
+
+            
         }
 
         private bool CanStartOfDayExecute(string arg)

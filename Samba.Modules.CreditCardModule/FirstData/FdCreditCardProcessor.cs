@@ -148,14 +148,11 @@ namespace Samba.Modules.CreditCardModule.FirstData
                 var resp = Force(ticket, amount, out requestStatus);
                 if (resp != null)
                 {
-                    //rjoshi fix me
+                    
 
                    //ar content = resp.ctr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                     var content = resp.ctr.Split(new[] { '\r', '\n' });
-                    if (!Settings.MergeCreditCardReceipt)
-                    {
-                        PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter).DoPrint(content);
-                    }
+                    
                     result.Amount = Decimal.Parse(resp.amount);
                     result.Authorizationcode = resp.authorization_num;
                     result.CreditCardNumber = resp.cc_number;
@@ -166,7 +163,18 @@ namespace Samba.Modules.CreditCardModule.FirstData
                         result.RemaningBalance = Decimal.Parse(resp.current_balance);
                     }
                     result.TransactionType = resp.transaction_type;
+                    if (!Settings.MergeCreditCardReceipt)
+                    {
+                        PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter)
+                                           .DoPrint(content);
+                        if (result.Amount >= Settings.SignRequiredAmount)
+                        {
+                            PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter)
+                                           .DoPrint(content);
+                        }
+                    }
                     SetTagsForSelectedTicket(resp);
+                   
                     _view.CardStatus.Text = resp.bank_message;
                     _view.Refresh();
                     if (!resp.transaction_approved)
@@ -256,6 +264,10 @@ namespace Samba.Modules.CreditCardModule.FirstData
             fdReq.password = Settings.Password;
             fdReq.transaction_type = txType;
             fdReq.reference_no = ticket.Id.ToString();
+            if(fdReq.transaction_type == ((int)FdCreditCardReq.FdTransactionType.Activation).ToString("00"))
+            {
+                fdReq.credit_card_type = "Gift Card";
+            }
 
             FdCreditCardResp fdResp;
             var fdGwMgr = new FdGatewayManager(Settings.GatewayUri, FdGatewayManager.ApiVersion.V11);

@@ -114,6 +114,10 @@ namespace Samba.Infrastructure.Printing
                 {
                     result.Add(line);
                 }
+                else if (line.ToLower().StartsWith("<t"))
+                {
+                    result.Add(AlignLine(maxWidth, lastWidth, line, LineAlignment.Center, canBreak));
+                }
                 else if (line.ToLower().StartsWith("<l"))
                 {
                     result.Add(AlignLine(maxWidth, lastWidth, line, LineAlignment.Left, canBreak));

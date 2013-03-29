@@ -9,7 +9,7 @@ namespace Samba.Domain.Models.Users
 {
     public class TimeCardEntry:IEntity
     {
-        public static TimeCardEntry Crate(int action, int userId)
+        public static TimeCardEntry Create(int action, int userId)
         {
             return new TimeCardEntry
                 {

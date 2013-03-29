@@ -48,12 +48,20 @@ namespace Samba.Login
 
         public void SubmitPin(int timeCardAction)
         {
-            if (PinSubmitted != null && AppServices.CanStartApplication())
-                PinSubmitted(this, new PinData { PinCode = _pinValue, TimeCardAction = timeCardAction });
+            if (string.IsNullOrWhiteSpace(PinValue))
+            {
+                MessageBox.Show("You must enter a pin");
+
+            }
             else
             {
-                if (!AppServices.CanStartApplication())
-                    MessageBox.Show(Localization.Properties.Resources.CheckDBVersion);
+                if (PinSubmitted != null && AppServices.CanStartApplication())
+                    PinSubmitted(this, new PinData {PinCode = _pinValue, TimeCardAction = timeCardAction});
+                else
+                {
+                    if (!AppServices.CanStartApplication())
+                        MessageBox.Show(Localization.Properties.Resources.CheckDBVersion);
+                }
             }
             PinValue = EmptyString;
         }

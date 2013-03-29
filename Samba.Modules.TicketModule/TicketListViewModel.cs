@@ -22,6 +22,7 @@ using Samba.Presentation.Common.Interaction;
 using Samba.Presentation.Common.Services;
 using Samba.Presentation.ViewModels;
 using Samba.Services;
+using Samba.Services.Printing;
 
 
 namespace Samba.Modules.TicketModule
@@ -46,6 +47,7 @@ namespace Samba.Modules.TicketModule
         public CaptionCommand<string> PrintTicketCommand { get; set; }
         public CaptionCommand<string> PrintInvoiceCommand { get; set; }
         public CaptionCommand<string> ShowAllOpenTickets { get; set; }
+       
         public CaptionCommand<string> MoveTicketItemsCommand { get; set; }
 
         public ICaptionCommand IncQuantityCommand { get; set; }
@@ -58,10 +60,12 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand CancelItemCommand { get; set; }
         public ICaptionCommand ShowExtraPropertyEditorCommand { get; set; }
         public ICaptionCommand EditTicketNoteCommand { get; set; }
+        public ICaptionCommand TogoTicketNoteCommand { get; set; }
         public ICaptionCommand RemoveTicketLockCommand { get; set; }
         public ICaptionCommand RemoveTicketTagCommand { get; set; }
         public ICaptionCommand ChangePriceCommand { get; set; }
         public ICaptionCommand PrintJobCommand { get; set; }
+        public ICaptionCommand PrintLastTicketCommand { get; set; }
         public DelegateCommand<TicketTagFilterViewModel> FilterOpenTicketsCommand { get; set; }
 
         private TicketViewModel _selectedTicket;
@@ -210,6 +214,11 @@ namespace Samba.Modules.TicketModule
             get { return SelectedTicket == null && AppServices.MainDataContext.IsCurrentWorkPeriodOpen; }
         }
 
+        private bool CanPrintLastTicket(string obj)
+        {
+            return (CachePrinterJob.LastPrintedContent != null); 
+        }
+
         public Brush TicketBackground { get { return SelectedTicket != null && (SelectedTicket.IsLocked || SelectedTicket.IsPaid) ? SystemColors.ControlLightBrush : SystemColors.WindowBrush; } }
 
         public int OpenTicketListViewColumnCount { get { return SelectedDepartment != null ? SelectedDepartment.OpenTicketViewColumnCount : 5; } }
@@ -258,9 +267,11 @@ namespace Samba.Modules.TicketModule
             MoveTicketItemsCommand = new CaptionCommand<string>(Resources.MoveTicketLine, OnMoveTicketItems, CanMoveTicketItems);
             ShowExtraPropertyEditorCommand = new CaptionCommand<string>(Resources.ExtraModifier, OnShowExtraProperty, CanShowExtraProperty);
             EditTicketNoteCommand = new CaptionCommand<string>(Resources.TicketNote, OnEditTicketNote, CanEditTicketNote);
+            TogoTicketNoteCommand = new CaptionCommand<string>(Resources.TicketNote_r, OnTogoTicketNote, CanEditTicketNote);
             RemoveTicketLockCommand = new CaptionCommand<string>(Resources.ReleaseLock, OnRemoveTicketLock, CanRemoveTicketLock);
             ChangePriceCommand = new CaptionCommand<string>(Resources.ChangePrice, OnChangePrice, CanChangePrice);
-
+            PrintLastTicketCommand = new CaptionCommand<string>(Resources.PrintLastTicket, OnPrintLastTicket, CanPrintLastTicket);
+            
             EventServiceFactory.EventService.GetEvent<GenericEvent<LocationData>>().Subscribe(
                 x =>
                 {
@@ -630,6 +641,13 @@ namespace Samba.Modules.TicketModule
         {
             SelectedTicket.PublishEvent(EventTopicNames.EditTicketNote);
         }
+        private void OnTogoTicketNote(string obj)
+        {
+           if (_selectedTicket != null)
+           {
+               _selectedTicket.Note = Resources.TicketNoteTogo;
+           }
+        }
 
         private bool CanShowExtraProperty(string arg)
         {
@@ -751,6 +769,21 @@ namespace Samba.Modules.TicketModule
             RaisePropertyChanged("OpenTickets");
         }
 
+        private void OnPrintLastTicket(string obj)
+        {
+            string[] content = CachePrinterJob.LastPrintedContent;
+            if (content != null && content.Length > 0)
+            {
+                PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter)
+                               .DoPrint(content);
+            }
+            else
+            {
+                InteractionService.UserIntraction.GiveFeedback(Resources.NoLastPrintedTicketExists);
+    
+            }
+        }
+
         private void OnFilterOpenTicketsExecute(TicketTagFilterViewModel obj)
         {
             UpdateOpenTickets(SelectedDepartment, obj.TagGroup, obj.TagValue);
@@ -787,7 +820,7 @@ namespace Samba.Modules.TicketModule
         {
             if (SelectedTicket != null && !SelectedTicket.IsLocked)
                 return SelectedTicket.CanChangeTable();
-            return SelectedTicket == null;
+            return (SelectedTicket == null && AppServices.IsUserPermittedFor(PermissionNames.ChangeTable));
         }
 
         private void OnSelectTableExecute(string obj)

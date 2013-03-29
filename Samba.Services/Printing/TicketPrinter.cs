@@ -56,6 +56,30 @@ namespace Samba.Services.Printing
 
             return maps.FirstOrDefault();
         }
+        private static IEnumerable<PrinterMap> GetPrinterMapsForItem(IEnumerable<PrinterMap> printerMaps, Ticket ticket, TicketItem ticketItem)
+        {
+            var menuItemGroupCode = Dao.Single<MenuItem, string>(ticketItem.MenuItemId, x => x.GroupCode);
+
+            var maps = printerMaps;
+
+            maps = maps.Count(x => !string.IsNullOrEmpty(x.TicketTag) && !string.IsNullOrEmpty(ticket.GetTagValue(x.TicketTag))) > 0
+                ? maps.Where(x => !string.IsNullOrEmpty(x.TicketTag) && !string.IsNullOrEmpty(ticket.GetTagValue(x.TicketTag)))
+                : maps.Where(x => string.IsNullOrEmpty(x.TicketTag));
+
+            maps = maps.Count(x => x.Department != null && x.Department.Id == ticketItem.DepartmentId) > 0
+                       ? maps.Where(x => x.Department != null && x.Department.Id == ticketItem.DepartmentId)
+                       : maps.Where(x => x.Department == null);
+
+            maps = maps.Count(x => x.MenuItemGroupCode == menuItemGroupCode) > 0
+                       ? maps.Where(x => x.MenuItemGroupCode == menuItemGroupCode)
+                       : maps.Where(x => x.MenuItemGroupCode == null);
+
+            maps = maps.Count(x => x.MenuItem != null && x.MenuItem.Id == ticketItem.MenuItemId) > 0
+                       ? maps.Where(x => x.MenuItem != null && x.MenuItem.Id == ticketItem.MenuItemId)
+                       : maps.Where(x => x.MenuItem == null);
+
+            return maps;
+        }
 
         public static void AutoPrintTicket(Ticket ticket)
         {
@@ -209,16 +233,22 @@ namespace Samba.Services.Printing
 
             foreach (var item in ticketItems)
             {
-                var p = GetPrinterMapForItem(printJob.PrinterMaps, ticket, item);
-                if (p != null)
+                var ps = GetPrinterMapsForItem(printJob.PrinterMaps, ticket, item);
+                if (ps != null)
                 {
-                    var lmap = p;
-                    var pmap = ordersCache.SingleOrDefault(
+                    foreach (var p in ps)
+                    {
+                        var lmap = p;
+                        var pmap = ordersCache.SingleOrDefault(
                             x => x.Key.Printer == lmap.Printer && x.Key.PrinterTemplate == lmap.PrinterTemplate).Key;
-                    if (pmap == null)
-                        ordersCache.Add(p, new List<TicketItem>());
-                    else p = pmap;
-                    ordersCache[p].Add(item);
+                        if (pmap == null)
+                        {
+                            ordersCache.Add(p, new List<TicketItem>());
+                            pmap = p;
+                        }
+                       
+                        ordersCache[pmap].Add(item);
+                    }
                 }
             }
 

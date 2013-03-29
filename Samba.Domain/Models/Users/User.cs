@@ -31,6 +31,7 @@ namespace Samba.Domain.Models.Users
         public string ContactPhone { get; set; }
         public string EmergencyPhone { get; set; }
         public string DateOfBirth { get; set; }
+       // public decimal Wages { get; set; }
 
         private UserRole _userRole;
         public virtual UserRole UserRole
@@ -49,22 +50,28 @@ namespace Samba.Domain.Models.Users
 
         public TimeCardEntry CreateTimeCardEntry(int timeCardAction)
         {
-            return TimeCardEntry.Crate(timeCardAction, Id);
+            return TimeCardEntry.Create(timeCardAction, Id);
         }
 
         public bool ShouldCreateCardEntry(TimeCardEntry currentCardEntry, int timeCardAction)
         {
             var result = false;
-
-            if (currentCardEntry != null && (DateTime.Compare(currentCardEntry.DateTime, DateTime.Today) > 0))
+            
+            if (currentCardEntry != null )
             {
-                if (currentCardEntry.Action != timeCardAction)
+                //any entry today
+                if (DateTime.Compare(currentCardEntry.DateTime, DateTime.Today) > 0)
+                {
+                    if (currentCardEntry.Action != timeCardAction)
+                    {
+                        result = true;
+
+                    }
+                }else if (timeCardAction == 1) //previous entry exist and did not clock out, allow to enter next entry if clock in
                 {
                     result = true;
                 }
-            }
-
-            if (currentCardEntry == null && timeCardAction == 1) //Clock In
+            }else if ( timeCardAction == 1) //Clock In
             {
                 result = true;
             }

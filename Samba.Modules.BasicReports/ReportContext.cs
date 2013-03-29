@@ -17,6 +17,7 @@ using Samba.Modules.BasicReports.Reports.CashReport;
 using Samba.Modules.BasicReports.Reports.CSVBuilder;
 using Samba.Modules.BasicReports.Reports.EndOfDayReport;
 using Samba.Modules.BasicReports.Reports.InventoryReports;
+using Samba.Modules.BasicReports.Reports.Payroll;
 using Samba.Modules.BasicReports.Reports.ProductReport;
 using Samba.Persistance.Data;
 using Samba.Services;
@@ -71,6 +72,7 @@ namespace Samba.Modules.BasicReports
             get { return _taxServiceTemplates ?? (_taxServiceTemplates = Dao.Query<TaxServiceTemplate>()); }
         }
 
+       
         private static WorkPeriod _currentWorkPeriod;
         public static WorkPeriod CurrentWorkPeriod
         {
@@ -170,6 +172,21 @@ namespace Samba.Modules.BasicReports
             return AppServices.CashService.GetTransactionsWithCustomerData(CurrentWorkPeriod);
         }
 
+        private static IEnumerable<TimeCardEntry> _timeCardEntries;
+        public static IEnumerable<TimeCardEntry> TimeCardEntries
+        {
+            get { return _timeCardEntries?? (_timeCardEntries = GetTimeCardEntries()); }
+        }
+
+        private static IEnumerable<TimeCardEntry> GetTimeCardEntries()
+        {
+            if (CurrentWorkPeriod.StartDate != CurrentWorkPeriod.EndDate)
+                return Dao.Query<TimeCardEntry>(x => x.DateTime >= CurrentWorkPeriod.StartDate && x.DateTime < CurrentWorkPeriod.EndDate);
+            return Dao.Query<TimeCardEntry>(x => x.DateTime >= CurrentWorkPeriod.StartDate);
+     
+        }
+
+
         public static string CurrencyFormat { get { return "#,#0.00;-#,#0.00;-"; } }
 
         static ReportContext()
@@ -185,7 +202,8 @@ namespace Samba.Modules.BasicReports
                               new PurchaseReportViewModel(),
                               new InventoryReportViewModel(),
                               new CostReportViewModel(),
-                              new CsvBuilderViewModel()
+                              new CsvBuilderViewModel(),
+                              new PayrollReportViewModel()
                           };
         }
 
@@ -204,6 +222,7 @@ namespace Samba.Modules.BasicReports
             _todayWorkPeriod = null;
             _workPeriods = null;
             _taxServiceTemplates = null;
+            _timeCardEntries = null;
             _workspace = null;
         }
 

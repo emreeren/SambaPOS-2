@@ -67,6 +67,10 @@ namespace Samba.Login
             {
                 PadControl.SubmitPin(2); //Clock Out
             }
+            else
+            {
+                PadControl.UpdatePinValue(""); //clear pin
+            }
         }
     }
 }

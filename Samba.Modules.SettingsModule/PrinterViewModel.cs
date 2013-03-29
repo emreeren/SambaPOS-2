@@ -15,7 +15,7 @@ namespace Samba.Modules.SettingsModule
             
         }
 
-        public IList<string> PrinterTypes { get { return new[] { Resources.TicketPrinter, Resources.Text, Resources.Html, Resources.PortPrinter, Resources.DemoPrinter }; } }
+        public IList<string> PrinterTypes { get { return new[] { Resources.TicketPrinter, Resources.Text, Resources.Html, Resources.PortPrinter, Resources.DemoPrinter, Resources.CachePrinter }; } }
 
         public string ShareName { get { return Model.ShareName; } set { Model.ShareName = value; } }
         public string PrinterType

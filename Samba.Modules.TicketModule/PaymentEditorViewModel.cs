@@ -162,7 +162,8 @@ namespace Samba.Modules.TicketModule
         private static bool CanAutoSetDiscount(string arg)
         {
             return AppServices.MainDataContext.SelectedTicket != null
-                   && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() > 0;
+                   && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() > 0
+                   && AppServices.IsUserPermittedFor(PermissionNames.RoundPayment);
         }
 
         private bool CanSetDiscount(string arg)

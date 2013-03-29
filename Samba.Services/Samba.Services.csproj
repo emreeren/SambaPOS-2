@@ -107,6 +107,7 @@
     <Compile Include="AppServices.cs" />
     <Compile Include="PrinterService.cs" />
     <Compile Include="Printing\DemoPrinterJob.cs" />
+    <Compile Include="Printing\CachePrinterJob.cs" />
     <Compile Include="Printing\HtmlPrinterJob.cs" />
     <Compile Include="Printing\PortPrinterJob.cs" />
     <Compile Include="Printing\PrinterTools.cs" />

@@ -16,5 +16,7 @@ namespace Samba.Domain.Models.Tickets
         public int PaymentType { get; set; }
         public int UserId { get; set; }
         public int DepartmentId { get; set; }
+
+        
     }
 }

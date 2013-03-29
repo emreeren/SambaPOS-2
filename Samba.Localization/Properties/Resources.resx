@@ -1060,6 +1060,15 @@ Payment</value>
     <value>Ticket Note</value>
     <comment>Paragraph content</comment>
   </data>
+  <data name="TicketNote_r" xml:space="preserve">
+    <value>TOGO</value>
+    <comment>Paragraph content</comment>
+  </data>
+  <data name="TicketNoteTogo" xml:space="preserve">
+    <value>TOGO</value>
+    <comment>Paragraph content</comment>
+  </data>
+  
   <data name="AccountAddress" xml:space="preserve">
     <value>Account Address</value>
     <comment>Paragraph content</comment>
@@ -1173,6 +1182,9 @@ Payment</value>
   </data>
   <data name="DemoPrinter" xml:space="preserve">
     <value>Demo Printer (notepad)</value>
+  </data>
+<data name="CachePrinter" xml:space="preserve">
+    <value>Store to Cache (In Memory)</value>
   </data>
   <data name="Printer" xml:space="preserve">
     <value>Printer</value>
@@ -1829,6 +1841,10 @@ Balance</value>
     <value>Date of Birth</value>
     <comment>Label.Content</comment>
   </data>
+<data name="Wages" xml:space="preserve">
+    <value>Wages</value>
+    <comment>Label.Content</comment>
+  </data>
   <data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
     <value>This Pin Code used by another user account.</value>
   </data>
@@ -2035,6 +2051,9 @@ Table: {2}</value>
   </data>
   <data name="WorkPeriodReport" xml:space="preserve">
     <value>Work Period Report</value>
+  </data>
+  <data name="PayrollReport" xml:space="preserve">
+    <value>Payroll Report</value>
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
@@ -3420,4 +3439,8 @@ Error Message:
 <data name="YouMustCloseCashDrawerToContinue" xml:space="preserve">
   <value>You must close cash drawer. Close Cash Drawer and Press OK.</value>
 </data>
+  
+  <data name="NoLastPrintedTicketExists" xml:space="preserve">
+    <value>There is no last printed ticket stored.You must configure CachePrinterJob.</value>
+  </data>
 </root>

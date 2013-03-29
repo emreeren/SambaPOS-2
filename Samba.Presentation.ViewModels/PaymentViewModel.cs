@@ -63,5 +63,7 @@ namespace Samba.Presentation.ViewModels
         {
             get { return Amount.ToString("#,#0.00"); }
         }
+
+        
     }
 }

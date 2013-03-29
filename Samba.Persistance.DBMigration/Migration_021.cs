@@ -25,7 +25,8 @@ namespace Samba.Persistance.DBMigration
 		    Create.Column("ContactPhone").OnTable("Users").AsString(128).Nullable();
 		    Create.Column("EmergencyPhone").OnTable("Users").AsString(128).Nullable();
 		    Create.Column("DateOfBirth").OnTable("Users").AsString(128).Nullable();
-		    Create.Column("TimeCardAction").OnTable("Users").AsInt32().WithDefaultValue(0);
+            Create.Column("Wages").OnTable("Users").AsDecimal(16,2).Nullable();
+		  //  Create.Column("TimeCardAction").OnTable("Users").AsInt32().WithDefaultValue(0);
             
 
         //         public string ContactPhone { get; set; }
