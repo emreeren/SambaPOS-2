@@ -175,7 +175,8 @@ namespace Samba.Modules.BasicReports
         private static IEnumerable<TimeCardEntry> _timeCardEntries;
         public static IEnumerable<TimeCardEntry> TimeCardEntries
         {
-            get { return _timeCardEntries?? (_timeCardEntries = GetTimeCardEntries()); }
+            get { return _timeCardEntries ?? (_timeCardEntries = GetTimeCardEntries()); }
+            set { _timeCardEntries = value; }
         }
 
         private static IEnumerable<TimeCardEntry> GetTimeCardEntries()
@@ -320,13 +321,23 @@ namespace Samba.Modules.BasicReports
 
         public static WorkPeriod CreateCustomWorkPeriod(string name, DateTime startDate, DateTime endDate)
         {
-            var periods = GetWorkPeriods(startDate, endDate);
-            var startPeriod = periods.FirstOrDefault();
-            var endPeriod = periods.LastOrDefault();
-            var start = startPeriod != null ? startPeriod.StartDate : startDate;
-            var end = endPeriod != null ? endPeriod.EndDate : endDate;
-            if (endPeriod != null && end == endPeriod.StartDate)
-                end = DateTime.Now;
+            DateTime start, end;
+            if (startDate == null || endDate == null)
+            {
+                var periods = GetWorkPeriods(startDate, endDate);
+                var startPeriod = periods.FirstOrDefault();
+                var endPeriod = periods.LastOrDefault();
+                start = startPeriod != null ? startPeriod.StartDate : startDate;
+                end = endPeriod != null ? endPeriod.EndDate : endDate;
+                if (endPeriod != null && end == endPeriod.StartDate)
+                    end = DateTime.Now;
+            }
+            else
+            {
+                start = startDate;
+                end = endDate;
+            }
+           
             var result = new WorkPeriod { Name = name, StartDate = start, EndDate = end };
             return result;
         }

@@ -14,6 +14,7 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
         protected override void CreateFilterGroups()
         {
             FilterGroups.Clear();
+            ReportContext.TimeCardEntries = null;
             FilterGroups.Add(CreateWorkPeriodFilterGroup());
         }
 
@@ -24,50 +25,66 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
             var report = new SimpleReport("8cm");
             AddDefaultReportHeader(report, currentPeriod, Resources.PayrollReport);
 
-             var table = new Dictionary<int, Dictionary<DateTime, int>>();
+             var table = new Dictionary<int, Dictionary<DateTime, KeyValuePair<int, string>>>();
             foreach (var u in ReportContext.TimeCardEntries.Select(t => t.UserId).Distinct())
             {
-                table.Add(u, new Dictionary<DateTime, int>());
+                table.Add(u, new Dictionary<DateTime, KeyValuePair<int, string>>());
                 foreach (var date in
                     EachDay(ReportContext.CurrentWorkPeriod.StartDate, ReportContext.CurrentWorkPeriod.EndDate))
                 {
                     int minutes = 0;
-                    bool error = false;
+                    
+                    string errMsg = "";
                     var ts = ReportContext.TimeCardEntries.Where(t => t.DateTime.Date.Equals(date.Date) && t.UserId == u).ToArray();
+                    if (!ts.Any())
+                    {
+                        continue;
+                    }
 
                     for (int i = 0; i < ts.Count(); i = i + 2)
                     {
                        
-                       
-                        if (ts.Count() > i+1)
+                        if (ts.Count() > i + 1)
                         {
-                            if (ts[0+i].Action != 1)
+                            if (ts[0 + i].Action != 1)
                             {
-                                error = true;
+                                
+                                errMsg = ", No ClockIn";
                             }
                             else
                             {
                                 DateTime end;
                                 DateTime start = ts[0 + i].DateTime;
 
-                                if (ts[1+i].Action != 2)
+                                if (ts[1 + i].Action != 2)
                                 {
-                                    error = true;
+                                   
+                                    errMsg = ", No ClockOut";
                                 }
                                 else
                                 {
-                                    end = ts[1+i].DateTime;
-                                    minutes += (int)end.Subtract(start).TotalMinutes;
+                                    end = ts[1 + i].DateTime;
+                                    minutes += (int) end.Subtract(start).TotalMinutes;
                                 }
                             }
 
                         }
+                        else
+                        {
+                           
+                            if (ts[0 + i].Action != 1)
+                            {
+
+                                errMsg = ", No ClockIn";
+                            }
+                            else
+                            {
+                                errMsg = ", No ClockOut";
+                            }
+                        }
                     }
-                    if (error)
-                    {
-                        minutes = 0;
-                    }
-                    table[u].Add(date.Date,minutes);
+                    
+                    table[u].Add(date.Date,new KeyValuePair<int, string>(minutes, errMsg));
                 } 
             }
 
@@ -80,15 +97,18 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                 report.AddColumnLength("Garson", "65*", "35*");
 
                 report.AddTable(userInfo.UserName,  userInfo.UserName, "");
-                report.AddBoldRow(userInfo.UserName, "Date", "Minutes");
+                report.AddBoldRow(userInfo.UserName, "Date", "Time");
                 var entries = table[user];
-                decimal totalMinutes = 0;
+                int totalMinutes = 0;
                 foreach (var entry in entries)
                 {
-                    totalMinutes += entry.Value;
-                    report.AddRow(userInfo.UserName, entry.Key.Date.ToShortDateString(),entry.Value);
+                     totalMinutes += entry.Value.Key;
+                     var t = new TimeSpan(0, entry.Value.Key, 0);
+                     report.AddRow(userInfo.UserName, entry.Key.Date.ToShortDateString(), String.Format("{0:D2}:{1:D2}{2}", t.Hours , t.Minutes, entry.Value.Value));
+                    
                 }
-                report.AddBoldRow(userInfo.UserName, "Total Hours:", totalMinutes/60);
+                var total = new TimeSpan(0, totalMinutes, 0);
+                report.AddBoldRow(userInfo.UserName, "Total Hours:", String.Format("{0:D2}:{1:D2}", total.Hours, total.Minutes));
             }
                    
             return report.Document;
