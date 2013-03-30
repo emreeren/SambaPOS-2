@@ -29,6 +29,7 @@ namespace Samba.Presentation.ViewModels
     {
         private static bool _registered;
         private static readonly Dictionary<string, Timer>  _timerTable = new Dictionary<string, Timer>();
+        private static object _timerSyncObj = new object();
         public static void RegisterOnce()
         {
             Debug.Assert(_registered == false);
@@ -595,31 +596,35 @@ namespace Samba.Presentation.ViewModels
 
                     if (!string.IsNullOrEmpty(command) && !string.IsNullOrWhiteSpace(comPort) && timeToWait > 0)
                     {
-                       if (_timerTable.ContainsKey(timerName))
-                       {
-                           var t = _timerTable[timerName];
+                        //make sure we syncronized here to avoid corruption in table or timer object
+                        lock (_timerSyncObj)
+                        {
+                            if (_timerTable.ContainsKey(timerName))
+                            {
+                                var t = _timerTable[timerName];
 
-                           if (t == null)
-                           {
-                               t = new Timer(timeToWait);
-                           }
-                           else if (t.Enabled)
-                           {
-                               t.Stop();
-                           }
-                           t.Interval = timeToWait;
-                          
-                          
-                       }
-                       else
-                       {
-                           var t = new Timer(timeToWait);
-                           t.Elapsed += (sender, e) => OnTimerExpired(sender, e, timerName, comPort, command);
-                           
-                           _timerTable.Add(timerName, t);
+                                if (t == null)
+                                {
+                                    t = new Timer(timeToWait);
+                                }
+                                else if (t.Enabled)
+                                {
+                                    t.Stop();
+                                }
+                                t.Interval = timeToWait;
 
-                       }
-                       _timerTable[timerName].Enabled = true;
+
+                            }
+                            else
+                            {
+                                var t = new Timer(timeToWait);
+                                t.Elapsed += (sender, e) => OnTimerExpired(sender, e, timerName, comPort, command);
+
+                                _timerTable.Add(timerName, t);
+
+                            }
+                            _timerTable[timerName].Enabled = true;
+                        }
                     }else
                     {
                         MessageBox.Show("Invalid Config for Cash Drawer Timer port");

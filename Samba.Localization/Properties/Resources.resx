@@ -1841,10 +1841,6 @@ Balance</value>
     <value>Date of Birth</value>
     <comment>Label.Content</comment>
   </data>
-<data name="Wages" xml:space="preserve">
-    <value>Wages</value>
-    <comment>Label.Content</comment>
-  </data>
   <data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
     <value>This Pin Code used by another user account.</value>
   </data>

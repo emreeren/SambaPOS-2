@@ -31,7 +31,7 @@ namespace Samba.Domain.Models.Users
         public string ContactPhone { get; set; }
         public string EmergencyPhone { get; set; }
         public string DateOfBirth { get; set; }
-       // public decimal Wages { get; set; }
+      
 
         private UserRole _userRole;
         public virtual UserRole UserRole

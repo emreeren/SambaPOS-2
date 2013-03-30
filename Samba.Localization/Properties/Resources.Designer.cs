@@ -8830,15 +8830,6 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wages.
-        /// </summary>
-        public static string Wages {
-            get {
-                return ResourceManager.GetString("Wages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Warning.
         /// </summary>
         public static string Warning {
