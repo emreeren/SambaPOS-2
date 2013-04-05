@@ -1052,6 +1052,10 @@ Payment</value>
     <value>User Name</value>
     <comment>Paragraph content</comment>
   </data>
+  <data name="UserId" xml:space="preserve">
+    <value>User Id</value>
+    <comment>Paragraph content</comment>
+  </data>
   <data name="TableName" xml:space="preserve">
     <value>Table Name</value>
     <comment>Paragraph content</comment>
@@ -2283,6 +2287,9 @@ Table: {2}</value>
   </data>
   <data name="TF_UserName" xml:space="preserve">
     <value>{USER NAME}</value>
+  </data>
+ <data name="TF_UserId" xml:space="preserve">
+    <value>{USER ID}</value>
   </data>
   <data name="TF_TableName" xml:space="preserve">
     <value>{TABLE}</value>

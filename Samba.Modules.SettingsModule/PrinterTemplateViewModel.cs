@@ -54,6 +54,7 @@ namespace Samba.Modules.SettingsModule
             result.Add("{SETTING:X}", Resources.ForPrintingAppSettingValue);
             result.Add(Resources.TF_TableOrUserName, Resources.TableOrUserName);
             result.Add(Resources.TF_UserName, Resources.UserName);
+            result.Add(Resources.TF_UserId, Resources.UserId);
             result.Add(Resources.TF_TableName, Resources.TableName);
             result.Add(Resources.TF_TicketNote, Resources.TicketNote);
             result.Add(Resources.TF_AccountName, Resources.AccountName);

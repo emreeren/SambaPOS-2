@@ -7507,6 +7507,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {USER ID}.
+        /// </summary>
+        public static string TF_UserId {
+            get {
+                return ResourceManager.GetString("TF_UserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {USER NAME}.
         /// </summary>
         public static string TF_UserName {
@@ -8565,6 +8574,15 @@ namespace Samba.Localization.Properties {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id.
+        /// </summary>
+        public static string UserId {
+            get {
+                return ResourceManager.GetString("UserId", resourceCulture);
             }
         }
         

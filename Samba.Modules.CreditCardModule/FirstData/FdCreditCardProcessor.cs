@@ -94,6 +94,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
             if (processType == ProcessType.External)
             {
                 result.Amount = amount;
+                SelectedTicket.SetTagValue("CC_TXTYPE", "External");
                 InteractionService.UserIntraction.DeblurMainWindow();
                 _view.Close();              
                 result.PublishEvent(EventTopicNames.PaymentProcessed);

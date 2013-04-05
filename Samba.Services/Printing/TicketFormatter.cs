@@ -278,6 +278,7 @@ namespace Samba.Services.Printing
 
             result = FormatData(result, Resources.TF_TableOrUserName, () => title);
             result = FormatData(result, Resources.TF_UserName, () => userName);
+            result = FormatData(result, Resources.TF_UserId, () => userNo.ToString());
             result = FormatData(result, Resources.TF_TableName, () => ticket.LocationName);
             result = FormatData(result, Resources.TF_TicketNote, () => ticket.Note ?? "");
             result = FormatData(result, Resources.TF_AccountName, () => ticket.CustomerName);
