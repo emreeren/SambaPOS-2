@@ -95,7 +95,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
             {
                 result.Amount = amount;
                 InteractionService.UserIntraction.DeblurMainWindow();
-                _view.Close();
+                _view.Close();              
                 result.PublishEvent(EventTopicNames.PaymentProcessed);
                 return;
             }

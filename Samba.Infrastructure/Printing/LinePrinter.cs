@@ -113,7 +113,14 @@ namespace Samba.Infrastructure.Printing
             WriteLine(tl + hl.PadLeft(_maxChars - 2, hl[0]) + tr, 1, 0);
             string text = vl + line.PadLeft((((_maxChars - 2) + line.Length) / 2), s[0]);
             WriteLine(text + vl.PadLeft(_maxChars - text.Length, s[0]), 1, 0);
-            WriteLine(bl + hl.PadLeft(_maxChars - 2, hl[0]) + br);
+            if (_maxChars - 2 > 0)
+            {
+                WriteLine(bl + hl.PadLeft(_maxChars - 2, hl[0]) + br);
+            }
+            else
+            {
+                WriteLine(bl  + br);
+            }
         }
 
         public void PrintFullLine(char lineChar)
@@ -125,7 +132,14 @@ namespace Samba.Infrastructure.Printing
         {
             if (expandLabel) label = ExpandLabel(label);
             string text = label.PadLeft((((_maxChars) + label.Length) / 2), '░');
-            WriteLine(text + "░".PadLeft(_maxChars - text.Length, '░'), 1, 0);
+            if ((_maxChars - text.Length) > 0)
+            {
+                WriteLine(text + "░".PadLeft(_maxChars - text.Length, '░'), 1, 0);
+            }
+            else
+            {
+                WriteLine(text, 1, 0);
+            }
         }
 
         private static string ExpandLabel(string label)

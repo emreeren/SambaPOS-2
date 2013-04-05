@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading;
 using System.Timers;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,7 @@ using Samba.Presentation.Common;
 using Samba.Presentation.Common.Services;
 using Samba.Services;
 using Samba.Infrastructure.Data.Serializer;
+using Timer = System.Timers.Timer;
 using Trigger = Samba.Domain.Models.Settings.Trigger;
 
 
@@ -592,6 +594,7 @@ namespace Samba.Presentation.ViewModels
                      var comPort = x.Value.GetAsString("COMPort");
                     var command = x.Value.GetAsString("CashDrawerReadCommand");
                     var timeToWait = x.Value.GetAsInteger("TimerDurationtInSec");
+                    timeToWait *= 1000; //convert sec to mill sec
                     //CashDrawerReadCommand="06", TimeToWait
 
                     if (!string.IsNullOrEmpty(command) && !string.IsNullOrWhiteSpace(comPort) && timeToWait > 0)
@@ -612,16 +615,15 @@ namespace Samba.Presentation.ViewModels
                                     t.Stop();
                                 }
                                 t.Interval = timeToWait;
-
+                              
 
                             }
                             else
                             {
                                 var t = new Timer(timeToWait);
                                 t.Elapsed += (sender, e) => OnTimerExpired(sender, e, timerName, comPort, command);
-
                                 _timerTable.Add(timerName, t);
-
+                               
                             }
                             _timerTable[timerName].Enabled = true;
                         }
@@ -673,7 +675,7 @@ namespace Samba.Presentation.ViewModels
                                 return;
                             }
                         }
-
+                        Thread.Sleep(5000);
                     }
                 }
             }

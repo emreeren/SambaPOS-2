@@ -28,7 +28,11 @@ namespace Samba.Services
             }
             catch (IOException)
             {
-
+                port.Close();
+            }
+            catch (Exception)
+            {
+                port.Close();
             }
         }
 
@@ -76,7 +80,11 @@ namespace Samba.Services
             }
             catch (IOException)
             {
-
+                port.Close();
+            }
+            catch (Exception)
+            {
+                port.Close();
             }
             return null;
         }

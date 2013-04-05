@@ -93,12 +93,12 @@ namespace Samba.Modules.BasicReports
         public static DateTime StartDate { get; set; }
         public static DateTime EndDate { get; set; }
 
-        public static string StartDateString { get { return StartDate.ToString("dd MM yyyy"); } set { StartDate = StrToDate(value); } }
-        public static string EndDateString { get { return EndDate.ToString("dd MM yyyy"); } set { EndDate = StrToDate(value); } }
+        public static string StartDateString { get { return StartDate.ToShortDateString(); } set { StartDate = StrToDate(value); } }
+        public static string EndDateString { get { return EndDate.ToShortDateString(); } set { EndDate = StrToDate(value); } }
 
         private static DateTime StrToDate(string value)
         {
-            var vals = value.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
+            var vals = value.Split(new[]{' ','/'}).Select(x => Convert.ToInt32(x)).ToList();
             if (vals.Count == 1) vals.Add(DateTime.Now.Month);
             if (vals.Count == 2) vals.Add(DateTime.Now.Year);
 
