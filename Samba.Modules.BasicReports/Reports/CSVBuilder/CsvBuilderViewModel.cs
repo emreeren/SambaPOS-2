@@ -62,6 +62,9 @@ namespace Samba.Modules.BasicReports.Reports.CSVBuilder
                         x.TicketItem.Voided,
                         x.TicketItem.Gifted,
                         Name = x.TicketItem.MenuItemName,
+                        Group = GetGroupCode(x.TicketItem.MenuItemId),
+                        Barcode = GetBarcode(x.TicketItem.MenuItemId),
+                        Tag = GetTag(x.TicketItem.MenuItemId),
                         Portion = x.TicketItem.PortionName,
                         x.TicketItem.Quantity,
                         Price = x.TicketItem.GetItemPrice(),
@@ -73,6 +76,23 @@ namespace Samba.Modules.BasicReports.Reports.CSVBuilder
                 );
             var csv = data.AsCsv();
             File.WriteAllText(fileName, csv);
+        }
+
+        private string GetBarcode(int menuItemId)
+        {
+            var mi = ReportContext.GetMenutItem(menuItemId);
+            return mi != null ? mi.Barcode : "";
+        }
+
+        private string GetTag(int menuItemId)
+        {
+            var mi = ReportContext.GetMenutItem(menuItemId);
+            return mi != null ? mi.Tag : "";
+        }
+        private string GetGroupCode(int menuItemId)
+        {
+            var mi = ReportContext.GetMenutItem(menuItemId);
+            return mi != null ? mi.GroupCode : "";
         }
 
         protected override string GetHeader()

@@ -43,6 +43,7 @@ namespace Samba.Presentation.Terminal
         public static TicketCommitResult CloseSelectedTicket()
         {
             Debug.Assert(SelectedTicket != null);
+            RuleExecutor.NotifyEvent(RuleEventNames.BeforeTicketClosing, new { Ticket = SelectedTicket.Model });
             SelectedTicket = null;
             var result = AppServices.MainDataContext.CloseTicket();
             AppServices.MessagingService.SendMessage(Messages.TicketRefreshMessage, result.TicketId.ToString());

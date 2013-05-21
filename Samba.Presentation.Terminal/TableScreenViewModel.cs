@@ -115,6 +115,12 @@ namespace Samba.Presentation.Terminal
 
         }
 
+        public bool HandleTextInput(string text)
+        {
+            OnTypeValueExecute(text);
+            return true;
+        }
+
         private void OnTypeValueExecute(string obj)
         {
             if (obj == "\r")
@@ -183,5 +189,7 @@ namespace Samba.Presentation.Terminal
             RaisePropertyChanged("NumeratorHeight");
             RaisePropertyChanged("TableScreenAlignment");
         }
+
+
     }
 }

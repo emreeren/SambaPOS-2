@@ -3291,4 +3291,10 @@ Error Message:
   <data name="SelectedLinesCount">
     <value xml:space="preserve">Selected Lines Count</value>
   </data>
+  <data name="BeforeTicketClosing" xml:space="preserve">
+    <value>Before Ticket Closing</value>
+  </data>
+  <data name="PaySelectedTicket" xml:space="preserve">
+    <value>Pay Selected Ticket</value>
+  </data>
 </root>

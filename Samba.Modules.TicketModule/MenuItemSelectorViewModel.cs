@@ -214,6 +214,11 @@ namespace Samba.Modules.TicketModule
                         var data = new ScreenMenuItemData { ScreenMenuItem = si, Quantity = quantity };
                         _addMenuItemCommand.Execute(data);
                     }
+                    else
+                    {
+                        NumeratorValue = insertedData;
+                        OnFindTableExecute(insertedData);
+                    }
                 }
                 catch (Exception) { }
             }
@@ -229,6 +234,8 @@ namespace Samba.Modules.TicketModule
             if (AppServices.MainDataContext.SelectedTicket == null)
             {
                 AppServices.MainDataContext.OpenTicketFromTableName(NumeratorValue);
+                if (AppServices.MainDataContext.SelectedTicket.Id == 0)
+                    RuleExecutor.NotifyEvent(RuleEventNames.TicketLocationChanged, new { Ticket = AppServices.MainDataContext.SelectedTicket, OldLocation = "", NewLocation = AppServices.MainDataContext.SelectedTicket.LocationName });
                 if (AppServices.MainDataContext.SelectedTicket != null)
                     EventServiceFactory.EventService.PublishEvent(EventTopicNames.RefreshSelectedTicket);
             }
@@ -243,7 +250,7 @@ namespace Samba.Modules.TicketModule
 
             if (IsQuickNumeratorVisible)
                 NumeratorValue = QuickNumeratorValues[0];
-            
+
             NumeratorValue = "";
 
             if (selectedMultiplier > 0)

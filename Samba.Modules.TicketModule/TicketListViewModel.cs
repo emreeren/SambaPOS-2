@@ -1102,7 +1102,7 @@ namespace Samba.Modules.TicketModule
                     return;
                 }
             }
-
+            RuleExecutor.NotifyEvent(RuleEventNames.BeforeTicketClosing, new { Ticket = _selectedTicket.Model });
             SelectedTicket.ClearSelectedItems();
             var result = AppServices.MainDataContext.CloseTicket();
             if (!string.IsNullOrEmpty(result.ErrorMessage))

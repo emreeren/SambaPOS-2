@@ -142,6 +142,7 @@ namespace Samba.Presentation.Common
                                 else if (paramvalue == "[Year]")
                                     settingName = settingName.Replace(paramvalue, DateTime.Now.Year.ToString());
                                 else settingName = settingName.Replace(paramvalue, "");
+                                
                             }
                         }
 
@@ -177,6 +178,5 @@ namespace Samba.Presentation.Common
 
             return true;
         }
-
     }
 }

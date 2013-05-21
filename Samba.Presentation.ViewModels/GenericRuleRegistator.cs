@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
+using Samba.Domain;
 using Samba.Domain.Models.Customers;
 using Samba.Domain.Models.Menus;
 using Samba.Domain.Models.Settings;
@@ -36,6 +37,8 @@ namespace Samba.Presentation.ViewModels
 
         private static void RegisterActions()
         {
+            RuleActionTypeRegistry.RegisterActionType("ShowMessage", Resources.ShowMessage, new { Message = "" });
+            RuleActionTypeRegistry.RegisterActionType("DisplayPopup", Resources.DisplayPopup, new { Title = "", Message = "", Color = "" });
             RuleActionTypeRegistry.RegisterActionType("SendEmail", Resources.SendEmail, new { SMTPServer = "", SMTPUser = "", SMTPPassword = "", SMTPPort = 0, ToEMailAddress = "", Subject = "", FromEMailAddress = "", EMailMessage = "", FileName = "", DeleteFile = false, BypassSslErrors = false });
             RuleActionTypeRegistry.RegisterActionType("AddTicketDiscount", Resources.AddTicketDiscount, new { DiscountPercentage = 0m });
             RuleActionTypeRegistry.RegisterActionType("AddTicketItem", Resources.AddTicketItem, new { MenuItemName = "", PortionName = "", Quantity = 0, Gift = false, GiftReason = "", Tag = "" });
@@ -57,6 +60,7 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterActionType("UpdateTicketAccount", Resources.UpdateTicketAccount, new { AccountPhone = "", AccountName = "", Note = "" });
             RuleActionTypeRegistry.RegisterActionType("ExecutePrintJob", Resources.ExecutePrintJob, new { PrintJobName = "", TicketItemTag = "" });
             RuleActionTypeRegistry.RegisterActionType("UpdateApplicationSubTitle", "Update Application Subtitle", new { Title = "", Color = "White", FontSize = 12 });
+            RuleActionTypeRegistry.RegisterActionType("PaySelectedTicket", Resources.PaySelectedTicket, new { PaymentType = "" });
         }
 
         private static void RegisterRules()
@@ -79,6 +83,7 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.ModifierSelected, Resources.ModifierSelected, new { TicketTag = "", MenuItemName = "", ModifierGroupName = "", ModifierName = "", ModifierPrice = 0, ModifierQuantity = 0, IsRemoved = false, IsPriceAddedToParentPrice = false, TotalPropertyCount = 0, TotalModifierQuantity = 0m, TotalModifierPrice = 0m });
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.ChangeAmountChanged, Resources.ChangeAmountUpdated, new { TicketAmount = 0, ChangeAmount = 0, TenderedAmount = 0 });
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.TicketClosed, Resources.TicketClosed);
+            RuleActionTypeRegistry.RegisterEvent(RuleEventNames.BeforeTicketClosing, Resources.BeforeTicketClosing);
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.ApplicationStarted, Resources.ApplicationStarted, new { CommandLineArguments = "" });
         }
 
@@ -94,7 +99,7 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterParameterSoruce("VatTemplate", () => Dao.Select<VatTemplate, string>(x => x.Name, x => x.Id > 0));
             RuleActionTypeRegistry.RegisterParameterSoruce("TaxServiceTemplate", () => Dao.Select<TaxServiceTemplate, string>(x => x.Name, x => x.Id > 0));
             RuleActionTypeRegistry.RegisterParameterSoruce("TagName", () => Dao.Select<TicketTagGroup, string>(x => x.Name, x => x.Id > 0));
-            RuleActionTypeRegistry.RegisterParameterSoruce("PaymentType", () => new[] { Resources.Cash, Resources.CreditCard, Resources.Ticket });
+            RuleActionTypeRegistry.RegisterParameterSoruce("PaymentType", () => new[] { Resources.Cash, Resources.CreditCard, Resources.Ticket, Resources.Account });
             RuleActionTypeRegistry.RegisterParameterSoruce("PrintJobName", () => Dao.Distinct<PrintJob>(x => x.Name));
             RuleActionTypeRegistry.RegisterParameterSoruce("CustomerGroupCode", () => Dao.Distinct<Customer>(x => x.GroupCode));
             RuleActionTypeRegistry.RegisterParameterSoruce("MenuItemGroupCode", () => Dao.Distinct<MenuItem>(x => x.GroupCode));
@@ -117,6 +122,48 @@ namespace Samba.Presentation.ViewModels
         {
             EventServiceFactory.EventService.GetEvent<GenericEvent<ActionData>>().Subscribe(x =>
             {
+                if (x.Value.Action.ActionType == "ShowMessage")
+                {
+                    var param = x.Value.GetAsString("Message");
+                    var ticket = x.Value.GetDataValue<Ticket>("Ticket");
+                    if (ticket != null)
+                    {
+                        param = ReplaceAccValues(param, ticket);
+                    }
+                    param = param.Replace("\\r", Environment.NewLine);
+                    if (!string.IsNullOrEmpty(param))
+                        InteractionService.UserIntraction.GiveFeedback(param);
+                }
+
+                if (x.Value.Action.ActionType == "DisplayPopup")
+                {
+                    var title = x.Value.GetAsString("Title");
+                    var message = x.Value.GetAsString("Message");
+                    var color = x.Value.GetAsString("Color");
+                    color = string.IsNullOrEmpty(color.Trim()) ? "DarkRed" : color;
+                    var ticket = x.Value.GetDataValue<Ticket>("Ticket");
+                    if (ticket != null)
+                    {
+                        message = ReplaceAccValues(message, ticket);
+                    }
+                    message = message.Replace("\\r", Environment.NewLine);
+                    if (!string.IsNullOrEmpty(message.Trim()))
+                        InteractionService.UserIntraction.DisplayPopup(title, message, null, "", color);
+                }
+
+                if (x.Value.Action.ActionType == "PaySelectedTicket")
+                {
+                    if (AppServices.MainDataContext.SelectedTicket == null) return;
+                    var pt = x.Value.GetAsString("PaymentType");
+                    if (pt != Resources.Cash && pt != Resources.CreditCard && pt != Resources.Voucher &&
+                        pt != Resources.Account) return;
+                    var ptt = PaymentType.Cash;
+                    if (pt == Resources.CreditCard) ptt = PaymentType.CreditCard;
+                    if (pt == Resources.Voucher) ptt = PaymentType.Ticket;
+                    if (pt == Resources.Account) ptt = PaymentType.Account;
+                    if (ptt == PaymentType.Account && AppServices.MainDataContext.SelectedTicket.CustomerId == 0) return;
+                    TicketViewModel.PaySelectedTicket(ptt);
+                }
                 if (x.Value.Action.ActionType == "UpdateApplicationSubTitle")
                 {
                     var title = x.Value.GetAsString("Title");
@@ -259,9 +306,24 @@ namespace Samba.Presentation.ViewModels
                     {
                         var customer = Dao.Query(qFilter).FirstOrDefault();
                         if (customer != null)
+                        {
                             AppServices.MainDataContext.AssignCustomerToSelectedTicket(customer);
+                            RuleExecutor.NotifyEvent(RuleEventNames.CustomerSelectedForTicket,
+                            new
+                            {
+                                Ticket = AppServices.MainDataContext.SelectedTicket,
+                                CustomerId = customer.Id,
+                                CustomerName = customer.Name,
+                                customer.PhoneNumber,
+                                CustomerNote = customer.Note,
+                                CustomerGroupCode = customer.GroupCode
+                            });
+                        }
                     }
-                    else AppServices.MainDataContext.AssignCustomerToSelectedTicket(Customer.Null);
+                    else
+                    {
+                        AppServices.MainDataContext.AssignCustomerToSelectedTicket(Customer.Null);
+                    }
                 }
 
                 if (x.Value.Action.ActionType == "UpdateProgramSetting")
@@ -553,6 +615,22 @@ namespace Samba.Presentation.ViewModels
                     }
                 }
             });
+        }
+
+        private static string ReplaceAccValues(string s, Ticket ticket)
+        {
+            if (!s.Contains("ACC")) return s;
+
+            if (s.Contains("{ACC BALANCE}"))
+            {
+                var balance = CashService.GetAccountBalance(ticket.CustomerId);
+                s = s.Replace("{ACC BALANCE}", balance.ToString("#,#0.00"));
+            }
+
+            if (s.Contains("{ACC NAME}"))
+                s = s.Replace("{ACC NAME}", ticket.CustomerName);
+
+            return s;
         }
 
         private static void RegisterNotifiers()

@@ -106,29 +106,6 @@ namespace Samba.Presentation.Common.Interaction
         public UserInteraction()
         {
             _popupDataViewModel = new PopupDataViewModel();
-
-            RuleActionTypeRegistry.RegisterActionType("ShowMessage", Resources.ShowMessage, new { Message = "" });
-            RuleActionTypeRegistry.RegisterActionType("DisplayPopup", Resources.DisplayPopup, new { Title = "", Message = "", Color = "" });
-
-            EventServiceFactory.EventService.GetEvent<GenericEvent<ActionData>>().Subscribe(x =>
-            {
-                if (x.Value.Action.ActionType == "ShowMessage")
-                {
-                    var param = x.Value.GetAsString("Message");
-                    if (!string.IsNullOrEmpty(param))
-                        GiveFeedback(param);
-                }
-
-                if (x.Value.Action.ActionType == "DisplayPopup")
-                {
-                    var title = x.Value.GetAsString("Title");
-                    var message = x.Value.GetAsString("Message");
-                    var color = x.Value.GetAsString("Color");
-                    color = string.IsNullOrEmpty(color.Trim()) ? "DarkRed" : color;
-                    if (!string.IsNullOrEmpty(message.Trim()))
-                        DisplayPopup(title, message, null, "", color);
-                }
-            });
         }
 
         public PopupWindow PopupWindow

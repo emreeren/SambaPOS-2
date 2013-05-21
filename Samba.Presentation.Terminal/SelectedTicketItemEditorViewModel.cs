@@ -198,6 +198,9 @@ namespace Samba.Presentation.Terminal
                     else
                     {
                         TicketTags.AddRange(selectedTicketTag.TicketTags.Select(x => new TicketTagViewModel(x)));
+                        if (TicketTags.Count == 1) OnTicketTagSelected(TicketTags.First());
+                        return;
+                        
                     }
                     RaisePropertyChanged("TicketTags");
                 }

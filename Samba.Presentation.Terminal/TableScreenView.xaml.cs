@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Samba.Presentation.Common;
 
 namespace Samba.Presentation.Terminal
 {
@@ -31,6 +32,28 @@ namespace Samba.Presentation.Terminal
             {
                 if (ts.SelectedTableScreen.NumeratorHeight < 30)
                     ts.DisplayFullScreenNumerator();
+            }
+        }
+
+        private void TableScreenView_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var ts = (DataContext as TableScreenViewModel);
+            if (ts != null)
+            {
+                e.Handled = ts.HandleTextInput(e.Text);
+            }
+        }
+
+        private void TableScreenView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var ts = (DataContext as TableScreenViewModel);
+            if (ts != null && ts.SelectedTableScreen != null)
+            {
+                if (ts.SelectedTableScreen.NumeratorHeight > 0)
+                {
+                    ts.NumeratorValue = "";
+                    NumeratorTextEdit.BackgroundFocus();
+                }
             }
 
         }

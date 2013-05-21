@@ -366,5 +366,10 @@ namespace Samba.Modules.BasicReports
             var workspace = WorkspaceFactory.Create();
             return InventoryService.GetCurrentPeriodicConsumption(workspace);
         }
+
+        public static MenuItem GetMenutItem(int menuItemId)
+        {
+            return Dao.SingleWithCache<MenuItem>(x => x.Id == menuItemId);
+        }
     }
 }

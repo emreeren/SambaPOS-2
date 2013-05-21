@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:FxButton="clr-namespace:FlexButton;assembly=FlexButton" mc:Ignorable="d" 
-             d:DesignHeight="320" d:DesignWidth="240">
+             d:DesignHeight="320" d:DesignWidth="240" PreviewTextInput="TableScreenView_OnPreviewTextInput" Loaded="TableScreenView_OnLoaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -67,7 +67,7 @@
                 <ColumnDefinition Width="20*" Name="AlphaButtonsColumn"/>
                 <ColumnDefinition Width="65*"/>
             </Grid.ColumnDefinitions>
-            <TextBox IsReadOnly="True" Focusable="True" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" Text="{Binding NumeratorValue,Mode=TwoWay}" PreviewMouseLeftButtonDown="TextBox_PreviewMouseLeftButtonDown" />
+            <TextBox Name="NumeratorTextEdit" IsReadOnly="True" Focusable="True" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" Text="{Binding NumeratorValue,Mode=TwoWay}" PreviewMouseLeftButtonDown="TextBox_PreviewMouseLeftButtonDown" />
             <UniformGrid Grid.Column="1" Grid.Row="1" Rows="4" Columns="3">
                 <FxButton:FlexButton Content="1" Command="{Binding TypeValueCommand}" CommandParameter="1" Margin="0,0,2,2" Focusable="False" />
                 <FxButton:FlexButton Content="2" Command="{Binding TypeValueCommand}" CommandParameter="2" Margin="0,0,2,2" Focusable="False" />

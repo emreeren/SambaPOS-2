@@ -3293,4 +3293,10 @@ Hata Mesajı:
   <data name="SelectedLinesCount">
     <value xml:space="preserve">Seçilen Satır Sayısı</value>
   </data>
+  <data name="BeforeTicketClosing" xml:space="preserve">
+    <value>Adisyon Kapanmadan Önce</value>
+  </data>
+  <data name="PaySelectedTicket" xml:space="preserve">
+    <value>Aktif Adisyonu Öde</value>
+  </data>
 </root>

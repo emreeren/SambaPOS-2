@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using Samba.Domain.Models.Tables;
 using Samba.Domain.Models.Tickets;
 using Samba.Domain.Models.Users;
 using Samba.Infrastructure;
+using Samba.Infrastructure.Data;
 using Samba.Infrastructure.Settings;
 using Samba.Localization.Engine;
 using Samba.Localization.Properties;
@@ -20,6 +22,8 @@ namespace Samba.Presentation.Terminal
     {
         public MainWindowViewModel()
         {
+            InteractionService.UserIntraction = new TerminalUserInteraction();
+
             //TODO: Para birimi servisinden al.
 
             LocalizeDictionary.ChangeLanguage(LocalSettings.CurrentLanguage);
@@ -429,5 +433,84 @@ namespace Samba.Presentation.Terminal
             return false;
         }
 
+    }
+
+    public class TerminalUserInteraction : IUserInteraction
+    {
+        public string[] GetStringFromUser(string caption, string description)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string[] GetStringFromUser(string caption, string description, string defaultValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<IOrderable> ChooseValuesFrom(IList<IOrderable> values, IList<IOrderable> selectedValues, string caption, string description, string singularName,
+                                      string pluralName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditProperties(object item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditProperties<T>(IList<T> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SortItems(IEnumerable<IOrderable> list, string caption, string description)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AskQuestion(string question)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GiveFeedback(string message)
+        {
+            MainWindowViewModel.ShowFeedback(message);
+        }
+
+        public void ShowKeyboard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HideKeyboard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToggleKeyboard()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ToggleSplashScreen()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DisplayPopup(string title, string content, object dataObject, string eventMessage, string headerColor = "DarkRed")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BlurMainWindow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeblurMainWindow()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

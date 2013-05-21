@@ -94,7 +94,6 @@ SolidCompression=true
 Compression=lzma/fast
 
 ;required by products
-MinVersion=4.1,5.0
 PrivilegesRequired=admin
 ArchitecturesAllowed=
 VersionInfoProductName=Samba POS Setup

@@ -468,12 +468,17 @@ namespace Samba.Presentation.ViewModels
             {
                 if (Model == null) return "";
 
-                string selectedTicketTitle;
+                string selectedTicketTitle = "#";
 
-                if (!string.IsNullOrEmpty(Location) && Model.Id == 0)
-                    selectedTicketTitle = string.Format(Resources.Table_f, Location);
-                else if (!string.IsNullOrEmpty(CustomerName) && Model.Id == 0)
-                    selectedTicketTitle = string.Format(Resources.Account_f, CustomerName);
+                if (Model.Id == 0)
+                {
+                    if (!string.IsNullOrEmpty(Location) && string.IsNullOrEmpty(CustomerName))
+                        selectedTicketTitle = string.Format(Resources.Table_f, Location);
+                    else if (!string.IsNullOrEmpty(CustomerName) && string.IsNullOrEmpty(Location))
+                        selectedTicketTitle = string.Format(Resources.Account_f, CustomerName);
+                    else if (!string.IsNullOrEmpty(CustomerName) && !string.IsNullOrEmpty(Location))
+                        selectedTicketTitle = string.Format(Resources.Table + ": {0}" + "\r" + Resources.Customer + ": {1}", CustomerName, Location);
+                }
                 else if (string.IsNullOrEmpty(CustomerName)) selectedTicketTitle = string.IsNullOrEmpty(Location)
                      ? string.Format("# {0}", Model.TicketNumber)
                      : string.Format(Resources.TicketNumberAndTable_f, Model.TicketNumber, Location);
@@ -606,6 +611,7 @@ namespace Samba.Presentation.ViewModels
             string paymentName = Resources.Cash;
             if (paymentType == PaymentType.CreditCard) paymentName = Resources.CreditCard;
             if (paymentType == PaymentType.Ticket) paymentName = Resources.Voucher;
+            if (paymentType == PaymentType.Account) paymentName = Resources.Account;
 
             RuleExecutor.NotifyEvent(RuleEventNames.PaymentReceived,
                 new { Ticket = ticket, PaymentType = paymentName, Amount = amount, TicketTag = ticket.Tag, ticket.CustomerId, ticket.CustomerName, ticket.CustomerGroupCode, SelectedLinesCount = ticket.GetPaidItems().Count() });
