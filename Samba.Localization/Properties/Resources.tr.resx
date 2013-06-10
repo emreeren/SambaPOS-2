@@ -3299,4 +3299,7 @@ Hata Mesajı:
   <data name="PaySelectedTicket" xml:space="preserve">
     <value>Aktif Adisyonu Öde</value>
   </data>
+  <data name="CanChangeTicketTags" xml:space="preserve">
+    <value>Adisyon Etiketini Değiştirebilir</value>
+  </data>
 </root>

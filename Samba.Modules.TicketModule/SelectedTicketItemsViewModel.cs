@@ -64,7 +64,10 @@ namespace Samba.Modules.TicketModule
                 tags.Sort(new AlphanumComparator());
                 TicketTags.AddRange(tags);
 
-                if (SelectedTicket.IsTaggedWith(SelectedTicket.LastSelectedTicketTag.Name)) TicketTags.Add(TicketTag.Empty);
+                if (SelectedTicket.IsTaggedWith(SelectedTicket.LastSelectedTicketTag.Name) && AppServices.IsUserPermittedFor(PermissionNames.RemoveTicketTag))
+                {
+                    TicketTags.Add(TicketTag.Empty);
+                }
                 if (TicketTags.Count == 1 && !_showFreeTagEditor) obj.Value.UpdateTag(SelectedTicket.LastSelectedTicketTag, TicketTags[0]);
                 RaisePropertyChanged("TagColumnCount");
                 RaisePropertyChanged("IsFreeTagEditorVisible");

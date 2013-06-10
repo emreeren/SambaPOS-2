@@ -209,7 +209,11 @@ namespace Samba.Presentation.Terminal
 
         private bool CanTicketTagExecute(TicketTagGroup arg)
         {
-            return SelectedTicket != null && (!SelectedTicket.IsLocked || !SelectedTicket.IsTaggedWith(arg.Name));
+            var canUserChangeTag = SelectedTicket != null &&
+                              (!SelectedTicket.IsTaggedWith(arg.Name) ||
+                               AppServices.IsUserPermittedFor(PermissionNames.ChangeTicketTag));
+
+            return SelectedTicket != null && canUserChangeTag && (!SelectedTicket.IsLocked || !SelectedTicket.IsTaggedWith(arg.Name));
         }
 
         private void OnTicketTagExecute(TicketTagGroup obj)

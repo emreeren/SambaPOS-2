@@ -513,7 +513,10 @@ namespace Samba.Modules.TicketModule
 
         private bool CanExecuteShowTicketTags(TicketTagGroup arg)
         {
-            return SelectedTicket == null || (SelectedTicket.Model.CanSubmit);
+            var canUserChangeTag = SelectedTicket != null &&
+                                   (!SelectedTicket.IsTaggedWith(arg.Name) ||
+                                    AppServices.IsUserPermittedFor(PermissionNames.ChangeTicketTag)); 
+            return SelectedTicket == null || (canUserChangeTag && SelectedTicket.Model.CanSubmit);
         }
 
         private void OnShowTicketsTagExecute(TicketTagGroup tagGroup)

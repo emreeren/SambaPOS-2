@@ -929,6 +929,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can Change Ticket Tags.
+        /// </summary>
+        public static string CanChangeTicketTags {
+            get {
+                return ResourceManager.GetString("CanChangeTicketTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can Display Old Tickets.
         /// </summary>
         public static string CanDisplayOldTickets {

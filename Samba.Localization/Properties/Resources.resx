@@ -3297,4 +3297,7 @@ Error Message:
   <data name="PaySelectedTicket" xml:space="preserve">
     <value>Pay Selected Ticket</value>
   </data>
+  <data name="CanChangeTicketTags" xml:space="preserve">
+    <value>Can Change Ticket Tags</value>
+  </data>
 </root>
