@@ -66,6 +66,7 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand ChangePriceCommand { get; set; }
         public ICaptionCommand PrintJobCommand { get; set; }
         public ICaptionCommand PrintLastTicketCommand { get; set; }
+        public ICaptionCommand OpenCashDrawerCommand { get; set; }
         public DelegateCommand<TicketTagFilterViewModel> FilterOpenTicketsCommand { get; set; }
 
         private TicketViewModel _selectedTicket;
@@ -218,6 +219,10 @@ namespace Samba.Modules.TicketModule
         {
             return (CachePrinterJob.LastPrintedContent != null); 
         }
+        private bool CanOpenCashDrawer(string obj)
+        {
+            return true;
+        }
 
         public Brush TicketBackground { get { return SelectedTicket != null && (SelectedTicket.IsLocked || SelectedTicket.IsPaid) ? SystemColors.ControlLightBrush : SystemColors.WindowBrush; } }
 
@@ -271,6 +276,8 @@ namespace Samba.Modules.TicketModule
             RemoveTicketLockCommand = new CaptionCommand<string>(Resources.ReleaseLock, OnRemoveTicketLock, CanRemoveTicketLock);
             ChangePriceCommand = new CaptionCommand<string>(Resources.ChangePrice, OnChangePrice, CanChangePrice);
             PrintLastTicketCommand = new CaptionCommand<string>(Resources.PrintLastTicket, OnPrintLastTicket, CanPrintLastTicket);
+            OpenCashDrawerCommand = new CaptionCommand<string>(Resources.OpenCashDrawer, OnOpenCashDrawer, CanOpenCashDrawer);
+
             
             EventServiceFactory.EventService.GetEvent<GenericEvent<LocationData>>().Subscribe(
                 x =>
@@ -783,6 +790,11 @@ namespace Samba.Modules.TicketModule
     
             }
         }
+        private void OnOpenCashDrawer(string obj)
+        {
+            
+          
+        }
 
         private void OnFilterOpenTicketsExecute(TicketTagFilterViewModel obj)
         {
@@ -1107,8 +1119,19 @@ namespace Samba.Modules.TicketModule
             _timer.Change(Timeout.Infinite, 60000);
         }
 
-        private static void OnMakePaymentExecute(string obj)
+        private  void OnMakePaymentExecute(string obj)
         {
+            if (SelectedTicket != null && SelectedTicket.Items.Count > 0)
+            {
+                var message = SelectedTicket.GetPrintError();
+                if (!string.IsNullOrEmpty(message))
+                {
+                    SelectedTicket.ClearSelectedItems();
+                    RefreshVisuals();
+                    InteractionService.UserIntraction.GiveFeedback(message);
+                    return;
+                }
+            }
             AppServices.MainDataContext.SelectedTicket.PublishEvent(EventTopicNames.MakePayment);
         }
 

@@ -26,7 +26,7 @@ namespace Samba.Modules.CidMonitor
 #if DEBUG
                 var i = 0;
 #else
-                InteractionService.UserIntraction.DisplayPopup(Resources.Information, Resources.CallerIdDriverError, "", "");
+             //   InteractionService.UserIntraction.DisplayPopup(Resources.Information, Resources.CallerIdDriverError, "", "");
 #endif
             }
         }

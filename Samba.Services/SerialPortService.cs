@@ -11,7 +11,58 @@ namespace Samba.Services
     public static class SerialPortService
     {
 
+        public  delegate void SerialDataReceivedEventHanderDelegate(object sender, SerialDataReceivedEventArgs e);
+
         private static readonly Dictionary<string, SerialPort> Ports = new Dictionary<string, SerialPort>();
+
+        public static void AddDataReceivedEventDelegate(string portName, int baudRate,
+                                           SerialDataReceivedEventHanderDelegate dataReceivedEventHanderDelegate)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                if (baudRate > 0)
+                {
+                    Ports.Add(portName, new SerialPort(portName, baudRate));
+                }
+                else
+                {
+                    Ports.Add(portName, new SerialPort(portName));
+                }
+            }
+            var port = Ports[portName];
+             port.DataReceived += new SerialDataReceivedEventHandler(dataReceivedEventHanderDelegate);
+
+            try
+            {
+                if (port.BaudRate != baudRate)
+                {
+                    port.Close();
+                }
+                if (!port.IsOpen) port.Open();
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+
+        }
+
+        public static void RemoveDataReceivedEventDelegate(string portName,
+                                           SerialDataReceivedEventHanderDelegate dataReceivedEventHanderDelegate)
+        {
+            if (Ports.ContainsKey(portName))
+            {
+
+                var port = Ports[portName];
+                port.DataReceived -= new SerialDataReceivedEventHandler(dataReceivedEventHanderDelegate);
+            }
+
+            
+
+        }
+        
 
         public static void WritePort(string portName, byte[] data)
         {
@@ -127,6 +178,7 @@ namespace Samba.Services
 
                     while (timeoutInMillSec > 0)
                     {
+                        
                         string data = port.ReadExisting();
                         if (!String.IsNullOrEmpty(data))
                         {

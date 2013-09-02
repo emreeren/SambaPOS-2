@@ -17,7 +17,6 @@ namespace Samba.Presentation.Common
                 decimal.TryParse(typedValue, out amnt);
                 if (amnt == 0) stringMode = true;
             }
-
             string dc = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
             if (typedValue == "." || typedValue == ",")
@@ -40,12 +39,14 @@ namespace Samba.Presentation.Common
                 rfmt = format.PadRight(dCount + rfmt.Length, '0');
             }
 
+
             string amount = string.IsNullOrEmpty(actualValue) ? "0" :
                 Convert.ToDecimal(actualValue).ToString(fmt);
             if (amount.Contains(dc))
                 amount = amount.Substring(0, amount.Length - 1);
 
             amnt = Convert.ToDecimal(amount + typedValue);
+           
             return (amnt).ToString(rfmt);
         }
     }

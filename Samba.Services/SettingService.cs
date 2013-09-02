@@ -33,6 +33,11 @@ namespace Samba.Services
                 CustomPosName = "Samba POS";
                 SaveChanges();
             }
+            if (DefaultCashDrawerAmount == null)
+            {
+                DefaultCashDrawerAmount = 150;
+                SaveChanges();
+            }
         }
 
         public string PhoneNumberInputMask
@@ -74,6 +79,11 @@ namespace Samba.Services
         {
             get { return GetCustomPosName().StringValue; }
             set { GetCustomPosName().StringValue = value; }
+        }
+        public decimal DefaultCashDrawerAmount
+        {
+            get { return GetDefaultCashDrawerAmountt().DecimalValue; }
+            set { GetDefaultCashDrawerAmountt().DecimalValue = value; }
         }
         private SettingGetter _weightBarcodePrefix;
         private SettingGetter GetWeightBarcodePrefix()
@@ -117,7 +127,11 @@ namespace Samba.Services
         {
             return _customPosName ?? (_customPosName = GetSetting("CustomPosName"));
         }
-             
+        private SettingGetter _defaultCashDrawerAmount;
+        public SettingGetter GetDefaultCashDrawerAmountt()
+       {
+           return _defaultCashDrawerAmount ?? (_defaultCashDrawerAmount = GetSetting("DefaultCashDrawerAmount"));
+       }
         public SettingGetter ReadLocalSetting(string settingName)
         {
             if (!_customSettingCache.ContainsKey(settingName))

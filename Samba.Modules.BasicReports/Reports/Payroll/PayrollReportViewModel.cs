@@ -20,7 +20,7 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
 
         protected override FlowDocument GetReport()
         {
-            var currentPeriod = ReportContext.CurrentWorkPeriod;
+            var currentPeriod = ReportContext.ThisWeekWorkPeriod; // ReportContext.CurrentWorkPeriod;
 
             var report = new SimpleReport("8cm");
             AddDefaultReportHeader(report, currentPeriod, Resources.PayrollReport);

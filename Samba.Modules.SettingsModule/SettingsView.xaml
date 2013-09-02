@@ -25,6 +25,10 @@
                         </Label>
                         <TextBox HorizontalAlignment="Left" MinWidth="300" Text="{Binding ConnectionString}" />
                         <Label>
+                           Failover Connection String:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" MinWidth="300" Text="{Binding FailoverConnectString}" />
+                        <Label>
                             <LocText ResourceIdentifierKey="MessageServerName" Suffix=":"/>
                         </Label>
                         <TextBox HorizontalAlignment="Left" MinWidth="200" Text="{Binding MessagingServerName}" />

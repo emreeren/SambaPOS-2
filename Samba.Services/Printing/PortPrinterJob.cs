@@ -23,9 +23,16 @@ namespace Samba.Services.Printing
                 data = PrinterHelper.ReplaceChars(data, Printer.ReplacementPattern);
                 foreach (var s in data)
                 {
-                    if (s.Trim().ToLower() == "<w>")
+                    if (s.Trim().StartsWith("<w"))
                     {
-                        System.Threading.Thread.Sleep(100);
+                        var lineData = s.ToLower().Replace("<w", "").Trim(new[] { ' ', '<', '>' });
+                        int sleepTime = 100;
+                        if (!String.IsNullOrWhiteSpace(lineData))
+                        {
+                            Int32.TryParse(lineData, out sleepTime);
+                        }
+                        System.Threading.Thread.Sleep(sleepTime);
+                        
                     }
                     else if (s.ToLower().StartsWith("<lb"))
                     {

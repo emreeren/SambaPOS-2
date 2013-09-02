@@ -81,6 +81,11 @@ namespace Samba.Modules.SettingsModule
             get { return LocalSettings.ConnectionString; }
             set { LocalSettings.ConnectionString = value; }
         }
+        public string FailoverConnectString
+        {
+            get { return LocalSettings.FailoverConnectString; }
+            set { LocalSettings.FailoverConnectString = value; }
+        }
 
         public string MessagingServerName
         {

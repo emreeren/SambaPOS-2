@@ -1883,6 +1883,10 @@ Visit Reports section and create Work Period Reports</value>
     <value>DON'T FORGET ENDING WORK PERIOD!</value>
     <comment>TextBlock.Text</comment>
   </data>
+  <data name="DontForgetToClockOut" xml:space="preserve">
+    <value>DON'T FORGET TO CLOCK OUT!</value>
+    <comment>TextBlock.Text</comment>
+  </data>
   <data name="Paid" xml:space="preserve">
     <value>Paid</value>
   </data>
@@ -3171,6 +3175,9 @@ Continue without adding details?</value>
   <data name="PrintLastTicket" xml:space="preserve">
     <value>Print Last Ticket</value>
   </data>
+ <data name="OpenCashDrawer" xml:space="preserve">
+    <value>Open Cash Drawer</value>
+  </data>
   <data name="NotifyToCloseCashDrawer" xml:space="preserve">
     <value>Notify to Close Cash Drawer</value>
   </data>
@@ -3238,6 +3245,9 @@ Error Message:
   </data>
   <data name="CustomPosName" xml:space="preserve">
     <value>POS Name to use in reports</value>
+  </data>
+  <data name="DefaultCashDrawerAmount" xml:space="preserve">
+    <value>Default Amount in CashDrawer</value>
   </data>
   <data name="Increase" xml:space="preserve">
     <value>Increase</value>

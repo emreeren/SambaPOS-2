@@ -15,7 +15,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
         public int ComBaudRate { get; set; }
        
 
-        [DisplayName("Gratuity"), Category("Settings"), DefaultValue(0.0)]
+        [DisplayName("Gratuity"), Category("Settings"), DefaultValue(0)]
         public decimal GratuityRate { get; set; }
         [DisplayName("Gratuity Template Name"), Category("Settings")]
         public string GratuityTemplateName { get; set; }

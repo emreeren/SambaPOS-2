@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using Samba.Domain.Foundation;
 using Samba.Domain.Models.Menus;
 using Samba.Domain.Models.Settings;
@@ -21,7 +22,7 @@ namespace Samba.Services
     {
         private readonly IWorkspace _workspace;
         public DataCreationService()
-        {
+        {         
             _workspace = WorkspaceFactory.Create();
         }
 
@@ -249,6 +250,7 @@ namespace Samba.Services
                         //Sundae|Small:1.99|Medium:2.99|Large:3.99
                         IList<string> parts = new List<string>(item.Split('|'));                      
                         var mi = MenuItem.Create();
+                        mi.Portions.Clear();
                         mi.Name = parts[0];
                         for (int i = 1; i < parts.Count; i++)
                         {
@@ -256,20 +258,21 @@ namespace Samba.Services
                             var tokens = parts[i].Split(':');
                             if (tokens.Count() != 2)
                             {
-                                var price = ConvertToDecimal(tokens[0], ds);
-                                mi.Portions[i - 1].Price.Amount = price;
+                                MessageBox.Show(String.Format("Skipping Invalid entry:{0}", item));
+                                break;
+
                             }
                             else
                             {
                                 
                                 var price = ConvertToDecimal(tokens[1], ds);
-                                if (mi.Portions.Count < i - 1)
-                                {
+                                //if (mi.Portions.Count <= i - 1)
+                                //{
                                     var mp = new MenuItemPortion();
-                                    mp.Price = new Price(price,"");
+                                    mp.Price = new Price(price,LocalSettings.CurrencySymbol);
                                     mp.Name = tokens[0];
                                     mi.Portions.Add(mp);
-                                }
+                                //}
                                
                             }
                            

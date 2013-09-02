@@ -377,7 +377,7 @@ namespace Samba.Presentation.ViewModels
 
         public bool CanCloseTicket()
         {
-            return !_forcePayment || Model.GetRemainingAmount() <= 0 || !string.IsNullOrEmpty(Location) || !string.IsNullOrEmpty(CustomerName) || IsTagged || Items.Count == 0;
+            return !_forcePayment || Model.GetRemainingAmount() <= 0 ||  !string.IsNullOrEmpty(CustomerName) || Items.Count == 0;
         }
 
         public bool IsTicketTotalVisible

@@ -67,7 +67,7 @@ namespace Samba.Domain.Models.Menus
                     return portion;
             }
             if (string.IsNullOrEmpty(portionName) && Portions.Count > 0) return Portions[0];
-            throw new Exception("Porsiyon Tanımlı Değil.");
+            throw new Exception("Portion not defined.");
         }
 
         public string UserString
@@ -77,7 +77,7 @@ namespace Samba.Domain.Models.Menus
 
         public static MenuItemPortion AddDefaultMenuPortion(MenuItem item)
         {
-            return item.AddPortion(Localization.Properties.Resources.DefaultMenuPortion ?? "Normal", 0, LocalSettings.CurrencySymbol);
+            return item.AddPortion(Localization.Properties.Resources.DefaultMenuPortion ?? "M", 0, LocalSettings.CurrencySymbol);
         }
 
         public static MenuItemProperty AddDefaultMenuItemProperty(MenuItemPropertyGroup item)

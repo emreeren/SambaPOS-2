@@ -427,6 +427,7 @@ namespace Samba.Domain.Models.Tickets
                 if (!TicketItems.Contains(item)) return false;
                 if (item.Voided) return false;
                 if (item.Gifted) return false;
+                if (item.Locked && !item.Gifted) return false;
             }
             return true;
         }

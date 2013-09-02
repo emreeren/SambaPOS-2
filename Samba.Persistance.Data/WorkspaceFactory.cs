@@ -19,14 +19,22 @@ namespace Samba.Persistance.Data
     public static class WorkspaceFactory
     {
         private static TextFileWorkspace _textFileWorkspace;
-        private static readonly MongoWorkspace MongoWorkspace;
+        private static  MongoWorkspace MongoWorkspace;
         private static string _connectionString = LocalSettings.ConnectionString;
+        
+      
 
         static WorkspaceFactory()
         {
             Database.SetInitializer(new Initializer());
+           
+        }
 
-            if (string.IsNullOrEmpty(LocalSettings.ConnectionString))
+        private static void InitializeWorkSpace()
+        {
+             var connectionString = LocalSettings.ConnectionString;
+            
+            if (string.IsNullOrEmpty(connectionString))
             {
                 if (IsSqlce40Installed())
                     LocalSettings.ConnectionString = "data source=" + LocalSettings.DocumentPath + "\\SambaData2.sdf";
@@ -35,7 +43,7 @@ namespace Samba.Persistance.Data
             if (LocalSettings.ConnectionString.EndsWith(".sdf"))
             {
                 Database.DefaultConnectionFactory =
-                    new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0", "", LocalSettings.ConnectionString);
+                    new SqlCeConnectionFactory("System.Data.SqlServerCe.4.0", "", connectionString);
             }
             else if (LocalSettings.ConnectionString.EndsWith(".txt"))
             {
@@ -45,7 +53,7 @@ namespace Samba.Persistance.Data
             {
                 MongoWorkspace = GetMongoWorkspace();
             }
-            else if (!string.IsNullOrEmpty(LocalSettings.ConnectionString))
+            else if (!string.IsNullOrEmpty(connectionString))
             {
                 var cs = LocalSettings.GetSqlServerConnectionString();
                 if (!cs.Trim().EndsWith(";"))
@@ -69,6 +77,9 @@ namespace Samba.Persistance.Data
 
         public static IWorkspace Create()
         {
+            MongoWorkspace = null;
+            _textFileWorkspace = null;
+            InitializeWorkSpace();
             if (MongoWorkspace != null) return MongoWorkspace;
             if (_textFileWorkspace != null) return _textFileWorkspace;
             return new EFWorkspace(new SambaContext(false));

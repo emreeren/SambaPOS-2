@@ -18,6 +18,7 @@ namespace Samba.Modules.SettingsModule
         public decimal AutoRoundDiscount { get; set; }
         public string PhoneNumberInputMask { get; set; }
         public string CustomPosName { get; set; }
+        public decimal DefaultCashDrawerAmount { get; set; }
 
         public ICaptionCommand SaveCommand { get; set; }
 
@@ -31,6 +32,7 @@ namespace Samba.Modules.SettingsModule
             PhoneNumberInputMask = AppServices.SettingService.PhoneNumberInputMask;
             AutoRoundDiscount = AppServices.SettingService.AutoRoundDiscount;
             CustomPosName = AppServices.SettingService.CustomPosName;
+            DefaultCashDrawerAmount = AppServices.SettingService.DefaultCashDrawerAmount;
         }
 
         private void OnSave(object obj)
@@ -42,6 +44,7 @@ namespace Samba.Modules.SettingsModule
             AppServices.SettingService.WeightBarcodeItemFormat = WeightBarcodeItemFormat;
             AppServices.SettingService.PhoneNumberInputMask = PhoneNumberInputMask;
             AppServices.SettingService.CustomPosName = CustomPosName;
+            AppServices.SettingService.DefaultCashDrawerAmount = DefaultCashDrawerAmount;
             AppServices.SettingService.SaveChanges();
             CommonEventPublisher.PublishViewClosedEvent(this);
         }

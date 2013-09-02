@@ -28,7 +28,7 @@ namespace Samba.Modules.TicketModule
             _manualPrintCommand = new CaptionCommand<PrintJob>(Resources.Print, OnManualPrint, CanManualPrint);
             SubmitCashPaymentCommand = new CaptionCommand<string>(Resources.Cash, OnSubmitCashPayment, CanSubmitCashPayment);
             SubmitCreditCardPaymentCommand = new CaptionCommand<string>(Resources.CreditCard_r, OnSubmitCreditCardPayment,
-                                                                        CanSubmitCashPayment);
+                                                                        CanSubmitCreditCardPayment);
             SubmitTicketPaymentCommand = new CaptionCommand<string>(Resources.Voucher_r, OnSubmitTicketPayment, CanSubmitCashPayment);
             SubmitAccountPaymentCommand = new CaptionCommand<string>(Resources.AccountBalance_r, OnSubmitAccountPayment, CanSubmitAccountPayment);
             ClosePaymentScreenCommand = new CaptionCommand<string>(Resources.Close, OnClosePaymentScreen, CanClosePaymentScreen);
@@ -127,13 +127,13 @@ namespace Samba.Modules.TicketModule
                                Caption = SetDiscountAmountCommand.Caption,
                                Command = SetDiscountAmountCommand
                            });
-
+/*
             result.Add(new CommandButtonViewModel
                            {
                                Caption = AutoSetDiscountAmountCommand.Caption,
                                Command = AutoSetDiscountAmountCommand
                            });
-
+*/
             if (SelectedTicket != null)
             {
                 result.AddRange(SelectedTicket.PrintJobButtons.Where(x => x.Model.UseFromPaymentScreen)
@@ -170,10 +170,10 @@ namespace Samba.Modules.TicketModule
         {
             if (GetTenderedValue() == 0) return true;
             return AppServices.MainDataContext.SelectedTicket != null
-                && GetTenderedValue() <= AppServices.MainDataContext.SelectedTicket.GetRemainingAmount()
-                && (AppServices.MainDataContext.SelectedTicket.TotalAmount > 0)
-                && AppServices.IsUserPermittedFor(PermissionNames.MakeDiscount)
-                && AppServices.IsUserPermittedFor(PermissionNames.RoundPayment);
+                   && GetTenderedValue() <= AppServices.MainDataContext.SelectedTicket.GetRemainingAmount()
+                   && (AppServices.MainDataContext.SelectedTicket.TotalAmount > 0)
+                   && AppServices.IsUserPermittedFor(PermissionNames.MakeDiscount);
+            //   && AppServices.IsUserPermittedFor(PermissionNames.RoundPayment);
         }
 
         private bool CanSetDiscountRate(string arg)
@@ -272,7 +272,13 @@ namespace Samba.Modules.TicketModule
             if (_resetAmount) TenderedAmount = "";
             _resetAmount = false;
             ReturningAmountVisibility = Visibility.Collapsed;
-            TenderedAmount = Helpers.AddTypedValue(TenderedAmount, obj, "#,#0.");
+            var newamount = TenderedAmount + obj;
+
+            var amnt = Convert.ToDecimal(newamount.Replace(
+                CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ""));
+            amnt = amnt/100;
+            TenderedAmount = amnt.ToString("##0.00", CultureInfo.InvariantCulture);
+           // TenderedAmount = Helpers.AddTypedValue(TenderedAmount, obj, "#,#0.00");
         }
 
         private void OnClosePaymentScreen(string obj)
@@ -303,6 +309,16 @@ namespace Samba.Modules.TicketModule
         {
             return AppServices.MainDataContext.SelectedTicket != null
                 && GetTenderedValue() > 0
+                && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() > 0
+                && (AppServices.CurrentTerminal.DepartmentId == 0 ||
+                !AppServices.MainDataContext
+                .SelectedTicket
+                .Payments.Any(x => x.DepartmentId != AppServices.MainDataContext.SelectedDepartment.Id));
+        }
+        private bool CanSubmitCreditCardPayment(string arg)
+        {
+            return AppServices.MainDataContext.SelectedTicket != null
+              //  && GetTenderedValue() > 0
                 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() > 0
                 && (AppServices.CurrentTerminal.DepartmentId == 0 ||
                 !AppServices.MainDataContext
@@ -440,7 +456,15 @@ namespace Samba.Modules.TicketModule
         private void OnSetDiscountAmountCommand(string obj)
         {
             if (GetTenderedValue() > GetPaymentValue()) return;
-            SelectedTicket.Model.AddTicketDiscount(DiscountType.Amount, GetTenderedValue(), AppServices.CurrentLoggedInUser.Id);
+            if (GetTenderedValue() == 0)
+            {
+                SelectedTicket.Model.Discounts.Clear();
+            }
+            else
+            {
+                SelectedTicket.Model.AddTicketDiscount(DiscountType.Amount, GetTenderedValue(),
+                                                       AppServices.CurrentLoggedInUser.Id);
+            }
             PaymentAmount = "";
             RefreshValues();
         }

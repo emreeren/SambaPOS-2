@@ -48,9 +48,9 @@ namespace Samba.Login
 
         public void SubmitPin(int timeCardAction)
         {
-            if (string.IsNullOrWhiteSpace(PinValue))
+            if (string.IsNullOrWhiteSpace(PinValue) || (PinValue.Trim().CompareTo(Localization.Properties.Resources.EnterPin.Trim()) == 0))
             {
-                MessageBox.Show("You must enter a pin");
+                MessageBox.Show("You must enter a pin.");
 
             }
             else

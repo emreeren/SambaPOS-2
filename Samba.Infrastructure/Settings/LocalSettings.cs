@@ -19,6 +19,7 @@ namespace Samba.Infrastructure.Settings
         public string MessagingServerName { get; set; }
         public string TerminalName { get; set; }
         public string ConnectionString { get; set; }
+        public string FailoverConnectString { get; set; }
         public bool StartMessagingClient { get; set; }
         public string LogoPath { get; set; }
         public string DefaultHtmlReportHeader { get; set; }
@@ -85,10 +86,17 @@ html
 
         public static string ConnectionString
         {
-            get { return _settingsObject.ConnectionString; }
+            get { return UseFailoverConnectionString ? FailoverConnectString : _settingsObject.ConnectionString; }
             set { _settingsObject.ConnectionString = value; }
         }
 
+        public static string FailoverConnectString
+        {
+            get { return _settingsObject.FailoverConnectString; }
+            set { _settingsObject.FailoverConnectString = value; }
+        }
+
+        public static bool UseFailoverConnectionString { get; set; }
         public static bool StartMessagingClient
         {
             get { return _settingsObject.StartMessagingClient; }
@@ -232,6 +240,7 @@ html
 
         static LocalSettings()
         {
+            UseFailoverConnectionString = false;
             if (!Directory.Exists(DocumentPath))
                 Directory.CreateDirectory(DocumentPath);
             if (!Directory.Exists(DataPath))

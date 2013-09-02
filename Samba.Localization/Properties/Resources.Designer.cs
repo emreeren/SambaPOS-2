@@ -2091,6 +2091,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Amount in CashDrawer.
+        /// </summary>
+        public static string DefaultCashDrawerAmount {
+            get {
+                return ResourceManager.GetString("DefaultCashDrawerAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Normal.
         /// </summary>
         public static string DefaultMenuPortion {
@@ -2664,6 +2673,15 @@ namespace Samba.Localization.Properties {
         public static string DontForgetEndingWorkPeriod {
             get {
                 return ResourceManager.GetString("DontForgetEndingWorkPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DON&apos;T FORGET TO CLOCK OUT!.
+        /// </summary>
+        public static string DontForgetToClockOut {
+            get {
+                return ResourceManager.GetString("DontForgetToClockOut", resourceCulture);
             }
         }
         
@@ -5108,6 +5126,15 @@ namespace Samba.Localization.Properties {
         public static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Cash Drawer.
+        /// </summary>
+        public static string OpenCashDrawer {
+            get {
+                return ResourceManager.GetString("OpenCashDrawer", resourceCulture);
             }
         }
         

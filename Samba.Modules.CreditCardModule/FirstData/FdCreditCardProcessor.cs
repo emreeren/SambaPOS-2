@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Security;
@@ -38,6 +39,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
         private readonly FdProcessorViewModel _viewModel;
         private FdProcessorView _view;
         private static readonly FdProcessorSettings Settings = new FdProcessorSettings();
+        private CreditCardTrackData _ccTrackData;
 
 
         public Ticket SelectedTicket { get; set; }
@@ -45,9 +47,12 @@ namespace Samba.Modules.CreditCardModule.FirstData
         [ImportingConstructor]
         public FdCreditCardProcessor(IRegionManager regionManager, FdProcessorViewModel viewModel)
         {
+            _ccTrackData = null;
             _viewModel = viewModel;
             _viewModel.Processed += ViewModelProcessed;
             Settings.Load();
+          //  SerialPortService.AddDataReceivedEventDelegate(Settings.ComPort, Settings.ComBaudRate, SerialPortDataReceivedEvent);
+            
         }
 
         public string Name
@@ -61,6 +66,13 @@ namespace Samba.Modules.CreditCardModule.FirstData
             Settings.Save();
         }
 
+        private void SerialPortDataReceivedEvent(object sender, SerialDataReceivedEventArgs e)
+        {
+            PopulateMsrTrackData();
+        }
+
+
+
         public void Process(CreditCardProcessingData creditCardProcessingData)
         {
             
@@ -68,12 +80,27 @@ namespace Samba.Modules.CreditCardModule.FirstData
             SelectedTicket = creditCardProcessingData.Ticket;
             ReSetTagsForSelectedTicket();
             _viewModel.CanPreAuth = true;
+            if (creditCardProcessingData.TenderedAmount > SelectedTicket.RemainingAmount)
+            {
+                MessageBox.Show(String.Format("Tendered Amount {0} can't be more than Balance Amount {1}.Resetting" +
+                                              " tendered amount to balace amount",
+                                              creditCardProcessingData.TenderedAmount,
+                                              SelectedTicket.RemainingAmount));
+                creditCardProcessingData.TenderedAmount = SelectedTicket.RemainingAmount;
+            }
+            else if (creditCardProcessingData.TenderedAmount == 0)
+            {
+                creditCardProcessingData.TenderedAmount = SelectedTicket.RemainingAmount;
+            }
+            
             _viewModel.TenderedAmount = creditCardProcessingData.TenderedAmount;
-            _viewModel.Gratuity = (creditCardProcessingData.TenderedAmount * Settings.GratuityRate) / 100;
+            _viewModel.Gratuity = (decimal) (creditCardProcessingData.TenderedAmount * Settings.GratuityRate) / 100;
             _view = new FdProcessorView(_viewModel);
             _view.FdTransactionType.SelectedIndex = 0;
             _viewModel.AuthCode = "";
             _view.ShowDialog();
+            
+            
         }
 
         public bool ForcePayment(int ticketId)
@@ -104,34 +131,11 @@ namespace Samba.Modules.CreditCardModule.FirstData
             
            if (processType == ProcessType.Swipe)
            {
-               string debugTrack = "";
-               _view.CardStatus.Text = Samba.Localization.Properties.Resources.SwipeCreditCard;
-               _view.Refresh();
-               var ccData = ReadCreditCardTrackData(out debugTrack);
-               if (ccData == null)
-               {
-                   if (String.IsNullOrWhiteSpace(debugTrack))
-                   {
-                       _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadFailed;
-                   }
-                   else
-                   {
-                       _view.CardStatus.Text = debugTrack;
-                   }
-                   _view.Refresh();
-                   return;
-               }
-               
-               _view.CardExpire.Text = ccData.CardExpiry;
-               _view.CardName.Text = ccData.CardName;
-               _view.CardNumber.Password = ccData.CardNumber;
-               _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadSuccess;
-               _view.Refresh();
+               if (PopulateMsrTrackData()) return;
                return;
            }
-           
 
-          
+
             if (processType == ProcessType.Force)
             {
                             
@@ -199,6 +203,34 @@ namespace Samba.Modules.CreditCardModule.FirstData
             _view.Close();
             
             result.PublishEvent(EventTopicNames.PaymentProcessed);
+        }
+
+        private bool PopulateMsrTrackData()
+        {
+            string debugTrack = "";
+            _view.CardStatus.Text = Samba.Localization.Properties.Resources.SwipeCreditCard;
+            _view.Refresh();
+            var ccData = ReadCreditCardTrackData(out debugTrack);
+            if (ccData == null)
+            {
+                if (String.IsNullOrWhiteSpace(debugTrack))
+                {
+                    _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadFailed;
+                }
+                else
+                {
+                    _view.CardStatus.Text = debugTrack;
+                }
+                _view.Refresh();
+                return true;
+            }
+
+            _view.CardExpire.Text = ccData.CardExpiry;
+            _view.CardName.Text = ccData.CardName;
+            _view.CardNumber.Password = ccData.CardNumber;
+            _view.CardStatus.Text = Samba.Localization.Properties.Resources.CreditCardReadSuccess;
+            _view.Refresh();
+            return false;
         }
 
         void SetTagsForSelectedTicket(FdCreditCardResp resp)
@@ -291,7 +323,8 @@ namespace Samba.Modules.CreditCardModule.FirstData
         /// <returns></returns>
         protected CreditCardTrackData ReadCreditCardTrackData(out string trackDebug)
         {
-            
+          //  SerialPortService.RemoveDataReceivedEventDelegate(Settings.ComPort, SerialPortDataReceivedEvent);
+           
             string error = "";
             string tracks = SerialPortService.ReadExisting(Settings.ComPort,Settings.ComBaudRate,  Settings.ComReadTimeout, ref error);
             if (!String.IsNullOrEmpty(tracks))

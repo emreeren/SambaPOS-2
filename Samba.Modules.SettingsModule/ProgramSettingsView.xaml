@@ -45,6 +45,10 @@
                             <LocText ResourceIdentifierKey="CustomPosName" Suffix=":" />
                         </Label>
                         <TextBox HorizontalAlignment="Left" Width="150" Text="{Binding CustomPosName}" />
+                        <Label>
+                            <LocText ResourceIdentifierKey="DefaultCashDrawerAmount" Suffix=":" />
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" Width="150" Text="{Binding DefaultCashDrawerAmount}" />
                     </StackPanel>
                 
             </GroupBox>

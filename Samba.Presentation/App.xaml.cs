@@ -80,7 +80,7 @@ namespace Samba.Presentation
             ExceptionPolicy.HandleException(ex, "Policy");
             //MessageBox.Show(Localization.Properties.Resources.UnhandledExceptionErrorMessage, Localization.Properties.Resources.Warning);
             ExceptionReporter.Show(ex);
-            Environment.Exit(1);
+          //  Environment.Exit(1);
         }
     }
 }

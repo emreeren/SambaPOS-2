@@ -208,9 +208,9 @@
             </Border>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="17*" />
-                    <ColumnDefinition Width="56*" />
-                    <ColumnDefinition Width="17*" />
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="53*" />
+                    <!-- ColumnDefinition Width="17*" / -->
                 </Grid.ColumnDefinitions>
                 <UniformGrid Grid.Column="0" Rows="6">
                     <FxButton:FlexButton Command="{Binding SetValueCommand}" CommandParameter="1" Margin="2"
@@ -256,16 +256,19 @@
                          CommandParameter="8" Margin="2">8</FxButton:FlexButton>
                     <FxButton:FlexButton Grid.Column="2" Grid.Row="2" Command="{Binding TypeValueCommand}"
                          CommandParameter="9" Margin="2">9</FxButton:FlexButton>
+                    <!--FxButton:FlexButton Grid.Column="0" Grid.Row="3" Command="{Binding TypeValueCommand}"
+                         CommandParameter="," Margin="2">.</FxButton:FlexButton -->
                     <FxButton:FlexButton Grid.Column="0" Grid.Row="3" Command="{Binding TypeValueCommand}"
-                         CommandParameter="," Margin="2">.</FxButton:FlexButton>
-                    <FxButton:FlexButton Grid.Column="1" Grid.Row="3" Command="{Binding TypeValueCommand}"
                          CommandParameter="0" Margin="2">0</FxButton:FlexButton>
-                    <FxButton:FlexButton Grid.Column="2" Grid.Row="3" Command="{Binding SetValueCommand}"
+                    <FxButton:FlexButton Grid.Column="1" Grid.Row="3" Command="{Binding SetValueCommand}"
                          CommandParameter="" Margin="2" ButtonColor="Black">C</FxButton:FlexButton>
+                    <FxButton:FlexButton Margin="2" Grid.Column="2" Grid.Row="3" ButtonColor="Purple" Command="{Binding TenderAllCommand}"
+                         Content="{Binding TenderAllCommand.Caption}" />
                 </Grid>
-                <UniformGrid Grid.Column="2" Rows="6">
+                <!--UniformGrid Grid.Column="2" Rows="6">
                     <FxButton:FlexButton Margin="2" ButtonColor="Purple" Command="{Binding TenderAllCommand}"
                          Content="{Binding TenderAllCommand.Caption}" />
+                  
                     <FxButton:FlexButton Margin="2" ButtonColor="RoyalBlue" Command="{Binding DivideValueCommand}"
                          CommandParameter="10" Foreground="WhiteSmoke">10%</FxButton:FlexButton>
                     <FxButton:FlexButton Margin="2" ButtonColor="RoyalBlue" Command="{Binding DivideValueCommand}"
@@ -274,10 +277,11 @@
                          CommandParameter="4" Foreground="WhiteSmoke">25%</FxButton:FlexButton>
                     <FxButton:FlexButton Margin="2" ButtonColor="RoyalBlue" Command="{Binding DivideValueCommand}"
                          CommandParameter="2" Foreground="WhiteSmoke">50%</FxButton:FlexButton>
+                    
                     <FxButton:FlexButton Command="{Binding SetValueCommand}" CommandParameter="{Binding LastTenderedAmount}"
                          Margin="2" ButtonColor="MediumPurple" Content="{Binding LastTenderedAmount}">
                     </FxButton:FlexButton>
-                </UniformGrid>
+                </UniformGrid-->
             </Grid>
             <ItemsControl Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding CommandButtons}">
                 <ItemsControl.ItemsPanel>

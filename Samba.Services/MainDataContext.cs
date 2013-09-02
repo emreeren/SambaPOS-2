@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using Samba.Domain.Models.Actions;
 using Samba.Domain.Models.Customers;
 using Samba.Domain.Models.Menus;
@@ -714,6 +715,10 @@ namespace Samba.Services
             {
                 workspace.Add(timeCardEntry);
                 workspace.CommitChanges();
+                if (timeCardEntry.Action == 2)
+                {
+                    MessageBox.Show("Successfully clocked out");
+                }
             }
         }
 
@@ -728,6 +733,7 @@ namespace Samba.Services
 
             if (user.ShouldCreateCardEntry(lastEntry, timeCardAction))
             {
+                
                 AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Samba.Domain.Models.Users;
@@ -81,10 +82,16 @@ namespace Samba.Modules.UserModule
                     if (pinData.TimeCardAction == 2)
                     {
                         AppServices.LogoutUser();
+                        MessageBox.Show("Clocked out success.");
                         return;
                     }
                 }
                 u.PublishEvent(EventTopicNames.UserLoggedIn);
+            }
+            else
+            {
+               MessageBox.Show("Invalid PIN.");
+               
             }
         }
 

@@ -13,6 +13,8 @@ namespace Samba.Persistance.DBMigration
     {
         public override void Up()
         {
+            var connectString = LocalSettings.ConnectionString;
+           
             Execute.Sql("delete from ScreenMenuItems where ScreenMenuCategory_Id in(select Id from ScreenMenuCategories where ScreenMenu_Id is null)");
             Execute.Sql("delete from ScreenMenuItems where ScreenMenuCategory_Id is null");
             Execute.Sql("delete from ScreenMenuCategories where ScreenMenu_Id is null");

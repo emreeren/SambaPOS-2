@@ -105,6 +105,8 @@ namespace Samba.Modules.SettingsModule.WorkPeriods
 
         public WorkPeriodsViewModel()
         {
+          
+            CashAmount = AppServices.SettingService.DefaultCashDrawerAmount;
             StartOfDayCommand = new CaptionCommand<string>(Resources.StartWorkPeriod, OnStartOfDayExecute, CanStartOfDayExecute);
             EndOfDayCommand = new CaptionCommand<string>(Resources.EndWorkPeriod, OnEndOfDayExecute, CanEndOfDayExecute);
             DisplayStartOfDayScreenCommand = new CaptionCommand<string>(Resources.StartWorkPeriod, OnDisplayStartOfDayScreenCommand, CanStartOfDayExecute);
@@ -188,6 +190,10 @@ namespace Samba.Modules.SettingsModule.WorkPeriods
 
         private void OnStartOfDayExecute(string obj)
         {
+            if (CashAmount == 0)
+            {
+                CashAmount = AppServices.SettingService.DefaultCashDrawerAmount;
+            }
             AppServices.MainDataContext.StartWorkPeriod(StartDescription, CashAmount, CreditCardAmount, TicketAmount);
             Refresh();
             AppServices.MainDataContext.CurrentWorkPeriod.PublishEvent(EventTopicNames.WorkPeriodStatusChanged);
