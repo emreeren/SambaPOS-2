@@ -149,7 +149,7 @@ namespace Samba.Modules.BasicReports.Reports.CashReport
             var totalCreditCardIncome = creditCardIncomeTotal + ac.CreditCardTotal + ReportContext.CurrentWorkPeriod.CreditCardAmount;
             var totalTicketIncome = ticketIncomeTotal + ac.TicketTotal + ReportContext.CurrentWorkPeriod.TicketAmount;
 
-            report.AddBoldRow("Gelir", Resources.Income.ToUpper() + " " + Resources.Totals.ToUpper(), "", "");
+            report.AddBoldRow("Gelir", Resources.Income.ToUpper() + " " + Resources.Totals.ToUpper(), "", "");                    
             report.AddRow("Gelir", GetPaymentString(0), Resources.TotalIncome, Fs(totalCashIncome));
             report.AddRow("Gelir", GetPaymentString(1), Resources.TotalIncome, Fs(totalCreditCardIncome));
             report.AddRow("Gelir", GetPaymentString(2), Resources.TotalIncome, Fs(totalTicketIncome));
@@ -167,6 +167,15 @@ namespace Samba.Modules.BasicReports.Reports.CashReport
                 Fs((totalCashIncome - cashExpenseTotal) +
                 (totalCreditCardIncome - creditCardExpenseTotal) +
                 (totalTicketIncome - ticketExpenseTotal)));
+
+            report.AddColumnLength("GelirlerTablosu", "45*", "Auto", "35*");
+            report.AddColumTextAlignment("GelirlerTablosu", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
+            report.AddTable("GelirlerTablosu", Resources.Sales.ToUpper(), "", "");
+            report.AddRow("GelirlerTablosu", Resources.Cash, ac.CashPercent, ac.CashTotal.ToString(ReportContext.CurrencyFormat));
+            report.AddRow("GelirlerTablosu", Resources.CreditCard, ac.CreditCardPercent, ac.CreditCardTotal.ToString(ReportContext.CurrencyFormat));
+            report.AddRow("GelirlerTablosu", Resources.Voucher, ac.TicketPercent, ac.TicketTotal.ToString(ReportContext.CurrencyFormat));
+            report.AddRow("GelirlerTablosu", Resources.AccountBalance, ac.AccountPercent, ac.AccountTotal.ToString(ReportContext.CurrencyFormat));
+            report.AddRow("GelirlerTablosu", Resources.TotalIncome.ToUpper(), "", ac.TotalAmount.ToString(ReportContext.CurrencyFormat));
             return report.Document;
         }
 

@@ -106,6 +106,34 @@ namespace Samba.Services
             WritePort(portName, Encoding.GetEncoding(codePage).GetBytes(data));
         }
 
+        public static void WriteBinary(string portName, string command)
+        {
+            byte[] buffer = new byte[command.Length];
+            for (int i = 0; i < command.Length; i++)
+            {
+                buffer[i] = (Byte)(Encoding.ASCII.GetBytes(command.Substring(i, 1))[0]);
+            }
+            WritePort(portName, buffer);
+        }   
+
+        /// <summary>
+        /// Byte to Read
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <returns></returns>
+        public static int ReadBufferCount(string portName)
+        {
+            SerialPort port = GetPort(portName);
+            
+            if (port.IsOpen)
+            {
+                return port.BytesToRead;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public static byte[] ReadBufferPort(string portName, int length, int timeoutInMillSec)
         {
             if (!Ports.ContainsKey(portName))
@@ -146,6 +174,37 @@ namespace Samba.Services
             return Encoding.ASCII.GetString(buffer);
         }
 
+        public static int ReadChar(string portName, int timeoutInMillSec = -1)
+        {
+            if (!Ports.ContainsKey(portName))
+            {
+                Ports.Add(portName, new SerialPort(portName));
+            }
+            var port = Ports[portName];
+
+            try
+            {
+                if (!port.IsOpen) port.Open();
+                if (port.IsOpen)
+                {
+                    if (timeoutInMillSec >= 0)
+                    {
+                        port.ReadTimeout = timeoutInMillSec;
+                    }
+
+                    return port.ReadChar();
+                }
+            }
+            catch (IOException)
+            {
+                port.Close();
+            }
+            catch (Exception)
+            {
+                port.Close();
+            }
+            return int.MaxValue;
+        }
         public static string ReadExisting(string portName, int baudRate, int timeoutInMillSec, ref string error)
         {
             if (!Ports.ContainsKey(portName))

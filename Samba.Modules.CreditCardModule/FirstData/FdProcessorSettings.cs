@@ -56,7 +56,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
             GratuityRate = AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYRATE").DecimalValue;
             GratuityTemplateName = AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYTEMPLATE").StringValue;
             GratuityService = AppServices.MainDataContext.TaxServiceTemplates.FirstOrDefault(x => x.Name == GratuityTemplateName);
-            SignRequiredAmount = AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED)AMOUNT").DecimalValue;
+            SignRequiredAmount = AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED_AMOUNT").DecimalValue;
             MergeCreditCardReceipt =
                 AppServices.SettingService.ReadGlobalSetting("CC_MERGE_CREDITCARD_RECEIPT").BoolValue;
 
@@ -78,7 +78,7 @@ namespace Samba.Modules.CreditCardModule.FirstData
             AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYRATE").DecimalValue = GratuityRate;
             AppServices.SettingService.ReadGlobalSetting("EXCCS_GRATUITYTEMPLATE").StringValue = GratuityTemplateName;
 
-            AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED)AMOUNT").DecimalValue = SignRequiredAmount;
+            AppServices.SettingService.ReadGlobalSetting("CC_SIGNREQUIRED_AMOUNT").DecimalValue = SignRequiredAmount;
             AppServices.SettingService.ReadGlobalSetting("CC_MERGE_CREDITCARD_RECEIPT").BoolValue =
                 MergeCreditCardReceipt;
 
