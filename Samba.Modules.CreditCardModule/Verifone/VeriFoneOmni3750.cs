@@ -19,7 +19,7 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
         NegativeAcknowledge = 0x15
     }
 
-    internal enum MessageType
+    public enum MessageType
     {
         [StringValue("00C1")]
         TransactionRequest = 0,
@@ -33,7 +33,7 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
         Purchase = 0
     }
 
-    internal enum AdditionalInformationType
+    public enum AdditionalInformationType
     {
         [StringValue("01")]
         Currency = 0,
@@ -54,6 +54,102 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
             }
             return (Char)result;
         }  
+    }
+
+    public enum TransactionResult
+    {
+        [StringValue("0")]
+        Ok = 0,
+        [StringValue("1")]
+        NotOk = 1,
+        [StringValue("2")]
+        ValueWrong = 2,
+        [StringValue("3")]
+        IncorrectProductInfo = 3,
+        [StringValue("4")]
+        PriceLitreCheckFailed  = 4,
+        [StringValue("5")]
+        TotalAmountNotEqualToSumOfSubtotal = 5,
+        [StringValue("6")]
+        SyntaxErrorTransactionFailed = 6,
+        [StringValue("7")]
+        AmountNotAllowed = 7,
+        [StringValue("8")]
+        AmountTooHigh = 8,
+        [StringValue("9")]
+        InvalidMessageVersion = 9,
+        [StringValue("A")]
+        TransactionStillBusy = 0xA
+
+    }
+
+    public struct TransactionResponse
+    {
+        public MessageType MessageResponseType { get; set; }
+        public int TerminalId { get; set; }
+        public AdditionalInformationType AdditionalInformationType { get; set; }
+        public decimal Amount { get; set; }
+        public string TypeOfCard { get; set; }
+        public TransactionResult Result{ get; set; }
+        public const int MinLength = 27;
+        //NOT PART OF PAYLOAD
+        public string ErrorMessage { get; set; }
+
+        public void FromString(string payload)
+        {
+            int index = 0;
+            int length = 4;
+            if (payload.Length >= (index + length))
+            {
+                MessageType messageType;
+                MessageType.TryParse(payload.Substring(index, length), true, out messageType);
+                MessageResponseType = messageType;
+            }
+
+            index += length;
+            length = 8;
+            if (payload.Length >= (index + length))
+            {
+                int terminalId;
+                int.TryParse(payload.Substring(index, 8), out terminalId);
+                TerminalId = terminalId;
+            }
+
+            index += length;
+            length = 1;
+            if (payload.Length >= (index + length))
+            {
+                AdditionalInformationType addInfo;
+                AdditionalInformationType.TryParse(payload.Substring(index, length), true, out addInfo);
+                AdditionalInformationType = addInfo;
+            }
+
+            index += length;
+            length = 12;
+            if (payload.Length >= (index + length))
+            {
+                decimal a;
+                decimal.TryParse(payload.Substring(index, length), out a);
+                Amount = a/100;
+            }
+
+            index += length;
+            length = 2;
+            if (payload.Length >= (index + length))
+            {              
+                TypeOfCard = payload.Substring(index, length);
+            }
+
+            index += length;
+            length = 1;
+            if (payload.Length >= (index + length))
+            {
+                TransactionResult rs;
+                TransactionResult.TryParse(payload.Substring(index, length), true, out rs);
+                Result = rs;
+            }
+        
+        }
     }
 
     internal struct TransactionRequest
@@ -147,7 +243,7 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
 
         #region Methods      
         //SerialPortService.ReadExisting(Settings.ComPort,Settings.ComBaudRate,  Settings.ComReadTimeout, ref error);
-        private TwoStepProtocol WaitForResponse()
+        private TwoStepProtocol WaitForAckResponse()
         {
             int timeout = Timeout;
             TwoStepProtocol result = TwoStepProtocol.Timeout;
@@ -182,21 +278,51 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
             return result;
         }
 
+       public  bool ReceiveTransactionResponse(out TransactionResponse transactionResponse)
+        {
+            int timeout = Timeout;
+            String response = "";
+            String error = "";
+            do
+            {
+                if (SerialPortService.ReadBufferCount(ComPort) > 0)
+                {
+                    response = SerialPortService.ReadExisting(ComPort, ComBaudRate, timeout, ref error);
+                    timeout = 0;
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                    timeout -= 100;
+                }
+            } while (timeout > 0);
+
+            transactionResponse = new TransactionResponse {ErrorMessage = error};
+            if (response.Length >= TransactionResponse.MinLength)
+            {            
+                transactionResponse.FromString(response);
+                return true;
+            }
+            return false;
+        }
+
         private bool SendRequest(string request)
         {
             SerialPortService.WriteBinary(ComPort, request);
             int retries = Retries;
-            bool result = (WaitForResponse() == TwoStepProtocol.Acknowledge);
+            bool result = (WaitForAckResponse() == TwoStepProtocol.Acknowledge);
             while (!result && (retries > 0))
             {
                 retries -= 1;
                 SerialPortService.WriteBinary(ComPort, request);
-                result = (WaitForResponse() == TwoStepProtocol.Acknowledge);
+                result = (WaitForAckResponse() == TwoStepProtocol.Acknowledge);
             }
             return result;
         }
 
-        public bool SendTransactionRequest(decimal amount, int receiptNumber)
+        
+
+        public bool SendTransactionRequest(decimal amount, int receiptNumber, out TransactionResponse rs)
         {
             TransactionRequest request = new TransactionRequest
             {
@@ -209,7 +335,13 @@ namespace Samba.Modules.CreditCardModule.Verifone //CGeers.Cardfon
                 AdditionalInformation = LocalCurrency
             };
 
-            return SendRequest(request.ToString());          
+            if (SendRequest(request.ToString()))
+            {
+                return ReceiveTransactionResponse(out rs);
+
+            }
+            rs = new TransactionResponse();
+            return false;
         }      
 
         #endregion

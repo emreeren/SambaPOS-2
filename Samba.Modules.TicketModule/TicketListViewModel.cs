@@ -669,12 +669,14 @@ namespace Samba.Modules.TicketModule
         private void OnDecQuantityCommand(string obj)
         {
             LastSelectedTicketItem.Quantity--;
+            _selectedTicket.RecalculateTicket();
             _selectedTicket.RefreshVisuals();
         }
 
         private void OnIncQuantityCommand(string obj)
         {
             LastSelectedTicketItem.Quantity++;
+            _selectedTicket.RecalculateTicket();
             _selectedTicket.RefreshVisuals();
         }
 

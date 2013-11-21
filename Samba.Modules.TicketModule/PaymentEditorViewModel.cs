@@ -374,6 +374,15 @@ namespace Samba.Modules.TicketModule
                 tenderedAmount = remainingTicketAmount;
             }
 
+            ReturningAmount = string.Format(Resources.ChangeAmount_f, returningAmount.ToString(LocalSettings.DefaultCurrencyFormat));
+            ReturningAmountVisibility = returningAmount > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (returningAmount > 0)
+            {
+                RuleExecutor.NotifyEvent(RuleEventNames.ChangeAmountChanged,
+                    new { Ticket = SelectedTicket.Model, TicketAmount = SelectedTicket.Model.TotalAmount, ChangeAmount = returningAmount, TenderedAmount = originalTenderedAmount });
+            }
+
             if (tenderedAmount > 0)
             {
                 if (tenderedAmount > AppServices.MainDataContext.SelectedTicket.GetRemainingAmount())
@@ -388,14 +397,7 @@ namespace Samba.Modules.TicketModule
                     : AppServices.MainDataContext.SelectedTicket.GetRemainingAmount().ToString("#,#0.00");
             }
 
-            ReturningAmount = string.Format(Resources.ChangeAmount_f, returningAmount.ToString(LocalSettings.DefaultCurrencyFormat));
-            ReturningAmountVisibility = returningAmount > 0 ? Visibility.Visible : Visibility.Collapsed;
-
-            if (returningAmount > 0)
-            {
-                RuleExecutor.NotifyEvent(RuleEventNames.ChangeAmountChanged,
-                    new { Ticket = SelectedTicket.Model, TicketAmount = SelectedTicket.Model.TotalAmount, ChangeAmount = returningAmount, TenderedAmount = originalTenderedAmount });
-            }
+           
 
             if (returningAmount == 0 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)
             {

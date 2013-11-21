@@ -127,18 +127,18 @@ namespace Samba.Modules.CreditCardModule.Verifone
                 _vfOmni.LocalCurrency = Settings.LocalCurrency;
                 _view.CardStatus.Text = "";
                 _view.Refresh();
-               
-                
 
-               
-                if (_vfOmni.SendTransactionRequest(amount, ticket.Id))
+
+
+                TransactionResponse response;
+                if (_vfOmni.SendTransactionRequest(amount, ticket.Id, out response))
                 {
 
 
-                    result.Amount = amount;
+                    result.Amount = response.Amount;
                     result.ProcessType = ProcessType.Force;
 
-                    SetTagsForSelectedTicket(amount);
+                    SetTagsForSelectedTicket(result.Amount);
                    
                     _view.CardStatus.Text = "Successfully sent transaction.";
                     _view.Refresh();
@@ -147,7 +147,7 @@ namespace Samba.Modules.CreditCardModule.Verifone
                 }
                 else
                 {
-                    _view.CardStatus.Text = Localization.Properties.Resources.CreditCardRequestSendFailure + ".";
+                    _view.CardStatus.Text = Localization.Properties.Resources.CreditCardRequestSendFailure + ". ";
                     _view.Refresh();
                     return;
                 }

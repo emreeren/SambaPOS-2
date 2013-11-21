@@ -55,6 +55,7 @@ namespace Samba.Presentation.ViewModels
                 RaisePropertyChanged("Quantity");
                 RaisePropertyChanged("TotalPrice");
                 ResetSelectedQuantity();
+
             }
         }
 
