@@ -281,7 +281,10 @@ namespace Samba.Modules.TicketModule
                 if (mig.ForceValue && SelectedItem.Properties.Count(x => x.Model.PropertyGroupId == mig.Id) < 2)
                     InteractionService.UserIntraction.GiveFeedback(string.Format(Resources.SelectionRequired_f, mig.Name));
                 else
-                    SelectedItem.RemoveProperty(mig, obj);
+                    if (!SelectedItem.RemoveProperty(mig, obj))
+                    {
+                        InteractionService.UserIntraction.GiveFeedback(string.Format(Resources.SelectionRequired_f, mig.Name + ":" + obj.Name));
+                    }
             }
             else SelectedItem.ToggleProperty(mig, obj);
             SelectedTicket.RefreshVisuals();

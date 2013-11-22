@@ -306,17 +306,23 @@ namespace Samba.Presentation.ViewModels
             RaisePropertyChanged("TotalPrice");
         }
 
-        public void RemoveProperty(MenuItemPropertyGroup mig, MenuItemProperty menuItemProperty)
+        public bool RemoveProperty(MenuItemPropertyGroup mig, MenuItemProperty menuItemProperty)
         {
-            var p = Model.Properties.Where(x => x.PropertyGroupId == mig.Id && x.Name == menuItemProperty.Name && (x.VatAmount + x.PropertyPrice.Amount) == menuItemProperty.Price.Amount).FirstOrDefault();
+            bool removedProperty = false;
+            var p = Model.Properties.Where(x => x.PropertyGroupId == mig.Id && x.Name == menuItemProperty.Name && ( x.PropertyPrice.Amount) == menuItemProperty.Price.Amount).FirstOrDefault();
             if (p != null)
             {
                 Model.Properties.Remove(p);
+                removedProperty = true;
+
+                RefreshProperties();
+                RaisePropertyChanged("Properties");
+                RaisePropertyChanged("TotalPrice");
+                RaisePropertyChanged("Quantity");
             }
-            RefreshProperties();
-            RaisePropertyChanged("Properties");
-            RaisePropertyChanged("TotalPrice");
-            RaisePropertyChanged("Quantity");
+           
+            return removedProperty;
+
         }
     }
 }

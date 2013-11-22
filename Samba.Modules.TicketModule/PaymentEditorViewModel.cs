@@ -365,7 +365,7 @@ namespace Samba.Modules.TicketModule
             var tenderedAmount = GetTenderedValue();
             var originalTenderedAmount = tenderedAmount;
             var remainingTicketAmount = GetPaymentValue();
-            var returningAmount = 0m;
+            var returningAmount = tenderedAmount - remainingTicketAmount;
             if (tenderedAmount == 0) tenderedAmount = remainingTicketAmount;
 
             if (tenderedAmount > remainingTicketAmount)
@@ -377,11 +377,9 @@ namespace Samba.Modules.TicketModule
             ReturningAmount = string.Format(Resources.ChangeAmount_f, returningAmount.ToString(LocalSettings.DefaultCurrencyFormat));
             ReturningAmountVisibility = returningAmount > 0 ? Visibility.Visible : Visibility.Collapsed;
 
-            if (returningAmount > 0)
-            {
-                RuleExecutor.NotifyEvent(RuleEventNames.ChangeAmountChanged,
+            RuleExecutor.NotifyEvent(RuleEventNames.ChangeAmountChanged,
                     new { Ticket = SelectedTicket.Model, TicketAmount = SelectedTicket.Model.TotalAmount, ChangeAmount = returningAmount, TenderedAmount = originalTenderedAmount });
-            }
+            
 
             if (tenderedAmount > 0)
             {
