@@ -168,7 +168,21 @@ namespace Samba.Presentation.Terminal
                     {
                         LastSelectedTicketItem = x.Value.Selected ? x.Value : null;
                         foreach (var item in SelectedTicket.SelectedItems)
-                        { item.IsLastSelected = item == LastSelectedTicketItem; }
+                        {
+                            //rjoshi added support to disable selection of multiple item.
+                            if (AppServices.CurrentTerminal.DisableMultipleItemSelection)
+                            {
+                                if (item != LastSelectedTicketItem)
+                                {
+                                    item.NotSelected();
+                                }
+                            }
+                            else
+                            {
+                                item.IsLastSelected = item == LastSelectedTicketItem;
+                            }
+                            
+                        }
                     }
                 });
 

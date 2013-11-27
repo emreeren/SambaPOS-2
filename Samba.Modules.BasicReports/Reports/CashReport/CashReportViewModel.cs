@@ -19,14 +19,14 @@ namespace Samba.Modules.BasicReports.Reports.CashReport
             FilterGroups.Add(CreateWorkPeriodFilterGroup());
         }
 
-        private static string GetPaymentString(int paymentType)
+        public static string GetPaymentString(int paymentType)
         {
             if (paymentType == (int)PaymentType.Cash) return Resources.Cash;
             if (paymentType == (int)PaymentType.CreditCard) return Resources.CreditCard_ab;
             return Resources.Voucher_ab;
         }
 
-        private static string Fs(decimal amount)
+        public static string Fs(decimal amount)
         {
             return amount.ToString(ReportContext.CurrencyFormat);
         }
@@ -179,7 +179,7 @@ namespace Samba.Modules.BasicReports.Reports.CashReport
             return report.Document;
         }
 
-        private static string Fct(CashTransactionData data)
+        public static string Fct(CashTransactionData data)
         {
             var cn = !string.IsNullOrEmpty(data.CustomerName) ? data.CustomerName + " " : "";
             return data.Date.ToShortDateString() + " " + cn + data.Name;

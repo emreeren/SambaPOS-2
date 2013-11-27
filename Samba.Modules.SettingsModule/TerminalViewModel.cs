@@ -34,6 +34,10 @@ namespace Samba.Modules.SettingsModule
         public IEnumerable<Printer> Printers { get; private set; }
         public IEnumerable<PrinterTemplate> PrinterTemplates { get; private set; }
 
+
+        public int? EarlyClockInAllowedInMinutes { get { return Model.EarlyClockInAllowedInMinutes; } set { Model.DepartmentId = value.GetValueOrDefault(0); } }
+        public bool DisableMultipleItemSelection { get { return Model.DisableMultipleItemSelection; } set { Model.DisableMultipleItemSelection = value; } }
+
         public ICaptionCommand SelectPrintJobsCommand { get; set; }
 
         public override Type GetViewType()

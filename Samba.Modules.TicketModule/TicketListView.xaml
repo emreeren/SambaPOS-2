@@ -382,6 +382,8 @@
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding RemoveTicketLockCommand.Caption}" />
                     </FxButton:FlexButton>
+                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding AddQuantityCommand}"
+                         Content="{Binding AddQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndUnlocked,Converter={StaticResource VisibilityConverter}}" />
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding IncQuantityCommand}"
                          Content="{Binding IncQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndUnlocked,Converter={StaticResource VisibilityConverter}}" />
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding DecQuantityCommand}"
@@ -419,6 +421,10 @@
                          Visibility="{Binding IsItemsSelected,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding ChangePriceCommand.Caption}" />
+                    </FxButton:FlexButton>
+
+                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding FindTicketCommand}" Focusable="False">
+                        <LocText ResourceIdentifierKey="FindTicket"/>
                     </FxButton:FlexButton>
                 </StackPanel>
             </Grid>

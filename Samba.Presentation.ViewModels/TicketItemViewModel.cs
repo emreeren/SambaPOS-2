@@ -201,6 +201,7 @@ namespace Samba.Presentation.ViewModels
 
         private void OnItemSelected(TicketItemViewModel obj)
         {
+           
             if (Selected && !IsLocked)
             {
                 var unselectedItem = AppServices.DataAccessService.GetUnselectedItem(obj.Model);
@@ -209,6 +210,7 @@ namespace Samba.Presentation.ViewModels
                     InteractionService.UserIntraction.GiveFeedback(string.Format(Resources.SelectionRequired_f, unselectedItem.Name));
                     return;
                 }
+              
             }
             Selected = !Selected;
             if (!Selected) ResetSelectedQuantity();

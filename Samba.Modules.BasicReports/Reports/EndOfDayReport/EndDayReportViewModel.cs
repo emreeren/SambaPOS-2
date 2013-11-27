@@ -4,8 +4,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
+using Samba.Domain;
 using Samba.Domain.Models.Tickets;
 using Samba.Localization.Properties;
+using Samba.Modules.BasicReports.Reports.CashReport;
 
 namespace Samba.Modules.BasicReports.Reports.EndOfDayReport
 {
@@ -111,9 +113,45 @@ namespace Samba.Modules.BasicReports.Reports.EndOfDayReport
                 }
             }
 
+            //expense
+            //Expense
+            var cashExpenseTotal = ReportContext.CashTransactions
+               .Where(x => x.PaymentType == (int)PaymentType.Cash && x.TransactionType == (int)TransactionType.Expense)
+               .Sum(x => x.Amount);
+            var creditCardExpenseTotal = ReportContext.CashTransactions
+                .Where(x => x.PaymentType == (int)PaymentType.CreditCard && x.TransactionType == (int)TransactionType.Expense)
+                .Sum(x => x.Amount);
+            var ticketExpenseTotal = ReportContext.CashTransactions
+               .Where(x => x.PaymentType == (int)PaymentType.Ticket && x.TransactionType == (int)TransactionType.Expense)
+               .Sum(x => x.Amount);
+            var expenseTransactions =
+                 ReportContext.CashTransactions.Where(x => x.TransactionType == (int)TransactionType.Expense);
+
+            if (expenseTransactions.Count() > 0)
+            {
+                report.AddColumTextAlignment("Gider", TextAlignment.Left, TextAlignment.Left, TextAlignment.Right);
+                report.AddColumnLength("Gider", "15*", "Auto", "25*");
+                report.AddTable("Gider", Resources.Expenses, "", "");
+
+                report.AddBoldRow("Gider", Resources.CashTransactions.ToUpper(), "", "");
+                foreach (var cashTransaction in expenseTransactions)
+                {
+                    report.AddRow("Gider", CashReportViewModel.GetPaymentString(cashTransaction.PaymentType),
+                        CashReportViewModel.Fct(cashTransaction), CashReportViewModel.Fs(cashTransaction.Amount));
+                }
+
+                report.AddBoldRow("Gider", Resources.Totals.ToUpper(), "", "");
+                report.AddRow("Gider", CashReportViewModel.GetPaymentString(0), Resources.TotalExpense, CashReportViewModel.Fs(cashExpenseTotal));
+                report.AddRow("Gider", CashReportViewModel.GetPaymentString(1), Resources.TotalExpense, CashReportViewModel.Fs(creditCardExpenseTotal));
+                report.AddRow("Gider", CashReportViewModel.GetPaymentString(2), Resources.TotalExpense, CashReportViewModel.Fs(ticketExpenseTotal));
+                report.AddRow("Gider", Resources.GrandTotal.ToUpper(), "", CashReportViewModel.Fs(cashExpenseTotal + creditCardExpenseTotal + ticketExpenseTotal));
+
+            }
+
             //---------------
 
             var ac = ReportContext.GetOperationalAmountCalculator();
+           
 
             report.AddColumnLength("GelirlerTablosu", "45*", "Auto", "35*");
             report.AddColumTextAlignment("GelirlerTablosu", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
@@ -123,7 +161,15 @@ namespace Samba.Modules.BasicReports.Reports.EndOfDayReport
             report.AddRow("GelirlerTablosu", Resources.Voucher, ac.TicketPercent, ac.TicketTotal.ToString(ReportContext.CurrencyFormat));
             report.AddRow("GelirlerTablosu", Resources.AccountBalance, ac.AccountPercent, ac.AccountTotal.ToString(ReportContext.CurrencyFormat));
             report.AddRow("GelirlerTablosu", Resources.TotalIncome.ToUpper(), "", ac.TotalAmount.ToString(ReportContext.CurrencyFormat));
-
+            //----cash register
+            var ptc = ReportContext.GetOperationalPaymentTypeCountCalculator();
+            report.AddColumnLength("CashRegisterStatus", "45*", "Auto", "35*");
+            report.AddColumTextAlignment("CashRegisterStatus", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
+            report.AddTable("CashRegisterStatus", "Cash Register Status", "", "");
+            report.AddRow("CashRegisterStatus", Resources.Cash, ptc.CashPaymentCount.ToString(), (ac.CashTotal - cashExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            report.AddRow("CashRegisterStatus", Resources.CreditCard, ptc.CreditPaymentCount.ToString(), (ac.CreditCardTotal - creditCardExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            report.AddRow("CashRegisterStatus", Resources.Voucher, ptc.TicketPaymentCount.ToString(), (ac.TicketTotal - ticketExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            
             //---------------
 
             //Kasa raporu eklendiği için kasa özeti bu rapordan kaldırıldı. Başka bir rapora taşınabilir şimdilik bıraktım.

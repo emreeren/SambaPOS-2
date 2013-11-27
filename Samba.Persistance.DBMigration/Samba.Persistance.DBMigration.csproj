@@ -67,6 +67,7 @@
     <Compile Include="Migration_006.cs" />
     <Compile Include="Migration_008.cs" />
     <Compile Include="Migration_021.cs" />
+    <Compile Include="Migration_022.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -713,12 +714,52 @@ namespace Samba.Services
         {
             using (var workspace = WorkspaceFactory.Create())
             {
+                
+
                 workspace.Add(timeCardEntry);
                 workspace.CommitChanges();
+               
                 if (timeCardEntry.Action == 2)
                 {
-                    MessageBox.Show("Successfully clocked out");
+                    var scheduledEndTime = GetEmpScheduleEndTime(timeCardEntry.UserId);
+                    if (scheduledEndTime == DateTime.MinValue)
+                    {
+                        MessageBox.Show("Successfully ClockedOut. System could not find your scheduled end time at this moment. Your hours will be approved as per Company policy.");
+                    }else if (scheduledEndTime != DateTime.MinValue && (timeCardEntry.DateTime >
+                                                     scheduledEndTime.AddMinutes(AppServices.CurrentTerminal.EarlyClockInAllowedInMinutes)))
+                    {
+                        MessageBox.Show(
+                            String.Format("Successfully ClockedOut. Your schedule end time was {0}. Your hours will be approved as per Company policy and your scheduled time.",
+                            scheduledEndTime.ToString("hh:mm:ss tt",
+                  CultureInfo.InvariantCulture)));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Successfully ClockedOut. Your hours will be approved as per Company policy and your schedule time.");
+                    }
+                }else if (timeCardEntry.Action == 1)
+                {
+                    //max allowed time for clock-in
+                    var scheduledStartTime = GetEmpScheduleStartTime(timeCardEntry.UserId);
+                    if (scheduledStartTime == DateTime.MinValue)
+                    {
+                        MessageBox.Show("Successfully ClockedIn. System could not find your scheduled start time at this moment. Your hours will be approved as per Company policy.");
+                    }else if (scheduledStartTime != DateTime.MinValue && (timeCardEntry.DateTime <
+                                                     scheduledStartTime.AddMinutes(-1 * AppServices.CurrentTerminal
+                                                                                               .EarlyClockInAllowedInMinutes)))
+                    {
+                        MessageBox.Show(String.Format("Successfully ClockedIn. Your schedule start time is {0}. Your hours will be approved as per schedule time and Company policy.",
+                            scheduledStartTime.ToString("hh:mm:ss tt",
+                  CultureInfo.InvariantCulture)));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Successfully ClockedIn.");
+                    }
+
                 }
+               
+            
             }
         }
 
@@ -735,6 +776,53 @@ namespace Samba.Services
             {
                 
                 AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
+            }
+        }
+        /*
+         * Get Employee schedule
+         */
+        public static IEnumerable<EmpScheduleEntry> GetEmpScheduleEntries()
+        {
+            DateTime startOfDay = DateTime.Today;
+            DateTime endOfDay = startOfDay.AddDays(1);
+            return Dao.Query<EmpScheduleEntry>(x => x.StartTime > startOfDay && x.EndTime < endOfDay);
+          
+        }
+       
+        public static EmpScheduleEntry GetEmpScheduleEntries(int userId)
+        {
+            DateTime startOfDay = DateTime.Today;
+            DateTime endOfDay = startOfDay.AddDays(1);
+            return Dao.Query<EmpScheduleEntry>(x => x.UserId == userId && x.StartTime > startOfDay &&  x.EndTime > DateTime.Now && x.EndTime < endOfDay).FirstOrDefault();
+        }
+        public static DateTime GetEmpScheduleStartTime(int userId)
+        {
+            DateTime startOfDay = DateTime.Today;
+            DateTime endOfDay = startOfDay.AddDays(1);
+            var entry= Dao.Query<EmpScheduleEntry>(x => x.UserId == userId && x.StartTime > startOfDay && x.EndTime > DateTime.Now && x.EndTime < endOfDay).FirstOrDefault();
+            if (entry != null)
+            {
+                return entry.StartTime;
+            }
+            return DateTime.MinValue;
+        }
+        public static DateTime GetEmpScheduleEndTime(int userId)
+        {
+            DateTime startOfDay = DateTime.Today;
+            DateTime endOfDay = startOfDay.AddDays(1);
+            var entry = Dao.Query<EmpScheduleEntry>(x => x.UserId == userId && x.StartTime > startOfDay && x.StartTime <= DateTime.Now && x.EndTime < endOfDay).FirstOrDefault();
+            if (entry != null)
+            {
+                return entry.EndTime;
+            }
+            return DateTime.MinValue;
+        }
+        public static void AddEmpScheduleEntry(EmpScheduleEntry scheduleEntry)
+        {
+            using (var workspace = WorkspaceFactory.Create())
+            {
+                workspace.Add(scheduleEntry);
+                workspace.CommitChanges();              
             }
         }
     }

@@ -50,6 +50,7 @@ namespace Samba.Modules.TicketModule
        
         public CaptionCommand<string> MoveTicketItemsCommand { get; set; }
 
+        public ICaptionCommand AddQuantityCommand { get; set; }
         public ICaptionCommand IncQuantityCommand { get; set; }
         public ICaptionCommand DecQuantityCommand { get; set; }
         public ICaptionCommand IncSelectionQuantityCommand { get; set; }
@@ -66,6 +67,7 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand ChangePriceCommand { get; set; }
         public ICaptionCommand PrintJobCommand { get; set; }
         public ICaptionCommand PrintLastTicketCommand { get; set; }
+        public ICaptionCommand FindTicketCommand { get; set; }
         public ICaptionCommand OpenCashDrawerCommand { get; set; }
         public DelegateCommand<TicketTagFilterViewModel> FilterOpenTicketsCommand { get; set; }
 
@@ -258,9 +260,10 @@ namespace Samba.Modules.TicketModule
             MakeTicketPaymentCommand = new CaptionCommand<string>(Resources.Voucher_r, OnMakeTicketPaymentExecute, CanMakeFastPayment);
             SelectTableCommand = new CaptionCommand<string>(Resources.SelectTable, OnSelectTableExecute, CanSelectTable);
             SelectCustomerCommand = new CaptionCommand<string>(Resources.SelectCustomer, OnSelectCustomerExecute, CanSelectCustomer);
-            ShowAllOpenTickets = new CaptionCommand<string>(Resources.AllTickets_r, OnShowAllOpenTickets);
+            ShowAllOpenTickets = new CaptionCommand<string>(Resources.AllTickets_r, OnShowAllOpenTickets);          
             FilterOpenTicketsCommand = new DelegateCommand<TicketTagFilterViewModel>(OnFilterOpenTicketsExecute);
-
+            //rjoshi: Add selected item 
+            AddQuantityCommand = new CaptionCommand<string>(Resources.AddQuantity_r, OnAddQuantityCommand, CanIncQuantity);
             IncQuantityCommand = new CaptionCommand<string>("+", OnIncQuantityCommand, CanIncQuantity);
             DecQuantityCommand = new CaptionCommand<string>("-", OnDecQuantityCommand, CanDecQuantity);
             IncSelectionQuantityCommand = new CaptionCommand<string>("(+)", OnIncSelectionQuantityCommand, CanIncSelectionQuantity);
@@ -277,7 +280,7 @@ namespace Samba.Modules.TicketModule
             ChangePriceCommand = new CaptionCommand<string>(Resources.ChangePrice, OnChangePrice, CanChangePrice);
             PrintLastTicketCommand = new CaptionCommand<string>(Resources.PrintLastTicket, OnPrintLastTicket, CanPrintLastTicket);
             OpenCashDrawerCommand = new CaptionCommand<string>(Resources.OpenCashDrawer, OnOpenCashDrawer, CanOpenCashDrawer);
-
+            FindTicketCommand = new CaptionCommand<string>(Resources.FindTicket, OnFindTicketExecute, CanFindTicket);
             
             EventServiceFactory.EventService.GetEvent<GenericEvent<LocationData>>().Subscribe(
                 x =>
@@ -340,9 +343,25 @@ namespace Samba.Modules.TicketModule
                 {
                     if (SelectedTicket != null && x.Topic == EventTopicNames.SelectedItemsChanged)
                     {
+                        
                         LastSelectedTicketItem = x.Value.Selected ? x.Value : null;
                         foreach (var item in SelectedTicket.SelectedItems)
-                        { item.IsLastSelected = item == LastSelectedTicketItem; }
+                        {
+                            //rjoshi added support to disable selection of multiple item.
+                            if (AppServices.CurrentTerminal.DisableMultipleItemSelection)
+                            {
+                                if (item != LastSelectedTicketItem)
+                                {
+                                    item.NotSelected();
+                                }
+                            }
+                            else
+                            {
+                                item.IsLastSelected = item == LastSelectedTicketItem;
+                            }
+
+                        }
+                       
 
                         SelectedTicket.PublishEvent(EventTopicNames.SelectedItemsChanged);
                     }
@@ -673,6 +692,20 @@ namespace Samba.Modules.TicketModule
             _selectedTicket.RefreshVisuals();
         }
 
+        private void OnAddQuantityCommand(string obj)
+        {
+           
+            var ti = _selectedTicket.AddNewItem(LastSelectedTicketItem.Model.MenuItemId, 1, false, "", LastSelectedTicketItem.Model.PortionName);
+
+            if (ti != null)
+            {
+                ti.ItemSelectedCommand.Execute(ti);
+            }
+
+            RefreshSelectedTicket();        
+            _selectedTicket.RefreshVisuals();
+        }
+
         private void OnIncQuantityCommand(string obj)
         {
             LastSelectedTicketItem.Quantity++;
@@ -699,7 +732,7 @@ namespace Samba.Modules.TicketModule
         {
             return LastSelectedTicketItem != null &&
                    LastSelectedTicketItem.Quantity > 1 &&
-                   LastSelectedTicketItem.IsLocked &&
+                   !LastSelectedTicketItem.IsLocked &&
                    !LastSelectedTicketItem.IsGifted &&
                    !LastSelectedTicketItem.IsVoided;
         }
@@ -707,6 +740,7 @@ namespace Samba.Modules.TicketModule
         private void OnDecSelectionQuantityCommand(string obj)
         {
             LastSelectedTicketItem.DecSelectedQuantity();
+         //   _selectedTicket.RecalculateTicket();
             _selectedTicket.RefreshVisuals();
         }
 
@@ -714,7 +748,7 @@ namespace Samba.Modules.TicketModule
         {
             return LastSelectedTicketItem != null &&
                LastSelectedTicketItem.Quantity > 1 &&
-               LastSelectedTicketItem.IsLocked &&
+               !LastSelectedTicketItem.IsLocked &&
                !LastSelectedTicketItem.IsGifted &&
                !LastSelectedTicketItem.IsVoided;
         }
@@ -722,6 +756,7 @@ namespace Samba.Modules.TicketModule
         private void OnIncSelectionQuantityCommand(string obj)
         {
             LastSelectedTicketItem.IncSelectedQuantity();
+        //    _selectedTicket.RecalculateTicket();
             _selectedTicket.RefreshVisuals();
         }
 
@@ -1279,6 +1314,16 @@ namespace Samba.Modules.TicketModule
             SelectedDepartment = departmentId > 0
                 ? Departments.SingleOrDefault(x => x.Id == departmentId)
                 : null;
+        }
+        private void OnFindTicketExecute(string obj)
+        {          
+            AppServices.MainDataContext.CurrentWorkPeriod.PublishEvent(EventTopicNames.DisplayTicketExplorer);
+            
+        }
+
+        private static bool CanFindTicket(string arg)
+        {
+            return ((AppServices.MainDataContext.SelectedTicket == null) && AppServices.IsUserPermittedFor(PermissionNames.DisplayOldTickets));
         }
     }
 }

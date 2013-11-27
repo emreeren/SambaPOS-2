@@ -73,6 +73,7 @@
                         <TextBox HorizontalAlignment="Left" MinWidth="150" Text="{Binding MinorCurrencyName}"></TextBox>
                         <Label>Plural Currency Suffix:</Label>
                         <TextBox HorizontalAlignment="Left" MinWidth="50" Text="{Binding PluralCurrencySuffix}"></TextBox>
+                        
                     </StackPanel>
 
 

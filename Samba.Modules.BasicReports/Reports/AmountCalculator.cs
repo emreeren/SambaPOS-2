@@ -19,6 +19,8 @@ namespace Samba.Modules.BasicReports.Reports
             return r != null ? r.Amount : 0;
         }
 
+       
+
         internal string GetPercent(int paymentType)
         {
             return TotalAmount > 0 ? string.Format("%{0:0.00}", (GetAmount(paymentType) * 100) / TotalAmount) : "%0";
@@ -35,5 +37,7 @@ namespace Samba.Modules.BasicReports.Reports
         public string CreditCardPercent { get { return GetPercent(1); } }
         public string TicketPercent { get { return GetPercent(2); } }
         public string AccountPercent { get { return GetPercent(3); } }
+
+        
     }
 }

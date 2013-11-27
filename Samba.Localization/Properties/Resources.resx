@@ -1676,6 +1676,12 @@ Card</value>
     <value>All
 Tickets</value>
   </data>
+  <data name="AddQuantity_r" xml:space="preserve">
+    <value>Add
+Quantity
+</value>
+  </data>
+  
   <data name="Void" xml:space="preserve">
     <value>Void</value>
   </data>
@@ -1843,6 +1849,10 @@ Balance</value>
   </data>
   <data name="DateOfBirth" xml:space="preserve">
     <value>Date of Birth</value>
+    <comment>Label.Content</comment>
+  </data>
+  <data name="Wages" xml:space="preserve">
+    <value>Wages</value>
     <comment>Label.Content</comment>
   </data>
   <data name="SaveErrorThisPinCodeInUse" xml:space="preserve">
@@ -3411,6 +3421,9 @@ Error Message:
   </data>
   <data name="HideExitButton" xml:space="preserve">
     <value>Hide Exit Button</value>
+  </data>
+  <data name="DisableMultipleItemSelection" xml:space="preserve">
+    <value>Disable Multiple Items Selection in Ticket List View</value>
   </data>
   <data name="SelectedLinesCount" xml:space="preserve">
     <value>Selected Lines Count</value>

@@ -82,7 +82,6 @@ namespace Samba.Modules.UserModule
                     if (pinData.TimeCardAction == 2)
                     {
                         AppServices.LogoutUser();
-                        MessageBox.Show("Clocked out success.");
                         return;
                     }
                 }

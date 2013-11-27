@@ -186,6 +186,19 @@ namespace Samba.Modules.BasicReports
             return Dao.Query<TimeCardEntry>(x => x.DateTime >= CurrentWorkPeriod.StartDate);
      
         }
+        private static IEnumerable<EmpScheduleEntry> _empScheduleEntries;
+        public static IEnumerable<EmpScheduleEntry> EmpScheduleEntries
+        {
+            get { return _empScheduleEntries ?? (_empScheduleEntries = GetEmpScheduleEntries()); }
+            set { _empScheduleEntries = value; }
+        }
+        private static IEnumerable<EmpScheduleEntry> GetEmpScheduleEntries()
+        {
+            if (CurrentWorkPeriod.StartDate != CurrentWorkPeriod.EndDate)
+                return Dao.Query<EmpScheduleEntry>(x => x.StartTime >= CurrentWorkPeriod.StartDate && x.EndTime < CurrentWorkPeriod.EndDate);
+            return Dao.Query<EmpScheduleEntry>(x => x.StartTime >= CurrentWorkPeriod.StartDate);
+
+        }
 
 
         public static string CurrencyFormat { get { return "#,#0.00;-#,#0.00;-"; } }
@@ -224,6 +237,7 @@ namespace Samba.Modules.BasicReports
             _workPeriods = null;
             _taxServiceTemplates = null;
             _timeCardEntries = null;
+            _empScheduleEntries = null;
             _workspace = null;
         }
 
@@ -368,6 +382,33 @@ namespace Samba.Modules.BasicReports
                 .GroupBy(x => new { x.PaymentType })
                 .Select(x => new TenderedAmount { PaymentType = x.Key.PaymentType, Amount = x.Sum(y => y.Amount) });
             return new AmountCalculator(groups);
+        }
+        internal static PaymentTypeCount GetOperationalPaymentTypeCountCalculator()
+        {
+            var cashPaymentCount = 0;
+            var creditPaymentCount = 0;
+            var ticketPaymentCount = 0;
+            var accountPaymentCount = 0;
+            foreach (var p in Tickets.SelectMany(t => t.Payments))
+            {
+                switch (p.PaymentType)
+                {
+                    case (int)PaymentType.Cash:
+                        cashPaymentCount++;
+                        break;
+                    case (int)PaymentType.CreditCard:
+                        creditPaymentCount++;
+                        break;
+                    case (int)PaymentType.Ticket:
+                        ticketPaymentCount++;
+                        break;
+                    case (int)PaymentType.Account:
+                        accountPaymentCount++;
+                        break;
+                }
+            }
+
+            return new PaymentTypeCount(cashPaymentCount, creditPaymentCount, ticketPaymentCount, accountPaymentCount);
         }
 
         internal static decimal GetCashTotalAmount()

@@ -36,6 +36,7 @@ namespace Samba.Persistance.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<TimeCardEntry> TimeCardEntries { get; set; }
+        public DbSet<EmpScheduleEntry> EmpScheduleEntries { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<Terminal> Terminals { get; set; }

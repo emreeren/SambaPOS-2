@@ -15,6 +15,7 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
         {
             FilterGroups.Clear();
             ReportContext.TimeCardEntries = null;
+            ReportContext.EmpScheduleEntries = null;
             FilterGroups.Add(CreateWorkPeriodFilterGroup());
         }
 
@@ -26,16 +27,27 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
             AddDefaultReportHeader(report, currentPeriod, Resources.PayrollReport);
 
             var table = new Dictionary<int, List<KeyValuePair<DateTime, DateTime>>>();
+            var scheduledTable = new Dictionary<int, List<KeyValuePair<DateTime, DateTime>>>();
             foreach (var u in ReportContext.TimeCardEntries.Select(t => t.UserId).Distinct())
             {
                 table.Add(u, new List<KeyValuePair<DateTime, DateTime>>());
+                scheduledTable.Add(u, new List<KeyValuePair<DateTime, DateTime>>());
                 foreach (var date in
                     EachDay(ReportContext.CurrentWorkPeriod.StartDate, ReportContext.CurrentWorkPeriod.EndDate))
                 {
+                    var es =
+                        ReportContext.EmpScheduleEntries.Where(e => e.StartTime.Date.Equals(date.Date) && e.UserId == u);
+                                    
+                    foreach (var e in es)
+                    {
+                        scheduledTable[u].Add(new KeyValuePair<DateTime, DateTime>(e.StartTime, e.EndTime));
+                    }
                     int minutes = 0;
                     
                     string errMsg = "";
                     var ts = ReportContext.TimeCardEntries.Where(t => t.DateTime.Date.Equals(date.Date) && t.UserId == u).ToArray();
+                    
+
                     if (!ts.Any())
                     {
                         continue;
@@ -103,6 +115,7 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                 report.AddTable(userInfo.UserName, userInfo.UserName, "", "", "");
                 report.AddBoldRow(userInfo.UserName, "Date", "ClockIn", "ClockOut", "Time");
                 var entries = table[user];
+                var scheduleEntries = scheduledTable[user];
                 int totalMinutes = 0;
                 foreach (var entry in entries)
                 {
@@ -133,6 +146,38 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                         t1Exist?(String.Format("{0:D2}:{1:D2}", t1.Hours, t1.Minutes)):"-----",
                         t2Exist?(String.Format("{0:D2}:{1:D2}", t2.Hours, t2.Minutes)):"-----",
                         t3Exist?(String.Format("{0:D2}:{1:D2}", t3.Hours, t3.Minutes)):"00:00");
+
+                    foreach (var e in scheduleEntries)
+                    {
+                        if (e.Key.Date.Equals(reportingDate.Date))
+                        {
+                             var s1 = new TimeSpan(e.Key.Ticks);
+                             var s1Exist = !e.Key.Equals(DateTime.MinValue);
+                             var s2 = new TimeSpan(e.Value.Ticks);
+                             var s2Exist = !e.Value.Equals(DateTime.MinValue);
+                             var s3 = TimeSpan.MinValue;
+                             var s3Exist = false;
+                             if (s1Exist && s2Exist)
+                             {
+                                 s3 = entry.Value.Subtract(entry.Key);
+                                 s3Exist = true;
+                                 if (s3.TotalMinutes < 1) //hack to discard seconds and still make display look good
+                                 {
+                                     s1 = s2;
+                                 }
+
+                             }
+                            report.AddRow(userInfo.UserName, "Scheduled",
+                             s1Exist ? (String.Format("{0:D2}:{1:D2}", s1.Hours, s1.Minutes)) : "-----",
+                             s2Exist ? (String.Format("{0:D2}:{1:D2}", s2.Hours, s2.Minutes)) : "-----",
+                             s3Exist ? (String.Format("{0:D2}:{1:D2}", s3.Hours, s3.Minutes)) : "00:00");
+                            scheduleEntries.Remove(e);
+                            break;
+                        }
+                    }
+                   
+                   
+
                     if (t3Exist)
                     {
                         totalMinutes += (int) t3.TotalMinutes;
@@ -143,6 +188,8 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                 var minutes = totalMinutes%60; 
                
                 report.AddBoldRow(userInfo.UserName, "Total Hours:", "", "",String.Format("{0:D2}:{1:D2}", hours, minutes));
+
+                
             }
                    
             return report.Document;

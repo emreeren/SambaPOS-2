@@ -9,24 +9,38 @@ namespace Samba.Persistance.DBMigration
 	[Migration(21)]
 	public class Migration_021 : Migration
 	{
-		public override void Up()
-		{
+	    public override void Up()
+	    {
+	        if (!Schema.Table("MenuItemPropertyGroups").Column("ButtonColor").Exists())
+	        {
 
-            Create.Column("ButtonColor").OnTable("MenuItemPropertyGroups").AsString(128).Nullable();
-            Execute.Sql("Update MenuItemPropertyGroups set ButtonColor='LightGray'");
+	            Create.Column("ButtonColor").OnTable("MenuItemPropertyGroups").AsString(128).Nullable();
+	            Execute.Sql("Update MenuItemPropertyGroups set ButtonColor='LightGray'");
+	        }
+            if (!Schema.Table("TimeCardEntries").Exists())
+	        {
+	            Create.Table("TimeCardEntries")
+	                  .WithColumn("Id").AsInt32().Identity().PrimaryKey()
+	                  .WithColumn("Name").AsString(128).Nullable()
+	                  .WithColumn("UserId").AsInt32().WithDefaultValue(0)
+	                  .WithColumn("Action").AsInt32().WithDefaultValue(0)
+	                  .WithColumn("DateTime").AsDateTime().WithDefaultValue(new DateTime(2000, 1, 1));
+	        }
 
-		    Create.Table("TimeCardEntries")
-		          .WithColumn("Id").AsInt32().Identity().PrimaryKey()
-                  .WithColumn("Name").AsString(128).Nullable()
-		          .WithColumn("UserId").AsInt32().WithDefaultValue(0)
-		          .WithColumn("Action").AsInt32().WithDefaultValue(0)
-		          .WithColumn("DateTime").AsDateTime().WithDefaultValue(new DateTime(2000, 1, 1));
+	        if (!Schema.Table("Users").Column("ContactPhone").Exists())
+	        {
+	            Create.Column("ContactPhone").OnTable("Users").AsString(128).Nullable();
+	        }
+	        if (!Schema.Table("Users").Column("ContactPhone").Exists())
+	        {
+                Create.Column("EmergencyPhone").OnTable("EmergencyPhone").AsString(128).Nullable();
+	        }
+            if (!Schema.Table("Users").Column("DateOfBirth").Exists())
+	        {
+	            Create.Column("DateOfBirth").OnTable("Users").AsString(128).Nullable();
+	        }
 
-		    Create.Column("ContactPhone").OnTable("Users").AsString(128).Nullable();
-		    Create.Column("EmergencyPhone").OnTable("Users").AsString(128).Nullable();
-		    Create.Column("DateOfBirth").OnTable("Users").AsString(128).Nullable();
-            
-		  //  Create.Column("TimeCardAction").OnTable("Users").AsInt32().WithDefaultValue(0);
+	        //  Create.Column("TimeCardAction").OnTable("Users").AsInt32().WithDefaultValue(0);
             
 
         //         public string ContactPhone { get; set; }
