@@ -12,7 +12,7 @@ namespace Samba.Persistance.DBMigration
      * Creating column for early checkin time
      */
     [Migration(22)]
-    class Migration_022 : Migration
+    public class Migration_022 : Migration
 	{
         public override void Up()
         {
@@ -34,9 +34,9 @@ namespace Samba.Persistance.DBMigration
             {
                 Create.Column("DisableMultipleItemSelection").OnTable("Terminals").AsBoolean().WithDefaultValue(false);
             }
-            if (!Schema.Table("Terminals").Column("EarlyClockInAllowedInMinutes").Exists())
+            if (!Schema.Table("Users").Column("EarlyClockInAllowedInMinutes").Exists())
             {
-                Create.Column("EarlyClockInAllowedInMinutes").OnTable("Terminals").AsBoolean().WithDefaultValue(5);
+                Create.Column("EarlyClockInAllowedInMinutes").OnTable("Users").AsBoolean().WithDefaultValue(5);
             }
 
         }

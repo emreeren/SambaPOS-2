@@ -32,6 +32,7 @@ namespace Samba.Domain.Models.Tickets
         public bool Voided { get; set; }
         public int ReasonId { get; set; }
         public bool Gifted { get; set; }
+        public bool Bogo { get; set; }
         public int OrderNumber { get; set; }
         public int CreatingUserId { get; set; }
         public DateTime CreatedDateTime { get; set; }

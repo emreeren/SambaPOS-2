@@ -8,6 +8,9 @@ using Samba.Domain.Models.Menus;
 using Samba.Infrastructure.Data;
 using Samba.Infrastructure.Data.Serializer;
 using Samba.Infrastructure.Settings;
+//using Samba.Services;
+using System.Reflection;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Samba.Domain.Models.Tickets
 {
@@ -70,6 +73,8 @@ namespace Samba.Domain.Models.Tickets
         [StringLength(500)]
         public string Tag { get; set; }
 
+       
+
         private IList<TicketItem> _ticketItems;
         public virtual IList<TicketItem> TicketItems
         {
@@ -105,7 +110,29 @@ namespace Samba.Domain.Models.Tickets
             set { _paidItems = value; }
         }
 
+        private static MethodInfo _mainDataContentGetReason;
+        private static object _mainDataContext;
+        public static MethodInfo GetMainDataContentGetReason()
+        {
+            foreach (Assembly c in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (c.FullName.ToLower().Contains("samba.services"))
+                {
+                    foreach (var t in c.GetExportedTypes())
+                    {
+                        if (t.FullName.Contains("MainDataContext"))
+                        {
+                            MethodInfo info = t.GetMethod("GetReason");
+                            _mainDataContext = Activator.CreateInstance(t, null);
+                            return info;
+                        }
+                    }
+                  
+                }
+            }
 
+            return null;
+        }
         public TicketItem AddTicketItem(int userId, MenuItem menuItem, string portionName)
         {
             // Only for tests
@@ -183,7 +210,17 @@ namespace Samba.Domain.Models.Tickets
 
         private decimal CalculateTax(decimal plainSum, decimal discount)
         {
-            var result = TicketItems.Where(x => !x.VatIncluded && !x.Gifted && !x.Voided).Sum(x => (x.VatAmount + x.Properties.Sum(y => y.VatAmount)) * x.Quantity);
+            //rjoshi: If gifted reason is BOGO, we need to apply tax
+         //   if (_mainDataContentGetReason == null)
+         //   {
+         //       _mainDataContentGetReason = GetMainDataContentGetReason();
+         //   }
+        
+        //    var result = TicketItems.Where(x => !x.VatIncluded && !x.Voided &&
+        //        (!x.Gifted || (x.Gifted && String.Compare("BOGO", (String)_mainDataContentGetReason.Invoke(_mainDataContext, new object[] { x.ReasonId }), true) == 0))
+        //        ).Sum(x => (x.VatAmount + x.Properties.Sum(y => y.VatAmount)) * x.Quantity);
+          
+            var result = TicketItems.Where(x => !x.VatIncluded && (!x.Gifted || x.Gifted && x.Bogo) && !x.Voided).Sum(x => (x.VatAmount + x.Properties.Sum(y => y.VatAmount)) * x.Quantity);
             if (discount > 0)
                 result -= (result * discount) / plainSum;
             return result;
@@ -399,6 +436,45 @@ namespace Samba.Domain.Models.Tickets
             item.ModifiedUserId = userId;
             item.ModifiedDateTime = DateTime.Now;
             item.ReasonId = reasonId;
+        }
+
+        public void BogoItem(TicketItem item, int userId)
+        {
+            Locked = false;
+            
+           
+            if(item.Gifted)
+            {
+                MessageBox.Show("Item is already gifted. Can't add BOGO offer");
+            }
+            if (item.Voided)
+            {
+                MessageBox.Show("Item is already void. Can't add BOGO offer");
+            }
+
+            if (item.Bogo)
+            {
+                MessageBox.Show("Item is already used in BOGO offer. Can't add BOGO offer");
+            }
+
+            foreach (var it in _ticketItems)
+            {
+                //find similar menu item 
+                if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && !it.Voided && !it.Bogo )
+                {
+                    item.ModifiedUserId = userId;
+                    item.ModifiedDateTime = DateTime.Now;
+                   
+                    item.Bogo = true;
+                    item.Gifted = true;
+                    //mark other item to avoid duplicate bogo
+                    it.Bogo = true;
+                   
+                    return;
+                }
+
+            }
+            MessageBox.Show("Must have two same items to apply BOGO offer");
         }
 
         public bool CanRemoveSelectedItems(IEnumerable<TicketItem> items)

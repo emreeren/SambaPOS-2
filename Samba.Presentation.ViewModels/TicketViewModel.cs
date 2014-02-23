@@ -322,6 +322,12 @@ namespace Samba.Presentation.ViewModels
             RegenerateItemViewModels();
         }
 
+        private void BogoItems(IEnumerable<TicketItemViewModel> ticketItems,  int userId)
+        {
+            ticketItems.ToList().ForEach(x => Model.BogoItem(x.Model, userId));
+            RegenerateItemViewModels();
+        }
+
         public void CancelItems(IEnumerable<TicketItemViewModel> ticketItems, int userId)
         {
             VoidItems(ticketItems, 0, userId);
@@ -346,6 +352,11 @@ namespace Samba.Presentation.ViewModels
         public void CancelSelectedItems()
         {
             CancelItems(SelectedItems.ToArray(), AppServices.CurrentLoggedInUser.Id);
+        }
+        public void BogoSelectedItems()
+        {
+            FixSelectedItems();
+            BogoItems(SelectedItems.ToArray(), AppServices.CurrentLoggedInUser.Id);
         }
 
         public void GiftSelectedItems(int reasonId)

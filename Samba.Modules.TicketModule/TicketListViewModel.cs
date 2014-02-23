@@ -57,6 +57,7 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand DecSelectionQuantityCommand { get; set; }
         public ICaptionCommand ShowVoidReasonsCommand { get; set; }
         public ICaptionCommand ShowGiftReasonsCommand { get; set; }
+        public ICaptionCommand BogoCommand { get; set; }
         public ICaptionCommand ShowTicketTagsCommand { get; set; }
         public ICaptionCommand CancelItemCommand { get; set; }
         public ICaptionCommand ShowExtraPropertyEditorCommand { get; set; }
@@ -270,6 +271,7 @@ namespace Samba.Modules.TicketModule
             DecSelectionQuantityCommand = new CaptionCommand<string>("(-)", OnDecSelectionQuantityCommand, CanDecSelectionQuantity);
             ShowVoidReasonsCommand = new CaptionCommand<string>(Resources.Void, OnShowVoidReasonsExecuted, CanVoidSelectedItems);
             ShowGiftReasonsCommand = new CaptionCommand<string>(Resources.Gift, OnShowGiftReasonsExecuted, CanGiftSelectedItems);
+            BogoCommand = new CaptionCommand<string>(Resources.Bogo, OnBogoSelected, CanGiftSelectedItems);
             ShowTicketTagsCommand = new CaptionCommand<TicketTagGroup>(Resources.Tag, OnShowTicketsTagExecute, CanExecuteShowTicketTags);
             CancelItemCommand = new CaptionCommand<string>(Resources.Cancel, OnCancelItemCommand, CanCancelSelectedItems);
             MoveTicketItemsCommand = new CaptionCommand<string>(Resources.MoveTicketLine, OnMoveTicketItems, CanMoveTicketItems);
@@ -775,6 +777,12 @@ namespace Samba.Modules.TicketModule
         private void OnShowGiftReasonsExecuted(string obj)
         {
             _selectedTicket.PublishEvent(EventTopicNames.SelectGiftReason);
+        }
+
+        private void OnBogoSelected(string obj)
+        {
+            _selectedTicket.BogoSelectedItems();
+            RefreshSelectedTicket();
         }
 
         private bool CanCancelSelectedItems(string arg)

@@ -31,7 +31,8 @@
             <TextBox HorizontalAlignment="Left" Text="{Binding Address,Mode=TwoWay}" MinWidth="150" />
             <Label Content="{LocText Wages, Suffix=':'}" />
             <TextBox HorizontalAlignment="Left" Text="{Binding Wages,Mode=TwoWay}" MinWidth="150" />
-           
+            <Label>Early ClockedIn allowed in Minutes:</Label>
+            <TextBox HorizontalAlignment="Left" MinWidth="150" Text="{Binding EarlyClockInAllowedInMinutes, Mode=TwoWay}"/>
             <Button HorizontalAlignment="Left" Margin="0,10" MinWidth="70" Content="{Binding SaveCommand.Caption}"
                  Command="{Binding SaveCommand}" />
             <Label Content="{Binding Error}" Foreground="Red" />

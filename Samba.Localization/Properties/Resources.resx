@@ -780,6 +780,9 @@ Payment</value>
   <data name="Gift" xml:space="preserve">
     <value>Gift</value>
   </data>
+  <data name="Bogo" xml:space="preserve">
+    <value>BOGO</value>
+  </data>
   <data name="Header" xml:space="preserve">
     <value>Header</value>
   </data>
@@ -1678,8 +1681,7 @@ Tickets</value>
   </data>
   <data name="AddQuantity_r" xml:space="preserve">
     <value>Add
-Quantity
-</value>
+Quantity</value>
   </data>
   
   <data name="Void" xml:space="preserve">
@@ -1932,6 +1934,9 @@ Visit Reports section and create Work Period Reports</value>
   </data>
   <data name="Gift_ab" xml:space="preserve">
     <value>[Gift] </value>
+  </data>
+  <data name="Bogo_ab" xml:space="preserve">
+    <value>[BOGO] </value>
   </data>
   <data name="Void_ab" xml:space="preserve">
     <value>[Void] </value>

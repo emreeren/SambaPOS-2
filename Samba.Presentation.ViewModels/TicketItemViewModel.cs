@@ -34,7 +34,11 @@ namespace Samba.Presentation.ViewModels
             {
                 string desc = _model.MenuItemName + _model.GetPortionDesc();
 
+
                 if (IsGifted) desc = Resources.Gift_ab + desc;
+                //if Bogo, override gift tag
+                if (IsBogo) desc = Resources.Bogo_ab + desc;
+                   
                 if (IsVoided) desc = Resources.Void_ab + desc;
 
                 if (IsSelectedQuantityModified)
@@ -167,7 +171,7 @@ namespace Samba.Presentation.ViewModels
         {
             get
             {
-                return Model.Voided ? TextDecorations.Strikethrough : null;
+                return Model.Voided  ? TextDecorations.Strikethrough : null;
             }
         }
 
@@ -186,6 +190,7 @@ namespace Samba.Presentation.ViewModels
         public ObservableCollection<TicketItemPropertyViewModel> Properties { get; private set; }
 
         public bool IsGifted { get { return Model.Gifted; } }
+        public bool IsBogo { get { return Model.Bogo; } }
         public bool IsVoided { get { return Model.Voided; } }
         public bool IsLocked { get { return Model.Locked; } }
         private bool _isLastSelected;
