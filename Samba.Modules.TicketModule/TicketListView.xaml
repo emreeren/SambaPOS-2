@@ -388,12 +388,12 @@
                          Content="{Binding IncQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndUnlocked,Converter={StaticResource VisibilityConverter}}" />
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding DecQuantityCommand}"
                          Content="{Binding DecQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndUnlocked,Converter={StaticResource VisibilityConverter}}" />
-                    <!--
+                    
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding IncSelectionQuantityCommand}"
                          Content="{Binding IncSelectionQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndLocked,Converter={StaticResource VisibilityConverter}}" />
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding DecSelectionQuantityCommand}"
                          Content="{Binding DecSelectionQuantityCommand.Caption}" Visibility="{Binding IsItemsSelectedAndLocked,Converter={StaticResource VisibilityConverter}}" />
-                    -->
+                    
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding ShowGiftReasonsCommand}"
                          Visibility="{Binding IsItemsSelected,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
@@ -414,21 +414,28 @@
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding CancelItemCommand.Caption}" />
                     </FxButton:FlexButton>
-                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding MoveTicketItemsCommand}"
+                                  
+                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding OpenCashDrawerCommand}"
+                         Visibility="{Binding CanPrintLastTicket,Converter={StaticResource VisibilityConverter}}">
+                        <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
+                             Text="{Binding OpenCashDrawerCommand.Caption}" />
+                    </FxButton:FlexButton>
+                   
+                    <!--FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding MoveTicketItemsCommand}"
                          Visibility="{Binding IsItemsSelected,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding MoveTicketItemsCommand.Caption}" />
-                    </FxButton:FlexButton>
+                    </FxButton:FlexButton-->
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding ShowExtraPropertyEditorCommand}"
                          Visibility="{Binding IsItemsSelectedAndUnlocked,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding ShowExtraPropertyEditorCommand.Caption}" />
                     </FxButton:FlexButton>
-                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding ChangePriceCommand}"
+                    <!--FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding ChangePriceCommand}"
                          Visibility="{Binding IsItemsSelected,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding ChangePriceCommand.Caption}" />
-                    </FxButton:FlexButton>
+                    </FxButton:FlexButton-->
 
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding FindTicketCommand}" Focusable="False">
                         <LocText ResourceIdentifierKey="FindTicket"/>

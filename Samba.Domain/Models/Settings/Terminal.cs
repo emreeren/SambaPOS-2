@@ -15,7 +15,7 @@ namespace Samba.Domain.Models.Settings
         public virtual Printer ReportPrinter { get; set; }
         public int DepartmentId { get; set; }
         public bool DisableMultipleItemSelection { get; set; }
-       
+        public int EarlyClockInAllowedInMinutes { get; set; }
 
         private IList<PrintJob> _printJobs;
         public virtual IList<PrintJob> PrintJobs

@@ -29,7 +29,6 @@
                 <CheckBox Margin="0,5" IsChecked="{Binding DisableMultipleItemSelection, Mode=TwoWay}">
                     <LocText ResourceIdentifierKey="DisableMultipleItemSelection"/>
                 </CheckBox>
-                
                 <GroupBox Header="{LocText PrinterOptions}" Margin="0,5,0,0"
                      MaxWidth="500" HorizontalAlignment="Left">
                     <UniformGrid Columns="2">
