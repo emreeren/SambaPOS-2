@@ -28,7 +28,7 @@ namespace Samba.Persistance.DBMigration
             }
             if (!Schema.Table("Users").Column("Wages").Exists())
             {
-                Create.Column("Wages").OnTable("Users").AsDecimal().Nullable();
+                Create.Column("Wages").OnTable("Users").AsDecimal().Nullable().WithDefaultValue(Decimal.One);
             }
             if (!Schema.Table("Terminals").Column("DisableMultipleItemSelection").Exists())
             {
@@ -36,7 +36,11 @@ namespace Samba.Persistance.DBMigration
             }
             if (!Schema.Table("Users").Column("EarlyClockInAllowedInMinutes").Exists())
             {
-                Create.Column("EarlyClockInAllowedInMinutes").OnTable("Users").AsBoolean().WithDefaultValue(5);
+                Create.Column("EarlyClockInAllowedInMinutes").OnTable("Users").AsInt32().Nullable().WithDefaultValue(5);
+            }
+            if (!Schema.Table("TicketItems").Column("Bogo").Exists())
+            {
+                Create.Column("Bogo").OnTable("TicketItems").AsBoolean().WithDefaultValue(false);
             }
 
         }

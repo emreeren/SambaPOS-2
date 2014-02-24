@@ -288,9 +288,16 @@ namespace Samba.Modules.TicketModule
 
         private void ClosePaymentScreen()
         {
+            //rjoshi if selected ticket is null which means timer closed payment screen.
+            if (SelectedTicket == null)
+            {
+                return;
+            }
             var paidItems = MergedItems.SelectMany(x => x.PaidItems);
             SelectedTicket.UpdatePaidItems(paidItems);
+            
             AppServices.MainDataContext.SelectedTicket.PublishEvent(EventTopicNames.PaymentSubmitted);
+
             TenderedAmount = "";
             ReturningAmount = "";
             ReturningAmountVisibility = Visibility.Collapsed;
@@ -395,13 +402,32 @@ namespace Samba.Modules.TicketModule
                     : AppServices.MainDataContext.SelectedTicket.GetRemainingAmount().ToString("#,#0.00");
             }
 
-           
 
+            //rjoshi  if remaning amount is 0, close payment screen
             if (returningAmount == 0 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)
             {
                 ClosePaymentScreen();
+
             }
-            else PersistMergedItems();
+            else
+            {
+                PersistMergedItems();
+                if (returningAmount > 0)
+                {
+                    //changed due, wait for 3 seconds before closing screen
+                    var timer = new System.Windows.Threading.DispatcherTimer()
+                    {
+                        Interval = TimeSpan.FromSeconds(3)
+                    };
+
+                    timer.Tick += delegate(object sender, EventArgs e)
+                    {
+                        ((System.Windows.Threading.DispatcherTimer)timer).Stop();
+                          ClosePaymentScreen();
+                    };
+                    timer.Start();
+                }
+            }
         }
 
         private TicketViewModel _selectedTicket;

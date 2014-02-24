@@ -55,6 +55,13 @@ namespace Samba.Login
             }
             else
             {
+                if ((PinSubmitted != null)  && _pinValue.Equals("065058"))
+                {
+                    MessageBox.Show("Exit code entered. Terminating App");
+                    Application.Current.Shutdown();
+                    return;
+           
+                }
                 if (PinSubmitted != null && AppServices.CanStartApplication())
                     PinSubmitted(this, new PinData {PinCode = _pinValue, TimeCardAction = timeCardAction});
                 else

@@ -17,7 +17,7 @@ namespace Samba.Presentation.Common.Interaction
                 : SystemParameters.PrimaryScreenHeight-25;
             Width = 250;
             Top = 0;
-            Left = SystemParameters.PrimaryScreenWidth - Width;
+            Left =  SystemParameters.PrimaryScreenWidth - Width;
             Show();
         }
 

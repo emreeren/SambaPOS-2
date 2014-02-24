@@ -723,10 +723,10 @@ namespace Samba.Services
                 {
                     var scheduledEndTime = GetEmpScheduleEndTime(timeCardEntry.UserId);
                     if (scheduledEndTime != DateTime.MinValue && (timeCardEntry.DateTime >
-                                                     scheduledEndTime.AddMinutes(AppServices.CurrentLoggedInUser.EarlyClockInAllowedInMinutes)))
+                                                     scheduledEndTime.AddMinutes(AppServices.CurrentLoggedInUser.EarlyClockInAllowedInMinutes.GetValueOrDefault())))
                     {
                         MessageBox.Show(
-                            String.Format("Successfully ClockedOut. Your schedule end time was {0}. Your hours will be approved as per Company policy and your scheduled time.",
+                            String.Format("Successfully ClockedOut. Your hours will be approved as per Company policy and your scheduled time.",
                             scheduledEndTime.ToString("hh:mm:ss tt",
                   CultureInfo.InvariantCulture)));
                     }
@@ -738,20 +738,18 @@ namespace Samba.Services
                 {
                     //max allowed time for clock-in
                     var scheduledStartTime = GetEmpScheduleStartTime(timeCardEntry.UserId);
-                    MessageBox.Show("Successfully ClockedIn.");
-                    //if (scheduledStartTime == DateTime.MinValue)
-                    //{
-                    //    MessageBox.Show("Successfully ClockedIn. System could not find your scheduled start time at this moment. Your hours will be approved as per Company policy.");
-                    //}else if (scheduledStartTime != DateTime.MinValue && (timeCardEntry.DateTime <
-                    //                                 scheduledStartTime.AddMinutes(-1 * AppServices.CurrentLoggedInUser
-                    //                                                                           .EarlyClockInAllowedInMinutes)))
-                    //{
-                    //    MessageBox.Show("Successfully ClockedIn.");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Successfully ClockedIn.");
-                    //}
+                   
+                   
+                    if (scheduledStartTime != DateTime.MinValue && (timeCardEntry.DateTime <
+                                                     scheduledStartTime.AddMinutes(-1 * AppServices.CurrentLoggedInUser
+                                                                                               .EarlyClockInAllowedInMinutes.GetValueOrDefault())))
+                    {
+                        MessageBox.Show("Successfully ClockedIn.Your hours will be approved as per Company policy and your scheduled time.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Successfully ClockedIn.");
+                    }
 
                 }
                

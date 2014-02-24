@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -78,17 +79,40 @@ namespace Samba.Presentation.Common.Interaction
 
         public void Add(string title, string content, object dataObject, string eventMessage, string headerColor)
         {
-            _popupCache.Add(new PopupData { Title = title, Content = content, DataObject = dataObject, EventMessage = eventMessage, HeaderColor = headerColor });
+           
+           _popupCache.Add(new PopupData { Title = title, Content = content, DataObject = dataObject, EventMessage = eventMessage, HeaderColor = headerColor });
+
+            
         }
 
         public void DisplayPopups()
         {
             if (_popupCache.Count == 0) return;
+
+            
             foreach (var popupData in _popupCache)
             {
-                _popupList.Add(popupData);
+                var p = _popupList.ToList().Find(r => r.Content == popupData.Content);
+                if (p == null)
+                {
+                    _popupList.Add(popupData);
+                }
             }
+           
             _popupCache.Clear();
+
+            //changed due, wait for 3 seconds before closing screen
+            var timer = new System.Windows.Threading.DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(3)
+            };
+
+            timer.Tick += delegate(object sender, EventArgs e)
+            {
+                ((System.Windows.Threading.DispatcherTimer)timer).Stop();
+                _popupList.Clear();
+            };
+            timer.Start();
         }
     }
 

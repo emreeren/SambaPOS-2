@@ -139,7 +139,7 @@ namespace Samba.Presentation.Terminal
 
         void LoginViewModelPinSubmitted(object sender, string pinValue)
         {
-            if (pinValue == "065058")
+            if (pinValue.Equals("065058"))
             {
                 Application.Current.Shutdown();
             }

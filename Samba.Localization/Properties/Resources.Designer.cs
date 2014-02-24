@@ -5167,7 +5167,7 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Cash Drawer.
+        ///   Looks up a localized string similar to Open Drawer.
         /// </summary>
         public static string OpenCashDrawer {
             get {

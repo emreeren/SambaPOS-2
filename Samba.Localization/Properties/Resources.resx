@@ -3191,7 +3191,7 @@ Continue without adding details?</value>
     <value>Print Last Ticket</value>
   </data>
  <data name="OpenCashDrawer" xml:space="preserve">
-    <value>Open Cash Drawer</value>
+    <value>Open Drawer</value>
   </data>
   <data name="NotifyToCloseCashDrawer" xml:space="preserve">
     <value>Notify to Close Cash Drawer</value>

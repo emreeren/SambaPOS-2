@@ -43,8 +43,8 @@ namespace Samba.Modules.UserModule
         public string ContactPhone { get { return Model.ContactPhone; } set { Model.ContactPhone = value; } }
         public string EmergencyPhone { get { return Model.EmergencyPhone; } set { Model.EmergencyPhone = value; } }
         public string DateOfBirth { get { return Model.DateOfBirth; } set { Model.DateOfBirth = value; } }
-        public Decimal Wages { get { return Model.Wages; } set { Model.Wages = value; } }
-        public int EarlyClockInAllowedInMinutes { get { return Model.EarlyClockInAllowedInMinutes; } set { Model.EarlyClockInAllowedInMinutes = value; } }
+        public Decimal Wages { get { return Model.Wages.GetValueOrDefault(); } set { Model.Wages = value; } }
+        public int EarlyClockInAllowedInMinutes { get { return Model.EarlyClockInAllowedInMinutes.GetValueOrDefault(); } set { Model.EarlyClockInAllowedInMinutes = value; } }
         
         public UserRole Role { get { return Model.UserRole; } set { Model.UserRole = value; } }
 

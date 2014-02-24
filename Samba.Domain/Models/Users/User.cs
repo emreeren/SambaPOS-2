@@ -13,7 +13,7 @@ namespace Samba.Domain.Models.Users
     {
         public User()
         {
-
+            Wages = Decimal.One;
         }
 
         public User(string name, string pinCode)
@@ -21,6 +21,7 @@ namespace Samba.Domain.Models.Users
             Name = name;
             PinCode = pinCode;
             _userRole = UserRole.Empty;
+            Wages = Decimal.One;
         }
 
         public int Id { get; set; }
@@ -31,8 +32,8 @@ namespace Samba.Domain.Models.Users
         public string ContactPhone { get; set; }
         public string EmergencyPhone { get; set; }
         public string DateOfBirth { get; set; }
-        public Decimal Wages { get; set; }
-        public int EarlyClockInAllowedInMinutes { get; set; }
+        public Decimal? Wages { get; set; }
+        public int? EarlyClockInAllowedInMinutes { get; set; }
       
 
         private UserRole _userRole;

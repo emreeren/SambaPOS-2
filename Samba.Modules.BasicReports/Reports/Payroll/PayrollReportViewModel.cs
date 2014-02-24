@@ -37,10 +37,12 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                 {
                     var es =
                         ReportContext.EmpScheduleEntries.Where(e => e.StartTime.Date.Equals(date.Date) && e.UserId == u);
-                                    
-                    foreach (var e in es)
+                    if (es != null)
                     {
-                        scheduledTable[u].Add(new KeyValuePair<DateTime, DateTime>(e.StartTime, e.EndTime));
+                        foreach (var e in es)
+                        {
+                            scheduledTable[u].Add(new KeyValuePair<DateTime, DateTime>(e.StartTime, e.EndTime));
+                        }
                     }
                     int minutes = 0;
                     
@@ -166,11 +168,13 @@ namespace Samba.Modules.BasicReports.Reports.Payroll
                                      s1 = s2;
                                  }
 
+                                 report.AddRow(userInfo.UserName, "Scheduled",
+                                 s1Exist ? (String.Format("{0:D2}:{1:D2}", s1.Hours, s1.Minutes)) : "-----",
+                                 s2Exist ? (String.Format("{0:D2}:{1:D2}", s2.Hours, s2.Minutes)) : "-----",
+                                 s3Exist ? (String.Format("{0:D2}:{1:D2}", s3.Hours, s3.Minutes)) : "00:00");
+
                              }
-                            report.AddRow(userInfo.UserName, "Scheduled",
-                             s1Exist ? (String.Format("{0:D2}:{1:D2}", s1.Hours, s1.Minutes)) : "-----",
-                             s2Exist ? (String.Format("{0:D2}:{1:D2}", s2.Hours, s2.Minutes)) : "-----",
-                             s3Exist ? (String.Format("{0:D2}:{1:D2}", s3.Hours, s3.Minutes)) : "00:00");
+                           
                             scheduleEntries.Remove(e);
                             break;
                         }
