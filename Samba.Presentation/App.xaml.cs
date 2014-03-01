@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows;
 using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
@@ -77,10 +77,10 @@ namespace Samba.Presentation
         private static void HandleException(Exception ex)
         {
             if (ex == null) return;
-            ExceptionPolicy.HandleException(ex, "Policy");
+           // ExceptionPolicy.HandleException(ex, "Policy");
             //MessageBox.Show(Localization.Properties.Resources.UnhandledExceptionErrorMessage, Localization.Properties.Resources.Warning);
             ExceptionReporter.Show(ex);
-          //  Environment.Exit(1);
+            //Environment.Exit(1);
         }
     }
 }

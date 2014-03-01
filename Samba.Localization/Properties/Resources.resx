@@ -783,6 +783,9 @@ Payment</value>
   <data name="Bogo" xml:space="preserve">
     <value>BOGO</value>
   </data>
+  <data name="RemoveBogo" xml:space="preserve">
+    <value>Remove BOGO</value>
+  </data>
   <data name="Header" xml:space="preserve">
     <value>Header</value>
   </data>
@@ -2068,6 +2071,9 @@ Table: {2}</value>
   <data name="Drawer" xml:space="preserve">
     <value>Cash Drawer</value>
   </data>
+  <data name="Drawer_prnt" xml:space="preserve">
+    <value>&lt;DRAWER&gt;</value>
+  </data>
   <data name="WorkPeriodReport" xml:space="preserve">
     <value>Work Period Report</value>
   </data>
@@ -3119,6 +3125,9 @@ Will Trigger after {1} days, {2} hours, {3} minutes</value>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Restart App</value>
+  </data>
   <data name="ErrorReportWithoutFeedback" xml:space="preserve">
     <value>You are sending error report without your feedback.
 Please give some details about how it happend.
@@ -3231,6 +3240,13 @@ Error Message:
   <data name="ApplicationStarted" xml:space="preserve">
     <value>Application Started</value>
   </data>
+  <data name="CashDrawerManuallyOpened" xml:space="preserve">
+    <value>Cash Drawer Opened Manually</value>
+  </data>
+  <data name="OnExceptionOccured" xml:space="preserve">
+    <value>On Error/Exception Occured</value>
+  </data>
+
   <data name="LastPaidLines" xml:space="preserve">
     <value>Last Paid Lines</value>
   </data>

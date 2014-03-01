@@ -87,6 +87,18 @@ namespace Samba.Modules.SettingsModule
             set { LocalSettings.FailoverConnectString = value; }
         }
 
+        public string ReportingEmail
+        {
+            get { return LocalSettings.ReportingEmail; }
+            set { LocalSettings.ReportingEmail = value; }
+        }
+
+        public string ReportingEmailPassword
+        {
+            get { return LocalSettings.ReportingEmailPassword; }
+            set { LocalSettings.ReportingEmailPassword = value; }
+        }
+
         public string MessagingServerName
         {
             get { return LocalSettings.MessagingServerName; }

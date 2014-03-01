@@ -404,29 +404,32 @@ namespace Samba.Modules.TicketModule
 
 
             //rjoshi  if remaning amount is 0, close payment screen
-            if (returningAmount == 0 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)
+            if (returningAmount >= 0 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)
             {
-                ClosePaymentScreen();
 
-            }
-            else
-            {
-                PersistMergedItems();
-                if (returningAmount > 0)
+                if (returningAmount == 0)
                 {
-                    //changed due, wait for 3 seconds before closing screen
+                    ClosePaymentScreen();
+                }else {
+                    PersistMergedItems(); 
+                //changed due, wait for 3 seconds before closing screen
                     var timer = new System.Windows.Threading.DispatcherTimer()
                     {
-                        Interval = TimeSpan.FromSeconds(3)
+                        Interval = TimeSpan.FromSeconds(2)
                     };
 
                     timer.Tick += delegate(object sender, EventArgs e)
                     {
-                        ((System.Windows.Threading.DispatcherTimer)timer).Stop();
-                          ClosePaymentScreen();
+                        (timer).Stop();
+                        ClosePaymentScreen();
                     };
                     timer.Start();
                 }
+
+            }
+            else
+            {
+                PersistMergedItems();            
             }
         }
 

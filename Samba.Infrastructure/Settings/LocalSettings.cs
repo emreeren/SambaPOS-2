@@ -27,6 +27,8 @@ namespace Samba.Infrastructure.Settings
         public bool OverrideLanguage { get; set; }
         public bool OverrideWindowsRegionalSettings { get; set; }
         public string DefaultCreditCardProcessorName { get; set; }
+        public string ReportingEmail { get; set; }
+        public string ReportingEmailPassword { get; set; }
         public SerializableDictionary<string, string> CustomSettings { get; set; }
        
 
@@ -35,6 +37,8 @@ namespace Samba.Infrastructure.Settings
             CustomSettings = new SerializableDictionary<string, string>();
             MessagingServerPort = 8080;
             ConnectionString = "";
+            ReportingEmail = "";
+            ReportingEmailPassword = "";
            
             DefaultHtmlReportHeader =
                 @"
@@ -84,6 +88,18 @@ html
         {
             get { return _settingsObject.TerminalName; }
             set { _settingsObject.TerminalName = value; }
+        }
+
+
+        public static string ReportingEmail
+        {
+            get { return _settingsObject.ReportingEmail; }
+            set { _settingsObject.ReportingEmail = value; }
+        }
+        public static string ReportingEmailPassword
+        {
+            get { return (!string.IsNullOrEmpty(_settingsObject.ReportingEmailPassword) && !string.IsNullOrEmpty(_settingsObject.ReportingEmail)) ? Crypto.DecryptStringAES(_settingsObject.ReportingEmailPassword, _settingsObject.ReportingEmail) : _settingsObject.ReportingEmailPassword; }
+            set { _settingsObject.ReportingEmailPassword = (!string.IsNullOrEmpty(_settingsObject.ReportingEmailPassword) && !string.IsNullOrEmpty(_settingsObject.ReportingEmail))?Crypto.EncryptStringAES(value, _settingsObject.ReportingEmail):value; }
         }
 
         public static string ConnectionString
@@ -227,11 +243,32 @@ html
             string fileName = SettingsFileName;
             if (File.Exists(fileName))
             {
-                var serializer = new XmlSerializer(_settingsObject.GetType());
+
                 var reader = new XmlTextReader(fileName);
                 try
                 {
+                    var serializer = new XmlSerializer(_settingsObject.GetType());
+                   
                     _settingsObject = serializer.Deserialize(reader) as SettingsObject;
+                }
+                catch (Exception ex)
+                {
+                    string logFileName = string.Format(LocalSettings.TerminalName + "-ExceptionReport-{0:yyyy-MM-dd_hh-mm-ss-tt}.txt", DateTime.Now);
+
+                    try
+                    {
+                        using (var stream = File.OpenWrite(logFileName))
+                        {
+                            var writer = new StreamWriter(stream);
+                            writer.Write("Failed to load settings" + ":" + ex.Message + Environment.NewLine);
+                            writer.Write(ex.StackTrace);
+                            writer.Flush();
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                 }
                 finally
                 {

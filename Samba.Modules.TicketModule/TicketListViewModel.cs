@@ -15,6 +15,7 @@ using Samba.Domain.Models.Customers;
 using Samba.Domain.Models.Settings;
 using Samba.Domain.Models.Tickets;
 using Samba.Infrastructure;
+using Samba.Infrastructure.Settings;
 using Samba.Localization.Properties;
 using Samba.Persistance.Data;
 using Samba.Presentation.Common;
@@ -71,6 +72,8 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand FindTicketCommand { get; set; }
         public ICaptionCommand OpenCashDrawerCommand { get; set; }
         public DelegateCommand<TicketTagFilterViewModel> FilterOpenTicketsCommand { get; set; }
+
+
 
         private TicketViewModel _selectedTicket;
         public TicketViewModel SelectedTicket
@@ -392,6 +395,19 @@ namespace Samba.Modules.TicketModule
                     {
                         _selectedTicketItems.Clear();
                         _selectedTicketItems.AddRange(x.Value.SelectedItems);
+                        /*
+                        foreach (var item in _selectedTicketItems)
+                        {
+                            if (item.IsBogo)
+                            {
+                                BogoCommand.Caption = Resources.RemoveBogo;
+                            }
+                            else
+                            {
+                                BogoCommand.Caption = Resources.Bogo;
+                            }
+                            
+                        }*/
                         if (x.Value.SelectedItems.Count == 0) LastSelectedTicketItem = null;
                         RaisePropertyChanged("IsItemsSelected");
                         RaisePropertyChanged("IsNothingSelected");
@@ -524,6 +540,15 @@ namespace Samba.Modules.TicketModule
                 });
 
             EventServiceFactory.EventService.GetEvent<GenericEvent<CreditCardProcessingResult>>().Subscribe(OnProcessCreditCard);
+        }
+
+        private void OnOpenCashDrawer(string obj)
+        {
+            //MessageBox.Show("Opening Drawer");
+            PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter)
+                                .DoPrint(new[] { Resources.Drawer_prnt });
+            RuleExecutor.NotifyEvent(RuleEventNames.CashDrawerManuallyOpened, null);
+            
         }
 
         private void OnProcessCreditCard(EventParameters<CreditCardProcessingResult> obj)
@@ -835,11 +860,7 @@ namespace Samba.Modules.TicketModule
     
             }
         }
-        private void OnOpenCashDrawer(string obj)
-        {
-            
-          
-        }
+       
 
         private void OnFilterOpenTicketsExecute(TicketTagFilterViewModel obj)
         {

@@ -17,7 +17,7 @@ namespace Samba.Presentation.Common.ErrorReport
 
 			_reportInfo = reportInfo;
 
-			_reportInfo.ExceptionDate = DateTime.UtcNow;
+		    _reportInfo.ExceptionDate = DateTime.Now;//DateTime.UtcNow;
 			_reportInfo.UserName = Environment.UserName;
 			_reportInfo.MachineName = Environment.MachineName;
 

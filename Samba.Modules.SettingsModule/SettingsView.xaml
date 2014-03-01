@@ -28,6 +28,15 @@
                            Failover Connection String:
                         </Label>
                         <TextBox HorizontalAlignment="Left" MinWidth="300" Text="{Binding FailoverConnectString}" />
+
+                        <Label>
+                            Reporting Email:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" MinWidth="300" Text="{Binding ReportingEmail}" />
+                        <Label>
+                            Reporting Email Password:
+                        </Label>
+                        <TextBox HorizontalAlignment="Left" MinWidth="300" Text="{Binding ReportingEmailPassword}" />
                         <Label>
                             <LocText ResourceIdentifierKey="MessageServerName" Suffix=":"/>
                         </Label>

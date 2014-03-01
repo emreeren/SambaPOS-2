@@ -109,6 +109,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecureStringToStringMarshaller.cs" />
     <Compile Include="SerializableDictionary.cs" />
+    <Compile Include="Settings\Crypto.cs" />
     <Compile Include="Settings\LocalSettings.cs" />
   </ItemGroup>
   <ItemGroup>

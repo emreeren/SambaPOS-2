@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -89,6 +90,9 @@ namespace Samba.Services
             private set { _currentLoggedInUser = value; }
         }
 
+        private static bool _processRestarting;
+        private static bool _displayingNetworkError;
+
         public static bool CanNavigate()
         {
             return MainDataContext.SelectedTicket == null;
@@ -128,14 +132,86 @@ namespace Samba.Services
 
         public static void LogError(Exception e)
         {
-            MessageBox.Show("Bir sorun tespit ettik.\r\n\r\nProgram çalışmaya devam edecek ancak en kısa zamanda teknik destek almanız önerilir. Lütfen teknik destek için program danışmanınız ile irtibat kurunuz.\r\n\r\nMesaj:\r\n" + e.Message, "Bilgi", MessageBoxButton.OK, MessageBoxImage.Stop);
-            Logger.Write(e, "General");
+           LogError(e, e.Message);
+            
         }
 
         public static void LogError(Exception e, string userMessage)
         {
-            MessageBox.Show(userMessage, "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (CheckIfSQLNetworkException(e))
+            {
+                if (!_displayingNetworkError)
+                {
+                    _displayingNetworkError = true;
+                    ConfirmRestartProcess(e);
+                    _displayingNetworkError = false;
+                }
+                return;
+            }
+            MessageBox.Show(userMessage + ":"  + e.InnerException.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            
             Logger.Write(e, "General");
+        }
+
+        private static bool CheckIfSQLNetworkException(Exception ex)
+        {
+            const string  networkError = "A network-related or instance-specific error occurred while establishing a connection to SQL Server";
+            if (ex == null)
+            {
+                return false;
+            }
+            if (ex.InnerException != null)
+            {
+                if (ex.InnerException.InnerException != null)
+                {
+                    if (ex.InnerException.InnerException.Message.Contains(networkError))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (ex.InnerException.Message.Contains(networkError))
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                if (ex.InnerException.Message.Contains(networkError))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+         private static void ConfirmRestartProcess(Exception e)
+        {
+            if (e == null) return;
+            try
+            {
+                EMailService.SendEmail(e.StackTrace);
+                
+                if(MessageBox.Show("Failed to connect to SQL Server. Do you want to RESTART Application?", "Network Error", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                {
+                    RestartProcess();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private static void RestartProcess()
+        {
+            if (!_processRestarting)
+            {
+                _processRestarting = true;
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Environment.Exit(1);
+            }
         }
 
         public static void Log(string message)
@@ -146,6 +222,10 @@ namespace Samba.Services
         public static void Log(string message, string category)
         {
             Logger.Write(message, category);
+        }
+        public static void LogExcetion(Exception ex, string userMessage)
+        {
+            Logger.Write(ex, "General");
         }
 
         public static void ResetCache()
@@ -182,6 +262,26 @@ namespace Samba.Services
             var permission = CurrentLoggedInUser.UserRole.Permissions.SingleOrDefault(x => x.Name == p);
             if (permission == null) return false;
             return permission.Value == (int)PermissionValue.Enabled;
+        }
+
+        public static void SaveExceptionToFile(Exception ex, string userMessage)
+        {
+            string fileName = string.Format(LocalSettings.TerminalName + "-ExceptionReport-{0:yyyy-MM-dd_hh-mm-ss-tt}.txt", DateTime.Now);
+
+            try
+            {
+                using (var stream = File.OpenWrite(fileName))
+                {
+                    var writer = new StreamWriter(stream);
+                    writer.Write(userMessage + ":" + ex.Message + Environment.NewLine);
+                    writer.Write(ex.StackTrace);
+                    writer.Flush();
+                }
+            }
+            catch 
+            {
+               
+            }
         }
     }
 }

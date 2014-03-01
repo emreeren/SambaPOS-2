@@ -32,8 +32,8 @@ namespace Samba.Domain.Models.Users
         public string ContactPhone { get; set; }
         public string EmergencyPhone { get; set; }
         public string DateOfBirth { get; set; }
-        public Decimal? Wages { get; set; }
-        public int? EarlyClockInAllowedInMinutes { get; set; }
+        public Decimal Wages { get; set; }
+        public int EarlyClockInAllowedInMinutes { get; set; }
       
 
         private UserRole _userRole;

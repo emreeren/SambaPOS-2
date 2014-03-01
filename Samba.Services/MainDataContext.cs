@@ -723,7 +723,7 @@ namespace Samba.Services
                 {
                     var scheduledEndTime = GetEmpScheduleEndTime(timeCardEntry.UserId);
                     if (scheduledEndTime != DateTime.MinValue && (timeCardEntry.DateTime >
-                                                     scheduledEndTime.AddMinutes(AppServices.CurrentLoggedInUser.EarlyClockInAllowedInMinutes.GetValueOrDefault())))
+                                                     scheduledEndTime.AddMinutes(AppServices.CurrentLoggedInUser.EarlyClockInAllowedInMinutes)))
                     {
                         MessageBox.Show(
                             String.Format("Successfully ClockedOut. Your hours will be approved as per Company policy and your scheduled time.",
@@ -742,7 +742,7 @@ namespace Samba.Services
                    
                     if (scheduledStartTime != DateTime.MinValue && (timeCardEntry.DateTime <
                                                      scheduledStartTime.AddMinutes(-1 * AppServices.CurrentLoggedInUser
-                                                                                               .EarlyClockInAllowedInMinutes.GetValueOrDefault())))
+                                                                                               .EarlyClockInAllowedInMinutes)))
                     {
                         MessageBox.Show("Successfully ClockedIn.Your hours will be approved as per Company policy and your scheduled time.");
                     }

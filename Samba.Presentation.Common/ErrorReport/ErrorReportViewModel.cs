@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Windows;
 using Microsoft.Win32;
+using Samba.Infrastructure.Settings;
 using Samba.Localization.Properties;
+using Samba.Services;
 
 namespace Samba.Presentation.Common.ErrorReport
 {
@@ -30,9 +33,19 @@ namespace Samba.Presentation.Common.ErrorReport
             Model = new ExceptionReportInfo { AppAssembly = Assembly.GetCallingAssembly() };
             Model.SetExceptions(exceptions);
 
+            string fileName = LocalSettings.TerminalName + string.Format("-ExceptionReport-{0:yyyy-MM-dd_hh-mm-ss-tt}.txt",
+                              DateTime.Now);
+            String exceptionFile = Path.Combine(LocalSettings.UserPath, fileName);
+            EMailService.SendEmail(ErrorReportAsText);
+
+            SaveReportToFile(exceptionFile);
+            //RuleExecutor.NotifyEvent(RuleEventNames.OnExceptionOccured, new { ParameterValues = ErrorReportAsText });
+           
+
             CopyCommand = new CaptionCommand<string>(Resources.Copy, OnCopyCommand);
             SaveCommand = new CaptionCommand<string>(Resources.Save, OnSaveCommand);
             SubmitCommand = new CaptionCommand<string>(Resources.Send, OnSubmitCommand);
+            RestartCommand = new CaptionCommand<string>(Resources.RestartApp, OnRestartCommand);
         }
 
         private void OnSubmitCommand(string obj)
@@ -43,11 +56,29 @@ namespace Samba.Presentation.Common.ErrorReport
             }
             DialogResult = false;
             SubmitError();
+            
         }
+
+        private void OnRestartCommand(string obj)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown(1);
+            }
+            catch (Exception)
+            {
+            }
+            Environment.Exit(1);
+
+        }
+
+        
 
         public void SubmitError()
         {
-            var tempFile = Path.GetTempFileName().Replace(".tmp", ".txt");
+            var tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".txt";
+            //var tempFile = Path.GetTempFileName().Replace(".tmp", ".txt");
             SaveReportToFile(tempFile);
             string queryString = string.Format("from={0}&emaila={1}&file={2}",
                 Uri.EscapeDataString("info@sambapos.com"),
@@ -56,6 +87,20 @@ namespace Samba.Presentation.Common.ErrorReport
 
             var c = new WebClient();
             var result = c.UploadFile("http://reports.sambapos.com/file.php?" + queryString, "POST", tempFile);
+            if (File.Exists(tempFile))
+            {
+                try
+                {
+                    File.Delete(tempFile);
+                }
+// ReSharper disable once EmptyGeneralCatchClause
+                catch(Exception ex)
+                {
+                    AppServices.SaveExceptionToFile(ex,
+                        "Failed to delete Temporary file:" + tempFile + " generated to submit Error report");
+                   
+                }
+            }
             MessageBox.Show(Encoding.ASCII.GetString(result));
         }
 
@@ -77,6 +122,7 @@ namespace Samba.Presentation.Common.ErrorReport
         public ICaptionCommand SaveCommand { get; set; }
         public ICaptionCommand SubmitCommand { get; set; }
         public ICaptionCommand CloseCommand { get; set; }
+        public ICaptionCommand RestartCommand { get; set; }
 
         private string _errorReportAsText;
         public string ErrorReportAsText
@@ -125,8 +171,10 @@ namespace Samba.Presentation.Common.ErrorReport
             }
             catch (Exception exception)
             {
-                MessageBox.Show(string.Format("Unable to save file '{0}' : {1}", fileName, exception.Message));
+                //MessageBox.Show(string.Format("Unable to save file '{0}' : {1}", fileName, exception.Message));
             }
         }
+
+
     }
 }

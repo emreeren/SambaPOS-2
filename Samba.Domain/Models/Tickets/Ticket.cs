@@ -9,7 +9,7 @@ using Samba.Infrastructure.Data;
 using Samba.Infrastructure.Data.Serializer;
 using Samba.Infrastructure.Settings;
 using System.Reflection;
-using MessageBox = System.Windows.Forms.MessageBox;
+using System.Windows;
 
 namespace Samba.Domain.Models.Tickets
 {
@@ -445,33 +445,76 @@ namespace Samba.Domain.Models.Tickets
             if(item.Gifted)
             {
                 MessageBox.Show("Item is already gifted. Can't add BOGO offer");
+                return;
             }
             if (item.Voided)
             {
                 MessageBox.Show("Item is already void. Can't add BOGO offer");
+                return;
             }
 
             if (item.Bogo)
             {
-                MessageBox.Show("Item is already used in BOGO offer. Can't add BOGO offer");
-            }
-
-            foreach (var it in _ticketItems)
-            {
-                //find similar menu item 
-                if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && !it.Voided && !it.Bogo )
+               
+                foreach (var it in _ticketItems)
                 {
-                    item.ModifiedUserId = userId;
-                    item.ModifiedDateTime = DateTime.Now;
-                   
-                    item.Bogo = true;
-                    item.Gifted = true;
-                    //mark other item to avoid duplicate bogo
-                    it.Bogo = true;
-                   
-                    return;
-                }
+                    if (item.Gifted)
+                    {
+                        //find similar menu item 
+                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && it.Bogo)
+                        {
+                            item.ModifiedUserId = userId;
+                            item.ModifiedDateTime = DateTime.Now;
 
+                            item.Bogo = false;
+                            item.Gifted = false;
+                            //mark other item to avoid duplicate bogo
+                            it.Bogo = false;
+                            MessageBox.Show("Removed BOGO Offer");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //find similar menu item 
+                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && it.Gifted && it.Bogo)
+                        {
+                            item.ModifiedUserId = userId;
+                            item.ModifiedDateTime = DateTime.Now;
+
+                            item.Bogo = false;
+                            //mark other item to avoid duplicate bogo
+                            it.Bogo = false;
+                            it.Gifted = false;
+                            MessageBox.Show("Removed BOGO Offer");
+
+                            return;
+                        }
+                    }
+                    MessageBox.Show("Item is already used in BOGO offer. Can't add BOGO offer");
+
+                }
+            }
+            else
+            {
+
+                foreach (var it in _ticketItems)
+                {
+                    //find similar menu item 
+                    if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && !it.Voided && !it.Bogo)
+                    {
+                        item.ModifiedUserId = userId;
+                        item.ModifiedDateTime = DateTime.Now;
+
+                        item.Bogo = true;
+                        item.Gifted = true;
+                        //mark other item to avoid duplicate bogo
+                        it.Bogo = true;
+
+                        return;
+                    }
+
+                }
             }
             MessageBox.Show("Must have two same items to apply BOGO offer");
         }

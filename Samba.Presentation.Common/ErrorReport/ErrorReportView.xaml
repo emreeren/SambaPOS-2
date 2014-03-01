@@ -51,11 +51,11 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" MinHeight="30"
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" MinHeight="50"
              Margin="0,0,3,5">
-            <Button Margin="2" MinWidth="70" Command="{Binding CopyCommand}" Content="{Binding CopyCommand.Caption}" />
-            <Button Margin="2" MinWidth="70" Command="{Binding SaveCommand}" Content="{Binding SaveCommand.Caption}" />
-            <Button Margin="2" MinWidth="70" Command="{Binding SubmitCommand}" Content="{Binding SubmitCommand.Caption}" />
+            <Button Margin="2" MinWidth="70" Command="{Binding RestartCommand}" Content="{Binding RestartCommand.Caption}" />
+            <!--Button Margin="2" MinWidth="70" Command="{Binding CopyCommand}" Content="{Binding CopyCommand.Caption}" />
+            <Button Margin="2" MinWidth="70" Command="{Binding SaveCommand}" Content="{Binding SaveCommand.Caption}" / -->           
             <Button Margin="2" MinWidth="70" Content="{LocText Close}"
                  Click="Button_Click" />
         </StackPanel>

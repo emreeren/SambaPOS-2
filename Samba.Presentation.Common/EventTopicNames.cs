@@ -23,6 +23,8 @@ namespace Samba.Presentation.Common
         public const string UserLoggedOut = "UserLoggedOut";
         public const string UserLoggedIn = "UserLoggedIn";
         public const string MessageReceived = "MessageReceived";
+        public const string CashDrawerManuallyOpened = "CashDrawerManuallyOpened";
+        public const string OnExceptionOccured = "OnExceptionOccured";
     }
 
     public static class EventTopicNames

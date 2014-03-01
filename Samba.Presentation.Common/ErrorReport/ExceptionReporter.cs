@@ -1,5 +1,9 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Windows;
+using Samba.Infrastructure.Settings;
+using Samba.Services;
 
 namespace Samba.Presentation.Common.ErrorReport
 {
@@ -11,6 +15,16 @@ namespace Samba.Presentation.Common.ErrorReport
             try
             {
                 var viewModel = new ErrorReportViewModel(exceptions);
+                
+                try
+                {
+                    
+                    AppServices.LogError(exceptions.FirstOrDefault(), "Error while processsing.");
+                    return;
+                }
+                catch (Exception)
+                {
+                }
                 var view = new ErrorReportView { DataContext = viewModel };
                 view.ShowDialog();
             }

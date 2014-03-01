@@ -33,7 +33,7 @@ namespace Samba.Services
                 CustomPosName = "Samba POS";
                 SaveChanges();
             }
-            if (DefaultCashDrawerAmount == null)
+            if (DefaultCashDrawerAmount == 0.0M)
             {
                 DefaultCashDrawerAmount = 150;
                 SaveChanges();

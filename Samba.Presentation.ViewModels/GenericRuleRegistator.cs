@@ -92,6 +92,8 @@ namespace Samba.Presentation.ViewModels
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.ChangeAmountChanged, Resources.ChangeAmountUpdated, new { TicketAmount = 0, ChangeAmount = 0, TenderedAmount = 0 });
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.TicketClosed, Resources.TicketClosed);
             RuleActionTypeRegistry.RegisterEvent(RuleEventNames.ApplicationStarted, Resources.ApplicationStarted, new { CommandLineArguments = "" });
+            RuleActionTypeRegistry.RegisterEvent(RuleEventNames.CashDrawerManuallyOpened, Resources.CashDrawerManuallyOpened);
+            RuleActionTypeRegistry.RegisterEvent(RuleEventNames.OnExceptionOccured, Resources.OnExceptionOccured);
         }
 
         private static void RegisterParameterSources()
@@ -360,7 +362,7 @@ namespace Samba.Presentation.ViewModels
                         x.Value.GetAsString("ToEMailAddress"),
                         x.Value.GetAsString("FromEMailAddress"),
                         x.Value.GetAsString("Subject"),
-                        x.Value.GetAsString("EMailMessage"),
+                        (x.Value.DataObject == null || String.IsNullOrEmpty(x.Value.GetDataValue<String>("ParameterValues"))) ? x.Value.GetAsString("EMailMessage") : x.Value.GetDataValue<String>("ParameterValues"),
                         x.Value.GetAsString("FileName"),
                         x.Value.GetAsBoolean("DeleteFile"),
                         x.Value.GetAsBoolean("BypassSslErrors"));

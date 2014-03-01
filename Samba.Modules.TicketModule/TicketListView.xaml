@@ -357,6 +357,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    
                     <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding PrintLastTicketCommand}"
                          Visibility="{Binding CanPrintLastTicket,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
@@ -416,12 +417,13 @@
                              Text="{Binding CancelItemCommand.Caption}" />
                     </FxButton:FlexButton>
                                   
-                    <FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding OpenCashDrawerCommand}"
+                    <!--FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding OpenCashDrawerCommand}"
                          Visibility="{Binding CanOpenCashDrawer,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
                              Text="{Binding OpenCashDrawerCommand.Caption}" />
-                    </FxButton:FlexButton>
+                    </FxButton:FlexButton-->
                    
+                    
                     <!--FxButton:FlexButton Height="50" Margin="0,0,3,3" Command="{Binding MoveTicketItemsCommand}"
                          Visibility="{Binding IsItemsSelected,Converter={StaticResource VisibilityConverter}}">
                         <TextBlock FontSize="16" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"
