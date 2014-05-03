@@ -135,6 +135,11 @@
                             <TextBlock Text="{Binding Path=BatchAddPropertyCommand.Caption}" />
                         </Hyperlink>
                     </TextBlock>
+                <TextBlock Margin="2,3">
+                        <Hyperlink Command="{Binding SortPropertyCommand}">
+                            <TextBlock Text="{Binding Path=SortPropertyCommand.Caption}" />
+                        </Hyperlink>
+                    </TextBlock>
             </StackPanel>
 
         </Grid>

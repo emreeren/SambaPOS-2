@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGeers.Cardfon", "CGeers.Cardfon\CGeers.Cardfon.csproj", "{9A7F152C-BC23-4209-85A1-CB0C89276735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClientApplication", "ConsoleClientApplication\ConsoleClientApplication.csproj", "{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

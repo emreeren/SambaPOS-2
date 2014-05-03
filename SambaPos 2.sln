@@ -108,6 +108,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyTools.Wpf", "Lib\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samba.Modules.CreditCardModule", "Samba.Modules.CreditCardModule\Samba.Modules.CreditCardModule.csproj", "{23A725F8-C11B-4244-ADA7-9EB02351F815}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{AF308067-C978-4E96-9572-BC6FF1C3F268}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBMSurePOSCashRegisterUtil", "IBMSurePOSCashRegisterUtil\IBMSurePOSCashRegisterUtil.csproj", "{B6DC9D01-2268-44F7-8ACB-D69762B4090C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGeers.Cardfon", "CGeers.Cardfon\CGeers.Cardfon\CGeers.Cardfon.csproj", "{9A7F152C-BC23-4209-85A1-CB0C89276735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omni3750TerminalUtil", "CGeers.Cardfon\ConsoleClientApplication\Omni3750TerminalUtil.csproj", "{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SambaPos.vsmdi
@@ -502,6 +510,36 @@ Global
 		{23A725F8-C11B-4244-ADA7-9EB02351F815}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{23A725F8-C11B-4244-ADA7-9EB02351F815}.Release|x86.ActiveCfg = Release|Any CPU
 		{23A725F8-C11B-4244-ADA7-9EB02351F815}.Release|x86.Build.0 = Release|Any CPU
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Debug|x86.ActiveCfg = Debug|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Debug|x86.Build.0 = Debug|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Release|Any CPU.ActiveCfg = Release|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Release|x86.ActiveCfg = Release|x86
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C}.Release|x86.Build.0 = Release|x86
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A7F152C-BC23-4209-85A1-CB0C89276735}.Release|x86.ActiveCfg = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -542,5 +580,8 @@ Global
 		{7168F82F-288A-42C4-9EB1-FBBE5112F211} = {BF4FA34A-A4C9-4BEC-90C4-AA09483582BB}
 		{413B698C-0D7D-4FCD-9F16-AF51AED4E647} = {8090D262-C7F1-4EFE-93F8-1B71BD23B627}
 		{C23F85CE-17B7-4A7D-9FEB-9189EA1D53D6} = {8090D262-C7F1-4EFE-93F8-1B71BD23B627}
+		{B6DC9D01-2268-44F7-8ACB-D69762B4090C} = {AF308067-C978-4E96-9572-BC6FF1C3F268}
+		{9A7F152C-BC23-4209-85A1-CB0C89276735} = {AF308067-C978-4E96-9572-BC6FF1C3F268}
+		{75E9F97D-C58F-4FF4-9276-CB9F52D4E073} = {AF308067-C978-4E96-9572-BC6FF1C3F268}
 	EndGlobalSection
 EndGlobal

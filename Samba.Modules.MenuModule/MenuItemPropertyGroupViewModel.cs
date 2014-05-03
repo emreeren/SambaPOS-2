@@ -24,6 +24,8 @@ namespace Samba.Modules.MenuModule
         public ICaptionCommand AddPropertyCommand { get; set; }
         public ICaptionCommand BatchAddPropertyCommand { get; set; }
         public ICaptionCommand DeletePropertyCommand { get; set; }
+        public ICaptionCommand SortPropertyCommand { get; set; }
+
 
         public bool SingleSelection { get { return Model.SingleSelection; } set { Model.SingleSelection = value; } }
         public bool MultipleSelection { get { return Model.MultipleSelection; } set { Model.MultipleSelection = value; } }
@@ -44,6 +46,8 @@ namespace Samba.Modules.MenuModule
             BatchAddPropertyCommand = new CaptionCommand<string>(string.Format(Resources.AddBatch_f, Resources.Modifier), OnBatchAddPropertyExecuted);
           
             DeletePropertyCommand = new CaptionCommand<string>(string.Format(Resources.Delete_f, Resources.Modifier), OnDeletePropertyExecuted, CanDeleteProperty);
+            SortPropertyCommand = new CaptionCommand<string>(string.Format("Sort", Resources.Modifier), OnSortPropertyExecuted, CanSortProperty);
+        
         }
 
         private void OnDeletePropertyExecuted(string obj)
@@ -58,6 +62,25 @@ namespace Samba.Modules.MenuModule
         private bool CanDeleteProperty(string arg)
         {
             return SelectedProperty != null;
+        }
+
+        private void OnSortPropertyExecuted(string obj)
+        {
+            if (Properties.Count < 1) return;
+
+            IEnumerable<MenuItemProperty> sortedEnum = Model.Properties.OrderBy(x => x.Name);
+            Model.Properties = sortedEnum.ToList();
+            Properties.Clear();
+            Properties.AddRange(GetProperties(Model));
+            _workspace.CommitChanges();
+
+            
+            
+        }
+
+        private bool CanSortProperty(string arg)
+        {
+            return Properties.Count > 1;
         }
 
         private void OnAddPropertyExecuted(string obj)

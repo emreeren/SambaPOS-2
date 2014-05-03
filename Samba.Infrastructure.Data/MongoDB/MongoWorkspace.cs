@@ -55,6 +55,10 @@ namespace Samba.Infrastructure.Data.MongoDB
         {
             return _provider.GetCollection<T>().AsQueryable().LastOrDefault();
         }
+        public T Last<T>(Expression<Func<T, bool>> expression) where T : class
+        {
+            return _provider.GetCollection<T>().AsQueryable().Where(expression).LastOrDefault();
+        }
 
         public IEnumerable<T> All<T>() where T : class
         {

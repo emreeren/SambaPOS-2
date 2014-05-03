@@ -9,6 +9,7 @@ using System.Windows;
 using Microsoft.Win32;
 using Samba.Infrastructure.Settings;
 using Samba.Localization.Properties;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Presentation.Common.ErrorReport
@@ -101,7 +102,7 @@ namespace Samba.Presentation.Common.ErrorReport
                    
                 }
             }
-            MessageBox.Show(Encoding.ASCII.GetString(result));
+            InteractionService.UserIntraction.GiveFeedback(Encoding.ASCII.GetString(result));
         }
 
         private void OnSaveCommand(string obj)
@@ -171,7 +172,7 @@ namespace Samba.Presentation.Common.ErrorReport
             }
             catch (Exception exception)
             {
-                //MessageBox.Show(string.Format("Unable to save file '{0}' : {1}", fileName, exception.Message));
+                //InteractionService.UserIntraction.GiveFeedback(string.Format("Unable to save file '{0}' : {1}", fileName, exception.Message));
             }
         }
 

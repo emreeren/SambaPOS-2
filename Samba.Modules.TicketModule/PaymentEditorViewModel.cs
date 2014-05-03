@@ -356,11 +356,24 @@ namespace Samba.Modules.TicketModule
                     var result = AppServices.MainDataContext.CloseTicket();
                     AppServices.MainDataContext.OpenTicket(result.TicketId);
                 }
+                
                 var ccpd = new CreditCardProcessingData
                                {
                                    TenderedAmount = GetTenderedValue(),
                                    Ticket = AppServices.MainDataContext.SelectedTicket
                                };
+                if (ccpd.TenderedAmount > ccpd.Ticket.RemainingAmount)
+                {
+                    MessageBox.Show(String.Format("Tendered Amount {0} can't be more than Balance Amount {1}.Resetting" +
+                                                  " tendered amount to balace amount",
+                                                  ccpd.TenderedAmount,
+                                                  ccpd.Ticket.RemainingAmount));
+                    ccpd.TenderedAmount = ccpd.Ticket.RemainingAmount;
+                }
+                else if (ccpd.TenderedAmount == 0)
+                {
+                    ccpd.TenderedAmount = ccpd.Ticket.RemainingAmount;
+                }
                 CreditCardProcessingService.Process(ccpd);
                 return;
             }
@@ -406,16 +419,19 @@ namespace Samba.Modules.TicketModule
             //rjoshi  if remaning amount is 0, close payment screen
             if (returningAmount >= 0 && AppServices.MainDataContext.SelectedTicket.GetRemainingAmount() == 0)
             {
+                
 
                 if (returningAmount == 0)
                 {
                     ClosePaymentScreen();
-                }else {
-                    PersistMergedItems(); 
-                //changed due, wait for 3 seconds before closing screen
+                }
+                else
+                {
+                    PersistMergedItems();
+                    //changed due, wait for 3 seconds before closing screen
                     var timer = new System.Windows.Threading.DispatcherTimer()
                     {
-                        Interval = TimeSpan.FromSeconds(2)
+                        Interval = TimeSpan.FromSeconds(4)
                     };
 
                     timer.Tick += delegate(object sender, EventArgs e)

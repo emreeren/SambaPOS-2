@@ -114,7 +114,18 @@ namespace Samba.Services
                 buffer[i] = (Byte)(Encoding.ASCII.GetBytes(command.Substring(i, 1))[0]);
             }
             WritePort(portName, buffer);
-        }   
+        }
+
+        public static void WriteHex(string portName, string command)
+        {
+            var hexBytes= Enumerable.Range(0, command.Length)
+                            .Where(x => x % 2 == 0)
+                            .Select(x => Convert.ToByte(command.Substring(x, 2), 16))
+                            .ToArray();
+            WritePort(portName, hexBytes);
+        }
+
+       
 
         /// <summary>
         /// Byte to Read

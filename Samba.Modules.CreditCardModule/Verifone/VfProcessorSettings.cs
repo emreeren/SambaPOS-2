@@ -26,7 +26,7 @@ namespace Samba.Modules.CreditCardModule.Verifone
         public string GratuityTemplateName { get; set; }
 
        
-        [DisplayName("TerminalId"), Category("Settings")]
+        [DisplayName("Terminal_Id"), Category("Settings")]
         public int TerminalId { get; set; }
 
         [DisplayName("LocalCurrency"), Category("Settings"), DefaultValue("USD")]

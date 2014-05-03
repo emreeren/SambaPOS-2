@@ -96,6 +96,7 @@
       <DependentUpon>PaymentEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PaymentEditorViewModel.cs" />
+    <Compile Include="PortionSelectionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenMenuItemData.cs" />
     <Compile Include="SearchData.cs" />
@@ -118,6 +119,9 @@
       <DependentUpon>TicketEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="TicketEditorViewModel.cs" />
+    <Compile Include="PortionSelectionView.xaml.cs">
+      <DependentUpon>PortionSelectionView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="DepartmentButtonView.xaml">
@@ -145,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TicketListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PortionSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -148,10 +148,18 @@ namespace Samba.Modules.BasicReports.Reports.EndOfDayReport
 
             }
 
-            //---------------
-
+            //----cash register
             var ac = ReportContext.GetOperationalAmountCalculator();
-           
+            var ptc = ReportContext.GetOperationalPaymentTypeCountCalculator();
+            report.AddColumnLength("CashRegisterStatus", "45*", "Auto", "35*");
+            report.AddColumTextAlignment("CashRegisterStatus", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
+            report.AddTable("CashRegisterStatus", "Cash Register Status", "", "");
+            report.AddRow("CashRegisterStatus", Resources.Cash, ptc.CashPaymentCount.ToString(), (ac.CashTotal - cashExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            report.AddRow("CashRegisterStatus", Resources.CreditCard, ptc.CreditPaymentCount.ToString(), (ac.CreditCardTotal - creditCardExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            report.AddRow("CashRegisterStatus", Resources.Voucher, ptc.TicketPaymentCount.ToString(), (ac.TicketTotal - ticketExpenseTotal).ToString(ReportContext.CurrencyFormat));
+            
+
+            //---------------
 
             report.AddColumnLength("GelirlerTablosu", "45*", "Auto", "35*");
             report.AddColumTextAlignment("GelirlerTablosu", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
@@ -161,14 +169,6 @@ namespace Samba.Modules.BasicReports.Reports.EndOfDayReport
             report.AddRow("GelirlerTablosu", Resources.Voucher, ac.TicketPercent, ac.TicketTotal.ToString(ReportContext.CurrencyFormat));
             report.AddRow("GelirlerTablosu", Resources.AccountBalance, ac.AccountPercent, ac.AccountTotal.ToString(ReportContext.CurrencyFormat));
             report.AddRow("GelirlerTablosu", Resources.TotalIncome.ToUpper(), "", ac.TotalAmount.ToString(ReportContext.CurrencyFormat));
-            //----cash register
-            var ptc = ReportContext.GetOperationalPaymentTypeCountCalculator();
-            report.AddColumnLength("CashRegisterStatus", "45*", "Auto", "35*");
-            report.AddColumTextAlignment("CashRegisterStatus", TextAlignment.Left, TextAlignment.Right, TextAlignment.Right);
-            report.AddTable("CashRegisterStatus", "Cash Register Status", "", "");
-            report.AddRow("CashRegisterStatus", Resources.Cash, ptc.CashPaymentCount.ToString(), (ac.CashTotal - cashExpenseTotal).ToString(ReportContext.CurrencyFormat));
-            report.AddRow("CashRegisterStatus", Resources.CreditCard, ptc.CreditPaymentCount.ToString(), (ac.CreditCardTotal - creditCardExpenseTotal).ToString(ReportContext.CurrencyFormat));
-            report.AddRow("CashRegisterStatus", Resources.Voucher, ptc.TicketPaymentCount.ToString(), (ac.TicketTotal - ticketExpenseTotal).ToString(ReportContext.CurrencyFormat));
             
             //---------------
 

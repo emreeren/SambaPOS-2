@@ -26,6 +26,7 @@ namespace Samba.Modules.TicketModule
 
         public SelectedTicketItemsViewModel()
         {
+            
             CloseCommand = new CaptionCommand<string>(Resources.Close, OnCloseCommandExecuted);
             SelectReasonCommand = new DelegateCommand<int?>(OnReasonSelected);
             SelectTicketTagCommand = new DelegateCommand<TicketTag>(OnTicketTagSelected);
@@ -85,6 +86,23 @@ namespace Samba.Modules.TicketModule
                 Reasons.AddRange(AppServices.MainDataContext.Reasons.Values.Where(x => x.ReasonType == 1));
                 if (Reasons.Count == 0) obj.Value.GiftSelectedItems(0);
                 RaisePropertyChanged("ReasonColumnCount");
+            }
+
+            if (obj.Topic == EventTopicNames.AddExtraModifiers)
+            {
+                //ResetValues(obj.Value);
+                //if (SelectedTicket != null && !SelectedItem.Model.Voided && !SelectedItem.Model.Locked)
+                //{
+                //    var id = SelectedItem.Model.MenuItemId;
+                //    var mi = AppServices.DataAccessService.GetMenuItem(id);
+                 
+                //    SelectedItemPropertyGroups.AddRange(mi.PropertyGroups.Where(x => string.IsNullOrEmpty(x.GroupTag)));
+               //     SelectedItemPortions.Clear();
+                //    
+                 //   SelectedItemGroupedPropertyItems.Clear();
+               // }
+              //  RaisePropertyChanged("ColumnCount");
+               
             }
 
             if (obj.Topic == EventTopicNames.SelectExtraProperty)
@@ -263,7 +281,7 @@ namespace Samba.Modules.TicketModule
                 SelectedTicket.GiftSelectedItems(rid);
         }
 
-        private void OnPortionSelected(MenuItemPortion obj)
+        public void OnPortionSelected(MenuItemPortion obj)
         {
             SelectedItem.UpdatePortion(obj, AppServices.MainDataContext.SelectedDepartment.PriceTag);
             SelectedTicket.RefreshVisuals();
@@ -340,9 +358,17 @@ namespace Samba.Modules.TicketModule
                 if (SelectedItem.Model.PortionCount > 1) SelectedItemPortions.AddRange(mi.Portions);
                 SelectedItemPropertyGroups.AddRange(mi.PropertyGroups.Where(x => string.IsNullOrEmpty(x.GroupTag)));
 
+                //rjoshi sort displayed item properties
+                //for (int i = 1; i <  SelectedItemPropertyGroups.Count; i++)
+                //{
+                //    IEnumerable<MenuItemProperty> sortedEnum = SelectedItemPropertyGroups[i].Properties.OrderBy(x => x.Name); ;
+                //    SelectedItemPropertyGroups[i].Properties = sortedEnum.ToList();
+                     
+                //}
+
                 SelectedItemGroupedPropertyItems.AddRange(mi.PropertyGroups.Where(x => !string.IsNullOrEmpty(x.GroupTag) && x.Properties.Count > 1)
                     .GroupBy(x => x.GroupTag)
-                    .Select(x => new MenuItemGroupedPropertyViewModel(SelectedItem, x)));
+                    .Select(x => new MenuItemGroupedPropertyViewModel(SelectedItem, x)).OrderBy(x => x.Name));
                 RaisePropertyChanged("IsPortionsVisible");
             }
             return SelectedItemPortions.Count > 1 || SelectedItemPropertyGroups.Count > 0 || SelectedItemGroupedPropertyItems.Count > 0;

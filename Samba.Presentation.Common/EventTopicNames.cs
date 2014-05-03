@@ -49,6 +49,7 @@ namespace Samba.Presentation.Common
         public const string SelectExtraProperty = "Select Extra Property";
         public const string SelectVoidReason = "Select Void Reason";
         public const string SelectGiftReason = "Select Gift Reason";
+        public const string AddExtraModifiers = "Add Extra Modifiers";
         public const string ActivateNavigation = "Activate Navigation";
         public const string CustomerSelectedForTicket = "Customer Selected For Ticket";
         public const string SelectCustomer = "Select Customer";

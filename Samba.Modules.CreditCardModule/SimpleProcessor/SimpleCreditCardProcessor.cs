@@ -23,16 +23,18 @@ namespace Samba.Modules.CreditCardModule.SimpleProcessor
         public void Process(CreditCardProcessingData creditCardProcessingData)
         {
             // get operator response 
-            var userEntry = InteractionService.UserIntraction.GetStringFromUser(Name, _settings.DisplayMessage);
+           // var userEntry = InteractionService.UserIntraction.GetStringFromUser(Name, _settings.DisplayMessage);
 
             // publish processing result
             var result = new CreditCardProcessingResult()
                              {
                                  Amount = creditCardProcessingData.TenderedAmount,
-                                 ProcessType = userEntry.Length > 0 ? ProcessType.Force : ProcessType.Cancel
+                                 ProcessType  = ProcessType.External //userEntry.Length > 0 ? ProcessType.Force : ProcessType.Cancel
                              };
 
+            creditCardProcessingData.Ticket.SetTagValue("CC_TXTYPE", "External");
             result.PublishEvent(EventTopicNames.PaymentProcessed);
+            
         }
 
         public bool ForcePayment(int ticketId)

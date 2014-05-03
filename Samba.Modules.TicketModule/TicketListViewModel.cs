@@ -58,6 +58,7 @@ namespace Samba.Modules.TicketModule
         public ICaptionCommand DecSelectionQuantityCommand { get; set; }
         public ICaptionCommand ShowVoidReasonsCommand { get; set; }
         public ICaptionCommand ShowGiftReasonsCommand { get; set; }
+        public ICaptionCommand AddExtraModifierCommand { get; set; }
         public ICaptionCommand BogoCommand { get; set; }
         public ICaptionCommand ShowTicketTagsCommand { get; set; }
         public ICaptionCommand CancelItemCommand { get; set; }
@@ -248,10 +249,18 @@ namespace Samba.Modules.TicketModule
             }
         }
 
+        public PortionSelectionViewModel PortionSelectionViewModel { get; set; }
+        private PortionSelectionView PortionSelectionView { get; set; }
+
         public TicketListViewModel()
         {
             _timer = new Timer(OnTimer, null, Timeout.Infinite, 1000);
             _selectedTicketItems = new ObservableCollection<TicketItemViewModel>();
+
+            PortionSelectionViewModel = new PortionSelectionViewModel();
+            PortionSelectionView = new PortionSelectionView(PortionSelectionViewModel);
+            PortionSelectionViewModel.PortionSelectionView = PortionSelectionView;
+            PortionSelectionView.Hide();
 
             PrintJobCommand = new CaptionCommand<PrintJob>(Resources.Print, OnPrintJobExecute, CanExecutePrintJob);
 
@@ -274,7 +283,8 @@ namespace Samba.Modules.TicketModule
             DecSelectionQuantityCommand = new CaptionCommand<string>("(-)", OnDecSelectionQuantityCommand, CanDecSelectionQuantity);
             ShowVoidReasonsCommand = new CaptionCommand<string>(Resources.Void, OnShowVoidReasonsExecuted, CanVoidSelectedItems);
             ShowGiftReasonsCommand = new CaptionCommand<string>(Resources.Gift, OnShowGiftReasonsExecuted, CanGiftSelectedItems);
-            BogoCommand = new CaptionCommand<string>(Resources.Bogo, OnBogoSelected, CanGiftSelectedItems);
+            AddExtraModifierCommand = new CaptionCommand<string>(Resources.AddExtra, OnAddExtraModifierExecuted, CanAddExtraModifiers);
+            BogoCommand = new CaptionCommand<string>(Resources.Bogo, OnBogoSelected, CanBogoSelectedItems);
             ShowTicketTagsCommand = new CaptionCommand<TicketTagGroup>(Resources.Tag, OnShowTicketsTagExecute, CanExecuteShowTicketTags);
             CancelItemCommand = new CaptionCommand<string>(Resources.Cancel, OnCancelItemCommand, CanCancelSelectedItems);
             MoveTicketItemsCommand = new CaptionCommand<string>(Resources.MoveTicketLine, OnMoveTicketItems, CanMoveTicketItems);
@@ -286,6 +296,7 @@ namespace Samba.Modules.TicketModule
             PrintLastTicketCommand = new CaptionCommand<string>(Resources.PrintLastTicket, OnPrintLastTicket, CanPrintLastTicket);
             OpenCashDrawerCommand = new CaptionCommand<string>(Resources.OpenCashDrawer, OnOpenCashDrawer, CanOpenCashDrawer);
             FindTicketCommand = new CaptionCommand<string>(Resources.FindTicket, OnFindTicketExecute, CanFindTicket);
+
             
             EventServiceFactory.EventService.GetEvent<GenericEvent<LocationData>>().Subscribe(
                 x =>
@@ -544,7 +555,7 @@ namespace Samba.Modules.TicketModule
 
         private void OnOpenCashDrawer(string obj)
         {
-            //MessageBox.Show("Opening Drawer");
+            //InteractionService.UserIntraction.GiveFeedback("Opening Drawer");
             PrintJobFactory.CreatePrintJob(AppServices.CurrentTerminal.SlipReportPrinter)
                                 .DoPrint(new[] { Resources.Drawer_prnt });
             RuleExecutor.NotifyEvent(RuleEventNames.CashDrawerManuallyOpened, null);
@@ -810,6 +821,11 @@ namespace Samba.Modules.TicketModule
             RefreshSelectedTicket();
         }
 
+        public void OnAddExtraModifierExecuted(string obj)
+        {
+            _selectedTicket.PublishEvent(EventTopicNames.AddExtraModifiers);
+        }
+
         private bool CanCancelSelectedItems(string arg)
         {
             if (_selectedTicket != null)
@@ -827,6 +843,18 @@ namespace Samba.Modules.TicketModule
         {
             if (_selectedTicket != null && !_selectedTicket.IsLocked && AppServices.IsUserPermittedFor(PermissionNames.GiftItems))
                 return _selectedTicket.CanGiftSelectedItems();
+            return false;
+        }
+        private bool CanBogoSelectedItems(string arg)
+        {
+            if (_selectedTicket != null && !_selectedTicket.IsLocked && AppServices.IsUserPermittedFor(PermissionNames.GiftItems))
+                return _selectedTicket.CanBogoSelectedItems();
+            return false;
+        }
+        private bool CanAddExtraModifiers(string arg)
+        {
+            if (_selectedTicket != null && !_selectedTicket.IsLocked)
+                return true;
             return false;
         }
 
@@ -1306,8 +1334,26 @@ namespace Samba.Modules.TicketModule
 
             if (SelectedTicket.IsLocked && !AppServices.IsUserPermittedFor(PermissionNames.AddItemsToLockedTickets)) return;
 
-            var ti = SelectedTicket.AddNewItem(obj.ScreenMenuItem.MenuItemId, obj.Quantity, obj.ScreenMenuItem.Gift, obj.ScreenMenuItem.DefaultProperties, obj.ScreenMenuItem.ItemPortion);
+            var mi = AppServices.DataAccessService.GetMenuItem(obj.ScreenMenuItem.MenuItemId);
+            String portionName = obj.ScreenMenuItem.ItemPortion;
+            if (mi.Portions.Count > 1)
+            {
+                
+                PortionSelectionViewModel.SelectedItemPortions.AddRange(mi.Portions);
+                
+                
+                // PortionSelectionView.Owner = Application.Current.MainWindow;
+                PortionSelectionView.Topmost = true;
+                // InteractionService.UserIntraction.BlurMainWindow();
+                PortionSelectionView.ShowDialog();
+                portionName = PortionSelectionViewModel.SelectedMenuItemPortion.Name;
+            }
 
+
+
+            var ti = SelectedTicket.AddNewItem(obj.ScreenMenuItem.MenuItemId, obj.Quantity, obj.ScreenMenuItem.Gift, obj.ScreenMenuItem.DefaultProperties, portionName);
+
+           
             if (obj.ScreenMenuItem.AutoSelect && ti != null)
             {
                 ti.ItemSelectedCommand.Execute(ti);

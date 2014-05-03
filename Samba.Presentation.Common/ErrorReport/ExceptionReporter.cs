@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Samba.Infrastructure.Settings;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Presentation.Common.ErrorReport
@@ -30,7 +31,7 @@ namespace Samba.Presentation.Common.ErrorReport
             }
             catch (Exception internalException)
             {
-                MessageBox.Show(internalException.Message);
+                InteractionService.UserIntraction.GiveFeedback(internalException.Message);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Windows;
 using Samba.Domain.Models.Actions;
@@ -41,6 +42,7 @@ namespace Samba.Services
 
                 _workspace = WorkspaceFactory.Create();
                 Ticket = Ticket.Create(department);
+                Ticket.TerminalId = AppServices.CurrentTerminal.Id;
             }
 
             public void OpenTicket(int ticketId)
@@ -266,7 +268,7 @@ namespace Samba.Services
 
         private static IEnumerable<WorkPeriod> GetLastTwoWorkPeriods()
         {
-            return Dao.Last<WorkPeriod>(2);
+            return Dao.Last<WorkPeriod>(2).Where(x => x.TerminalId == AppServices.CurrentTerminal.Id);
         }
 
         public void ResetUserData()
@@ -286,8 +288,8 @@ namespace Samba.Services
             using (var workspace = WorkspaceFactory.Create())
             {
                 _lastTwoWorkPeriods = null;
-
-                var latestWorkPeriod = workspace.Last<WorkPeriod>();
+                
+                var latestWorkPeriod = workspace.All<WorkPeriod>(x => x.TerminalId == AppServices.CurrentTerminal.Id).OrderByDescending(y => y.Id).FirstOrDefault();
                 if (latestWorkPeriod != null && latestWorkPeriod.StartDate == latestWorkPeriod.EndDate)
                 {
                     return;
@@ -296,12 +298,14 @@ namespace Samba.Services
                 var now = DateTime.Now;
                 var newPeriod = new WorkPeriod
                                     {
+                                        
                                         StartDate = now,
                                         EndDate = now,
                                         StartDescription = description,
                                         CashAmount = cashAmount,
                                         CreditCardAmount = creditCardAmount,
-                                        TicketAmount = ticketAmount
+                                        TicketAmount = ticketAmount,
+                                        TerminalId = AppServices.CurrentTerminal.Id
                                     };
 
                 workspace.Add(newPeriod);
@@ -315,7 +319,7 @@ namespace Samba.Services
             using (var workspace = WorkspaceFactory.Create())
             {
                 var period = workspace.Last<WorkPeriod>();
-                if (period.EndDate == period.StartDate)
+                if (period.EndDate == period.StartDate && period.Name == LocalSettings.TerminalName)
                 {
                     period.EndDate = DateTime.Now;
                     period.EndDescription = description;
@@ -710,7 +714,7 @@ namespace Samba.Services
             return null;
         }
 
-        public static void AddTimeCardEntry(TimeCardEntry timeCardEntry)
+        public static string AddTimeCardEntry(TimeCardEntry timeCardEntry)
         {
             using (var workspace = WorkspaceFactory.Create())
             {
@@ -721,18 +725,28 @@ namespace Samba.Services
                
                 if (timeCardEntry.Action == 2)
                 {
+                    var clockinEntry = Dao.Query<TimeCardEntry>(x => x.UserId == timeCardEntry.UserId && x.Action == 1 && x.DateTime <= DateTime.Now && x.DateTime > DateTime.Today).LastOrDefault();
+                    double totalMinutes = 0.0;
+                    
+                    if (clockinEntry != null)
+                    {
+                        totalMinutes = timeCardEntry.DateTime.Subtract(clockinEntry.DateTime).TotalMinutes;
+                    }
+                    var hours = (int)totalMinutes / 60;
+                    var minutes = (int)totalMinutes % 60;
+
+                    String totalHours = String.Format("{0:D2}:{1:D2}", hours, minutes);
+
                     var scheduledEndTime = GetEmpScheduleEndTime(timeCardEntry.UserId);
                     if (scheduledEndTime != DateTime.MinValue && (timeCardEntry.DateTime >
                                                      scheduledEndTime.AddMinutes(AppServices.CurrentLoggedInUser.EarlyClockInAllowedInMinutes)))
                     {
-                        MessageBox.Show(
-                            String.Format("Successfully ClockedOut. Your hours will be approved as per Company policy and your scheduled time.",
-                            scheduledEndTime.ToString("hh:mm:ss tt",
-                  CultureInfo.InvariantCulture)));
+                       return String.Format("Successfully ClockedOut. Total Hours in this shift : {0}.  Your hours will be approved as per Company policy and your scheduled time: {1}",
+                           totalHours,scheduledEndTime.ToString("hh:mm:ss tt", CultureInfo.InvariantCulture));
                     }
                     else
                     {
-                        MessageBox.Show("Successfully ClockedOut.");
+                        return String.Format("Successfully ClockedOut. Total Hours in this shift: {0}", totalHours);
                     }
                 }else if (timeCardEntry.Action == 1)
                 {
@@ -744,24 +758,25 @@ namespace Samba.Services
                                                      scheduledStartTime.AddMinutes(-1 * AppServices.CurrentLoggedInUser
                                                                                                .EarlyClockInAllowedInMinutes)))
                     {
-                        MessageBox.Show("Successfully ClockedIn.Your hours will be approved as per Company policy and your scheduled time.");
+                       return "Successfully ClockedIn.Your hours will be approved as per Company policy and your scheduled time.";
                     }
                     else
                     {
-                        MessageBox.Show("Successfully ClockedIn.");
+                        return "Successfully ClockedIn.";
                     }
 
                 }
                
             
             }
+            return "";
         }
 
-        public static void UpdateTimeCardEntry(User user, int timeCardAction)
+        public static string UpdateTimeCardEntry(User user, int timeCardAction)
         {
             if (timeCardAction == 0)
             {
-                return;
+                return "";
             }
 
             var lastEntry = GetLastTimeCardEntry(user);
@@ -769,8 +784,9 @@ namespace Samba.Services
             if (user.ShouldCreateCardEntry(lastEntry, timeCardAction))
             {
                 
-                AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
+                return AddTimeCardEntry(user.CreateTimeCardEntry(timeCardAction));
             }
+            return "";
         }
         /*
          * Get Employee schedule

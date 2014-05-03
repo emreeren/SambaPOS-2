@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Data;
 using Samba.Domain;
 using Samba.Domain.Models.Customers;
@@ -10,6 +11,7 @@ using Samba.Infrastructure.Settings;
 using Samba.Localization.Properties;
 using Samba.Persistance.Data;
 using Samba.Presentation.Common;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Presentation.ViewModels
@@ -18,6 +20,7 @@ namespace Samba.Presentation.ViewModels
     {
         private readonly Ticket _model;
         private readonly bool _forcePayment;
+       
 
         public TicketViewModel(Ticket model, bool forcePayment)
         {
@@ -29,6 +32,8 @@ namespace Samba.Presentation.ViewModels
 
             _itemsViewSource = new CollectionViewSource { Source = _items };
             _itemsViewSource.GroupDescriptions.Add(new PropertyGroupDescription("GroupObject"));
+
+           
 
             PrintJobButtons = AppServices.CurrentTerminal.PrintJobs
                 .Where(x => (!string.IsNullOrEmpty(x.ButtonText))
@@ -239,6 +244,9 @@ namespace Samba.Presentation.ViewModels
             this.PublishEvent(EventTopicNames.SelectedItemsChanged);
         }
 
+      //  public PortionSelectionViewModel PortionSelectionViewModel { get; set; }
+      //  private PortionSelectionView PortionSelectionView { get; set; }
+
         public TicketItemViewModel AddNewItem(int menuItemId, decimal quantity, bool gift, string defaultProperties, string portionName)
         {
             if (!Model.CanSubmit) return null;
@@ -252,6 +260,7 @@ namespace Samba.Presentation.ViewModels
             {
                 portion = menuItem.Portions.First(x => x.Name == portionName);
             }
+           
 
             var departmentId = AppServices.CurrentTerminal.DepartmentId > 0
                                    ? AppServices.MainDataContext.SelectedDepartment.Id
@@ -263,6 +272,7 @@ namespace Samba.Presentation.ViewModels
 
             ti.Gifted = gift;
             var ticketItemViewModel = new TicketItemViewModel(ti);
+            
             _items.Add(ticketItemViewModel);
             RecalculateTicket();
             RuleExecutor.NotifyEvent(RuleEventNames.TicketLineAdded, new
@@ -324,8 +334,90 @@ namespace Samba.Presentation.ViewModels
 
         private void BogoItems(IEnumerable<TicketItemViewModel> ticketItems,  int userId)
         {
-            ticketItems.ToList().ForEach(x => Model.BogoItem(x.Model, userId));
+            ticketItems.ToList().ForEach(x => BogoItem(Model, x.Model, userId));
             RegenerateItemViewModels();
+        }
+        public void BogoItem(Ticket t, TicketItem item, int userId)
+        {
+            t.Locked = false;
+
+
+            if (item.Gifted)
+            {
+
+                InteractionService.UserIntraction.GiveFeedback("Item is already gifted. Can't add BOGO offer");
+                return;
+            }
+            if (item.Voided)
+            {
+                InteractionService.UserIntraction.GiveFeedback("Item is already void. Can't add BOGO offer");
+                return;
+            }
+
+            if (item.Bogo)
+            {
+
+                foreach (var it in t.TicketItems)
+                {
+                    if (item.Gifted)
+                    {
+                        //find similar menu item 
+                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && it.Bogo)
+                        {
+                            item.ModifiedUserId = userId;
+                            item.ModifiedDateTime = DateTime.Now;
+
+                            item.Bogo = false;
+                            item.Gifted = false;
+                            //mark other item to avoid duplicate bogo
+                            it.Bogo = false;
+                            InteractionService.UserIntraction.GiveFeedback("BOGO Offer Removed.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //find similar menu item 
+                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && it.Gifted && it.Bogo)
+                        {
+                            item.ModifiedUserId = userId;
+                            item.ModifiedDateTime = DateTime.Now;
+
+                            item.Bogo = false;
+                            //mark other item to avoid duplicate bogo
+                            it.Bogo = false;
+                            it.Gifted = false;
+                            InteractionService.UserIntraction.GiveFeedback("BOGO Offer Removed.");
+
+                            return;
+                        }
+                    }
+                    // MessageBox.Show("Item is already used in BOGO offer. Can't add BOGO offer");
+
+                }
+            }
+            else
+            {
+
+                foreach (var it in t.TicketItems)
+                {
+                    //find similar menu item 
+                    if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && !it.Voided && !it.Bogo)
+                    {
+                        item.ModifiedUserId = userId;
+                        item.ModifiedDateTime = DateTime.Now;
+
+                        item.Bogo = true;
+                        item.Gifted = true;
+                        //mark other item to avoid duplicate bogo
+                        it.Bogo = true;
+
+                        return;
+                    }
+
+                }
+            }
+            InteractionService.UserIntraction.GiveFeedback("Must have two same items to apply BOGO offer");
         }
 
         public void CancelItems(IEnumerable<TicketItemViewModel> ticketItems, int userId)
@@ -379,6 +471,10 @@ namespace Samba.Presentation.ViewModels
         public bool CanGiftSelectedItems()
         {
             return Model.CanGiftSelectedItems(SelectedItems.Select(x => x.Model));
+        }
+        public bool CanBogoSelectedItems()
+        {
+            return Model.CanBogoSelectedItems(SelectedItems.Select(x => x.Model));
         }
 
         public bool CanCancelSelectedItems()

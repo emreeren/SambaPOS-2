@@ -20,6 +20,9 @@ namespace Samba.Modules.TicketModule
             MenuItemSelectorViewModel = new MenuItemSelectorViewModel(TicketListViewModel.AddMenuItemCommand);
             PaymentViewModel = new PaymentEditorViewModel();
             SelectedTicketItemsViewModel = new SelectedTicketItemsViewModel();
+            //PortionSelectionViewModel = new PortionSelectionViewModel(SelectedTicketItemsViewModel);
+            //PortionSelectionView = new PortionSelectionView(PortionSelectionViewModel);
+           // PortionSelectionView.Hide();
             TicketExplorerViewModel = new TicketExplorerViewModel();
             DisplayCategoriesScreen();
 
@@ -44,6 +47,8 @@ namespace Samba.Modules.TicketModule
         public TicketListViewModel TicketListViewModel { get; set; }
         public PaymentEditorViewModel PaymentViewModel { get; set; }
         public SelectedTicketItemsViewModel SelectedTicketItemsViewModel { get; set; }
+        //public PortionSelectionViewModel PortionSelectionViewModel { get; set; }
+       // private PortionSelectionView PortionSelectionView { get; set; }
         public TicketExplorerViewModel TicketExplorerViewModel { get; set; }
 
         private int _selectedView;
@@ -88,10 +93,22 @@ namespace Samba.Modules.TicketModule
             if (obj.Topic == EventTopicNames.SelectedItemsChanged)
             {
                 if (SelectedTicketItemsViewModel.ShouldDisplay(obj.Value))
+                {
+
+                    if(SelectedTicketItemsViewModel.SelectedItemPortions.Count > 0) {
+                   
+                   // PortionSelectionViewModel.PortionSelectionView = PortionSelectionView;
+                   // PortionSelectionView.Owner = Application.Current.MainWindow;
+                  //  PortionSelectionView.Topmost = true;
+                   // InteractionService.UserIntraction.BlurMainWindow();
+                   // PortionSelectionView.ShowDialog();
+                    }
                     DisplayTicketDetailsScreen();
+
+                }
                 else DisplayCategoriesScreen();
             }
-
+             
             if (obj.Topic == EventTopicNames.SelectVoidReason
                 || obj.Topic == EventTopicNames.SelectGiftReason
                 || obj.Topic == EventTopicNames.SelectExtraProperty

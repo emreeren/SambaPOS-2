@@ -7,6 +7,7 @@ using Samba.Domain.Models.Users;
 using Samba.Localization.Properties;
 using Samba.Presentation.Common;
 using Samba.Presentation.Common.ModelBase;
+using Samba.Presentation.Common.Services;
 using Samba.Services;
 
 namespace Samba.Modules.UserModule
@@ -78,7 +79,12 @@ namespace Samba.Modules.UserModule
             {
                 if (pinData.TimeCardAction != 0)
                 {
-                    MainDataContext.UpdateTimeCardEntry(u, pinData.TimeCardAction);
+                    string message= MainDataContext.UpdateTimeCardEntry(u, pinData.TimeCardAction);
+                    if (!string.IsNullOrEmpty(message))
+                    {
+                        InteractionService.UserIntraction.GiveFeedback(message);
+                    }
+
                     if (pinData.TimeCardAction == 2)
                     {
                         AppServices.LogoutUser();
@@ -89,7 +95,7 @@ namespace Samba.Modules.UserModule
             }
             else
             {
-               MessageBox.Show("Invalid PIN.");
+                InteractionService.UserIntraction.GiveFeedback("Invalid PIN.");
                
             }
         }

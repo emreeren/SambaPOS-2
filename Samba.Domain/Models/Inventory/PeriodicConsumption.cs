@@ -11,6 +11,7 @@ namespace Samba.Domain.Models.Inventory
         public int WorkPeriodId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        
         public virtual IList<PeriodicConsumptionItem> PeriodicConsumptionItems { get; set; }
         public virtual IList<CostItem> CostItems { get; set; }
 

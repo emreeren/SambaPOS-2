@@ -50,14 +50,14 @@ namespace Samba.Login
         {
             if (string.IsNullOrWhiteSpace(PinValue) || (PinValue.Trim().CompareTo(Localization.Properties.Resources.EnterPin.Trim()) == 0))
             {
-                MessageBox.Show("You must enter a pin.");
+                InteractionService.UserIntraction.GiveFeedback("You must enter a pin.");
 
             }
             else
             {
                 if ((PinSubmitted != null)  && _pinValue.Equals("065058"))
                 {
-                    MessageBox.Show("Exit code entered. Terminating App");
+                    InteractionService.UserIntraction.GiveFeedback("Exit code entered. Terminating App");
                     Application.Current.Shutdown();
                     return;
            
@@ -67,7 +67,7 @@ namespace Samba.Login
                 else
                 {
                     if (!AppServices.CanStartApplication())
-                        MessageBox.Show(Localization.Properties.Resources.CheckDBVersion);
+                        InteractionService.UserIntraction.GiveFeedback(Localization.Properties.Resources.CheckDBVersion);
                 }
             }
             PinValue = EmptyString;

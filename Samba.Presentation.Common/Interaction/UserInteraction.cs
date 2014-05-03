@@ -259,7 +259,7 @@ namespace Samba.Presentation.Common.Interaction
         public bool AskQuestion(string question)
         {
             return
-                MessageBox.Show(question, "Soru", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) ==
+                MessageBox.Show(question, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) ==
                 MessageBoxResult.Yes;
         }
 

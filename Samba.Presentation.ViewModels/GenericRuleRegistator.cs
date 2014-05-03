@@ -644,7 +644,8 @@ namespace Samba.Presentation.ViewModels
                 if ("CashDrawerOpenTimer" == timerName)
                 {
                     for(int  i = 0; i < 5; i++) {
-                    SerialPortService.WritePort(portName, command);
+
+                    SerialPortService.WriteHex(portName, command);
                     string error = "";
                     string data = SerialPortService.ReadExisting(portName, -1, 1000, ref error);
 

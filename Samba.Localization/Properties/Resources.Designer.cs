@@ -288,6 +288,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Extra.
+        /// </summary>
+        public static string AddExtra {
+            get {
+                return ResourceManager.GetString("AddExtra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credit.
         /// </summary>
         public static string AddLiability_r {
@@ -2741,7 +2750,7 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;DRAWER&gt;.
+        ///   Looks up a localized string similar to &lt;XCT 07&gt;.
         /// </summary>
         public static string Drawer_prnt {
             get {
@@ -5316,6 +5325,15 @@ namespace Samba.Localization.Properties {
         public static string PastMonth {
             get {
                 return ResourceManager.GetString("PastMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Past Two Weeks.
+        /// </summary>
+        public static string PastTwoWeeks {
+            get {
+                return ResourceManager.GetString("PastTwoWeeks", resourceCulture);
             }
         }
         

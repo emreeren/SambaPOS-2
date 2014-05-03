@@ -780,6 +780,9 @@ Payment</value>
   <data name="Gift" xml:space="preserve">
     <value>Gift</value>
   </data>
+  <data name="AddExtra" xml:space="preserve">
+    <value>Add Extra</value>
+  </data>
   <data name="Bogo" xml:space="preserve">
     <value>BOGO</value>
   </data>
@@ -2008,6 +2011,9 @@ Table: {2}</value>
   <data name="PastWeek" xml:space="preserve">
     <value>Past Week</value>
   </data>
+  <data name="PastTwoWeeks" xml:space="preserve">
+    <value>Past Two Weeks</value>
+  </data>
   <data name="UndefinedWithBrackets" xml:space="preserve">
     <value>[Undefined]</value>
   </data>
@@ -2072,7 +2078,7 @@ Table: {2}</value>
     <value>Cash Drawer</value>
   </data>
   <data name="Drawer_prnt" xml:space="preserve">
-    <value>&lt;DRAWER&gt;</value>
+    <value>&lt;XCT 07&gt;</value>
   </data>
   <data name="WorkPeriodReport" xml:space="preserve">
     <value>Work Period Report</value>

@@ -18,7 +18,7 @@ namespace Samba.Domain.Models.Tickets
         public Ticket()
             : this(0, "")
         {
-
+            
         }
 
         public Ticket(int ticketId)
@@ -71,6 +71,7 @@ namespace Samba.Domain.Models.Tickets
         public bool Locked { get; set; }
         [StringLength(500)]
         public string Tag { get; set; }
+        public int TerminalId { get; set; }
 
        
 
@@ -437,87 +438,7 @@ namespace Samba.Domain.Models.Tickets
             item.ReasonId = reasonId;
         }
 
-        public void BogoItem(TicketItem item, int userId)
-        {
-            Locked = false;
-            
-           
-            if(item.Gifted)
-            {
-                MessageBox.Show("Item is already gifted. Can't add BOGO offer");
-                return;
-            }
-            if (item.Voided)
-            {
-                MessageBox.Show("Item is already void. Can't add BOGO offer");
-                return;
-            }
-
-            if (item.Bogo)
-            {
-               
-                foreach (var it in _ticketItems)
-                {
-                    if (item.Gifted)
-                    {
-                        //find similar menu item 
-                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && it.Bogo)
-                        {
-                            item.ModifiedUserId = userId;
-                            item.ModifiedDateTime = DateTime.Now;
-
-                            item.Bogo = false;
-                            item.Gifted = false;
-                            //mark other item to avoid duplicate bogo
-                            it.Bogo = false;
-                            MessageBox.Show("Removed BOGO Offer");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        //find similar menu item 
-                        if ((it.MenuItemId == item.MenuItemId) && (item != it) && it.Gifted && it.Bogo)
-                        {
-                            item.ModifiedUserId = userId;
-                            item.ModifiedDateTime = DateTime.Now;
-
-                            item.Bogo = false;
-                            //mark other item to avoid duplicate bogo
-                            it.Bogo = false;
-                            it.Gifted = false;
-                            MessageBox.Show("Removed BOGO Offer");
-
-                            return;
-                        }
-                    }
-                    MessageBox.Show("Item is already used in BOGO offer. Can't add BOGO offer");
-
-                }
-            }
-            else
-            {
-
-                foreach (var it in _ticketItems)
-                {
-                    //find similar menu item 
-                    if ((it.MenuItemId == item.MenuItemId) && (item != it) && !it.Gifted && !it.Voided && !it.Bogo)
-                    {
-                        item.ModifiedUserId = userId;
-                        item.ModifiedDateTime = DateTime.Now;
-
-                        item.Bogo = true;
-                        item.Gifted = true;
-                        //mark other item to avoid duplicate bogo
-                        it.Bogo = true;
-
-                        return;
-                    }
-
-                }
-            }
-            MessageBox.Show("Must have two same items to apply BOGO offer");
-        }
+        
 
         public bool CanRemoveSelectedItems(IEnumerable<TicketItem> items)
         {
@@ -546,6 +467,20 @@ namespace Samba.Domain.Models.Tickets
                 if (item.Voided) return false;
                 if (item.Gifted) return false;
                 if (item.Locked && !item.Gifted) return false;
+            }
+            return true;
+        }
+
+        public bool CanBogoSelectedItems(IEnumerable<TicketItem> items)
+        {
+            if (!CanRemoveSelectedItems(items)) return false;
+            foreach (var item in items)
+            {
+                if (!TicketItems.Contains(item)) return false;
+                if (item.Voided) return false;
+                if (item.Gifted && !item.Bogo) return false;
+                if (item.Locked && !item.Gifted) return false;
+                if (item.Bogo && !item.Gifted) return false;
             }
             return true;
         }
@@ -622,7 +557,10 @@ namespace Samba.Domain.Models.Tickets
 
         public static Ticket Create(Department department)
         {
-            var ticket = new Ticket { DepartmentId = department.Id };
+            var ticket = new Ticket
+            {
+                DepartmentId = department.Id
+            };
             foreach (var taxServiceTemplate in department.TaxServiceTemplates)
             {
                 ticket.AddTaxService(taxServiceTemplate.Id, taxServiceTemplate.CalculationMethod, taxServiceTemplate.Amount);
