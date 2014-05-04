@@ -56,6 +56,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="clrzmq">
+      <HintPath>..\packages\clrzmq.3.0.0-rc1\lib\net40\clrzmq.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -106,6 +109,7 @@
     <Compile Include="Printing\AbstractPrintJob.cs" />
     <Compile Include="AppServices.cs" />
     <Compile Include="PrinterService.cs" />
+    <Compile Include="Printing\ZmqPrinterJob.cs" />
     <Compile Include="Printing\DemoPrinterJob.cs" />
     <Compile Include="Printing\CachePrinterJob.cs" />
     <Compile Include="Printing\HtmlPrinterJob.cs" />
@@ -143,7 +147,9 @@
       <Name>Samba.Persistance.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT "$(ConfigurationName)"=="Release" GOTO End

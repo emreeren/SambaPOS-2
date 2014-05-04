@@ -1199,6 +1199,10 @@ Payment</value>
 <data name="CachePrinter" xml:space="preserve">
     <value>Store to Cache (In Memory)</value>
   </data>
+  <data name="ZmqPrinter" xml:space="preserve">
+    <value>ZeroMQ Printer (Remote)</value>
+  </data>
+
   <data name="Printer" xml:space="preserve">
     <value>Printer</value>
   </data>

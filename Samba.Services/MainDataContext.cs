@@ -42,7 +42,7 @@ namespace Samba.Services
 
                 _workspace = WorkspaceFactory.Create();
                 Ticket = Ticket.Create(department);
-                Ticket.TerminalId = AppServices.CurrentTerminal.Id;
+               
             }
 
             public void OpenTicket(int ticketId)
@@ -268,7 +268,7 @@ namespace Samba.Services
 
         private static IEnumerable<WorkPeriod> GetLastTwoWorkPeriods()
         {
-            return Dao.Last<WorkPeriod>(2).Where(x => x.TerminalId == AppServices.CurrentTerminal.Id);
+            return Dao.Last<WorkPeriod>(2);
         }
 
         public void ResetUserData()
@@ -288,8 +288,7 @@ namespace Samba.Services
             using (var workspace = WorkspaceFactory.Create())
             {
                 _lastTwoWorkPeriods = null;
-                
-                var latestWorkPeriod = workspace.All<WorkPeriod>(x => x.TerminalId == AppServices.CurrentTerminal.Id).OrderByDescending(y => y.Id).FirstOrDefault();
+                var latestWorkPeriod = workspace.Last<WorkPeriod>();
                 if (latestWorkPeriod != null && latestWorkPeriod.StartDate == latestWorkPeriod.EndDate)
                 {
                     return;
@@ -304,8 +303,7 @@ namespace Samba.Services
                                         StartDescription = description,
                                         CashAmount = cashAmount,
                                         CreditCardAmount = creditCardAmount,
-                                        TicketAmount = ticketAmount,
-                                        TerminalId = AppServices.CurrentTerminal.Id
+                                        TicketAmount = ticketAmount
                                     };
 
                 workspace.Add(newPeriod);
@@ -319,7 +317,7 @@ namespace Samba.Services
             using (var workspace = WorkspaceFactory.Create())
             {
                 var period = workspace.Last<WorkPeriod>();
-                if (period.EndDate == period.StartDate && period.Name == LocalSettings.TerminalName)
+                if (period.EndDate == period.StartDate)
                 {
                     period.EndDate = DateTime.Now;
                     period.EndDescription = description;

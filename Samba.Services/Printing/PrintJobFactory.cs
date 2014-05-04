@@ -16,6 +16,8 @@ namespace Samba.Services.Printing
                 return new DemoPrinterJob(printer);
             if (printer.PrinterType == 5)
                 return new CachePrinterJob(printer);
+            if (printer.PrinterType == 6)
+                return new ZmqPrinterJob(printer);
             return new SlipPrinterJob(printer);
         }
     }

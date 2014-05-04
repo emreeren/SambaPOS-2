@@ -71,7 +71,7 @@ namespace Samba.Domain.Models.Tickets
         public bool Locked { get; set; }
         [StringLength(500)]
         public string Tag { get; set; }
-        public int TerminalId { get; set; }
+      
 
        
 

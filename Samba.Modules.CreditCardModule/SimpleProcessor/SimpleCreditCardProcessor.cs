@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Windows;
 using Samba.Presentation.Common;
 using Samba.Presentation.Common.Services;
 using Samba.Services;
@@ -22,6 +23,18 @@ namespace Samba.Modules.CreditCardModule.SimpleProcessor
 
         public void Process(CreditCardProcessingData creditCardProcessingData)
         {
+            if (creditCardProcessingData.TenderedAmount > creditCardProcessingData.Ticket.RemainingAmount)
+            {
+                InteractionService.UserIntraction.GiveFeedback(String.Format("Tendered Amount {0} can't be more than Balance Amount {1}.Resetting" +
+                                              " tendered amount to balace amount",
+                                              creditCardProcessingData.TenderedAmount,
+                                              creditCardProcessingData.Ticket.RemainingAmount));
+                creditCardProcessingData.TenderedAmount = creditCardProcessingData.Ticket.RemainingAmount;
+            }
+            else if (creditCardProcessingData.TenderedAmount == 0)
+            {
+                creditCardProcessingData.TenderedAmount = creditCardProcessingData.Ticket.RemainingAmount;
+            }
             // get operator response 
            // var userEntry = InteractionService.UserIntraction.GetStringFromUser(Name, _settings.DisplayMessage);
 
@@ -34,6 +47,7 @@ namespace Samba.Modules.CreditCardModule.SimpleProcessor
 
             creditCardProcessingData.Ticket.SetTagValue("CC_TXTYPE", "External");
             result.PublishEvent(EventTopicNames.PaymentProcessed);
+            InteractionService.UserIntraction.GiveFeedback("Swipe credit card on external terminal for amount " + creditCardProcessingData.TenderedAmount);
             
         }
 
