@@ -307,7 +307,9 @@
                  Margin="10" />
             <FxButton:FlexButton Command="{Binding SubmitTicketPaymentCommand}" Content="{Binding SubmitTicketPaymentCommand.Caption}"
                  Margin="10" />
-            <FxButton:FlexButton Command="{Binding SubmitAccountPaymentCommand}" Content="{Binding SubmitAccountPaymentCommand.Caption}"
+            <!--FxButton:FlexButton Command="{Binding SubmitAccountPaymentCommand}" Content="{Binding SubmitAccountPaymentCommand.Caption}"
+                 Margin="10" /-->
+            <FxButton:FlexButton Command="{Binding ChargeExtraAmountCommand}" Content="{Binding ChargeExtraAmountCommand.Caption}"
                  Margin="10" />
             <FxButton:FlexButton Command="{Binding ClosePaymentScreenCommand}" Content="{Binding ClosePaymentScreenCommand.Caption}"
                  Margin="10" ButtonColor="Red" />

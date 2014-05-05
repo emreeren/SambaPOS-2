@@ -31,6 +31,7 @@ namespace Samba.Modules.TicketModule
                                                                         CanSubmitCreditCardPayment);
             SubmitTicketPaymentCommand = new CaptionCommand<string>(Resources.Voucher_r, OnSubmitTicketPayment, CanSubmitAccountPayment);          
             SubmitAccountPaymentCommand = new CaptionCommand<string>(Resources.AccountBalance_r, OnSubmitAccountPayment, CanSubmitAccountPayment);
+            
             ClosePaymentScreenCommand = new CaptionCommand<string>(Resources.Close, OnClosePaymentScreen, CanClosePaymentScreen);
             TenderAllCommand = new CaptionCommand<string>(Resources.All, OnTenderAllCommand);
             TypeValueCommand = new DelegateCommand<string>(OnTypeValueExecuted);
@@ -39,9 +40,11 @@ namespace Samba.Modules.TicketModule
             SelectMergedItemCommand = new DelegateCommand<MergedItem>(OnMergedItemSelected);
 
             SetDiscountAmountCommand = new CaptionCommand<string>(Resources.Round, OnSetDiscountAmountCommand, CanSetDiscount);
+
             AutoSetDiscountAmountCommand = new CaptionCommand<string>(Resources.Flat, OnAutoSetDiscount, CanAutoSetDiscount);
             SetDiscountRateCommand = new CaptionCommand<string>(Resources.DiscountPercentSign, OnSetDiscountRateCommand, CanSetDiscountRate);
-
+            ChargeExtraAmountCommand = new CaptionCommand<string>(Resources.ChargeExtra_r, OnChargeExtraAmountCommand, CanChargeExtraAmount);
+            
             MergedItems = new ObservableCollection<MergedItem>();
             ReturningAmountVisibility = Visibility.Collapsed;
 
@@ -62,6 +65,7 @@ namespace Samba.Modules.TicketModule
         public CaptionCommand<string> SetDiscountRateCommand { get; set; }
         public CaptionCommand<string> SetDiscountAmountCommand { get; set; }
         public CaptionCommand<string> AutoSetDiscountAmountCommand { get; set; }
+        public CaptionCommand<string> ChargeExtraAmountCommand { get; set; } 
 
         public ObservableCollection<MergedItem> MergedItems { get; set; }
 
@@ -463,6 +467,8 @@ namespace Samba.Modules.TicketModule
 
         public decimal TicketRemainingValue { get; set; }
 
+        
+
         private void OnSetDiscountRateCommand(string obj)
         {
             var tenderedvalue = GetTenderedValue();
@@ -514,6 +520,35 @@ namespace Samba.Modules.TicketModule
             RefreshValues();
         }
 
+        private bool CanChargeExtraAmount(string obj)
+        {
+            return true;
+        }
+        ////ChargeExtraAmountCommand
+        private void OnChargeExtraAmountCommand(string obj)
+        {
+           
+            if (GetTenderedValue() != 0)
+            {
+                var selectedItem = SelectedTicket.Items.First();
+                if (selectedItem != null)
+                {
+                    selectedItem.Model.UpdateCustomProperty("Extra", GetTenderedValue(), 1);
+                    PaymentAmount = "";
+                    RefreshValues();
+                }
+                else
+                {
+                    InteractionService.UserIntraction.GiveFeedback("First Select Item before adding extra charges");
+                }
+
+            }
+            else
+            {
+                InteractionService.UserIntraction.GiveFeedback("Extra amount must be more than zero");
+            }
+           
+        }
         public void RefreshValues()
         {
             SelectedTicket.RecalculateTicket();

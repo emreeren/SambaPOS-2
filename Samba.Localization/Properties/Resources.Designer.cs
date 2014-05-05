@@ -1553,6 +1553,16 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charge
+        ///Extra.
+        /// </summary>
+        public static string ChargeExtra_r {
+            get {
+                return ResourceManager.GetString("ChargeExtra_r", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check Database Version.
         /// </summary>
         public static string CheckDBVersion {

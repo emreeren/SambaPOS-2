@@ -1734,6 +1734,10 @@ Info</value>
     <value>Account
 Balance</value>
   </data>
+  <data name="ChargeExtra_r" xml:space="preserve">
+    <value>Charge
+Extra</value>
+  </data>
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
