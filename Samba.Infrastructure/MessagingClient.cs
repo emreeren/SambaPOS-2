@@ -14,7 +14,7 @@ namespace Samba.Infrastructure
         private static TcpChannel _channel;
         private static MessagingServerObject _serverObject;
         private static MessagingClientObject _clientObject;
-        private static readonly Timer Timer = new Timer(OnTimerTick, null, Timeout.Infinite, 1000);
+        private static readonly Timer Timer = new Timer(OnTimerTick, null, Timeout.Infinite, 5000);
         private static IMessageListener _messageListener;
 
         public static bool IsConnected { get; set; }
@@ -24,12 +24,23 @@ namespace Samba.Infrastructure
             if (_clientObject != null && _messageListener != null && IsConnected)
             {
                 string[] arrData;
-                _clientObject.GetData(out arrData);
-
-                foreach (var t in arrData.Distinct())
+                try
                 {
-                    _messageListener.ProcessMessage(t);
+                    int size = _clientObject.GetData(out arrData);
+                    if (size > 0 && arrData != null)
+                    {
+                        foreach (var t in arrData.Distinct())
+                        {
+                            _messageListener.ProcessMessage(t);
+                        }
+                    }
                 }
+                catch (Exception ex)
+                {
+                    //ignore not so important
+                }
+
+               
             }
         }
 
@@ -116,7 +127,14 @@ namespace Samba.Infrastructure
             {
             }
             _messageListener = messageListener;
-            Connect(_messageListener);
+            try
+            {
+                Connect(_messageListener);
+            }
+            catch
+            {
+                if (IsConnected) Disconnect();
+            }
         }
 
         public static void Connect(IMessageListener messageListener)
@@ -154,17 +172,24 @@ namespace Samba.Infrastructure
                 return;
             }
             IsConnected = true;
-            Timer.Change(0, 1000);
+            Timer.Change(0, 5000);
         }
 
         private static void HandleError()
         {
+            
             _messageListener = null;
             _serverObject = null;
             _clientObject = null;
             if (_channel != null)
             {
-                ChannelServices.UnregisterChannel(_channel);
+                try
+                {
+                    ChannelServices.UnregisterChannel(_channel);
+                }
+                catch
+                {
+                }
                 _channel = null;
             }
             IsConnected = false;

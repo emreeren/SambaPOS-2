@@ -9,10 +9,23 @@ namespace Samba.Infrastructure
 
         public int GetData(out string[] arrData)
         {
-            arrData = new String[_newData.Count];
-            _newData.CopyTo(arrData);
-            _newData.Clear();
-            return arrData.Length;
+            
+            if (_newData.Count > 0)
+            {
+                arrData = new String[_newData.Count];
+                try
+                {
+                    _newData.CopyTo(0, arrData, 0, arrData.Length);
+                }
+                catch
+                {
+                    
+                }
+                _newData.Clear();
+                return arrData.Length;
+            }
+            arrData = null;
+            return 0;
         }
 
         public bool Update(ISubject sender, string data, short objState)

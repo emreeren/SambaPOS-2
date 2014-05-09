@@ -18,8 +18,14 @@ namespace Samba.Presentation.Common
 
         public void ProcessMessage(string message)
         {
-            if (!message.Contains(Key))
-                MessageProcessor.ProcessMessage(message);
+            try
+            {
+                if (!message.Contains(Key))
+                    MessageProcessor.ProcessMessage(message);
+            }
+            catch
+            {
+            }
         }
     }
 }
