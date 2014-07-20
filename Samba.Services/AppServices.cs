@@ -132,24 +132,44 @@ namespace Samba.Services
 
         public static void LogError(Exception e)
         {
-           LogError(e, e.Message);
-            
+            try
+            {
+                LogError(e, e.Message);
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
 
         public static void LogError(Exception e, string userMessage)
         {
-            if (CheckIfSQLNetworkException(e))
+            try
             {
-                if (!_displayingNetworkError)
+                if (CheckIfSQLNetworkException(e))
                 {
-                    _displayingNetworkError = true;
-                    ConfirmRestartProcess(e);
-                    _displayingNetworkError = false;
+                    if (!_displayingNetworkError)
+                    {
+                        _displayingNetworkError = true;
+                        ConfirmRestartProcess(e);
+                        _displayingNetworkError = false;
+                    }
+                    return;
                 }
-                return;
             }
-            MessageBox.Show(userMessage + ":"  + e.InnerException.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            
+            catch (Exception ex)
+            {
+            }
+            if (e.InnerException != null)
+            {
+                MessageBox.Show(userMessage + ":" + e.InnerException.Message, "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(userMessage + ":" + e.Message, "Error", MessageBoxButton.OK,
+                               MessageBoxImage.Error);
+            }
             Logger.Write(e, "General");
         }
 
@@ -162,7 +182,7 @@ namespace Samba.Services
             }
             if (ex.InnerException != null)
             {
-                if (ex.InnerException.InnerException != null)
+                if (ex.InnerException.InnerException != null && ex.InnerException.InnerException.Message != null)
                 {
                     if (ex.InnerException.InnerException.Message.Contains(networkError))
                     {
@@ -171,7 +191,7 @@ namespace Samba.Services
                 }
                 else
                 {
-                    if (ex.InnerException.Message.Contains(networkError))
+                    if ((ex.InnerException.Message != null) && ex.InnerException.Message.Contains(networkError))
                     {
                         return true;
                     }

@@ -55,7 +55,18 @@ namespace Samba.Presentation
         {
             LocalizeDictionary.ChangeLanguage(LocalSettings.CurrentLanguage);
 
-            LocalSettings.SetTraceLogPath("app");
+            try
+            {
+                LocalSettings.SetTraceLogPath("app");
+            }
+            catch (System.TypeLoadException s)
+            {
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
             InteractionService.UserIntraction = ServiceLocator.Current.GetInstance<IUserInteraction>();
             InteractionService.UserIntraction.ToggleSplashScreen();
 

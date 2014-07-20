@@ -41,7 +41,13 @@ namespace Samba.Services
             }
             catch (Exception e)
             {
-                AppServices.LogError(e);
+                try
+                {
+                    AppServices.LogError(e);
+                }
+                catch (Exception i)
+                {
+                }
             }
             finally
             {

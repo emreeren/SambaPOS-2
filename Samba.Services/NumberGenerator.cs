@@ -39,6 +39,10 @@ namespace Samba.Services
                 {
                     return GetNextString(numeratorId);
                 }
+                catch (Exception ex)
+                {
+                    return GetNextString(numeratorId);
+                }
                 return numerator.GetNumber();
             }
         }

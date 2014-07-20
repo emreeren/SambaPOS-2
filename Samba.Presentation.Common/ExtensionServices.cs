@@ -41,8 +41,19 @@ namespace Samba.Presentation.Common
 
         public static void PublishEvent<TEventsubject>(this TEventsubject eventArgs, string eventTopic, bool wait)
         {
-            if (wait) Application.Current.Dispatcher.Invoke(new PublishEventDelegate<TEventsubject>(_PublishEvent), eventArgs, eventTopic);
-            else Application.Current.Dispatcher.BeginInvoke(new PublishEventDelegate<TEventsubject>(_PublishEvent), eventArgs, eventTopic);
+            try
+            {
+                if (wait)
+                    Application.Current.Dispatcher.Invoke(new PublishEventDelegate<TEventsubject>(_PublishEvent),
+                                                          eventArgs, eventTopic);
+                else
+                    Application.Current.Dispatcher.BeginInvoke(new PublishEventDelegate<TEventsubject>(_PublishEvent),
+                                                               eventArgs, eventTopic);
+            }
+            catch (Exception ex)
+            {
+               
+            }
         }
 
         public static void AddRange<T>(this ObservableCollection<T> oc, IEnumerable<T> collection)
