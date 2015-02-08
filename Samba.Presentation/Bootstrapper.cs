@@ -23,6 +23,7 @@ namespace Samba.Presentation
         protected override DependencyObject CreateShell()
         {
             return Container.GetExportedValue<Shell>();
+           
         }
 
         protected override void ConfigureAggregateCatalog()

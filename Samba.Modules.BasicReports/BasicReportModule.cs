@@ -30,6 +30,7 @@ namespace Samba.Modules.BasicReports
             RuleActionTypeRegistry.RegisterParameterSoruce("ReportName", () => ReportContext.Reports.Select(x => x.Header));
 
             RuleActionTypeRegistry.RegisterActionType("PrintReport", Resources.PrintReport, new { ReportName = ""});
+            RuleActionTypeRegistry.RegisterActionType("EmailReport", Resources.PrintReport, new { ReportName = "" });
             
             EventServiceFactory.EventService.GetEvent<GenericEvent<ActionData>>().Subscribe(x =>
             {
@@ -37,6 +38,7 @@ namespace Samba.Modules.BasicReports
                 {
                     var reportName = x.Value.GetAsString("ReportName");
                     var fileName = x.Value.GetAsString("FileName");
+                   
                     if (!string.IsNullOrEmpty(reportName))
                     {
                         var report = ReportContext.Reports.Where(y => y.Header == reportName).FirstOrDefault();
@@ -76,6 +78,7 @@ namespace Samba.Modules.BasicReports
                         }
                     }
                 }
+               
             });
         }
 

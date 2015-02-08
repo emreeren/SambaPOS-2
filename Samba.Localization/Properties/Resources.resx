@@ -2815,6 +2815,9 @@ Will Trigger after {1} days, {2} hours, {3} minutes</value>
   <data name="PrintReport" xml:space="preserve">
     <value>Print Report</value>
   </data>
+  <data name="EmailReport" xml:space="preserve">
+    <value>Email Report</value>
+  </data>
   <data name="PriceDefinitonName" xml:space="preserve">
     <value>Price Definiton Name</value>
     <comment>Label.Content</comment>

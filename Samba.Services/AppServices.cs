@@ -159,6 +159,7 @@ namespace Samba.Services
             }
             catch (Exception ex)
             {
+
             }
             if (e.InnerException != null)
             {
@@ -172,6 +173,7 @@ namespace Samba.Services
             }
             Logger.Write(e, "General");
         }
+       
 
         private static bool CheckIfSQLNetworkException(Exception ex)
         {

@@ -2832,6 +2832,15 @@ namespace Samba.Localization.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Report.
+        /// </summary>
+        public static string EmailReport {
+            get {
+                return ResourceManager.GetString("EmailReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Emergency Contact Phone.
         /// </summary>
         public static string EmergencyPhone {
